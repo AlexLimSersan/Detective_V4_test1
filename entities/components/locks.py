@@ -124,7 +124,7 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
             return
 
         if player_side == self.outside:
-            command_id = self.game_state.player.ask_inv_type("key", ui)
+            command_id = self.game_state.player.ask_inv_type(ui, "key")
             if not command_id:
                 return
             if command_id == self.key:

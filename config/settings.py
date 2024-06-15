@@ -3,7 +3,7 @@
 PLAYER_STARTING_LOCATION = "cab_01"
 #TIME SYSTEM
 START_PHASE = "morning"
-ALL_PHASES = ["morning", "midday", "evening", "night"]
+ALL_PHASES = ["morning", "afternoon", "evening", "night"]
 TICKER_MULTIPLIER = 1
 PHASE_TIME_INTERVAL = 10 #time between phases
 #ACTION TIME
@@ -30,6 +30,7 @@ ITEM_STATE_FREQUENCY = 0.8
 
 
 # Mood Keys
+"""Range is from [-10, 10]"""
 AMBIANCE_KEYS = ['good', 'neutral', 'bad']
 AMBIANCE_VALUES = {'good': 10, 'neutral': 0, 'bad': -10}
 DEFAULT_STARTING_AMBIANCE = 0

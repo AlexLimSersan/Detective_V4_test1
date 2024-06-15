@@ -26,6 +26,8 @@ class Descriptions(ABC):
         descriptions = iterate_states(self.game_state, self.entity_state, self.descriptions, description_type)
         desc_logger.debug(f"Base Description/ get_description() : iterated states gives: {descriptions}")
         if descriptions:
+            # could have a default extension thing (like weather system) here? like check for "default", if deafult, add it, etc...
+            #^^WOULDNT THAT JUST BE "AT ENTITY? LOL"
             return self.fetch_random_description(description_type, descriptions)
         desc_logger.warning(f"Base Description/get_description(): No descriptions found after iterating states for description type {description_type}")
         #raise ValueError("No description available")
@@ -40,12 +42,21 @@ class Descriptions(ABC):
 
         #if additional keying needed:
         if description_type == "weather":
-            if random.random() < 0.7:
+            if random.random() < 100: #for now, because if im doing TIME KEYED DESCRIPTIONS IN WEATHER, NEED THEM 100%!!!!!
 
                 descriptions_dic = descriptions_dic.get(self.game_state.weather_system.current_weather)
                 desc_logger.debug(f"Base Description/ fetch_random_description() : weather keyed dic {descriptions_dic}")
+                if isinstance(description_type, dict):
+                    time_keyed_weather_description_dic = descriptions_dic.get(self.game_state.time_system.current_phase)
+                    if time_keyed_weather_description_dic:
+
+                        descriptions_dic = time_keyed_weather_description_dic.get(self.game_state.time_system.current_phase)
+                        desc_logger.debug(
+                            f"Base Description/ fetch_random_description() : time_keyed_weather_description_dic {descriptions_dic}")
+                    else:
+                        desc_logger.warning(f"Base Description/ fetch_random_description() : no time key. current dic (will iterate keys on): \n {descriptions_dic}")
             else:
-                desc_logger.info(f"BASE DESCRIPTIONS not ADDING WEATHER")
+                desc_logger.info(f"BASE DESCRIPTIONS not ADDING entity specific WEATHER desc")
                 return
 
         if description_type == "times":
@@ -55,7 +66,29 @@ class Descriptions(ABC):
         if description_type == "at_scene":
             descriptions_dic = descriptions_dic.get(self.game_state.player.current_location.id)
             desc_logger.debug(f"Base Description/ fetch_random_description() : at_scene keyed dic {descriptions_dic}")
-        #end of additional keying
+
+            # ALWAYS key weather, time. or just time. but never time, weather!!!
+            current_weather = self.game_state.weather_system.current_weather
+            current_time = self.game_state.time_system.current_phase
+
+            # try weather key, time key. then try time key. then finally, iterate mood keys.
+            weather_keyed_dic = descriptions_dic.get(current_weather)
+            time_keyed_dic = descriptions_dic.get(current_time)
+            if weather_keyed_dic:
+                if isinstance(weather_keyed_dic, dict):
+                    time_keyed_weather_dic = weather_keyed_dic.get(current_time)
+                    if time_keyed_weather_dic:
+                        descriptions_dic = time_keyed_weather_dic
+                    else:
+                        raise ValueError(f" weather_keyed keyed by time but no descriptions?!")
+                else:
+                    descriptions_dic = weather_keyed_dic
+            elif time_keyed_dic:
+                descriptions_dic = weather_keyed_dic
+
+
+
+        #end of additional keying - COULD ADD APPROACHING/LEAVING?!
 
         desc_logger.debug(f"Base Description/ fetch_random_description() : iterating keys on {descriptions_dic}")
         descriptions = iterate_keys(self.game_state, descriptions_dic)
@@ -76,7 +109,7 @@ class Descriptions(ABC):
         tags = iterate_states(self.game_state, self.entity_state, self.descriptions, "tags")
         # can have frequency logic here
         if self.is_outdoors:
-            if random.random() < 0.6:
+            if random.random() < 1: #for now
                 decor = self.game_state.weather_system.decorate_tags(tags)
                 desc_decorations.append(decor)
                 desc_logger.debug(f"Base Description/ decorate_description_tags() : decorating weather with tags: {tags}; decor: {decor}")
@@ -105,8 +138,11 @@ class Mobile_Descriptions(Descriptions):
     def get_description(self, description_type):
         description = []
         if description_type == "at_entity":
-            #if player is at the entity, add the clue id to the known clue ids, for topic generation in dialogue
-            self.game_state.player.add_known_topic(self.id) #handles clue to topic logic
+            #if player is at the entity, add the clue obj to the known clue obj, for topic generation in dialogue
+            obj = self.game_state.suspect_manager.get_entity(self.id) or self.game_state.item_manager.get_entity(self.id)
+            if not obj:
+                raise ValueError(f"MOBILE DESCRIPTIONS/GET_description(): NO OBJECT TO ADD TO player for topics/inventory ")
+            self.game_state.player.add_known_topic(obj) #handles clue to topic logic
             desc_logger.info(f"mobile descriptions/at_entity adding {self.id} as known topic ")
             #known clues will later be used for the end game analysis!
         parent_description = super().get_description(description_type) #might need more conditions here, like if not in list of things to not talk about

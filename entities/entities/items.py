@@ -8,8 +8,9 @@ from entities.descriptions.item_descriptions import Item_Descriptions
 
 class Item(Mobile_Entity):
     # routine hack: event->move mobile entity wherever, then event descriptions-> can be tailored for that location. default is default routine
-    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = ITEM_SPAWN_FREQUENCY, ):
+    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = ITEM_SPAWN_FREQUENCY, ):
         super().__init__(id, name, game_state, None, entity_state, is_outdoors, current_location)
+        self.item_type = item_type
         self.descriptions = Item_Descriptions(id, name, entity_state, game_state, descriptions, current_location, is_outdoors)
         self.state_data = state_data
         self.spawn_data = spawn_data
@@ -57,8 +58,8 @@ class Item(Mobile_Entity):
 
 
 class Clue(Item):
-    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = CLUE_SPAWN_FREQUENCY, ):
-        super().__init__(id, name, game_state, descriptions, spawn_data, state_data, components, entity_state, is_outdoors, current_location, None)
+    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = CLUE_SPAWN_FREQUENCY, ):
+        super().__init__(id, name, game_state, descriptions, spawn_data, state_data, components, item_type, entity_state, is_outdoors, current_location, None )
         self.spawn_frequency = spawn_frequency
 
 

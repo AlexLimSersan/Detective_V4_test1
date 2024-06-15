@@ -44,7 +44,7 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
                 for connection in self.get_connections():
                     if connection != self.game_state.player.location_history[-2].id:
                         conn_obj = self.game_state.location_manager.get_entity(connection)
-                        print(conn_obj.id)
+
                         ui.display(conn_obj.descriptions.get_connection_descriptions(self.id))
 
             else:

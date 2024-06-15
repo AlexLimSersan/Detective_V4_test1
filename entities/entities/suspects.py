@@ -23,6 +23,7 @@ class Suspect(Mobile_Entity):
 
     def loop(self, ui):
         #approach and leave desc already shown
+        ui.display(self.descriptions.set_scene())
         self.dialogue.start_loop(ui) #arguably better to pull up some logic to here, like locations
         #bye already dealt with
 

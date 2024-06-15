@@ -3,14 +3,19 @@ import random
 from config.settings import MESSAGE_SLEEP_TIME
 import sys
 from utilities.general_utils import ids_to_names
+from utilities.state_utils import iterate_keys
 
 from config.logging_config import app_logger
 
 from utilities.general_utils import match_command_to_option
 class UI:
+    def __init__(self):
+        self.game_state = None
 
     def get_input(self):
-        return input("> ").lower().strip()
+        output =  input("> ").lower().strip()
+
+        return output
 
     def bad_input(self):
         print (f"Command not recognized")
@@ -57,12 +62,18 @@ class UI:
             print(f"announcing: Inserting {subject if subject else ""}...")
         elif verb == "cab_driving":
             #possible key iterations here
-            text = random.choice([f'"You got it boss."', "The engine sputters, and the cab drives off.", "The cab drives..."])
-            self.display(text)
-            #print(f"Announcing: {verb}, {subject}")
-            #could have driving up to scene stuff here:
-                #ie: The pub comes into view. You step out the cab, and make your way down to the porch.
-            #then start entity loop, so approaching, then at entity.
+            drive1 = random.choice([f'"You got it boss."', "The engine sputters, and the cab drives off.", "The cab drives..."])
+            driving_dic = {
+                "neutral": ["You sit in the cab, watching the city pass by through the window."],
+                "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
+                "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
+            }
+            drive2 = iterate_keys(self.game_state, driving_dic)
+            self.display(drive1)
+            self.beat()
+            self.display(drive2)
+            # could have the buffer area here
+
         else:
             print(f"Announcing: {verb}, {subject}")
         self.beat()

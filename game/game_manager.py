@@ -99,7 +99,7 @@ class Game_Manager:
             player=player
         )
 
-
+        self.ui.game_state = self.game_state
         # Initialize Game with Game_State and UI
         self.game = Game(self.game_state, self.ui)
 

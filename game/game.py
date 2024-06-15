@@ -30,15 +30,17 @@ class Game:
             # should CHECK EVENTS HERE so can break before regular processing happens
             self.game_state.event_system.check_events()
             logger.debug(f"Game.game matched command is {matched_command}")
-
+            #only announce here
             if matched_command in self.game_state.player.current_location.get_connections():
-
+                print(f"ANNOUNCEMENT TEST PLACEMENT - moving")
                 self.game_state.player.move(matched_command, self.ui)
                 break
             elif matched_command in self.game_state.player.current_location.suspects_present:
+                print(f"ANNOUNCEMENT TEST PLACEMENT - talking")
                 self.dialogue_handler(matched_command)
                 break
             elif matched_command in self.game_state.player.current_location.items_present:
+                print(f"ANNOUNCEMENT TEST PLACEMENT - item")
                 self.item_handler(matched_command)
                 break
             else:
@@ -47,9 +49,10 @@ class Game:
 
     def dialogue_handler(self, command_id):
         # check with player first to verify breaking convo, to prevent mistakes from choosing topic
-        #announce here?
+
         try:
             current_suspect = self.game_state.suspect_manager.get_entity(command_id)
+
             logger.debug(f"game.game sus handler starting loop with {current_suspect.id}")
             current_suspect.start_loop(self.ui)
 

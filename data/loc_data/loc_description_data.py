@@ -1,88 +1,150 @@
-
+#for weather or connections, you have
+# optional weather or time keys.
+# always key weather, time. or just time. but never time, weather!!!
 loc_description_data = {
-    "cab_01": {
-        "default": {
-            "approaching": { #
-                "neutral": ["The cab is lazily parked, taking up 3 spots...",  "The cab idles.."],
-                "good": ["The cabbie waves as you approach.", "The cab idles.."],
-                "bad": ["The cabbie glances your direction.", "The cab is surrounded by cigarettes", "The cab idles.."]
-            },
-            "at_entity": {#drive
-                "neutral": ['The driver adjusts his mirror. "Where to?"', "The cabbie nods his head.",],
-                "good": ["You enter the cab.", "You are greeted by a friendly nod from the driver."],
-                "bad": ['The cab smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror. "Where to?"' ,'The driver looks indifferent to your presence.']
-            },
-            "leaving": {
-                "neutral": ["You sit in the cab, watching the city pass by through the window."],
-                "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
-                "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
-            },
-            "times": {
-                "morning": ["He yawns."],
-                "afternoon": ["He rubs his eyes."],
-                "evening": ["He lights a cigarette."],
-                "night": ["The headlights flicker."]
-            },
-            "weather": {
-                "rain": ["Raindrops pelt the cab, streaking its windows.", "The rain makes a rhythmic drumming sound."],
-                "sunny": ["The sun reflects off the cab’s metal, making it shimmer brightly."],
-                "grey": ["The sky makes the cab look dull and unremarkable."]
-            },
-            "tags": ["cab"],
-            "connections": {
-                "alley_01": {
-                    "neutral": ["From the cab, you see the narrow entrance to the alley."],
-                    "good": ["The alley looks less intimidating from the comfort of the cab."],
-                    "bad": ["The alley appears dark and foreboding from the cab's window."]
+"cab_01": {
+    "default": {
+        "approaching": { #
+            "neutral": ["The cab is lazily parked, taking up 3 spots...",  "The cab idles.."],
+            "good": ["The cabbie waves as you approach.", "The cab idles.."],
+            "bad": ["The cabbie glances your direction.", "The cab is surrounded by cigarettes", "The cab idles.."]
+        },
+        "at_entity": {#driver
+            "neutral": ['The driver adjusts his mirror. "Where to?"', "The cabbie nods his head.", "You enter the cab."],
+            "good": ["You are greeted by a friendly nod from the driver.", "You enter the cab."],
+            "bad": ['The cab smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror. "Where to?"' ,'The driver looks indifferent to your presence.']
+        },
+        "times": {
+            "morning": ["He yawns."],
+            "afternoon": ["He rubs his eyes."],
+            "evening": ["He lights a cigarette."],
+            "night": ["The headlights flicker."]
+        },
+        "weather": { #optionally keyed to time of day
+            "rain": ["Raindrops pelt the cab, streaking its windows.", "The rain makes a rhythmic drumming sound."],
+            "sunny": ["The sun reflects off the cab’s metal, making it shimmer brightly."],
+            "grey": ["The sky makes the cab look dull and unremarkable."]
+        },
+        "tags": ["cab"],
+        "connections": {#optional weather or time keys.
+                # always key weather, time. or just time. but never time, weather!!!
+            "porch_01": { #seeing the cab from the porch
+                "sunny": {
+                    "morning": ["The cab is parked nearby, its polished surface reflecting the morning sun."],
+                    "afternoon": ["The cab stands out in the bright afternoon sun, casting a sharp shadow."],
+                    "evening": ["The cab is bathed in the soft hues of the evening, its metal surface taking on a warm glow."],
+                    "night": ["The cab is a dark silhouette, its form barely visible under the streetlight."]
                 },
-                "porch_01": {
-                    "neutral": ["The porch is visible, a short walk from the cab."],
-                    "good": ["The porch looks welcoming, even from a distance."],
-                    "bad": ["The porch looks worn, a stark contrast to the cab."]
+                "rain": {
+                    "morning": ["The cab is slick with rain, water running in rivulets down its sides."],
+                    "afternoon": ["The cab appears slightly blurred through the rain, its form softened by the downpour."],
+                    "evening": ["The cab reflects the dim evening light, its surface shimmering with rainwater."],
+                    "night": ["The cab is a dark, wet silhouette, barely visible through the rain."]
+                },
+                "grey": {
+                    "morning": ["The cab is muted under the grey morning sky, blending into the subdued surroundings."],
+                    "afternoon": ["The cab sits quietly in the grey afternoon, its details softened by the overcast light."],
+                    "evening": ["The cab is a dark shape against the greying evening, its form indistinct."],
+                    "night": ["The cab is barely visible in the dim, grey light of night, a shadow among shadows."]
                 }
-            }
-        }
+            },
+            "alley_01": { #seeing the cab from the alley
+                "sunny": {
+                    "morning": ["The cab is parked at the end of the alley, its polished surface glinting in the morning sun."],
+                    "afternoon": ["The cab casts a sharp shadow against the alley walls, standing out in the bright afternoon sun."],
+                    "evening": ["The cab is bathed in the warm evening light, its metal surface glowing softly."],
+                    "night": ["The cab is a dark silhouette at the end of the alley, its form barely visible under the streetlight."]
+                },
+                "rain": {
+                    "morning": ["The cab is slick with rain, water running in rivulets down its sides as it sits at the end of the alley."],
+                    "afternoon": ["The cab appears slightly blurred through the rain, its form softened by the downpour."],
+                    "evening": ["The cab reflects the dim evening light, its surface shimmering with rainwater."],
+                    "night": ["The cab is a dark, wet silhouette at the end of the alley, barely visible through the rain."]
+                },
+                "grey": {
+                    "morning": ["The cab is muted under the grey morning sky, blending into the subdued surroundings at the end of the alley."],
+                    "afternoon": ["The cab sits quietly in the grey afternoon, its details softened by the overcast light."],
+                    "evening": ["The cab is a dark shape against the greying evening sky, its form indistinct."],
+                    "night": ["The cab is barely visible in the dim, grey light of night, a shadow among shadows at the end of the alley."]
+                }
+            },
+        },
+        "leaving": {
+            "neutral": ["You exit the cab, closing the door behind you."],
+        },
+
     },
+},
 "porch_01": {
     "default": {
         "approaching": {
-            "neutral": ["The porch comes into view, its wooden planks creaking underfoot."],
-            "good": ["The porch looks inviting, with a rocking chair swaying gently in the breeze."],
-            "bad": ["The porch appears neglected, the paint peeling and the wood rotting."]
+            "neutral": ["Wooden planks creak underfoot.",],
         },
         "at_entity": {
-            "neutral": ["You stand on the porch, its surface worn from years of use."],
-            "good": ["The porch offers a pleasant place to rest"," the chair creaking as you sit."],
-            "bad": ["The porch feels unstable, each step threatening to break the silence with a loud creak."]
+            "neutral": ["You stand on the porch, its surface weathered and worn."],
+            "bad": ["The wood groans under your weight."],
+            "good": ["The porch is a cozy spot."],
         },
         "leaving": {
-            "neutral": ["You leave the porch behind, its wooden steps groaning underfoot."],
-            "good": ["You step off the porch, feeling refreshed and ready to continue."],
-            "bad": ["You hurry off the porch, eager to leave its decay behind."]
         },
         "times": {
-            "morning": ["The porch basks in the soft morning light."],
-            "afternoon": ["The afternoon sun warms the porch, making the wood hot to the touch."],
-            "evening": ["The porch glows softly in the fading light of the evening."],
-            "night": ["The porch is cloaked in darkness, the shadows deep and long."]
+            #if keying time to weather, really dont need this!
         },
         "weather": {
-            "rain": ["Rain taps against the porch roof, creating a soothing sound."],
-            "sunny": ["The porch is bathed in sunlight, casting sharp shadows."],
-            "grey": ["The porch looks dreary under the grey sky, its colors muted."]
-        },
-        "tags": ["urban"],
-        "connections": {
-            "pub_01": {
-                "neutral": ["From the porch, you see the entrance to the pub."],
-                "good": ["The pub looks inviting from the porch, a welcome sight."],
-                "bad": ["The pub seems unwelcoming from the porch, its exterior worn."]
+            "sunny": {
+                "morning": ["The porch basks in the soft morning light."],
+                "afternoon": ["The afternoon sun warms the porch, making the wood hot to the touch."],
+                "evening": ["The porch glows softly in the fading light of the evening."],
+                "night": ["The porch is cloaked in darkness, the shadows deep and long."]
             },
-            "cab_01": {
-                "neutral": ["The cab is visible from the porch, parked nearby."],
-                "good": ["The cab gleams invitingly from the porch."],
-                "bad": ["The cab looks tired and worn from the porch."]
+            "rain": {
+                "morning": ["Raindrops tap gently on the porch roof as the morning light filters through the clouds."],
+                "afternoon": ["The porch is slick and shiny from the rain, with puddles forming in the corners."],
+                "evening": ["The porch glistens in the dim light as rain continues to fall, creating a soothing rhythm."],
+                "night": ["The porch is shrouded in darkness, with the sound of rain pattering softly against the wood."]
+            },
+            "grey": {
+                "morning": ["The porch is wrapped in a soft, grey light, the sky overcast and dull."],
+                "afternoon": ["The afternoon brings a steady grey, the porch cool and shaded."],
+                "evening": ["The porch is enveloped in a muted grey, the light fading gently as evening falls."],
+                "night": ["The porch is dimly lit, with shadows blending into the grey of the night sky."]
             }
+        },
+
+        "tags": ["urban"],
+        "connections": {#optional weather or time keys.
+                # always key weather, time. or just time. but never time, weather!!!
+            "lounge_01": {  # seeing the porch from the lounge
+                "sunny": {
+                    "morning": ["The porch basks in the soft morning light, visible through the lounge windows."],
+                    "afternoon": [
+                        "The porch is bright and inviting, the afternoon sun making the wood hot to the touch."],
+                    "evening": [
+                        "The porch glows softly in the fading light of the evening, a peaceful sight from the lounge."],
+                    "night": [
+                        "The porch is cloaked in darkness, the shadows deep and long, only faintly visible from the lounge."]
+                },
+                "rain": {
+                    "morning": [
+                        "Raindrops tap gently on the porch roof, the morning light filtering through the clouds, visible from the lounge."],
+                    "afternoon": [
+                        "The porch is slick and shiny from the rain, with puddles forming in the corners, a calming view from the lounge."],
+                    "evening": [
+                        "The porch glistens in the dim light as rain continues to fall, creating a soothing rhythm seen from the lounge."],
+                    "night": [
+                        "The porch is shrouded in darkness, with the sound of rain pattering softly against the wood, barely visible from the lounge."]
+                },
+                "grey": {
+                    "morning": [
+                        "The porch is wrapped in a soft, grey light, the sky overcast and dull, creating a serene view from the lounge."],
+                    "afternoon": [
+                        "The afternoon brings a steady grey, the porch cool and shaded, a calm scene from the lounge."],
+                    "evening": [
+                        "The porch is enveloped in a muted grey, the light fading gently as evening falls, a quiet sight from the lounge."],
+                    "night": [
+                        "The porch is dimly lit, with shadows blending into the grey of the night sky, barely discernible from the lounge."]
+                }
+            },
         }
     }
 },
@@ -103,9 +165,9 @@ loc_description_data = {
             "good": ["You step out of the pub, feeling refreshed and invigorated."],
             "bad": ["You exit the pub, the night's cold air biting at your skin."]
         },
-        "times": {
-            "morning": ["lounge mornig."],
-            "afternoon": ["In the afternoon, the pub is quiet, a few patrons nursing their drinks."],
+        "times": { #lounge is quiet, picks up in the evening/night
+            "morning": ["It's a quiet morning."],
+            "afternoon": ["In the afternoon, the lounge is quiet, a few patrons nursing their drinks."],
             "evening": ["The pub comes alive in the evening, filled with laughter and music."],
             "night": ["At night, the pub is bustling, the sound of revelry spilling into the street."]
         },
@@ -116,18 +178,52 @@ loc_description_data = {
         },
         "tags": ["urban", "indoors"],
         "connections": {
-            "bar_01": {
-                "neutral": ["From the pub, the bar is just a few steps away."],
-                "good": ["The bar looks inviting, the bartender already preparing your favorite drink."],
-                "bad": ["The bar is crowded and noisy, making it hard to relax."]
+            "porch_01": { #seeing the lounge from the porch
+                "sunny": {
+                    "morning": ["The lounge windows glimmer in the soft morning light, inviting with a warm glow from the porch."],
+                    "afternoon": ["The lounge is filled with bright light, its windows almost too bright to look at directly from the porch."],
+                    "evening": ["The lounge lights start to flicker on, creating a cozy, inviting atmosphere as seen from the porch."],
+                    "night": ["The lounge is a beacon of light, the windows glowing warmly against the night, visible from the porch."]
+                },
+                "rain": {
+                    "morning": ["The lounge windows are streaked with rain, the light inside soft and welcoming as seen from the porch."],
+                    "afternoon": ["The lounge windows glisten with raindrops, the interior light diffused through the wet glass, visible from the porch."],
+                    "evening": ["The lounge lights shine through the rain, casting a warm glow onto the wet street, visible from the porch."],
+                    "night": ["The lounge is a warm, glowing refuge, its light cutting through the rainy night, visible from the porch."]
+                },
+                "grey": {
+                    "morning": ["The lounge windows reflect the dull grey light, the interior dim and quiet as seen from the porch."],
+                    "afternoon": ["The lounge is calm and quiet, the grey light filtering softly through the windows, visible from the porch."],
+                    "evening": ["The lounge windows begin to glow, a warm light emerging from the grey backdrop, visible from the porch."],
+                    "night": ["The lounge is a soft glow in the grey night, the light spilling out onto the street, visible from the porch."]
+                }
             },
-            "kitchen_01": {
-                "neutral": ["The kitchen door swings open, releasing a wave of delicious aromas."],
-                "good": ["The kitchen staff greets you warmly as you approach."],
-                "bad": ["The kitchen looks chaotic, the staff struggling to keep up."]
+            "bar_01": { #seeing the lounge from the bar
+                "morning": ["The lounge is serene, a place of quiet before the day begins."],
+                "afternoon": ["The lounge is lively with chatter, contrasting the bar's calm."],
+                "evening": ["The lounge is cozy and inviting, a warm glow seen from the bar."],
+                "night": ["The lounge is vibrant and energetic, visible from the bustling bar."]
+            },
+            "kitchen_01": { #seeing the lounge from the kitchen
+                "morning": ["The lounge is calm, soft hues touching its furnishings."],
+                "afternoon": ["The lounge is vibrant, filled with people and energy."],
+                "evening": ["The lounge glows warmly, a comforting sight from the kitchen."],
+                "night": ["The lounge buzzes with energy, the kitchen a backstage view."]
+            },
+            "stage_01": { #seeing the lounge from the stage
+                "morning": ["The lounge is quiet, filled with anticipation from the stage."],
+                "afternoon": ["The lounge hums with activity, lively and bustling."],
+                "evening": ["The lounge is warm and inviting, seen from the stage."],
+                "night": ["The lounge is vibrant, the stage offering a unique view."]
+            },
+            "hallway_01": { #seeing the lounge from the hallway
+                "morning": ["The lounge is a peaceful retreat, calm and quiet."],
+                "afternoon": ["The lounge is lively, a world away from the quiet hallway."],
+                "evening": ["The lounge is warm and active, inviting from the hallway."],
+                "night": ["The lounge is energetic, the hallway a silent observer."]
             }
-        }
-    }
+        },
+    },
 },
 "bar_01": {
     "default": {
@@ -157,13 +253,14 @@ loc_description_data = {
             "sunny": ["Sunlight streams through the windows, casting warm glows on the patrons."],
             "grey": ["The bar feels cozier under the grey sky, a refuge from the dreary weather."]
         },
-        "tags": ["urban", "indoors"],
+        "tags": ["indoors"],
         "connections": {
-            "pub_01": {
-                "neutral": ["From the bar, the pub’s entrance is within easy reach."],
-                "good": ["The pub's lively atmosphere is palpable from the bar."],
-                "bad": ["The pub’s noise spills over into the bar, making it hard to hear."]
-            }
+            "lounge_01": { #seeing the bar from the lounge
+                "morning": ["The bar is quiet, the morning light casting soft shadows."],
+                "afternoon": ["The bar is bustling, a lively scene from the lounge."],
+                "evening": ["The bar glows warmly, filled with patrons and chatter."],
+                "night": ["The bar is vibrant, a hub of activity seen from the lounge."]
+            },
         }
     }
 },
@@ -197,10 +294,11 @@ loc_description_data = {
         },
         "tags": ["urban", "indoors"],
         "connections": {
-            "pub_01": {
-                "neutral": ["From the kitchen, you hear the lively sounds of the pub."],
-                "good": ["The pub's lively atmosphere complements the kitchen's bustle."],
-                "bad": ["The pub’s noise adds to the kitchen’s chaotic environment."]
+            "lounge_01": { #seeing the kitchen from the lounge
+        "morning": ["The kitchen is calm, a peaceful start to the day."],
+        "afternoon": ["The kitchen is busy, filled with movement and energy."],
+        "evening": ["The kitchen glows warmly, a comforting sight."],
+        "night": ["The kitchen is active, a backstage view of the evening's events."]
             }
         }
     }
@@ -235,10 +333,11 @@ loc_description_data = {
         },
         "tags": ["urban", "indoors"],
         "connections": {
-            "pub_01": {
-                "neutral": ["From the stage, the pub's noise is a distant hum."],
-                "good": ["The pub’s lively atmosphere energizes the stage."],
-                "bad": ["The pub’s noise distracts from the performance on stage."]
+            "lounge_01": { #seeing the stage from the lounge
+                "morning": ["The stage is quiet, anticipation hanging in the air."],
+                "afternoon": ["The stage is lively, preparations underway."],
+                "evening": ["The stage glows invitingly, ready for the night's performance."],
+                "night": ["The stage is vibrant, the focus of the lounge's energy."]
             }
         }
     }
@@ -288,43 +387,22 @@ loc_description_data = {
 },
 "hallway_01": {
     "default": {
-        "approaching": {
-            "neutral": ["The hallway stretches ahead, dimly lit and lined with closed doors."],
-            "good": ["The hallway feels welcoming, with soft lighting and clean walls."],
-            "bad": ["The hallway looks dark and foreboding, with flickering lights and peeling paint."]
-        },
+
         "at_entity": {
-            "neutral": ["You are in the hallway, the quiet surrounding you."],
-            "good": ["The hallway feels like a peaceful respite, with gentle lighting."],
-            "bad": ["The hallway feels oppressive, the silence almost deafening."]
+            "neutral": ["You are in the hallway."],
         },
         "leaving": {
-            "neutral": ["You leave the hallway, the doors closing softly behind you."],
-            "good": ["You step out of the hallway, feeling refreshed."],
-            "bad": ["You hurry out of the hallway, eager to escape its gloom."]
         },
         "times": {
-            "morning": ["The hallway is bathed in soft morning light, quiet and empty."],
-            "afternoon": ["The hallway is lightly trafficked, with occasional footsteps echoing."],
-            "evening": ["The hallway is busy, with people moving to and fro."],
-            "night": ["The hallway is silent and empty, the lights dimmed for the night."]
+
         },
-        "weather": {
-            "rain": ["The sound of rain against the windows adds a rhythmic backdrop to the hallway."],
-            "sunny": ["Sunlight streams through the hallway windows, casting warm glows."],
-            "grey": ["The hallway feels somber under the grey sky, the mood subdued."]
-        },
-        "tags": ["urban", "indoors"],
+
         "connections": {
-            "pub_01": {
-                "neutral": ["From the hallway, the pub's noise is a distant hum."],
-                "good": ["The pub’s lively atmosphere energizes the hallway."],
-                "bad": ["The pub’s noise distracts from the hallway's quiet."]
+            "lounge_01": { #seeing the hallway from the lounge
+                "neutral" : ["Theres a hallway closeby.", " A hallway entrance can be seen from here."],
             },
-            "stage_02": {
-                "neutral": ["The backstage connects directly to the hallway, a frequently used path."],
-                "good": ["The hallway provides a quiet escape from the bustling backstage."],
-                "bad": ["The hallway feels too quiet compared to the lively backstage."]
+            "stage_02": {  #seeing the hallway from the backstage
+                "neutral": ["The backstage connects directly to the hallway."],
             }
         }
     }
@@ -332,42 +410,30 @@ loc_description_data = {
 "hallway_02": {
     "default": {
         "approaching": {
-            "neutral": ["The hallway continues, lined with more closed doors and dim lighting."],
-            "good": ["The hallway feels calm, with soft lighting and a clean, orderly appearance."],
-            "bad": ["The hallway appears darker and more ominous, with flickering lights."]
+
         },
         "at_entity": {
-            "neutral": ["You are in the hallway, the quietness enveloping you."],
-            "good": ["The hallway provides a peaceful passage, with a serene ambiance."],
-            "bad": ["The hallway feels oppressive, the silence heavy and unsettling."]
+            "neutral": ["The hallway stretches on, "],
         },
         "leaving": {
-            "neutral": ["You leave the hallway, moving towards brighter areas."],
-            "good": ["You step out of the hallway, feeling lighter and refreshed."],
-            "bad": ["You hurry out of the hallway, relieved to escape its gloom."]
         },
         "times": {
-            "morning": ["The hallway is calm and quiet in the morning light."],
-            "afternoon": ["The hallway has a few people passing through, their footsteps echoing softly."],
-            "evening": ["The hallway is busier, with more activity and chatter."],
-            "night": ["The hallway is empty and quiet, the lights dimmed for the night."]
+            "morning": [" silent and empty."],
+            "afternoon": ["with occasional footsteps echoing."],
+            "evening": ["with people moving to and fro.", "dimly lit."],
+            "night": ["late nighters stumbling about."]
         },
         "weather": {
-            "rain": ["The sound of rain against the windows adds a soothing backdrop."],
-            "sunny": ["Sunlight filters through the hallway windows, creating a warm glow."],
-            "grey": ["The hallway feels muted under the grey sky, with a subdued atmosphere."]
+
         },
-        "tags": ["urban", "indoors"],
+        "tags": [],
         "connections": {
             "hallway_01": {
-                "neutral": ["The previous hallway leads seamlessly into this one."],
-                "good": ["The transition from the previous hallway feels smooth and welcoming."],
-                "bad": ["The previous hallway feels even darker as you continue."]
+                "neutral": ["You can make out doors at the end of the hall."],
+                "bad": ["Doors face you at the end of the hall."]
             },
             "hallway_03": {
-                "neutral": ["The hallway extends further, leading to another section."],
-                "good": ["The next hallway looks brighter and more inviting."],
-                "bad": ["The next hallway appears even more foreboding from here."]
+                "neutral": ["The pub's lounge is close ahead."]
             }
         }
     }
@@ -375,47 +441,26 @@ loc_description_data = {
 "hallway_03": {
     "default": {
         "approaching": {
-            "neutral": ["The hallway stretches ahead, its length disappearing into the shadows."],
-            "good": ["The hallway is well-lit, with a welcoming ambiance."],
-            "bad": ["The hallway looks particularly dark and uninviting, with flickering lights."]
         },
         "at_entity": {
-            "neutral": ["You are in the hallway, its length filled with closed doors and silence."],
-            "good": ["The hallway feels calm and orderly, with soft lighting."],
-            "bad": ["The hallway feels confining, the silence heavy and unsettling."]
+
         },
         "leaving": {
-            "neutral": ["You leave the hallway, stepping towards brighter areas."],
-            "good": ["You step out of the hallway, feeling more relaxed."],
-            "bad": ["You rush out of the hallway, eager to leave its oppressive silence."]
+
         },
         "times": {
-            "morning": ["The hallway is calm and quiet, bathed in morning light."],
-            "afternoon": ["The hallway has light traffic, with soft footsteps echoing."],
-            "evening": ["The hallway is busier, with more people moving through."],
-            "night": ["The hallway is quiet and empty, with the lights dimmed."]
+
         },
         "weather": {
-            "rain": ["The sound of rain against the windows adds a soothing backdrop."],
-            "sunny": ["Sunlight filters through the hallway windows, casting a warm glow."],
-            "grey": ["The hallway feels subdued under the grey sky, with a muted atmosphere."]
+
         },
-        "tags": ["urban", "indoors"],
+        "tags": [],
         "connections": {
             "hallway_02": {
-                "neutral": ["The previous hallway leads directly into this one."],
-                "good": ["The transition from the previous hallway feels smooth and welcoming."],
-                "bad": ["The previous hallway feels even darker as you continue."]
+                "neutral": ["You are coming close to the end of the hallway."],
             },
-            "bertha_office_door_01": {
-                "neutral": ["The office door is visible at the end of the hallway."],
-                "good": ["The office door looks sturdy and inviting from here."],
-                "bad": ["The office door seems ominous, a potential barrier."]
-            },
-            "backroom_door_01": {
-                "neutral": ["The backroom door is visible, a sturdy barrier."],
-                "good": ["The backroom door looks solid and secure."],
-                "bad": ["The backroom door seems forbidding, a potential obstacle."]
+            "hallway_04": {
+                "neutral": ["Ahead is the path to the pub.", "The hallway stretches on, all the way to the pub."],
             }
         }
     }
@@ -423,47 +468,36 @@ loc_description_data = {
 "hallway_04": {
     "default": {
         "approaching": {
-            "neutral": ["The hallway stretches ahead, its length disappearing into the shadows."],
-            "good": ["The hallway is well-lit, with a welcoming ambiance."],
-            "bad": ["The hallway looks particularly dark and uninviting, with flickering lights."]
+            "neutral": ["You come to the end of the hallway."],
+
         },
         "at_entity": {
-            "neutral": ["You are in the hallway, its length filled with closed doors and silence."],
-            "good": ["The hallway feels calm and orderly, with soft lighting."],
-            "bad": ["The hallway feels confining, the silence heavy and unsettling."]
+            "neutral": ["Wood groans underfoot.", "It's a tight area.", "It feels cramped."],
+            "bad": ["The walls feel slightly claustrophobic.", "It feels cramped."]
         },
         "leaving": {
-            "neutral": ["You leave the hallway, stepping towards brighter areas."],
-            "good": ["You step out of the hallway, feeling more relaxed."],
-            "bad": ["You rush out of the hallway, eager to leave its oppressive silence."]
+
         },
         "times": {
-            "morning": ["The hallway is calm and quiet, bathed in morning light."],
-            "afternoon": ["The hallway has light traffic, with soft footsteps echoing."],
-            "evening": ["The hallway is busier, with more people moving through."],
-            "night": ["The hallway is quiet and empty, with the lights dimmed."]
+
         },
         "weather": {
-            "rain": ["The sound of rain against the windows adds a soothing backdrop."],
-            "sunny": ["Sunlight filters through the hallway windows, casting a warm glow."],
-            "grey": ["The hallway feels subdued under the grey sky, with a muted atmosphere."]
+
         },
-        "tags": ["urban", "indoors"],
+        "tags": [],
         "connections": {
-            "hallway_02": {
-                "neutral": ["The previous hallway leads directly into this one."],
-                "good": ["The transition from the previous hallway feels smooth and welcoming."],
-                "bad": ["The previous hallway feels even darker as you continue."]
+            "hallway_03": { #see 04 from 03
+                "neutral": ["You are near the end of the hallway."],
             },
             "bertha_office_door_01": {
-                "neutral": ["The office door is visible at the end of the hallway."],
-                "good": ["The office door looks sturdy and inviting from here."],
-                "bad": ["The office door seems ominous, a potential barrier."]
+
+                #door connections are keyed by open/closed, then optionally weather, times, etc like before.
+                #but, this is for seeing hallway_04 from the door, so this is not a door connection desc.
+
+                "neutral": ["The door leads to the hallway."],
             },
             "backroom_door_01": {
-                "neutral": ["The backroom door is visible, a sturdy barrier."],
-                "good": ["The backroom door looks solid and secure."],
-                "bad": ["The backroom door seems forbidding, a potential obstacle."]
+                "neutral": ["The door leads to the hallway."],
             }
         }
     }
@@ -471,37 +505,24 @@ loc_description_data = {
 "bertha_office_01": {
     "default": {
         "approaching": {
-            "neutral": ["The office door is just ahead, its surface unmarked and plain."],
-            "good": ["The office door looks inviting, promising privacy and quiet."],
-            "bad": ["The office door appears imposing, a barrier to whatever lies within."]
+            "neutral": ["You enter through the door."],
         },
-        "at_entity": {
-            "neutral": ["You are at the office door, its handle within reach."],
-            "good": ["The office door opens smoothly, revealing a well-kept space."],
-            "bad": ["The office door creaks as it opens, revealing a dimly lit room."]
+        "at_entity": { #should just have a bunch of at scene description stuff here. relevant clues! desk, boxes, flask, etc
+            "neutral": ["You are in the office."]
         },
         "leaving": {
-            "neutral": ["You leave the office, the door closing softly behind you."],
-            "good": ["You step out of the office, feeling more focused."],
-            "bad": ["You exit the office, eager to leave its confining space."]
+            "neutral": ["You turn back the way you came..."]
         },
         "times": {
-            "morning": ["The office is bathed in soft morning light, calm and quiet."],
-            "afternoon": ["The office is bright and orderly, ready for the day's work."],
-            "evening": ["The office is dimly lit, the day's work winding down."],
-            "night": ["The office is dark and quiet, the day's work long finished."]
+
         },
         "weather": {
-            "rain": ["The sound of rain outside adds a soothing backdrop to the office's quiet."],
-            "sunny": ["Sunlight streams into the office, creating a warm, inviting atmosphere."],
-            "grey": ["The office feels somber under the grey sky, the mood subdued."]
-        },
-        "tags": ["urban", "indoors"],
+
+    },
+        "tags": ["indoors"],
         "connections": {
             "bertha_office_door_01": {
-                "neutral": ["The office door leads back into the hallway."],
-                "good": ["The hallway looks calm and orderly from the office."],
-                "bad": ["The hallway appears dark and foreboding from the office."]
+                "neutral": ["Through the gap, you can see Bertha's office."]
             }
         }
     }
@@ -509,87 +530,68 @@ loc_description_data = {
 "backroom_01": {
     "default": {
         "approaching": {
-            "neutral": ["The backroom door is ahead, sturdy and unmarked."],
-            "good": ["The backroom door looks solid, promising security and privacy."],
-            "bad": ["The backroom door appears daunting, a potential obstacle."]
+            "neutral": ["You walk through the door and enter the backroom."],
         },
         "at_entity": {
             "neutral": ["You are at the backroom "],
-            "good": ["The backroom door opens smoothly, revealing a well-organized space."],
-            "bad": ["The backroom door creaks as it opens, revealing a dimly lit room."]
         },
         "leaving": {
-            "neutral": ["You leave the backroom, the door closing softly behind you."],
-            "good": ["You step out of the backroom, feeling more focused."],
-            "bad": ["You exit the backroom, eager to leave its confining space."]
+            "neutral": ["You leave the way you came..."],
         },
         "times": {
-            "morning": ["The backroom is bathed in soft morning light, calm and quiet."],
-            "afternoon": ["The backroom is bright and orderly, ready for the day's work."],
-            "evening": ["The backroom is dimly lit, the day's work winding down."],
-            "night": ["The backroom is dark and quiet, the day's work long finished."]
+            "morning": ["Only the most hardcore late night gamblers are still up.", "Most of the tables are empty.", "It's quiet, with the occasional groans from lost bets."],
+            "afternoon": ["Most of the tables are empty.", "The clinking of chips punctuates the silence.", "It's quiet, with the occasional groans from lost bets." ],
+            "evening": ["Cards ruffle and shuffle.", "A mix of chatter and laughter create a backdrop of the night."],
+            "night": ["It's a rambunctious kind of night.","Cards ruffle and shuffle.", "A mix of chatter and laughter create a backdrop of the night."]
         },
         "weather": {
-            "rain": ["The sound of rain outside adds a soothing backdrop to the backroom's quiet."],
-            "sunny": ["Sunlight streams into the backroom, creating a warm, inviting atmosphere."],
-            "grey": ["The backroom feels somber under the grey sky, the mood subdued."]
         },
-        "tags": ["urban", "indoors"],
+        "tags": ["indoors"],
         "connections": {
             "backroom_door_01": {
-                "neutral": ["The backroom door leads back into the hallway."],
-                "good": ["The hallway looks calm and orderly from the backroom."],
-                "bad": ["The hallway appears dark and foreboding from the backroom."]
+                "neutral": ["Through the gap, you can see the backroom."]
+                }
             }
         }
-    }
-},
+    },
 "backroom_door_01": {
     "default": {
         "approaching": {
-            "neutral": ["The iron door stands solid and imposing, a barrier to the backroom."],
-            "good": ["The iron door looks sturdy and secure, protecting whatever lies beyond."],
-            "bad": ["The iron door appears forbidding, a heavy obstacle in your path."]
         },
 
         "leaving": {
-            "neutral": ["You leave the iron door, the backroom hidden once more."],
-            "good": ["You step away from the iron door, feeling more secure."],
-            "bad": ["You retreat from the iron door, relieved to be away from its oppressive presence."]
         },
         "times": {
-            "morning": ["The iron door gleams slightly in the morning light."],
-            "afternoon": ["The iron door stands firm, unchanged by the passing day."],
-            "evening": ["The iron door casts long shadows in the fading light."],
-            "night": ["The iron door blends into the darkness, almost invisible."]
+
         },
         "weather": {
-            "rain": ["Raindrops streak the iron door, their sound absorbed by the heavy metal."],
-            "sunny": ["The iron door glints under the bright sun, its surface reflecting the light."],
-            "grey": ["The iron door looks dull under the grey sky, its presence somber."]
+
         },
-        "tags": ["urban", "indoors"],
+        "tags": [""],
         "connections": {
             "hallway_04": {
-                "neutral": ["From the hallway, the iron door looks impenetrable."],
-                "good": ["The iron door seems less daunting from the safety of the hallway."],
-                "bad": ["The iron door looms menacingly at the end of the hallway."]
+                "open": ["The iron door is ajar."],
+                "closed": ["An iron door faces you."],
+            },
+            "backroom_01": {
+                "open": ["YOU CAN SEE THE IRON DOOR FORM HERE?1"],
+                "closed": ["YOU CAN SEE THE IRON DOOR FORM HERE?1."],
+                }
             }
         }
-    }
-},
+    },
 "bertha_office_door_01": {
     "default": {
         "approaching": ["approaching office door"],
         "connections": {
             "hallway_04": {
-                "neutral": ["From the hallway, the office."],
-                "good": ["The office door seems less daunting from the safety of the hallway."],
-                "bad": ["The office door looms menacingly at the end of the hallway."]
-                }
-            },
+                "open": ["Beside that, you can see a wooden door, partly open."],
+                "closed": ["Beside that, you can see a wooden door, firmly closed."],
+                },
+            }
         }
     }
+
 }
 
 

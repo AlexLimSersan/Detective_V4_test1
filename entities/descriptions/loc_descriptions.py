@@ -67,13 +67,45 @@ class Loc_Descriptions(Descriptions):
         return scene_description
 
     def get_connection_descriptions(self, loc_id_querying_from):
+        #iterate states to find connection dic
         conn_desc_dic = iterate_states(self.game_state, self.entity_state, self.descriptions, "connections")
         if conn_desc_dic:
+            #if the loc you are querying form in connection dictionary (should be)
             if loc_id_querying_from in conn_desc_dic:
-                description = iterate_keys(self.game_state, conn_desc_dic[loc_id_querying_from])
+                description_dic = conn_desc_dic[loc_id_querying_from]
+                desc_logger.debug(f"connection descriptions: desc_dic = {description_dic}")
+                #ALWAYS key weather, time. or just time. but never time, weather!!!
+                current_weather = self.game_state.weather_system.current_weather
+                current_time = self.game_state.time_system.current_phase
+                desc_logger.debug(f"connection descriptions: current_weather = {current_weather} ; current_time = {current_time}")
+                #try weather key, time key. then try time key. then finally, iterate mood keys.
+                weather_keyed_dic = description_dic.get(current_weather)
+                time_keyed_dic = description_dic.get(current_time)
+                desc_logger.debug(
+                    f"connection descriptions: weather_keyed_dic = {weather_keyed_dic} ")
+                desc_logger.debug(
+                    f"connection descriptions: time_keyed_dic = {time_keyed_dic} ")
+                if weather_keyed_dic:
+                    desc_logger.info(
+                        f"connection descriptions: weather_keyed_dic = {weather_keyed_dic} ")
+                    if isinstance(weather_keyed_dic, dict):
+                        time_keyed_weather_dic = weather_keyed_dic.get(current_time)
+                        desc_logger.info(
+                            f"connection descriptions: time_keyed_weather_dic = {time_keyed_weather_dic} ")
+                        if time_keyed_weather_dic:
+                            description_dic = time_keyed_weather_dic
+                        else:
+                            raise ValueError (f" weather_keyed keyed by time but no descriptions?!")
+                    else:
+                        description_dic = weather_keyed_dic
+                if time_keyed_dic:
+                    description_dic = time_keyed_dic
+                desc_logger.debug(f"connection descriptions: desc_dic after keying = {description_dic}")
+                description = iterate_keys(self.game_state, description_dic)
                 if description:
                     desc_logger.debug(f"LOC DESC/ get connection desctripsion: returning random {description}")
                     return random.choice(description)
+        desc_logger.warning(f"LOC_DESCRIPTIONS.PY/get_connection_descriptions(): no connection description dictionary for: \n id {self.id}, \n loc querying from {loc_id_querying_from}")
         #raise ValueError("No connection descriptions available; should have defaulted")
 
 
@@ -119,3 +151,52 @@ class Door_Descriptions(Loc_Descriptions): #difference is only for setting scene
             return description
         else:
             return super().get_description(description_type)
+
+    def get_connection_descriptions(self, loc_id_querying_from):
+        #iterate states to find connection dic
+        conn_desc_dic = iterate_states(self.game_state, self.entity_state, self.descriptions, "connections")
+        if conn_desc_dic:
+            #if the loc you are querying form in connection dictionary (should be)
+            if loc_id_querying_from in conn_desc_dic:
+                description_dic = conn_desc_dic[loc_id_querying_from]
+                desc_logger.debug(f"DOOR connection descriptions: desc_dic = {description_dic}")
+
+                #FIRST, GET DOOR OPEN/CLOSED!
+                if self.lid_component.is_open:
+                    description_dic = description_dic["open"]
+                else:
+                    description_dic = description_dic["closed"]
+                if isinstance(description_dic, dict):
+                    #ALWAYS key weather, time. or just time. but never time, weather!!!
+                    current_weather = self.game_state.weather_system.current_weather
+                    current_time = self.game_state.time_system.current_phase
+                    desc_logger.debug(f"connection descriptions: current_weather = {current_weather} ; current_time = {current_time}")
+                    #try weather key, time key. then try time key. then finally, iterate mood keys.
+                    weather_keyed_dic = description_dic.get(current_weather)
+                    time_keyed_dic = description_dic.get(current_time)
+                    desc_logger.debug(
+                        f"connection descriptions: weather_keyed_dic = {weather_keyed_dic} ")
+                    desc_logger.debug(
+                        f"connection descriptions: time_keyed_dic = {time_keyed_dic} ")
+                    if weather_keyed_dic:
+                        desc_logger.info(
+                            f"connection descriptions: weather_keyed_dic = {weather_keyed_dic} ")
+                        if isinstance(weather_keyed_dic, dict):
+                            time_keyed_weather_dic = weather_keyed_dic.get(current_time)
+                            desc_logger.info(
+                                f"connection descriptions: time_keyed_weather_dic = {time_keyed_weather_dic} ")
+                            if time_keyed_weather_dic:
+                                description_dic = time_keyed_weather_dic
+                            else:
+                                raise ValueError (f" weather_keyed keyed by time but no descriptions?!")
+                        else:
+                            description_dic = weather_keyed_dic
+                    if time_keyed_dic:
+                        description_dic = time_keyed_dic
+                desc_logger.debug(f"connection descriptions: desc_dic after keying = {description_dic}")
+                description = iterate_keys(self.game_state, description_dic)
+                if description:
+                    desc_logger.debug(f"LOC DESC/ get connection desctripsion: returning random {description}")
+                    return random.choice(description)
+        desc_logger.warning(f"LOC_DESCRIPTIONS.PY/get_connection_descriptions(): no connection description dictionary for: \n id {self.id}, \n loc querying from {loc_id_querying_from}")
+        #raise ValueError("No connection descriptions available; should have defaulted")

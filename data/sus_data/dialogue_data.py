@@ -50,11 +50,21 @@ sus_dialogue_data = {
                     "says": ["I really don't know anything.", "You're barking up the wrong tree."],
                     "effects": {},
                     "options": None
-                }
+                },
+                "whiskey_01_chat_neutral": {
+                    "says": ["ugh I hate whiskey.",],
+                    "effects": {},
+                    "options": None
+                },
+                "whiskey_01_grill_neutral": {
+                    "says": ["only thing that might be helpful is that I served a bunch at the bar last night. I think I poured some for Phil, Gibbs, and the Butcher..",],
+                    "effects": {},
+                    "options": None
+                },
+                #additional states as needed
             },
-            #additional states as needed
         },
-        "conditional": [ #witness statements
+    "conditional": [ #witness statements
             {
                 "conditions": ["gibbs"], #murderer traits here
                 "dialogue": { #will add all these nodes to dialogue if all conditions in murderer profile

@@ -6,9 +6,7 @@ from entities.entities.locations.locations import Location
 from entities.entities.locations.cab import Cab
 from entities.entities.locations.hallways import Hallway
 from entities.entities.locations.doors import Door
-import logging
-
-logger = logging.getLogger('my_game')
+from config.logging_config import ent_logger
 
 class Location_Manager(Entity_Manager):
     def __init__(self, entity_data, description_data, game_state):
@@ -22,13 +20,13 @@ class Location_Manager(Entity_Manager):
             else:
                 self.entities[loc_id] = Location(id=loc_id, game_state=self.game_state,
                                              descriptions = self.description_data[loc_id], **loc_data)
-            logger.debug(f"loading location {loc_id}, {loc_data}")
+            ent_logger.debug(f"loading location {loc_id}, {loc_data}")
         for door_id, door_data in self.entity_data["doors"].items():
-            logger.debug(f"loading door {door_id} with {door_data}")
+            ent_logger.debug(f"loading door {door_id} with {door_data}")
             self.entities[door_id] = Door(id=door_id, game_state=self.game_state,
                                           descriptions=self.description_data[door_id], **door_data)
         for loc_id, loc_data in self.entity_data["halls"].items():
-            logger.debug(f"loading halls {loc_id} with {loc_data}")
+            ent_logger.debug(f"loading halls {loc_id} with {loc_data}")
             self.entities[loc_id] = Hallway(id=loc_id, game_state=self.game_state,
                                                  descriptions=self.description_data[loc_id], **loc_data)
 
@@ -74,8 +72,16 @@ class Location_Manager(Entity_Manager):
             raise ValueError(f"Location {spawn_location} not found")
         # update locations
         spawn_location.add_entity(entity)
-        logger.debug(f"LOC_MANAGER: spawning entity {entity.id} in {spawn_location.id}")
+        ent_logger.debug(f"LOC_MANAGER: spawning entity {entity.id} in {spawn_location.id}")
         # update mobile entity
         entity.current_location = spawn_location
         # ensure sync
         assert entity.current_location == self.get_location_of_entity(entity.id)
+
+    def spawn_entities(self, mobile_entity, spawn_loc_ids):
+        for id in spawn_loc_ids:
+            loc_obj = self.get_entity(id)
+            loc_obj.add_entity(mobile_entity)
+            ent_logger.info(f"spawning {mobile_entity.id} in {loc_obj.id}")
+
+

@@ -40,12 +40,12 @@ loc_ent_data = {
         "bertha_office_01": {
             "name": "office",
             "connections": ["bertha_office_door_01"],
-            "is_outdoors": False
+            "is_outdoors": True
         },
         "backroom_01": {
             "name": "backroom",
             "connections": ["backroom_door_01"],
-            "is_outdoors": False
+            "is_outdoors": True
         },
     },
     "halls": {

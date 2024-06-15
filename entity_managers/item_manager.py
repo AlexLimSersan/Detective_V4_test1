@@ -78,9 +78,11 @@ class Item_Manager(Entity_Manager):
                     self.entities[item_id].entity_state = self.determine_state(state_data)
 
                     #SPAWN ITEM
-                    spawn_location = random.choice(spawn_data.get("locations"))
-                    self.game_state.location_manager.spawn_entity(self.entities[item_id], spawn_location, spawn_data.get("count", 1))
-                    ent_logger.debug(f"Spawning item {item_id} in {spawn_location} \nwith state {self.entities[item_id].entity_state}")
+                    number_to_spawn = spawn_data.get("count", 1)
+                    spawn_locations = spawn_data.get("locations")
+                    spawn_locations = spawn_locations[:number_to_spawn]
+                    self.game_state.location_manager.spawn_entities(self.entities[item_id], spawn_locations)
+                    ent_logger.info(f"Spawning item {item_id} in all {spawn_locations} \nwith state {self.entities[item_id].entity_state}")
 
     def determine_state(self, state_data):
         if state_data:

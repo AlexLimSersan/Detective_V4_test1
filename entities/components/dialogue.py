@@ -27,7 +27,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         #greet
         self.handle_dialogue_dic(self.get_dialogue_dic("greet"), ui)
         self.talking = True
-        ent_logger.info(f"{self.id} ; mood: {self.mood}")
+        ent_logger.info(f"DIALOGUE/start loop: {self.id} ; mood: {self.mood.current_value}")
         self.loop(ui)
         self.handle_dialogue_dic(self.get_dialogue_dic("bye"), ui)
 
@@ -37,6 +37,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         effects_to_handle = dialogue_dic.get("effects")
         self.handle_effects(effects_to_handle)
         #suspect responds
+
         suspect_says = dialogue_dic.get("says", [...])
         ui.display(random.choice(suspect_says))
         #next player node
@@ -45,6 +46,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
 
 
     def handle_effects(self, effects): #this could even be in event system?
+
         #or could be in base interaction class?
         #effects is a dictionary of effect, value/id ; mood changes, game vibe changes, or IDS for events
         if not effects:
@@ -52,7 +54,9 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         for effect, data in effects:
             ent_logger.debug(f"handling effects: effect {effect}, data {data}")
             if effect == "mood":
+                #if data + or - or 0, can react accordingly right here!
                 self.mood += data
+                #reactions for mood changes!
             elif effect == "vibe":
                 self.game_state.vibe_system += data
             elif effect == "new_event": #later, will make this more robust
@@ -89,24 +93,27 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         player_choices_by_preference = list(dict.fromkeys([player_input, "chat", "grill"])) #remove duplicates
         mood_keys_by_preference = self.mood.ranked_keys
 
+        #CREATE ALL POSSIBLE DIALOGUE NODE KEYS IN ORDER OF PREFERENCE
         #create list of all keys
         dialogue_keys_by_preference = []
         # examples:
         # topic key: apple_chat_good
         # non_topic key: greet_good
+        #CREATE NODE KEY LIST
         for _type in type_by_preference: #start with the topic, for example "apple" or "greet"
             for choice in player_choices_by_preference: #then the current choice, like "chat" or "grill"
                 for key in mood_keys_by_preference: #then iterate moods.if none, next player choice if no mood found
                     dialogue_keys_by_preference.append(f"{_type}_{f"{choice}_" if player_input else ""}{key}")
 
         ent_logger.info(f"dialogue_keys_by_preference: {dialogue_keys_by_preference}")
+        #GET THE DIALOGUE DIC ACCORDING TO IF THE PLAYER GAVE AN INPUT; THIS TRANSLATES TO TOPIC VS NON TOPIC DIALOGUE
         if player_input:
             ent_logger.debug(f"if player input True: {player_input}")
             dialogue_dic = self.dialogue["topic"]
         else:
             ent_logger.debug(f"if player input False: {player_input}")
             dialogue_dic = self.dialogue["non_topic"]
-
+        # ITERATE THROUGH TO FIND DIALOGUE DIC MATCHED TO NODE
         for dialogue_key in dialogue_keys_by_preference:
             #iterate through event_id, entity_state, and default, to find a matching dialogue.
             #found in preference of the ranked mood keys, then the player choice if player choice
@@ -135,29 +142,34 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
 
 
     def process_command(self, command, options, ui):
+
         if command in EXIT_COMMANDS:
             # if return,, leave, etc, self.talking = false
             self.talking = False
             return True
         elif command in options:
-            #if command in change here
-            self.handle_dialogue_dic(self.get_dialogue_dic(type=self.topic, player_input=command), ui)
+            if command == "change":
+                new_topic = self.game_state.player.ask_inv_type(ui, inv_type="topic")
+                if isinstance(new_topic, list):
+                    new_topic = new_topic[0]
+                if not new_topic:
+                    self.reset_convo(ui)
+                else:
+                    self.topic = new_topic
+
+            else:
+                self.handle_dialogue_dic(self.get_dialogue_dic(type=self.topic, player_input=command), ui)
             return True
         else:
             matched_command, matched = match_command_to_option(command, self.game_state, actions = options)
-            if matched and ui.confirm(matched_command, self.game_state):
-                if isinstance(matched_command, list):
-                    matched_command = matched_command[0]
-                if matched_command in EXIT_COMMANDS:
-                    # if return,, leave, etc, self.talking = false
-                    self.talking = False
-                    return True
-                elif matched_command in options:
-                    self.handle_dialogue_dic(self.get_dialogue_dic(type=self.topic, player_input=command), ui)
-                    return True
-        """
-        JUST NEED a change topic?
-        """
+            if matched:
+                if ui.confirm(matched_command, self.game_state):
+                    if isinstance(matched_command, list):
+                        matched_command = matched_command[0]
+                    self.process_command(matched_command, options, ui)
+                return True
+
+
         ui.bad_input()
         return False
 

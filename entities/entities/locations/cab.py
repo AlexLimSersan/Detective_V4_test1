@@ -34,8 +34,19 @@ class Cab(Location):
             #if not command id, its ok, will go through the match command to id function
             result = self.process_command(command_id, ui, suspects, items, locations, actions)
             ent_logger.debug(f"LOCATIONS.PY/CAB/LOOP() result = {result}")
+            # COULD DO BUFFER LOCATION, THEN YOU DONT HAVE TO HAVE SPECIAL CAB GETTING INPUTS/
+            #and dont need the cab driving announcement.
+                #CAB leaving = engine sputters
+                #buffer approach = the drive over to the porch
+                #at entity = the porch comes into view
+                #user input exit cab or choose other area
+                #leaving = you leave the cab, and make your way to the pub.
+                #then,
+                #approaching porch - etc etc
+
             if result:
                 ui.announce("cab_driving", result)
+                ui.display(self.descriptions.get_description("leaving"))
                 return result
             else:
                 ui.bad_input()

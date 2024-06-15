@@ -8,13 +8,15 @@ from utilities.general_utils import names_to_ids, ids_to_names
 
 class Player():
     def __init__(self, game_state):
-        self.clues_found = [] #tracker for end game analysis
+        #self.clues_found = [] #tracker for end game analysis - can just cross check anything found vs
         self.location_history = [] #loc history ; objects of locs, including current loc just for flexibility?
         self._current_location = None#loc object
-        self.inventory = [] #list of objects
-        self.convo_topics = ["night of the murder"] #handles convo topic logic; night of the murder = default
+        self.inventory = [] #list of objects; CANT PICK ANYTHING UP YET!
         self.game_state = game_state
         self.orientation = "forward"
+        #for convo topics, just use inventory
+        #self.convo_topics = ["night of the murder"] #handles convo topic logic; night of the murder = default
+
 
     @property
     def current_location(self):
@@ -31,7 +33,8 @@ class Player():
 
         ui.announce("moving_player", matched_command)
         #you leave the cab, and approach entry location
-        ui.display(self.current_location.descriptions.get_description("leaving"))
+        if not self.current_location.id == "cab_01":
+            ui.display(self.current_location.descriptions.get_description("leaving"))
         #ui.beat()
 
         loc_object = self.game_state.location_manager.get_entity(matched_command)
@@ -45,53 +48,51 @@ class Player():
         starting_loc_object = self.game_state.location_manager.get_entity(PLAYER_STARTING_LOCATION)
         self.location_history = [starting_loc_object]
         self.current_location = starting_loc_object
-    def add_known_topic(self, ent_id):
+    def add_known_topic(self, ent_obj):
         #logic for dictionary of clues to topics to reuse dialogue
         #just for now:
-        self.convo_topics.append(ent_id)
-        self.clues_found.append(ent_id)
+        #self.convo_topics.append(ent_id)
+        #self.clues_found.append(ent_id)
+        if ent_obj not in self.inventory:
+            self.inventory.append(ent_obj)
 
-    def ask_inv_type(self, type, ui):
+    def ask_inv_type(self, ui, inv_type): #get topics like this?!?
         inv_by_type = []
-        for item in self.inventory: #can just list all inventory? use apple as whimsical?
-            if item.type == type:
-                inv_by_type.append(item)
+        ids_by_type = []
+
+        if inv_type == "topic":
+            inv_by_type.append("night of the murder")
+            ids_by_type.append("night of the murder")
+            for item in self.inventory: #should append any for topic
+                inv_by_type.append(item.name)
+                ids_by_type.append(item.id)
+        else:
+            for item in self.inventory:  # should append any for topic
+                if item.item_type == inv_type:
+                    inv_by_type.append(item.name)
+                    ids_by_type.append(item.id)
+
         #DISPLAY
-        ui.display(f"Choose {type}:")
-        for item in inv_by_type:
+        ui.display(f"Choose {inv_type}:")
+        ent_logger.info(f"inv_by_type = {inv_by_type}")
+        for name in inv_by_type:
 
-            ui.display(f"- {item.name}")
+            ui.display(f"- {name}")
 
         command = ui.get_input()
         command_id = names_to_ids(command, self.game_state)
-        for item in inv_by_type:
-            if item.id == command_id:
+        ent_logger.info(f"command id: {command_id}")
+        for id in ids_by_type:
+            if id in command_id:
                 return command_id
-        matched_command, matched = match_command_to_option(command, self.game_state, items=inv_by_type)
-        if matched and ui.confirm(matched_command, self.game_state):
-            return matched_command
-        ui.display(f"You can't find {command_id}")
-
-    def get_convo_topic(self, ui):
-        topics = []
-        ui.display(f"Change topic:")
-        for topic in topics:
-            ids_to_names(topic, self.game_state)
-            ui.display(f"- {topic}")
-        command = ui.get_input()
-        command_id = names_to_ids(command, self.game_state)
-        for topic in topics:
-            if topic == command_id:
-                return command_id
-        matched_command, matched = match_command_to_option(command, self.game_state, items=inv_by_type)
-        if matched and ui.confirm(matched_command, self.game_state):
-            return matched_command
-
 
         matched_command, matched = match_command_to_option(command, self.game_state, items=inv_by_type)
         if matched and ui.confirm(matched_command, self.game_state):
-            return matched_command
-        ui.display(f"You can't find {command_id}")
+            matched_id = names_to_ids(matched_command, self.game_state)
+            return matched_id
+        ui.display(f"No {command_id} {inv_type}")
+
+
 
 
 

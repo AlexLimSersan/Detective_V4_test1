@@ -1,6 +1,6 @@
 
 import random
-
+from utilities.state_utils import iterate_keys
 from config.settings import START_WEATHERS, ALL_WEATHERS, GOOD_WEATHER
 import logging
 # Get the logger configured in the main script
@@ -16,6 +16,7 @@ class Weather_System:
         self.weather_descriptions = weather_data
         #gamestate
         self.game_state = game_state
+        assert self.weather_descriptions.get("rain") is not None
 
     @property
     def current_weather(self):
@@ -36,6 +37,10 @@ class Weather_System:
     def roll_weather(self):
         chance = random.random()
         logger.info(f"weather system generating chance: {chance}") #for now, will comment out later
+        #can just have a 1 phase delay with weather transitions as new weather data! sunny to rain so suddenly is weird...
+        #doesnt need to be as robust as base weathers. just something like "rain clouds start to form...", or "the rain slows down.."
+            #"The grey clouds darken, hinting at the possibility of rain."
+        #also, a weather "lag" during this transition, so things like puddles!
         if chance < 0.8:
             keys = self.game_state.vibe_system.ranked_keys
             #if current gamevibe is good
@@ -52,6 +57,8 @@ class Weather_System:
         logger.info(f"weather_system decorate tags: all description_tags: {description_tags}")
         if not description_tags:
             return []
+
+
         # Get current time of day and weather type
         time_of_day = self.game_state.time_system.current_phase
         current_weather = self.current_weather
@@ -79,10 +86,18 @@ class Weather_System:
             #getting default descriptions for weighted output below
             #default is keyed to weather type, not to tag
             if "default" in weather_dic:
-                default_descs.extend(weather_dic["default"].get(time_of_day))
+                description_dic = weather_dic["default"].get(time_of_day)
+                #if dictionary, iterate keys!
+                if isinstance(description_dic, dict):
+                    description_dic = iterate_keys(self.game_state, description_dic)
+                default_descs.extend(description_dic)
 
             if tag in weather_dic:
-                specific_descs.extend(weather_dic[tag].get(time_of_day))
+                description_dic = weather_dic[tag].get(time_of_day)
+                # if dictionary, iterate keys!
+                if isinstance(description_dic, dict):
+                    description_dic = iterate_keys(self.game_state, description_dic)
+                specific_descs.extend(description_dic)
         # Create a pool of descriptions by combining specific time of day and default descriptions
         combined_descs = specific_descs + default_descs
         weights = [2.0] * len(specific_descs) + [1.0] * len(default_descs)  # Adjust weights as needed
