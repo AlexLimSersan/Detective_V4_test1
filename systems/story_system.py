@@ -1,3 +1,14 @@
+
+
+
+class Stat_Tracker:
+    def __init__(self):
+        self.murder_clues = None #list of item ids that were spawned dur to murder traits
+
+
+
+
+
 class StoryGenerator:
     def __init__(self, story_templates, game_state):
         self.story_templates = story_templates
@@ -5,4 +16,4 @@ class StoryGenerator:
 
     def generate_story(self, murderer_id, profile):
         story_texts = self.story_templates[murderer_id]
-        for
+        #for

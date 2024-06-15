@@ -73,26 +73,26 @@ class Item_Manager(Entity_Manager):
             #CHECK FREQUENCY:
             if random.random() < self.entities[item_id].spawn_frequency: #default vs custom spawn frequency handled in entity (makes CLUES vs ITEMS logic easier)
                 #CHECK SPAWN_CONDITIONS
-                if self.check_conditions(spawn_data.get('conditions', {})):
+                if self.check_conditions(spawn_data.get('conditions', {}), item_id):
                     #DETERMINE STARTING STATE
-                    self.entities[item_id].entity_state = self.determine_state(state_data)
+                    self.entities[item_id].entity_state = self.determine_state(state_data, item_id)
 
                     #SPAWN ITEM
                     number_to_spawn = spawn_data.get("count", 1)
                     spawn_locations = spawn_data.get("locations")
-                    spawn_locations = spawn_locations[:number_to_spawn]
+                    spawn_locations = spawn_locations[:number_to_spawn] #should make this more random???
                     self.game_state.location_manager.spawn_entities(self.entities[item_id], spawn_locations)
                     ent_logger.info(f"Spawning item {item_id} in all {spawn_locations} \nwith state {self.entities[item_id].entity_state}")
 
-    def determine_state(self, state_data):
+    def determine_state(self, state_data, item_id):
         if state_data:
             for state, data in state_data.items():
-                if state != "default" and self.check_conditions(data.get("conditions", {})):
+                if state != "default" and self.check_conditions(data.get("conditions", {}), item_id):
                     if random.random() <= data.get("frequency", ITEM_STATE_FREQUENCY):
                         return state
         return "default"
 
-    def check_conditions(self, conditions_dic):
+    def check_conditions(self, conditions_dic, item_id):
         if not conditions_dic:
             return True
         murderer_profile = self.game_state.suspect_manager.murderer.profile
@@ -100,7 +100,10 @@ class Item_Manager(Entity_Manager):
             if condition == "traits":
                 if all(cond in murderer_profile.values() for cond in values):
                     # means that an item was set based on the murderer, therefore:
-                    #can add the STORY TRACKER and STATS tracker stuff here!
+                    #can add the STORY TRACKER and STATS tracker stuff here!item_id
+                    #can add a -1 tag to related dialogue?
+                    ent_logger.info(f"{item_id} is MURDERER CLUE: {condition}, {values}")
+
                     return True
             # can have other conditions as needed
         return False

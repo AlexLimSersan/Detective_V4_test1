@@ -14,6 +14,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         self.mood = mood
         #dialogue types: {state : {topic, {non topic, }}}
         self.dialogue = dialogue #data
+        self.current_node = None
         #player options
         self.player_options = player_options #all player options
         self.player_node = None #current node to find player options,
@@ -31,11 +32,11 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         self.loop(ui)
         self.handle_dialogue_dic(self.get_dialogue_dic("bye"), ui)
 
-    def handle_dialogue_dic(self, dialogue_dic, ui):
+    def handle_dialogue_dic(self, dialogue_dic, ui, command=None):
         ent_logger.debug(f" handle_dialogue_dic: dialogue_dic {dialogue_dic}")
         #handle effects first to reflect reaction
         effects_to_handle = dialogue_dic.get("effects")
-        self.handle_effects(effects_to_handle)
+        self.handle_effects(effects_to_handle, command)
         #suspect responds
 
         suspect_says = dialogue_dic.get("says", [...])
@@ -45,8 +46,15 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         self.player_node = dialogue_dic.get("options")
 
 
-    def handle_effects(self, effects): #this could even be in event system?
 
+    def handle_effects(self, effects, command=None): #this could even be in event system?
+        test_ids = ["apple_01", "whiskey_01", "gibbs_01", "bertha_01", "unknown", "redirect"]
+        ent_logger.info(f"self.current node = {self.current_node}")
+        for id in test_ids:
+            if id in self.current_node:
+                ent_logger.info(f"this could work?")
+        if command:
+            ent_logger.info(f"command = {command}; possible reaction?!")
         #or could be in base interaction class?
         #effects is a dictionary of effect, value/id ; mood changes, game vibe changes, or IDS for events
         if not effects:
@@ -55,6 +63,9 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
             ent_logger.debug(f"handling effects: effect {effect}, data {data}")
             if effect == "mood":
                 #if data + or - or 0, can react accordingly right here!
+                #could tally up mood modifier + if in murderer_clue_ids and suspect, then just change it later if there is any to be changed
+                #then have one unified react, x2 if murderer? ;;
+                #can also get reaction based on current location, is outdoors?
                 self.mood += data
                 #reactions for mood changes!
             elif effect == "vibe":
@@ -121,6 +132,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
             response = iterate_states(self.game_state, self.entity_state, dialogue_dic, dialogue_key)
             if response: #respond with first match
                 ent_logger.info(f"using dialogue key {dialogue_key}\n response found: {response}")
+                self.current_node = dialogue_key
                 return response
         raise ValueError("dialogue response did not default to unknown properly")
 
@@ -158,7 +170,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
                     self.topic = new_topic
 
             else:
-                self.handle_dialogue_dic(self.get_dialogue_dic(type=self.topic, player_input=command), ui)
+                self.handle_dialogue_dic(self.get_dialogue_dic(type=self.topic, player_input=command), ui, command)
             return True
         else:
             matched_command, matched = match_command_to_option(command, self.game_state, actions = options)

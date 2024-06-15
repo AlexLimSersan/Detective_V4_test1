@@ -31,12 +31,14 @@ class Time_System:
         next_index = (current_index + 1) % len(self.all_phases)
         #progress phase
         self.current_phase = self.all_phases[next_index]
-        ui.display(f"Time phase has progressed to: {self.current_phase}") #later will comment out
+
         self.game_state.weather_system.roll_weather()
         #can have things like events, routines (remember hack).
         self.game_state.suspect_manager.update_entity_locations()
-        # Routines could be a  class which just moves entities based on time and syncs event_ids or state_ids
-        ui.display(f"PEOPLE MOOOOOVEEEE")
+        ui.display(f"_____________________")
+        ui.display(f"Time progresses... People move around you.\n #Current phase: {self.current_phase.capitalize()}")  # later will comment out
+        ui.display(f"_____________________")
+        ui.stall()
 
 
 

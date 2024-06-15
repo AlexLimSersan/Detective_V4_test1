@@ -27,9 +27,9 @@ class UI:
         #sys.stdout.flush()
         self.get_input()
 
-    def beat(self):
-        time.sleep(0.4)
-        print("")
+    def beat(self, multiplier = 1):
+        time.sleep(0.4*multiplier)
+        #print("")
 
 
     def display(self, text, pause_time = 0, nested_pause_time=0):
@@ -60,20 +60,9 @@ class UI:
             print(f"Moving...")
         elif verb == "insert":
             print(f"announcing: Inserting {subject if subject else ""}...")
-        elif verb == "cab_driving":
+        #elif verb == "cab_driving":
             #possible key iterations here
-            drive1 = random.choice([f'"You got it boss."', "The engine sputters, and the cab drives off.", "The cab drives..."])
-            driving_dic = {
-                "neutral": ["You sit in the cab, watching the city pass by through the window."],
-                "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
-                "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
-            }
-            drive2 = iterate_keys(self.game_state, driving_dic)
-            self.display(drive1)
-            self.beat()
-            self.display(drive2)
-            # could have the buffer area here
-
+            ...
         else:
             print(f"Announcing: {verb}, {subject}")
         self.beat()

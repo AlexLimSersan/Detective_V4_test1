@@ -1,8 +1,9 @@
 from config.settings import EXIT_COMMANDS, ENTER_COMMANDS
 from entities.entities.locations.locations import Location
 from utilities.general_utils import names_to_ids, match_command_to_option
-
+from utilities.state_utils import iterate_keys
 from config.logging_config import ent_logger
+import random
 
 class Cab(Location):
     def __init__(self, id, name, game_state, descriptions, connections, entity_state="default", is_outdoors=False):
@@ -12,6 +13,10 @@ class Cab(Location):
                 "pub": "porch_01", #name to entry point
                 "porch_01": "porch_01"
             }
+        self.cab_buffer_dic = {
+            "porch_01": ["The porch comes into view.."]
+        }
+
 
     def loop(self, ui):
         while True:
@@ -45,8 +50,10 @@ class Cab(Location):
                 #approaching porch - etc etc
 
             if result:
-                ui.announce("cab_driving", result)
+                if result != self.game_state.player.location_history[-2].id:
+                    self.drive(result, ui)
                 ui.display(self.descriptions.get_description("leaving"))
+                ui.display(f"\nYou step up onto the porch...")  # later, make this a dic!
                 return result
             else:
                 ui.bad_input()
@@ -63,3 +70,29 @@ class Cab(Location):
                     return self.handle_command_id_check_enter_or_exit(matched_command)
                 return self.cab_loc_dic.get(matched_command)
         return None
+
+    def drive(self,result,ui):
+        ui.announce("cab_driving", result)
+
+        driving_dic_1 = {
+            "neutral": [f'"You got it boss."', "The engine sputters, and the cab drives off.", "The cab drives..."]}
+        driving_dic_2 = {
+            "neutral": ["You sit in the cab, watching the city pass by through the window."],
+            "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
+            "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
+        }
+        drive1 = iterate_keys(self.game_state, driving_dic_1)
+        drive2 = iterate_keys(self.game_state, driving_dic_2)
+        ui.display(random.choice(drive1))
+        ui.beat()
+        ui.display(drive2)
+        # could have the buffer area here
+        ui.beat()
+        ui.beat()
+        ui.beat()
+        loc_into_view = self.cab_buffer_dic.get(result)
+        ui.display(loc_into_view)
+        # you arrive
+        ui.display(f"\nInput any to exit cab...")
+        ui.get_input()
+        ui.beat()

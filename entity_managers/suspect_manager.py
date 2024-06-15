@@ -25,6 +25,7 @@ class Suspect_Manager(Entity_Manager):
                     **suspect_data
                 )
                 self.murderer = self.entities[suspect_id]
+                ent_logger.info(f"loading MURDERER:{suspect_id}, {suspect_data}")
             else:
                 self.entities[suspect_id] = Suspect(
                     id=suspect_id,
@@ -34,7 +35,7 @@ class Suspect_Manager(Entity_Manager):
                     player_options=self.player_options,
                     **suspect_data
                 )
-            ent_logger.info(f"loading suspect {suspect_id}, {suspect_data}")
+                ent_logger.info(f"loading suspect: {suspect_id}, {suspect_data}")
 
     def update_entity_locations(self):
         for entity in self.entities.values():

@@ -45,5 +45,5 @@ EVENT_TRIGGER_CAP = 2 #before murder!
 # UI SETTINGS
 MESSAGE_SLEEP_TIME = 0.4
 # Command Identifiers
-EXIT_COMMANDS = ["return", "leave", "exit", "back", "turn"]
+EXIT_COMMANDS = ["return", "leave", "exit", "back"]
 ENTER_COMMANDS = ["enter", "go", "continue", "forward", "down", "cont", "walk"]

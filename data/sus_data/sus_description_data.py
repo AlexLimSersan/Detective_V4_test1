@@ -5,15 +5,19 @@ sus_description_data = {
         "default": {
             "at_scene": {
                 "bar_01": {
+                    "neutral": ["Bertha stands behind the bar, working.","Bertha is tending to customers.", "Bertha pours a drink", "Bertha is wiping down the table."],
+                    "bad": ["Bertha looks annoyed, her movements sharp and impatient."]
+                },
+                "porch_01": {
+                    "neutral": ["Bertha is on the porch, smoking"],
+                    "good": ["bertha is on the porch ; smiles warmly as she tends to her patrons."],
+                    "bad": ["bertha is on the porch ; looks annoyed, her movements sharp and impatient."]
+                },
+                "bertha_office_01": {
                     "neutral": ["Bertha stands behind the bar, her eyes watching the room intently."],
                     "good": ["Bertha smiles warmly as she tends to her patrons."],
                     "bad": ["Bertha looks annoyed, her movements sharp and impatient."]
                 },
-                "porch_01": {
-                    "neutral": ["bertha is on the porch nutralele"],
-                    "good": ["bertha is on the porch ; smiles warmly as she tends to her patrons."],
-                    "bad": ["bertha is on the porch ; looks annoyed, her movements sharp and impatient."]
-                }
             },
             "approaching": {
                 "neutral": ["You see Bertha behind the bar."],

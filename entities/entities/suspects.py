@@ -50,6 +50,7 @@ class Murderer(Suspect):
         murderer_profile = {}
         for trait, options in profile.items():
             murderer_profile[trait] = random.choice(options)
+        ent_logger.info(f"MURDERER PROFILE: {self.id}\n {murderer_profile}")
         return murderer_profile
 
 

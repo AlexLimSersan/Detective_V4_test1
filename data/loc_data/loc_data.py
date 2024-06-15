@@ -7,7 +7,7 @@ loc_ent_data = {
     "locations": {
         "cab_01": {
             "name": "cab",
-            "connections": ["alley_01", "porch_01", "butcher_01", "docks_01", "morgue_01"],
+            "connections": ["alley_01", "porch_01"],  #, "butcher_01", "docks_01", "morgue_01"
             "is_outdoors": True
         },
         "porch_01": {

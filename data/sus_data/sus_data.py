@@ -31,6 +31,7 @@ sus_ent_data = {
         "routine": { #routine management here
             "default": { #can have different states
                 "morning": "porch_01",
+                "afternoon": "bertha_office_01",
                 "else": "bar_01" #ids!
             }
         }
@@ -38,7 +39,7 @@ sus_ent_data = {
     "gibbs_01": {
         "name": "gibbs",
         "profile":{
-            "murderer": ["bertha", "gibbs", "phil", "bob", "maxwell"],
+            "murderer": ["gibbs"],
             "weapon_type": ["knife", "gun", "blunt"],
             "fight_type": ["strong", "weak"],
             "outfit_type": ["leather", "denim"],

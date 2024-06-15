@@ -14,7 +14,7 @@ item_ent_data = {
                 "frequency": 0.8
             },
             "cleaned": {
-                "conditions": {"murderer": "bertha", }
+                "conditions": {"traits": ["bertha"]}
             }
         },
         "spawn_data": {
@@ -67,6 +67,7 @@ item_ent_data = {
         "locations": ["lounge_01", "porch_01"],
         "frequency": 1,
         "count": 1,
+"conditions": {"traits": ["bertha"]}
     }
 },
 "matches_01": {
@@ -81,7 +82,7 @@ item_ent_data = {
         "locations": ["lounge_01", "porch_01"],
         "frequency": 1,
         "count": 1,
-        "conditions": {"traits": ["bertha", "leather"]}
+        "conditions": {"traits": ["bertha"]}
     }
 },
 "apple_01": {
