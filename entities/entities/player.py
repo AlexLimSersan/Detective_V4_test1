@@ -82,7 +82,7 @@ class Player():
         ent_logger.info(f"inv_by_type = {inv_by_type}")
         for name in inv_by_type:
 
-            ui.display(f"- {name}")
+            ui.display(f"- {name.capitalize()}")
 
         command = ui.get_input()
         command_id = names_to_ids(command, self.game_state)

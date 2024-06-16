@@ -106,6 +106,7 @@ class Cab(Location):
         return None
 
     def handle_cabbie_actions(self, command_id, ui):
+        ui.display(random.choice(['"What can I do for ya?"']))
         while True:
             options = {"accuse": "choose suspect...", "drive": "away and leave town... (exit game)", "return": ""}
             ui.display_menu_type_2(options)
@@ -124,7 +125,8 @@ class Cab(Location):
             ui.display(f"ACCUSING #later, have something here about you can hang whoever...")
             choice = self.game_state.player.ask_inv_type(ui, "suspect")
             if choice:
-                return choice
+                #handle accusation logic
+                ...
         elif command == "drive":
             ui.display(f"Are you sure you want to leave town? (y/n)")
             confirm = ui.get_input()

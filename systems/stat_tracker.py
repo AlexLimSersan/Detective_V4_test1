@@ -5,7 +5,7 @@ class Stat_Tracker:
     def __init__(self):
         self.game_state = None
         self.murderer = None #INITIALIZED from suspect manager when suspects are spawned
-        self.murder_clues_tracker = {} #condition: {item_id: spawn_locs}
+        self.murder_clues_tracker = {} #condition: [{item_id: spawn_locs}]
         self.murder_cleanup_tracker = {} #item: starting_state
 
     def track_murderer(self, item_id, murder_condition, query_type, state_or_spawn_id):
@@ -26,20 +26,27 @@ class Stat_Tracker:
             starting_state = state_or_spawn_id
             self.murder_cleanup_tracker[item_id].append(starting_state)
             # for example, knife starting state was clean because the murderer cleaned it.
-    def dump(self):
-        #testing just for now
-        print(f"MURDERER PROFILE:")
-        print(f"{self.murderer.name}")
-        for trait_category, trait in self.murderer.profile:
-            print(f"{trait_category}: {trait}")
 
-        print(f"MURDERER LEFT THE FOLLOWING CLUES")
-        for condition, item_id in self.murder_clues_tracker:
-            print(f"- {condition}: {item_id}")
+    def dump(self, ui):
+        ui.display(f"Dump data? (y/n)")
+        command = ui.get_input()
+        if command in ["y", "ye", "yes"]:
+            print(f"MURDERER PROFILE:")
+            for trait_category, trait in self.murderer.profile.items():
+                print(f"{trait_category}: {trait}")
 
-        print(f"MURDERER ALTERED STARTING STATE:")
-        for item_id, starting_state in self.murder_cleanup_tracker:
-            print(f"- {item_id}: {starting_state}")
+            print(f"MURDERER LEFT THE FOLLOWING CLUES")
+            # condition: {item_id: spawn_locs}
+
+            for condition, item_loc_pair in self.murder_clues_tracker.items():
+                print(f"- {condition}:")
+                for dic_pair in item_loc_pair:
+                    for item, loc in dic_pair.items():
+                        print(f"{item}: {loc}")
+
+            print(f"MURDERER ALTERED STARTING STATE:")
+            for item_id, starting_state in self.murder_cleanup_tracker.items():
+                print(f"- {item_id}: {starting_state}")
 
         #can have a "you found" thing later, and also more additional stats as desired
 
