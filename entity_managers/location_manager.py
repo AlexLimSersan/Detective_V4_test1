@@ -60,25 +60,10 @@ class Location_Manager(Entity_Manager):
         # ensure sync
         assert entity.current_location == self.get_location_of_entity(entity.id)
 
-    def spawn_entity(self, entity, spawn_location_id, count = 1):
-        """
-        spawn ent in loc, sync location and entities references. no errors for no old id, etc
-        """
-        if not isinstance(entity, Mobile_Entity):
-            raise ValueError("Entity must be a Mobile_Entity object")
-
-        spawn_location = self.get_entity(spawn_location_id)
-        if not spawn_location:
-            raise ValueError(f"Location {spawn_location} not found")
-        # update locations
-        spawn_location.add_entity(entity)
-        ent_logger.debug(f"LOC_MANAGER: spawning entity {entity.id} in {spawn_location.id}")
-        # update mobile entity
-        entity.current_location = spawn_location
-        # ensure sync
-        assert entity.current_location == self.get_location_of_entity(entity.id)
 
     def spawn_entities(self, mobile_entity, spawn_loc_ids):
+        if not isinstance(spawn_loc_ids, list):
+            spawn_loc_ids = [spawn_loc_ids]
         for id in spawn_loc_ids:
             loc_obj = self.get_entity(id)
             loc_obj.add_entity(mobile_entity)

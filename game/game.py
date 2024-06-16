@@ -15,8 +15,7 @@ class Game:
     def run(self):
         # intro sequence
         logger.debug("running game")
-        while True:
-            self.exploration_handler()  # time/effects directly change gamestate; causes effects
+        self.exploration_handler()  # time/effects directly change gamestate; causes effects
         #outro sequence
 
 
@@ -34,18 +33,20 @@ class Game:
             if matched_command in self.game_state.player.current_location.get_connections():
                 print(f"ANNOUNCEMENT TEST PLACEMENT - moving")
                 self.game_state.player.move(matched_command, self.ui)
-                break
+
             elif matched_command in self.game_state.player.current_location.suspects_present:
                 print(f"ANNOUNCEMENT TEST PLACEMENT - talking")
                 self.dialogue_handler(matched_command)
-                break
+
             elif matched_command in self.game_state.player.current_location.items_present:
                 print(f"ANNOUNCEMENT TEST PLACEMENT - item")
                 self.item_handler(matched_command)
+
+            elif matched_command == "EXIT_GAME":
                 break
             else:
                 # handle whimsical command
-                raise ValueError("validated command with no handler")
+                raise ValueError(f"validated command with no handler: {matched_command}")
 
     def dialogue_handler(self, command_id):
         # check with player first to verify breaking convo, to prevent mistakes from choosing topic

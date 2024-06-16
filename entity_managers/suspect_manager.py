@@ -26,6 +26,7 @@ class Suspect_Manager(Entity_Manager):
                 )
                 self.murderer = self.entities[suspect_id]
                 ent_logger.info(f"loading MURDERER:{suspect_id}, {suspect_data}")
+                self.game_state.stat_tracker.murderer = self.murderer
             else:
                 self.entities[suspect_id] = Suspect(
                     id=suspect_id,
@@ -52,8 +53,9 @@ class Suspect_Manager(Entity_Manager):
                 loc_id = current_routine.get("else")
                 if not loc_id:
                     raise ValueError("SUSPECT LOC ID NOT RECOGNIZED")
-            self.game_state.location_manager.spawn_entity(obj, loc_id)
             ent_logger.info(f"SUS_MANAGER.PY/SPAWNING {id} {loc_id}")
+            self.game_state.location_manager.spawn_entities(obj, loc_id)
+
 
 #dialogue generation -> put in dialogue_manager?
     def preprocess_all_suspect_dialogues(self):

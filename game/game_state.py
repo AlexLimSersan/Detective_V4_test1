@@ -7,6 +7,7 @@ class Game_State:
         self.location_manager = None
         self.item_manager = None
         #systems
+        self.stat_tracker = None
         self.vibe_system = None
         self.weather_system = None
         self.time_system = None
@@ -14,8 +15,9 @@ class Game_State:
         #player
         self.player = None
 
-    def initialize(self, suspect_manager, location_manager, item_manager,
+    def initialize(self, stat_tracker, suspect_manager, location_manager, item_manager,
                    vibe_system, weather_system, time_system, event_system, player):
+        self.stat_tracker = stat_tracker
         self.suspect_manager = suspect_manager
         self.location_manager = location_manager
         self.item_manager = item_manager
@@ -29,12 +31,16 @@ class Game_State:
         self.update_references()
         self.spawn_entities()
 
+
     def spawn_entities(self):
         self.item_manager.spawn_items()
         self.suspect_manager.spawn_suspects()
 
+
     def update_references(self):
         # Update game_state references in systems and managers
+        if self.stat_tracker:
+            self.stat_tracker.game_state = self
         if self.weather_system:
             self.weather_system.game_state = self
         if self.time_system:

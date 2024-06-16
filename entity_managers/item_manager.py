@@ -68,31 +68,27 @@ class Item_Manager(Entity_Manager):
         #spawn entities in locations
         for item_id, item in self.entities.items():
             spawn_data = item.spawn_data
-            state_data = item.state_data
+            #get the locations first so you can pass it to the stat tracker.
+            number_to_spawn = spawn_data.get("count", 1)
+
+            spawn_locations = spawn_data.get("locations")
+            random.shuffle(spawn_locations)
+            ent_logger.debug(f"item: {item_id}, spawn_locations: {spawn_locations}\n{spawn_data}")
+            spawn_locations = spawn_locations[:number_to_spawn]
+            #end of location logic
 
             #CHECK FREQUENCY:
             if random.random() < self.entities[item_id].spawn_frequency: #default vs custom spawn frequency handled in entity (makes CLUES vs ITEMS logic easier)
                 #CHECK SPAWN_CONDITIONS
-                if self.check_conditions(spawn_data.get('conditions', {}), item_id):
-                    #DETERMINE STARTING STATE
-                    self.entities[item_id].entity_state = self.determine_state(state_data, item_id)
+                if self.check_conditions(spawn_data.get('conditions', {}), item_id, "spawn", spawn_locations):
 
-                    #SPAWN ITEM
-                    number_to_spawn = spawn_data.get("count", 1)
-                    spawn_locations = spawn_data.get("locations")
-                    spawn_locations = spawn_locations[:number_to_spawn] #should make this more random???
+
                     self.game_state.location_manager.spawn_entities(self.entities[item_id], spawn_locations)
                     ent_logger.info(f"Spawning item {item_id} in all {spawn_locations} \nwith state {self.entities[item_id].entity_state}")
 
-    def determine_state(self, state_data, item_id):
-        if state_data:
-            for state, data in state_data.items():
-                if state != "default" and self.check_conditions(data.get("conditions", {}), item_id):
-                    if random.random() <= data.get("frequency", ITEM_STATE_FREQUENCY):
-                        return state
-        return "default"
 
-    def check_conditions(self, conditions_dic, item_id):
+
+    def check_conditions(self, conditions_dic, item_id, query_type=None, spawn_or_state_id=None): #last two are for stat tracker, state vs spawn and relevant ids
         if not conditions_dic:
             return True
         murderer_profile = self.game_state.suspect_manager.murderer.profile
@@ -104,6 +100,7 @@ class Item_Manager(Entity_Manager):
                     #can add a -1 tag to related dialogue?
                     ent_logger.info(f"{item_id} is MURDERER CLUE: {condition}, {values}")
 
+                    self.game_state.stat_tracker.track_murderer(item_id, values, query_type, spawn_or_state_id)
                     return True
             # can have other conditions as needed
         return False

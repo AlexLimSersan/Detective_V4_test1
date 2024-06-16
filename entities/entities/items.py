@@ -1,22 +1,31 @@
 
 from entities.entities.base import Mobile_Entity
 
-from config.settings import ITEM_SPAWN_FREQUENCY, CLUE_SPAWN_FREQUENCY, EXIT_COMMANDS
+from config.settings import ITEM_SPAWN_FREQUENCY, CLUE_SPAWN_FREQUENCY, EXIT_COMMANDS, ITEM_STATE_FREQUENCY
 from config.logging_config import ent_logger
 from utilities.general_utils import match_command_to_option
 from entities.descriptions.item_descriptions import Item_Descriptions
-
+import random
 class Item(Mobile_Entity):
     # routine hack: event->move mobile entity wherever, then event descriptions-> can be tailored for that location. default is default routine
     def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = ITEM_SPAWN_FREQUENCY, ):
         super().__init__(id, name, game_state, None, entity_state, is_outdoors, current_location)
-        self.item_type = item_type
+        self.item_type = item_type#need type for inv by type?
         self.descriptions = Item_Descriptions(id, name, entity_state, game_state, descriptions, current_location, is_outdoors)
         self.state_data = state_data
         self.spawn_data = spawn_data
         self.components = components
         self.spawn_frequency = spawn_frequency
-    #need type for inv by type?
+        self.entity_state = self.determine_state() #this is actually irrelevant outside of initialization due to iterate states?
+
+
+    def determine_state(self):
+        for state, data in self.state_data.items():
+            if random.random() <= data.get("frequency", ITEM_STATE_FREQUENCY):
+                if state != "default" and self.game_state.item_manager.check_conditions(data.get("conditions", {}), self.id, "state", state):
+
+                    return state
+        return "default"
     def loop(self, ui):
         #approach and leave desc already shown
         ui.display(self.descriptions.set_scene())

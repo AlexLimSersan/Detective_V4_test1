@@ -41,9 +41,10 @@ class Loc_Descriptions(Descriptions):
         #DECORATE TAGS SEPARATELY, NOT IN AT_ENTITY.
         # this way, system decorations (like weather) come after all the specific descriptions from the id, but before the present suspects/items.
         #either before or after? decide later.
-        desc_decorations = self.decorate_description_tags()
-        scene_description.append(desc_decorations)
-        desc_logger.debug(f"Loc_Desc/set_scene() :desc_decorations {desc_decorations}")
+            if not weather_desc:
+                desc_decorations = self.decorate_description_tags()
+                scene_description.append(desc_decorations)
+                desc_logger.debug(f"Loc_Desc/set_scene() :desc_decorations {desc_decorations}")
         for suspect_id, suspect_data in suspects_present.items(): #get descriptions from objevct for each obeject?@@?@?@22
             sus_desc = suspect_data.descriptions.get_description("at_scene")
             scene_description.append(sus_desc)

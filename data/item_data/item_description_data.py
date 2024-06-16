@@ -3,7 +3,7 @@ item_description_data = {
         "default": {
             "at_scene": {
                 "kitchen_01": {
-                    "neutral": ["The kitchen knife lies on the counter, its blade catching the light."],
+                    "neutral": ["A kitchen knife lies on the counter, its blade catching the light."],
                     "good": ["The kitchen knife is clean and sharp, ready for use."],
                     "bad": ["The kitchen knife looks slightly tarnished, with traces of dried food on the blade."]
                 }

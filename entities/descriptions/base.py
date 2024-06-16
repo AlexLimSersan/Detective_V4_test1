@@ -67,6 +67,8 @@ class Descriptions(ABC):
             descriptions_dic = descriptions_dic.get(self.game_state.player.current_location.id)
             desc_logger.debug(f"Base Description/ fetch_random_description() : at_scene keyed dic {descriptions_dic}")
 
+        """test this for all later; could check if isinstance dic first?"""
+        if isinstance(descriptions_dic, dict):
             # ALWAYS key weather, time. or just time. but never time, weather!!!
             current_weather = self.game_state.weather_system.current_weather
             current_time = self.game_state.time_system.current_phase
@@ -84,7 +86,7 @@ class Descriptions(ABC):
                 else:
                     descriptions_dic = weather_keyed_dic
             elif time_keyed_dic:
-                descriptions_dic = weather_keyed_dic
+                descriptions_dic = time_keyed_dic
 
 
 
@@ -166,8 +168,9 @@ class Mobile_Descriptions(Descriptions):
         # DECORATE TAGS SEPARATELY, NOT IN AT_ENTITY.
         # this way, system decorations (like weather) come after all the specific descriptions from the id, but before the present suspects/items.
         # either before or after? decide later.
-        desc_decorations = self.decorate_description_tags()
-        scene_description.append(desc_decorations)
-        desc_logger.debug(f"ITEM_DESC/set_scene() :desc_decorations {desc_decorations}")
+            if not weather_desc:
+                desc_decorations = self.decorate_description_tags()
+                scene_description.append(desc_decorations)
+                desc_logger.debug(f"ITEM_DESC/set_scene() :desc_decorations {desc_decorations}")
         return scene_description
 

@@ -5,7 +5,7 @@ from config.logging_config import ent_logger
 
 from utilities.general_utils import names_to_ids, ids_to_names
 
-
+from entities.entities.suspects import Suspect
 class Player():
     def __init__(self, game_state):
         #self.clues_found = [] #tracker for end game analysis - can just cross check anything found vs
@@ -66,6 +66,11 @@ class Player():
             for item in self.inventory: #should append any for topic
                 inv_by_type.append(item.name)
                 ids_by_type.append(item.id)
+        elif inv_type == "suspect":
+            for obj in self.inventory:
+                if isinstance(obj, Suspect):
+                    inv_by_type.append(obj.name)
+                    ids_by_type.append(obj.id)
         else:
             for item in self.inventory:  # should append any for topic
                 if item.item_type == inv_type:

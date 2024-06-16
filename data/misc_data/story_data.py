@@ -12,7 +12,7 @@ suspect_story_templates = {
         },
         "access_to_matches": {
             "at_bar"
-        }
+        },
         "next_day": {
             "clean": "The next day, she cleans the weapon, shoes, etc."
         }

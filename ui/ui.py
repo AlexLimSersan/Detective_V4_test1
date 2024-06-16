@@ -11,6 +11,7 @@ from utilities.general_utils import match_command_to_option
 class UI:
     def __init__(self):
         self.game_state = None
+        self.bar = "_____________________"
 
     def get_input(self):
         output =  input("> ").lower().strip()
@@ -78,7 +79,7 @@ class UI:
 
     def display_menu(self, game_state, suspects=None, items=None, locations=None, actions=None):
         app_logger.debug(f"UI/DISPLAYMENU() ; \n {suspects} \n {items}\n {locations}\n {actions}")
-        print("_____________________")
+        print(self.bar)
         #if game_state.player.current_location.id == "cab_01":  # if cab, no return, and maybe display entry points differently later
         #    self.handle_cab_menu(game_state, suspects, items, locations, actions)
         #    return #break
@@ -118,7 +119,7 @@ class UI:
 
         if actions:
             player_last_loc_obj = game_state.player.location_history[-2]
-            print(f"Action:")
+            print(f"Actions:")
             for option, description in actions.items():
                 description = ids_to_names(description, game_state)
                 if option != player_last_loc_obj.id:
@@ -130,3 +131,14 @@ class UI:
 
 
 
+    def display_menu_type_2(self, options, title="Menu"):
+        print(self.bar)
+        print(title)
+        if isinstance(options, dict):
+            for option, description in options.items():
+                print(f"- {option.capitalize()}{f": {description}" if description else "..."}")
+        elif isinstance(options, list):
+            for option in options:
+                print(f"- {option.capitalize}")
+        elif isinstance(options, str):
+            print(f"- {options.capitalize}")

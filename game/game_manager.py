@@ -26,6 +26,7 @@ from entity_managers.suspect_manager import Suspect_Manager
 from entity_managers.item_manager import Item_Manager
 
 #systems
+from systems.stat_tracker import Stat_Tracker
 from systems.event_system import Event_System
 from systems.ambiance_system import Ambiance_System
 from systems.weather_system import Weather_System
@@ -87,8 +88,11 @@ class Game_Manager:
 
         player = Player(self.game_state)
 
+        stat_tracker = Stat_Tracker()
+
         # Initialize Game State with all required components
         self.game_state.initialize(
+            stat_tracker=stat_tracker,
             suspect_manager=suspect_manager,#for now
             location_manager=location_manager,
             item_manager=item_manager,
@@ -108,6 +112,5 @@ class Game_Manager:
 
 
     def run(self):
-        if self.game:
-            #spawn, now that you can access game_state. so put mobile ents in their locs
-            self.game.run()
+        self.game.run()
+        self.game_state.stat_tracker.dump()
