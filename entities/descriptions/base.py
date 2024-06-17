@@ -66,7 +66,11 @@ class Descriptions(ABC):
         if description_type == "at_scene":
             descriptions_dic = descriptions_dic.get(self.game_state.player.current_location.id)
             desc_logger.debug(f"Base Description/ fetch_random_description() : at_scene keyed dic {descriptions_dic}")
+            if not descriptions_dic:
+                desc_logger.warning((f"base / at scene descriptions: {descriptions_dic}"))
 
+        # COULD ADD APPROACHING/LEAVING?! TRY PLAYER CURRENT loc vs matched command for going to / leaving to...
+        #approaching (from player last loc
         """test this for all later; could check if isinstance dic first?"""
         if isinstance(descriptions_dic, dict):
             # ALWAYS key weather, time. or just time. but never time, weather!!!
@@ -89,8 +93,7 @@ class Descriptions(ABC):
                 descriptions_dic = time_keyed_dic
 
 
-
-        #end of additional keying - COULD ADD APPROACHING/LEAVING?!
+        #end of additional keying -
 
         desc_logger.debug(f"Base Description/ fetch_random_description() : iterating keys on {descriptions_dic}")
         descriptions = iterate_keys(self.game_state, descriptions_dic)

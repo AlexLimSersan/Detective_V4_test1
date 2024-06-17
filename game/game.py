@@ -31,7 +31,7 @@ class Game:
             logger.debug(f"Game.game matched command is {matched_command}")
             #only announce here
             if matched_command in self.game_state.player.current_location.get_connections():
-                print(f"ANNOUNCEMENT TEST PLACEMENT - moving")
+                self.ui.announce("moving_player", matched_command)
                 self.game_state.player.move(matched_command, self.ui)
 
             elif matched_command in self.game_state.player.current_location.suspects_present:
