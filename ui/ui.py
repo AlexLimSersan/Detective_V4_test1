@@ -7,7 +7,9 @@ from utilities.state_utils import iterate_keys
 
 from config.logging_config import app_logger
 
-from utilities.general_utils import match_command_to_option
+from utilities.command_utils import match_command_to_option
+
+
 class UI:
     def __init__(self):
         self.game_state = None
@@ -45,13 +47,15 @@ class UI:
             return
         if isinstance(text, list):
             for item in text:
-                #print(".")
                 self.display(item)
                 time.sleep(nested_pause_time)
+        elif isinstance(text, dict):
+            for key, value in text:
+                self.display(f"{key}{f": {value}" if value else ""}")
         else:
             print(text)
-            sys.stdout.flush()  # Ensure the text is displayed immediately
-            time.sleep(pause_time)
+        sys.stdout.flush()  # Ensure the text is displayed immediately
+        time.sleep(pause_time)
 
     def announce(self, verb, subject=None): #could pass last loc and have a if verb x and last loc cab, etc
         if verb == "go":
@@ -69,13 +73,25 @@ class UI:
         self.beat()
         #could have if subject is cab here
 
-    def confirm(self, command_id, game_state):
-        command_name = ids_to_names(command_id, game_state)
-        self.display(f"Did you mean '{command_name}'? (y/n): ")
+    def confirm(self, command_id=None, optional_text = None):
+        text = None
+        if command_id:
+            command_name = ids_to_names(command_id, self.game_state)
+            text = f"Did you mean '{command_name}'? (y/n):"
+        if optional_text:
+            text = optional_text
+        if not text:
+            raise ValueError(f"NO TEXT IN UI.CONFIRM")
+
+        self.display(text)
         confirm = self.get_input()
         if confirm in ["y", "ye", "yes"]:
             return True
-        return False
+        elif confirm in ["n", "no", "nope"]:
+            return False
+        else:
+            self.bad_input()
+            return False
 
     def display_menu(self, game_state, suspects=None, items=None, locations=None, actions=None):
         app_logger.debug(f"UI/DISPLAYMENU() ; \n {suspects} \n {items}\n {locations}\n {actions}")
@@ -120,16 +136,18 @@ class UI:
         if actions:
             player_last_loc_obj = game_state.player.location_history[-2]
             print(f"Actions:")
-            for option, description in actions.items():
-                description = ids_to_names(description, game_state)
-                if option != player_last_loc_obj.id:
-                    print(f"- {option.capitalize()}{f": {description}" if description else "..."}")
-                elif option == player_last_loc_obj.id:
-                    print(f"- Return: to {player_last_loc_obj.name}...")
-                else:
-                    print(f"what kind of option is {option}")
-
-
+            if isinstance(actions, dict):
+                for option, description in actions.items():
+                    description = ids_to_names(description, game_state)
+                    if option != player_last_loc_obj.id:
+                        print(f"- {option.capitalize()}{f": {description}" if description else "..."}")
+                    elif option == player_last_loc_obj.id:
+                        print(f"- Return: to {player_last_loc_obj.name}...")
+                    else:
+                        print(f"what kind of option is {option}")
+            else:
+                for action in actions:
+                    print(f"- {action.capitalize()}")
 
     def display_menu_type_2(self, options, title="Menu"):
         print(self.bar)

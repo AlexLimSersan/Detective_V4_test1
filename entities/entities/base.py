@@ -13,6 +13,7 @@ class Entity(ABC):
         self.descriptions = Descriptions(self.id, self.name, entity_state, self.game_state, descriptions, is_outdoors)
         self._entity_state = entity_state
         self.is_outdoors = is_outdoors
+        self.whimsical_handlers = {}
 
     @property
     def entity_state(self):
@@ -25,15 +26,15 @@ class Entity(ABC):
 
         assert self._entity_state == self.descriptions.entity_state
 
+    @abstractmethod
     def start_loop(self, ui):
-        ui.display(self.descriptions.get_description("approaching"))
-        self.loop(ui) #dialogue or interactions
-        ui.display(self.descriptions.get_description("leaving"))
+        #handles starting/leaving stuff
+        pass
 
     @abstractmethod
     def loop(self, ui):
         #something like:
-        #get at ent desc, get options, process command
+
         pass
 
 
@@ -70,5 +71,17 @@ class Mobile_Entity(Entity):
     @abstractmethod
     def update_location(self):
         pass
+    def start_loop(self, ui):
+        ui.display(self.descriptions.get_description("approaching"))
+        self.add_player_topic()
+        self.loop(ui) #dialogue or interactions
+        ui.display(self.descriptions.get_description("leaving"))
+
+    def add_player_topic(self):
+        # FIND OBJECT AND ADD TO PLAYER INV
+        obj = self.game_state.suspect_manager.get_entity(self.id) or self.game_state.item_manager.get_entity(self.id)
+        if not obj:
+            raise ValueError(f"Base Mobile Entity/start_loop(): NO OBJECT TO ADD to player for topics/inventory ")
+        self.game_state.player.add_known_topic(obj)  # handles clue to topic logic
 
 

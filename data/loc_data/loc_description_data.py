@@ -6,7 +6,7 @@ loc_description_data = {
     #FOR APPROACH/LEAVING, TRY CONNECTIONS?
 "cab_01": {
     "default": {
-        "approaching": { #
+        "approaching": { #approaching current loc, FROM last loc. so can optinally add last locs here, then optional weather, time, etc
             "neutral": ["The cab is lazily parked, taking up 3 spots...",  "The cab idles.."],
             "good": ["The cabbie waves as you approach.", "The cab idles, the engine a low, constant hum."],
             "bad": ["The cabbie glances your direction.", "The cab is surrounded by cigarettes", "The cab idles.."]
@@ -41,7 +41,7 @@ loc_description_data = {
             },
             "alley_01": ["The cab is parked nearby."],
             },
-        "leaving": {
+        "leaving": { #leaving from this loc TO player current loc, so key by current loc, then weather or time,,,
             "neutral": ["You exit the cab, closing the door behind you."],
         },
 

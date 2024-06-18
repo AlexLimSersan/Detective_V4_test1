@@ -1,5 +1,6 @@
 # utils/state_utils.py
 import random
+from config.logging_config import app_logger
 def iterate_states(game_state, entity_state, data, to_get=None):
     current_events = game_state.event_system.current_events
     #print(f"iterating states on {data}")
@@ -26,8 +27,12 @@ def iterate_keys(game_state, dictionary): #for mood keys
     ranked_keys = game_state.vibe_system.ranked_keys
     try:
         for key in ranked_keys:
+            #fails if not a list
             keyed_descriptions = dictionary.get(key)
             if keyed_descriptions:
+                app_logger.info(f"returning {key} keyed descriptions {keyed_descriptions} ")
                 return keyed_descriptions
+        app_logger.warning(f"tried all keys, didnt fail. not returning anything?")
     except:
+        app_logger.info(f"failed try, exception: returning {dictionary}")
         return dictionary #if cant find key, just return dic anyways

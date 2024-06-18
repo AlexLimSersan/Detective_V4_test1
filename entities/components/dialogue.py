@@ -3,7 +3,7 @@ from entities.components.base import Interaction
 from game.game_state import Game_State
 import random
 from config.settings import EXIT_COMMANDS
-from utilities.general_utils import match_command_to_option
+from utilities.command_utils import match_command_to_option
 from config.logging_config import ent_logger
 
 
@@ -20,7 +20,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         self.player_node = None #current node to find player options,
         self.talking = False #for the dialogue loop
         self.topic = "night of the murder"
-
+        #reaction dics using description keying?
         # Ensure game_state is an instance of Game_State
         assert isinstance(self.game_state, Game_State), f"Expected Game_State, got {type(self.game_state)}"
 

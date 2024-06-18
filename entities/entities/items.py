@@ -3,7 +3,7 @@ from entities.entities.base import Mobile_Entity
 
 from config.settings import ITEM_SPAWN_FREQUENCY, CLUE_SPAWN_FREQUENCY, EXIT_COMMANDS, ITEM_STATE_FREQUENCY
 from config.logging_config import ent_logger
-from utilities.general_utils import match_command_to_option
+from utilities.command_utils import match_command_to_option
 from entities.descriptions.item_descriptions import Item_Descriptions
 import random
 class Item(Mobile_Entity):

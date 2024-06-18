@@ -2,7 +2,7 @@ from entities.components.base import Interaction
 from entities.descriptions.base import Descriptions
 from abc import ABC, abstractmethod
 from utilities.state_utils import iterate_states, iterate_keys
-from utilities.general_utils import match_command_to_option
+from utilities.command_utils import match_command_to_option
 from config.settings import EXIT_COMMANDS, ENTER_COMMANDS
 from entities.components.locks import KeyLock, BoltLock
 

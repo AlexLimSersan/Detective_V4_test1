@@ -20,31 +20,10 @@ class Loc_Descriptions(Descriptions):
 
     def set_scene(self, suspects_present, items_present, connections):
         desc_logger.debug(f"Loc_Desc/set_scene(): setting scene with suspects {suspects_present}, items {items_present}, connections {connections}")
-        player_last_loc = self.game_state.player.location_history[-2]
-        #can have some logic for player last loc, if its the same location (ie they just interacted with a suspect or item)
-        #   make description shorter or just a recap!
 
         scene_description = []
-        #AT ENTITY
-        at_ent_desc = self.get_description("at_entity")
-        scene_description.append(at_ent_desc)
-        desc_logger.debug(f"Loc_Desc/set_scene(): got at ent{at_ent_desc}")
-        #TIMES
-        time_desc = self.get_description("times")
-        scene_description.append(time_desc)
-        desc_logger.debug(f"Loc_Desc/set_scene(): got times{time_desc}")
-        #WEATHER IF OUTDOORS
-        if self.is_outdoors:
-            weather_desc = self.get_description("weather")
-            scene_description.append(weather_desc)
-            desc_logger.debug(f"Loc_Desc/set_scene(): got outdoors:{weather_desc}")
-        #DECORATE TAGS SEPARATELY, NOT IN AT_ENTITY.
-        # this way, system decorations (like weather) come after all the specific descriptions from the id, but before the present suspects/items.
-        #either before or after? decide later.
-            if not weather_desc:
-                desc_decorations = self.decorate_description_tags()
-                scene_description.append(desc_decorations)
-                desc_logger.debug(f"Loc_Desc/set_scene() :desc_decorations {desc_decorations}")
+        scene_description.append(super().set_scene())
+
         for suspect_id, suspect_data in suspects_present.items(): #get descriptions from objevct for each obeject?@@?@?@22
             sus_desc = suspect_data.descriptions.get_description("at_scene")
             scene_description.append(sus_desc)
@@ -55,7 +34,7 @@ class Loc_Descriptions(Descriptions):
             desc_logger.debug(f"Loc_Desc/set_scene(): got item desc AT SCENE : {item_desc}")
 
         #GET INTRO PHRASE?!?!
-
+        player_last_loc = self.game_state.player.location_history[-2]
         #query from the actual connected location, so that you get descriptions based on their state!
         for connection_id in connections:
             if connection_id != player_last_loc.id:
@@ -64,6 +43,7 @@ class Loc_Descriptions(Descriptions):
                     conn_desc = connected_location.descriptions.get_connection_descriptions(self.id)
                     scene_description.append(conn_desc)
                     desc_logger.debug(f"Loc_Desc/set_scene():got connected loc desc {conn_desc}")
+
         desc_logger.debug(f"LOC_DESC set scene: returnins {scene_description}")
         return scene_description
 

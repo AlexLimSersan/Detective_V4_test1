@@ -1,5 +1,4 @@
-
-from utilities.general_utils import match_command_to_option
+from utilities.command_utils import match_command_to_option
 from config.settings import PLAYER_STARTING_LOCATION, MOVE_TIME
 from config.logging_config import ent_logger
 
@@ -29,19 +28,17 @@ class Player():
         ent_logger.debug(f"PLAYER/location history = {self.location_history[-2].id}")
 
     def move(self, matched_command, ui):
-        # location manager always is used to change entity location - syncs between location and item.
-
-        ui.announce("moving_player", matched_command)
-        #you leave the cab, and approach entry location
-        if not self.current_location.id == "cab_01":
-            ui.display(self.current_location.descriptions.get_description("leaving"))
-        #ui.beat()
-
+        # change current location to matched command object
         loc_object = self.game_state.location_manager.get_entity(matched_command)
         self.current_location = loc_object
+
+        #leaving from last location, can check against current loc for leaving to
+        ui.display(self.location_history[-2].descriptions.get_description("leaving"))
+        #get approaching description from current location; can check against last loc for directional (approaching from)
+        ui.display(self.current_location.descriptions.get_description("approaching"))
+        ui.beat()
         # ELAPSE TIME
         self.game_state.time_system.elapse_time(MOVE_TIME, ui)  # event checker here?
-        ui.display(self.current_location.descriptions.get_description("approaching"))
 
     def initialize(self):
         # Initialize Player (with starting loc)
@@ -72,14 +69,17 @@ class Player():
                     inv_by_type.append(obj.name)
                     ids_by_type.append(obj.id)
         else:
-            for item in self.inventory:  # should append any for topic
-                if item.item_type == inv_type:
-                    inv_by_type.append(item.name)
-                    ids_by_type.append(item.id)
+            for obj in self.inventory:  # should append any for topic
+                try:
+                    if obj.item_type == inv_type:
+                        inv_by_type.append(obj.name)
+                        ids_by_type.append(obj.id)
+                except:
+                    ent_logger.warning(f"PLAYER/get inv type: no item_type for {obj.id}")
 
         #DISPLAY
         ui.display(f"Choose {inv_type}:")
-        ent_logger.info(f"inv_by_type = {inv_by_type}")
+        ent_logger.debug(f"inv_by_type = {inv_by_type}")
         for name in inv_by_type:
 
             ui.display(f"- {name.capitalize()}")
