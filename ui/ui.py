@@ -93,7 +93,7 @@ class UI:
             self.bad_input()
             return False
 
-    def display_menu(self, game_state, suspects=None, items=None, locations=None, actions=None):
+    def display_menu(self, suspects=None, items=None, locations=None, actions=None):
         app_logger.debug(f"UI/DISPLAYMENU() ; \n {suspects} \n {items}\n {locations}\n {actions}")
         print(self.bar)
         #if game_state.player.current_location.id == "cab_01":  # if cab, no return, and maybe display entry points differently later
@@ -105,40 +105,35 @@ class UI:
         if suspects:
             print(f"Suspects:") #speak withApproach
             for sus in suspects:
-                sus_name = ids_to_names(sus, game_state)
+                sus_name = ids_to_names(sus, self.game_state)
                 print(f"- {sus_name.capitalize()}")
         if items:
             print(f"Items:") #inspect
             for it in items:
-                item_name = ids_to_names(it, game_state)
+                item_name = ids_to_names(it, self.game_state)
                 print(f"- {item_name.capitalize()}")
-
         if locations:
-
-            player_last_loc_obj = game_state.player.location_history[-2]  # -1 current, -2 most recent
+            player_last_loc_obj = self.game_state.player.location_history[-2]  # -1 current, -2 most recent
             print(f"Locations:") #change location? Travel Move to
-
             for location in locations:
                 #for NOT previous locations:
                 if location != player_last_loc_obj.id:
-                    location_name = ids_to_names(location, game_state)
+                    location_name = ids_to_names(location, self.game_state)
                     #locations with same name as current loc
-                    if location_name == game_state.player.current_location.name: #PUT THIS IN HALLWAY!!
+                    if location_name == self.game_state.player.current_location.name: #PUT THIS IN HALLWAY!!
                         print(f"- Continue: down {location_name.capitalize()}")
                     #all locations that are not previous location
                     else:
                         print(f"- {location_name.capitalize()}")
-
             if player_last_loc_obj.id in locations:
                 #if previous location name same as current location name,
                 print(f"- Return: to {player_last_loc_obj.name}...")
-
         if actions:
-            player_last_loc_obj = game_state.player.location_history[-2]
+            player_last_loc_obj = self.game_state.player.location_history[-2]
             print(f"Actions:")
             if isinstance(actions, dict):
                 for option, description in actions.items():
-                    description = ids_to_names(description, game_state)
+                    description = ids_to_names(description, self.game_state)
                     if option != player_last_loc_obj.id:
                         print(f"- {option.capitalize()}{f": {description}" if description else "..."}")
                     elif option == player_last_loc_obj.id:
@@ -152,6 +147,7 @@ class UI:
     def display_menu_type_2(self, options, title="Menu"):
         print(self.bar)
         print(title)
+        #for text in options ids to names self.game_state
         if isinstance(options, dict):
             for option, description in options.items():
                 print(f"- {option.capitalize()}{f": {description}" if description else "..."}")
@@ -160,3 +156,5 @@ class UI:
                 print(f"- {option.capitalize}")
         elif isinstance(options, str):
             print(f"- {options.capitalize}")
+        else:
+            raise ValueError(f"what are you printing man")

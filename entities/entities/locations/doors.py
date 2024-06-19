@@ -24,22 +24,21 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
         while True:
             suspects, items, locations, actions = self.get_options()
             # Door locations are displayed as actions (enter, return) ; locations still used for moving/connections
-            ui.display_menu(self.game_state, suspects, items, None, actions)
-
+            ui.display_menu(suspects, items, None, actions)
+            #get all ids that you want to pass to components as actions
+            actions = list(self.components.option_handlers.keys())
             command_id = get_command(ui, self.game_state)
             result = self.process_command(command_id, ui, suspects, items, locations, actions)
             if result:
                 return result
             elif command_id in self.whimsical_handlers:
                 self.whimsical_handlers[command_id](ui)
+            ui.display(self.descriptions.set_scene(self.suspects_present, self.items_present, self.get_connections()))
 
     def process_action(self, command_id, ui):
         if self.components.process_command(command_id, ui):
-            # Display connection description across door if opened.
-            for connection in self.get_connections():
-                if connection != self.game_state.player.location_history[-2].id:
-                    conn_obj = self.game_state.location_manager.get_entity(connection)
-                    ui.display(conn_obj.descriptions.get_connection_descriptions(self.id))
+            #possible door specific logic here
+            pass
     def get_actions(self):
         actions = {}
         # handling front end enter/return type stuff:
@@ -47,13 +46,11 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
         connections = self.get_connections()
 
         player_last_loc_id = self.game_state.player.location_history[-2].id
-        ent_logger.debug(f"door connections :{connections}, playerlastloc id {player_last_loc_id}")
         for connection in connections:
             if connection != player_last_loc_id:
-                actions["Enter"] = f"{connection}"  # formatting handled in UI
+                actions["Enter"] = f"{connection}"
         actions.update(self.components.get_options())
         actions[player_last_loc_id] = ""  # formatting handled in UI
-        ent_logger.debug(f"doors.py/getoptions {actions}")
         # no connection locations for doors, all in actions!
         return actions
 

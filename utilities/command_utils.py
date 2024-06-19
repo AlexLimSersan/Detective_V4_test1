@@ -40,20 +40,16 @@ def handle_command_id_list_logic(command_ids, game_state):
 
 
 def match_command_to_option(command, game_state, suspects=None, items=None, locations=None, actions=None):
-    if suspects is None:
-        suspects = []
-    if items is None:
-        items = []
-    if locations is None:
-        locations = []
-    if actions is None:
-        actions = []
+    suspects = suspects or []
+    items = items or []
+    locations = locations or []
+    actions = actions or []
     app_logger.info(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION: command = {command}\n suspects = {suspects}\nitems={items}\n locs={locations}\nactions={actions}\n")
     matched = False
 
     if isinstance(command, list):
+        app_logger.warning(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION: command = {command}\n suspects = {suspects}\nitems={items}\n locs={locations}\nactions={actions}\n")
         command = command[0]
-
 
     # Convert actions to list if it is a dict
     if isinstance(actions, dict):

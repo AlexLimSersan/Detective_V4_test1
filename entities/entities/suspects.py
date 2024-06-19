@@ -1,5 +1,5 @@
 from entities.entities.base import Mobile_Entity
-from entities.descriptions.base import Mobile_Descriptions
+from entities.descriptions.sus_descriptions import Sus_Descriptions
 from entities.components.dialogue import Dialogue
 
 from systems.ambiance_system import Ambiance_System
@@ -17,7 +17,7 @@ class Suspect(Mobile_Entity):
         self.profile = profile
         self.routine = routine
         self.mood = Ambiance_System(SUSPECT_STARTING_MOOD)
-        self.descriptions = Mobile_Descriptions(id, name, entity_state, game_state, descriptions, current_location, is_outdoors)
+        self.descriptions = Sus_Descriptions(id, name, self.mood, entity_state, game_state, descriptions, current_location, is_outdoors)
         assert isinstance(self.game_state, Game_State)
         self.dialogue = Dialogue(dialogue, player_options, id, name, entity_state, self.mood, game_state, current_location, is_outdoors)
 

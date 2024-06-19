@@ -10,7 +10,7 @@ class Player():
         #self.clues_found = [] #tracker for end game analysis - can just cross check anything found vs
         self.location_history = [] #loc history ; objects of locs, including current loc just for flexibility?
         self._current_location = None#loc object
-        self.inventory = [] #list of objects; CANT PICK ANYTHING UP YET!
+        self.known_clues = [] #list of objects; CANT PICK ANYTHING UP YET!
         self.game_state = game_state
         self.orientation = "forward"
         #for convo topics, just use inventory
@@ -50,8 +50,8 @@ class Player():
         #just for now:
         #self.convo_topics.append(ent_id)
         #self.clues_found.append(ent_id)
-        if ent_obj not in self.inventory:
-            self.inventory.append(ent_obj)
+        if ent_obj not in self.known_clues:
+            self.known_clues.append(ent_obj)
 
     def ask_inv_type(self, ui, inv_type): #get topics like this?!?
         inv_by_type = []
@@ -60,16 +60,16 @@ class Player():
         if inv_type == "topic":
             inv_by_type.append("night of the murder")
             ids_by_type.append("night of the murder")
-            for item in self.inventory: #should append any for topic
-                inv_by_type.append(item.name)
-                ids_by_type.append(item.id)
+            for obj in self.known_clues: #should append any for topic
+                inv_by_type.append(obj.name)
+                ids_by_type.append(obj.id)
         elif inv_type == "suspect":
-            for obj in self.inventory:
+            for obj in self.known_clues:
                 if isinstance(obj, Suspect):
                     inv_by_type.append(obj.name)
                     ids_by_type.append(obj.id)
         else:
-            for obj in self.inventory:  # should append any for topic
+            for obj in self.known_clues:  # should append any for topic
                 try:
                     if obj.item_type == inv_type:
                         inv_by_type.append(obj.name)

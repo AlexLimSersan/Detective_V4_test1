@@ -22,7 +22,6 @@ class Location(Entity):
         self.suspects_present = {}
         self.items_present = {}
 
-
     def remove_entity(self, entity):
         """Remove entity from location"""
         if entity.id in self.suspects_present:
@@ -59,7 +58,7 @@ class Location(Entity):
     def loop(self, ui):  # command validation must be in loop, only break out if valid command
         while True:
             suspects, items, locations, actions = self.get_options()
-            ui.display_menu(self.game_state, suspects, items, locations, actions)
+            ui.display_menu(suspects, items, locations, actions)
 
             command_id = get_command(ui, self.game_state)
             result = self.process_command(command_id, ui, suspects, items, locations, actions)

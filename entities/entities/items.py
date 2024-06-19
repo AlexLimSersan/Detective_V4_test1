@@ -18,7 +18,6 @@ class Item(Mobile_Entity):
         self.spawn_frequency = spawn_frequency
         self.entity_state = self.determine_state() #this is actually irrelevant outside of initialization due to iterate states?
 
-
     def determine_state(self):
         for state, data in self.state_data.items():
             if random.random() <= data.get("frequency", ITEM_STATE_FREQUENCY):
@@ -31,7 +30,7 @@ class Item(Mobile_Entity):
         ui.display(self.descriptions.set_scene())
         while True:
             actions = self.get_options()
-            ui.display_menu(self.game_state, actions = actions)
+            ui.display_menu_type_2(options = actions, title=self.name)
             #you pick up, put down, ??
             command = ui.get_input()
             if self.components:
@@ -49,7 +48,7 @@ class Item(Mobile_Entity):
             return command_id  # game handles switching handlers
         matched_command, matched = match_command_to_option(command_id, self.game_state, actions = actions)
         if matched:
-            if ui.confirm(matched_command, self.game_state):
+            if ui.confirm(matched_command):
                 return matched_command
         return None
 

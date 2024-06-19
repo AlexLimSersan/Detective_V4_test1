@@ -71,7 +71,7 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
         ent_logger.debug(f"toget = {to_get}\n descriptions = {self.descriptions}")
         state_description_dic = iterate_states(self.game_state, self.entity_state, self.descriptions, to_get)
         if state_description_dic:
-            description = iterate_keys(self.game_state, state_description_dic)
+            description = iterate_keys(state_description_dic, self.game_state.vibe_system.ranked_keys)
             return description
         else:
             desc = default_descriptions.get(to_get)

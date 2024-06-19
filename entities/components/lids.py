@@ -17,7 +17,7 @@ self.id = id
         self.game_state = game_state
 """
 
-class Lid(Interaction):
+class Lid(Interaction): #can refactor this for sure
     def __init__(self, id, name, entity_state, game_state, is_outdoors, connections, component_descriptions = None, is_open = False, lock_mechanism = None):
         super().__init__(id, name, game_state, entity_state, is_outdoors)
 
@@ -26,6 +26,13 @@ class Lid(Interaction):
         self.descriptions = component_descriptions #default: type(opened, closed, etc); key:description
         self.is_open = is_open
         self.lock_mechanism = self.create_lock_mechanism(lock_mechanism)
+        # Dictionary mapping commands to their corresponding methods
+        self.option_handlers = {
+            "open": self.open,
+            "close": self.close,
+            "lock": self.lock,
+            "unlock": self.unlock,
+        }
         assert isinstance(self.game_state, Game_State)
 
     def create_lock_mechanism(self, lock_mechanism):
@@ -71,7 +78,7 @@ class Lid(Interaction):
         ent_logger.debug(f"LIDS.PY/ GET_DESCRIPTION()  toget = {to_get}, iterating states on : {self.descriptions}")
         state_description_dic = iterate_states(self.game_state, self.entity_state, self.descriptions, to_get) if self.descriptions else None
         if state_description_dic:
-            description.append(iterate_keys(self.game_state, state_description_dic))
+            description.append(iterate_keys(state_description_dic, self.game_state.vibe_system.ranked_keys))
         else:
             description.append(default.format(name=self.name))
         ent_logger.info(f"LIDS.PY/ GET_DESCRIPTION() type: {type} -  returning {description}")
@@ -91,30 +98,23 @@ class Lid(Interaction):
         return options
 
     def process_command(self, command, ui):
-        # Dictionary mapping commands to their corresponding methods
-        option_handlers = {
-            "open": self.open,
-            "close": self.close,
-            "lock": self.lock,
-            "unlock": self.unlock,
 
-        }
 
         # Check if the command is in the options and in the handler dictionary
         #if command in options and
-        if command in option_handlers:
+        if command in self.option_handlers:
             # Call the corresponding method and pass the UI object
-            option_handlers[command](ui)
+            self.option_handlers[command](ui)
             return True
 
         else: #COULD PASS ACTIONS HERE
-            actual_options = list(self.get_options().keys()) #because it would correct to not actual options
-            matched_command, matched = match_command_to_option(command, game_state=self.game_state, actions=actual_options)
+            current_options = list(self.get_options().keys()) #because it would correct to all options
+            matched_command, matched = match_command_to_option(command, game_state=self.game_state, actions=current_options)
             if matched:
                 if ui.confirm(matched_command, self.game_state):
-                    if matched_command in option_handlers:
+                    if matched_command in self.option_handlers:
                         # Call the corresponding method and pass the UI object
-                        option_handlers[matched_command](ui)
+                        self.option_handlers[matched_command](ui)
                 return True
             return False
 

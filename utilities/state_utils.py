@@ -23,11 +23,10 @@ def iterate_states(game_state, entity_state, data, to_get=None):
         return found_dic
     #raise ValueError(f"ITERATE STATES: no found dictionary; to_get : {to_get}")
 
-def iterate_keys(game_state, dictionary): #for mood keys
-    ranked_keys = game_state.vibe_system.ranked_keys
+def iterate_keys(dictionary, ranked_keys): #for mood keys
     try:
         for key in ranked_keys:
-            #fails if not a list
+            #fails if a list
             keyed_descriptions = dictionary.get(key)
             if keyed_descriptions:
                 app_logger.info(f"returning {key} keyed descriptions {keyed_descriptions} ")

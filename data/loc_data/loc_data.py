@@ -91,12 +91,7 @@ loc_ent_data = {
             "name": "office door",
             "connections": ["hallway_04", "bertha_office_01"],
             "component_descriptions": {
-                "default": {
-                    "opening": ["The door clicks open, echoing softly."],
-                    "closing": ["The door snaps shut with a finality."],
-                    "opened": ["The office door hangs open.","The door is ajar."],
-                    "closed": ["The door is firmly shut."]
-                },
+
             },
             "lock_mechanism": {
                 "name": "brass lock",

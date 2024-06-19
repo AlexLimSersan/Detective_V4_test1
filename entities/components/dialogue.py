@@ -12,6 +12,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         super().__init__(id, name, game_state, entity_state, is_outdoors)
         self.current_location = current_location
         self.mood = mood
+        self.node_history = [] #list of topic ids
         #dialogue types: {state : {topic, {non topic, }}}
         self.dialogue = dialogue #data
         self.current_node = None
@@ -21,16 +22,65 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         self.talking = False #for the dialogue loop
         self.topic = "night of the murder"
         #reaction dics using description keying?
+
         # Ensure game_state is an instance of Game_State
         assert isinstance(self.game_state, Game_State), f"Expected Game_State, got {type(self.game_state)}"
 
     def start_loop(self, ui):
         #greet
-        self.handle_dialogue_dic(self.get_dialogue_dic("greet"), ui)
+        dialogue_dic_to_handle = self.get_dialogue_dic("greet")
+        self.handle_dialogue_dic(dialogue_dic_to_handle, ui)
+
         self.talking = True
-        ent_logger.info(f"DIALOGUE/start loop: {self.id} ; mood: {self.mood.current_value}")
         self.loop(ui)
-        self.handle_dialogue_dic(self.get_dialogue_dic("bye"), ui)
+
+        dialogue_dic_to_handle = self.get_dialogue_dic("bye")
+        self.handle_dialogue_dic(dialogue_dic_to_handle, ui)
+
+    def loop(self, ui):
+        while self.talking:  # loop until no longer talking, can be turned off by event/dialogue effect or player action
+            options = self.get_options()
+            ent_logger.info(
+                f"DIALOGUE/ loop: {self.id} ; mood: {self.mood.current_value} \n options = {options}\n topic = {self.topic}\n ")
+            if not options:
+                self.reset_convo(ui)
+                continue
+            command_executed = False
+            while not command_executed:
+                ent_logger.debug(f"entering not command executed loop")
+                ui.display_menu_type_2(options=options, title=self.name)
+                command = ui.get_input()
+                command_executed = self.process_command(command, options, ui)
+            # timesystem.advance time here!
+
+    def process_command(self, command, options, ui):
+        if command in EXIT_COMMANDS:
+            self.talking = False
+            return True
+        elif command in options:
+            if command == "change":
+                new_topic = self.game_state.player.ask_inv_type(ui, inv_type="topic")
+                if isinstance(new_topic, list):
+                    new_topic = new_topic[0]
+                if not new_topic:
+                    self.reset_convo(ui)
+                else:
+                    self.topic = new_topic
+
+            else:
+                self.handle_dialogue_dic(self.get_dialogue_dic(type=self.topic, player_input=command), ui, command)
+            return True
+        else:
+            matched_command, matched = match_command_to_option(command, self.game_state, actions=options)
+            if matched:
+                if ui.confirm(matched_command):
+                    if isinstance(matched_command, list):
+                        matched_command = matched_command[0]
+                    self.process_command(matched_command, options, ui)
+                return True
+
+        ui.bad_input()
+        return False
 
     def handle_dialogue_dic(self, dialogue_dic, ui, command=None):
         ent_logger.debug(f" handle_dialogue_dic: dialogue_dic {dialogue_dic}")
@@ -38,14 +88,12 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         effects_to_handle = dialogue_dic.get("effects")
         self.handle_effects(effects_to_handle, command)
         #suspect responds
-
+        #custom reactions?
         suspect_says = dialogue_dic.get("says", [...])
         ui.display(random.choice(suspect_says))
         #next player node
         # this SHOULD be set to none if there is No options, to reflect that the convo for that topic ends. this will trigger the redirect
         self.player_node = dialogue_dic.get("options")
-
-
 
     def handle_effects(self, effects, command=None): #this could even be in event system?
         test_ids = ["apple_01", "whiskey_01", "gibbs_01", "bertha_01", "unknown", "redirect"]
@@ -53,6 +101,10 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         for id in test_ids:
             if id in self.current_node:
                 ent_logger.info(f"this could work?")
+        if "chat" in self.current_node:
+            ...
+        elif "grill" in self.current_node:
+            ...
         if command:
             ent_logger.info(f"command = {command}; possible reaction?!")
         #or could be in base interaction class?
@@ -135,53 +187,3 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
                 self.current_node = dialogue_key
                 return response
         raise ValueError("dialogue response did not default to unknown properly")
-
-
-    def loop(self, ui):
-        while self.talking: #loop until no longer talking, can be turned off by event/dialogue effect or player action
-            options = self.get_options()
-            ent_logger.debug(f"dialogue loop starting; \n options = {options}\n topic = {self.topic}\n ")
-            if not options:
-                self.reset_convo(ui)
-                continue
-            command_executed = False
-            while not command_executed:
-                ent_logger.debug(f"entering not command executed loop")
-                ui.display_menu(self.game_state, actions = options)
-                command = ui.get_input()
-                command_executed = self.process_command(command, options, ui)
-            #timesystem.advance time here!
-
-
-    def process_command(self, command, options, ui):
-
-        if command in EXIT_COMMANDS:
-            # if return,, leave, etc, self.talking = false
-            self.talking = False
-            return True
-        elif command in options:
-            if command == "change":
-                new_topic = self.game_state.player.ask_inv_type(ui, inv_type="topic")
-                if isinstance(new_topic, list):
-                    new_topic = new_topic[0]
-                if not new_topic:
-                    self.reset_convo(ui)
-                else:
-                    self.topic = new_topic
-
-            else:
-                self.handle_dialogue_dic(self.get_dialogue_dic(type=self.topic, player_input=command), ui, command)
-            return True
-        else:
-            matched_command, matched = match_command_to_option(command, self.game_state, actions = options)
-            if matched:
-                if ui.confirm(matched_command, self.game_state):
-                    if isinstance(matched_command, list):
-                        matched_command = matched_command[0]
-                    self.process_command(matched_command, options, ui)
-                return True
-
-
-        ui.bad_input()
-        return False
-

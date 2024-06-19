@@ -23,7 +23,7 @@ def flatten_list(list_to_fix):
 def generate_full_names(names):
     return set(name.lower() for name in names)
 
-def find_best_match(command, full_names, threshold=0.4):
+def find_best_match(command, full_names, threshold=0.6):
     #lower threshold = more likely to match
     command_lower = command.lower()
     best_match = None

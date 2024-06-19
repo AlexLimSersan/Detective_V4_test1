@@ -27,7 +27,7 @@ class Cab(Location):
         while True:
             suspects, items, locations, actions = self.get_options()
             #instead of connections, pass the major location names
-            ui.display_menu(self.game_state, suspects, items, self.cab_location_area_names, actions=None)
+            ui.display_menu(suspects, items, self.cab_location_area_names, actions=None)
             ui.display(f"Input 'cabbie' for additional options")
 
             command_id = get_command(ui, self.game_state)
@@ -35,6 +35,7 @@ class Cab(Location):
             ent_logger.debug(f"Locations.py/loop: cab changes command_id : {command_id}")
 
             result = self.process_command(command_id, ui, suspects, items, list(self.cab_loc_dic.keys()), actions)
+            result = self.cab_loc_dic.get(result)
             ent_logger.debug(f"LOCATIONS.PY/CAB/LOOP() result = {result}")
             if result:
                 if result == "EXIT_GAME":
@@ -87,8 +88,9 @@ class Cab(Location):
             "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
             "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
         }
-        drive1 = iterate_keys(self.game_state, driving_dic_1)
-        drive2 = iterate_keys(self.game_state, driving_dic_2)
+
+        drive1 = iterate_keys(driving_dic_1, self.game_state.vibe_system.ranked_keys)
+        drive2 = iterate_keys(driving_dic_2, self.game_state.vibe_system.ranked_keys)
         ui.display(random.choice(drive1))
         ui.beat()
         ui.display(drive2)

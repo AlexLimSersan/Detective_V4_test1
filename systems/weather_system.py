@@ -12,7 +12,7 @@ class Weather_System:
         self._current_weather = random.choice(START_WEATHERS)
         self.all_weathers = ALL_WEATHERS
         self.good_weathers = GOOD_WEATHER
-        #weather descriptions
+        #weather descriptions - sun, rain, after rain (puddles?) BASICALLY, NEED WEATHER TRANSITIONS!!! its a bright sunny day... then next thing: thunder claps in the rain
         self.weather_descriptions = weather_data
         #gamestate
         self.game_state = game_state

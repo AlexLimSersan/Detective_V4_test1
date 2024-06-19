@@ -48,7 +48,7 @@ class Hallway(Location):
         while True:
             suspects, items, locations, actions = self.get_options()
             #locations displayed as actions in hallways
-            ui.display_menu(self.game_state, suspects, items, self.get_directional_locations(), actions)
+            ui.display_menu(suspects, items, self.get_directional_locations(), actions)
             command_id = get_command(ui, self.game_state)
             result = self.process_command(command_id, ui, suspects, items, locations, actions)
             if result:
