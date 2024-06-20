@@ -68,14 +68,15 @@ class Suspect_Manager(Entity_Manager):
     def preprocess_dialogue(self, dialogue_template):
         merged_dialogue = dialogue_template.copy()
         for conditional_dialogues in dialogue_template.get("conditional", []):
-            if self.check_conditions(conditional_dialogues["conditions"]):
+            if self.game_state.item_manager.check_conditions(conditional_dialogues["conditions"], sus_id, "dialogue", conditional_dialogues):
                 self.merge_dialogue(merged_dialogue, conditional_dialogues["dialogue"])
         return merged_dialogue
 
-    def check_conditions(self, conditions):
-        if all(cond in self.murderer.profile.values() for cond in conditions):
-            return True
-        return False
+    def check_conditions(self):
+        pass
+        #if all(cond in self.murderer.profile.values() for cond in conditions):
+        #    return True
+        #return False
 
     def merge_dialogue(self, base_dialogue, additional_dialogue):
         for dialogue_id, dialogue_dic in additional_dialogue.items():

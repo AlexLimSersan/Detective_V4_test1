@@ -25,9 +25,10 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
             suspects, items, locations, actions = self.get_options()
             # Door locations are displayed as actions (enter, return) ; locations still used for moving/connections
             ui.display_menu(suspects, items, None, actions)
-            #get all ids that you want to pass to components as actions
-            actions = list(self.components.option_handlers.keys())
+
             command_id = get_command(ui, self.game_state)
+            # get all ids that you want to pass to components as actions
+            actions = list(self.components.option_handlers.keys())
             result = self.process_command(command_id, ui, suspects, items, locations, actions)
             if result:
                 return result
@@ -56,5 +57,5 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
 
     def bump(self, ui):
         if not self.components.is_open:
-            bump_text = self.descriptions.get_description(f"enter") or f"You bump into the {self.name}."
+            bump_text = self.descriptions.get_description(f"bump") or f"You bump into the {self.name}."
             ui.display(bump_text)

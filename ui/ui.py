@@ -3,7 +3,7 @@ import random
 from config.settings import MESSAGE_SLEEP_TIME
 import sys
 from utilities.general_utils import ids_to_names
-from utilities.state_utils import iterate_keys
+from utilities.state_utils import iterate_vibe_keys
 
 from config.logging_config import app_logger
 
@@ -17,37 +17,28 @@ class UI:
 
     def get_input(self):
         output =  input("> ").lower().strip()
-
         return output
 
-    def bad_input(self):
+    def bad_input(self, text = None, beat_multiplier = 1):
         print (f"Command not recognized")
-        self.stall()
+        self.stall(text, beat_multiplier)
 
-    def stall(self):
-        time.sleep(0.3)
-        print("Input any to continue...")
+    def stall(self, text = None, beat_multiplier = 1):
+        self.beat(beat_multiplier)
+        self.display(text or "Input any to continue...")
         #sys.stdout.flush()
         self.get_input()
 
     def beat(self, multiplier = 1):
         time.sleep(0.4*multiplier)
-        #print("")
-
 
     def display(self, text, pause_time = 0, nested_pause_time=0):
-        """
-        Display text from a nested list with pauses between each phrase.
-
-        :param text_list: Nested list of phrases to display
-        :param pause_time: Pause time between phrases in seconds
-        :param nested_pause_time: Pause time between nested lists in seconds
-        """
+        #something for if not ending with .??
         if not text:
             return
         if isinstance(text, list):
-            for item in text:
-                self.display(item)
+            for nested_str in text:
+                self.display(nested_str)
                 time.sleep(nested_pause_time)
         elif isinstance(text, dict):
             for key, value in text:
@@ -57,7 +48,9 @@ class UI:
         sys.stdout.flush()  # Ensure the text is displayed immediately
         time.sleep(pause_time)
 
-    def announce(self, verb, subject=None): #could pass last loc and have a if verb x and last loc cab, etc
+    def announce(self, verb, subject=None):
+        #refactor - could be good for all commands that work, like "chatting... or grilling... or opening..."
+        # then you could also get less reliant on "its open"
         if verb == "go":
             choices = ["Moving...", "Approaching...", "Walking to..."]
             new_verb = random.choice(choices)
@@ -65,25 +58,16 @@ class UI:
             print(f"Moving...")
         elif verb == "insert":
             print(f"announcing: Inserting {subject if subject else ""}...")
-        #elif verb == "cab_driving":
-            #possible key iterations here
-            ...
         else:
             print(f"Announcing: {verb}, {subject}")
         self.beat()
-        #could have if subject is cab here
 
-    def confirm(self, command_id=None, optional_text = None):
-        text = None
+    def confirm(self, command_id=None, text = None):
+        command_name = None
+
         if command_id:
             command_name = ids_to_names(command_id, self.game_state)
-            text = f"Did you mean '{command_name}'? (y/n):"
-        if optional_text:
-            text = optional_text
-        if not text:
-            raise ValueError(f"NO TEXT IN UI.CONFIRM")
-
-        self.display(text)
+        self.display(text or f"Did you mean '{command_name}'? (y/n):")
         confirm = self.get_input()
         if confirm in ["y", "ye", "yes"]:
             return True
@@ -96,11 +80,6 @@ class UI:
     def display_menu(self, suspects=None, items=None, locations=None, actions=None):
         app_logger.debug(f"UI/DISPLAYMENU() ; \n {suspects} \n {items}\n {locations}\n {actions}")
         print(self.bar)
-        #if game_state.player.current_location.id == "cab_01":  # if cab, no return, and maybe display entry points differently later
-        #    self.handle_cab_menu(game_state, suspects, items, locations, actions)
-        #    return #break
-
-
         #pass IDS to menu
         if suspects:
             print(f"Suspects:") #speak withApproach
@@ -139,21 +118,21 @@ class UI:
                     elif option == player_last_loc_obj.id:
                         print(f"- Return: to {player_last_loc_obj.name}...")
                     else:
-                        print(f"what kind of option is {option}")
+                        print(f"what kind of option is {option}!@!@!@")
             else:
                 for action in actions:
                     print(f"- {action.capitalize()}")
 
     def display_menu_type_2(self, options, title="Menu"):
         print(self.bar)
-        print(title)
+        print(title.capitalize())
         #for text in options ids to names self.game_state
         if isinstance(options, dict):
             for option, description in options.items():
-                print(f"- {option.capitalize()}{f": {description}" if description else "..."}")
+                print(f"- {ids_to_names(option, self.game_state).capitalize()}{f": {ids_to_names(description, self.game_state)}" if description else "..."}")
         elif isinstance(options, list):
             for option in options:
-                print(f"- {option.capitalize}")
+                print(f"- {ids_to_names(option, self.game_state).capitalize()}")
         elif isinstance(options, str):
             print(f"- {options.capitalize}")
         else:

@@ -28,7 +28,7 @@ from entity_managers.item_manager import Item_Manager
 #systems
 from systems.stat_tracker import Stat_Tracker
 from systems.event_system import Event_System
-from systems.ambiance_system import Ambiance_System
+from systems.vibe_system import Vibe_System
 from systems.weather_system import Weather_System
 from systems.time_system import Time_System
 from data.misc_data.weather_data import weather_data
@@ -54,7 +54,7 @@ class Game_Manager:
 
 
         # Initialize Systems
-        vibe_system = Ambiance_System()
+        vibe_system = Vibe_System()
         weather_system = Weather_System(weather_data=weather_data, game_state=self.game_state)
         time_system = Time_System(game_state=self.game_state)
         event_system = Event_System(game_state=self.game_state, events_data=events_data)

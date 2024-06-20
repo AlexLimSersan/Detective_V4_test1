@@ -4,8 +4,19 @@
 #why not optional time or weather keys for all of them?
 loc_description_data = {
     #FOR APPROACH/LEAVING, TRY CONNECTIONS?
+
 "cab_01": {
     "default": {
+        "driving_start": {
+            "neutral": [f'"You got it boss."', "The engine sputters, and the cab drives off.", "The cab drives..."]},
+        "driving_during": {
+            "neutral": ["You sit in the cab, watching the city pass by through the window."],
+            "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
+            "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
+        },
+        "driving_arriving": {
+            "porch_01": ["The porch comes into view.."]
+        },
         "approaching": { #approaching current loc, FROM last loc. so can optinally add last locs here, then optional weather, time, etc
             "neutral": ["The cab is lazily parked, taking up 3 spots...",  "The cab idles.."],
             "good": ["The cabbie waves as you approach.", "The cab idles, the engine a low, constant hum."],

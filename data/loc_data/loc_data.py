@@ -94,6 +94,7 @@ loc_ent_data = {
 
             },
             "lock_mechanism": {
+                "id": "not needed lol",
                 "name": "brass lock",
                 "key": "brass_key_01",
                 "lock_type": "key_lock",

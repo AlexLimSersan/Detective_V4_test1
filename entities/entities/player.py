@@ -5,6 +5,7 @@ from config.logging_config import ent_logger
 from utilities.general_utils import names_to_ids, ids_to_names
 
 from entities.entities.suspects import Suspect
+from utilities.command_utils import get_command
 class Player():
     def __init__(self, game_state):
         #self.clues_found = [] #tracker for end game analysis - can just cross check anything found vs
@@ -55,46 +56,39 @@ class Player():
 
     def ask_inv_type(self, ui, inv_type): #get topics like this?!?
         inv_by_type = []
-        ids_by_type = []
-
         if inv_type == "topic":
             inv_by_type.append("night of the murder")
-            ids_by_type.append("night of the murder")
-            for obj in self.known_clues: #should append any for topic
-                inv_by_type.append(obj.name)
-                ids_by_type.append(obj.id)
+            for obj in self.known_clues:
+                inv_by_type.append(obj)
         elif inv_type == "suspect":
             for obj in self.known_clues:
                 if isinstance(obj, Suspect):
-                    inv_by_type.append(obj.name)
-                    ids_by_type.append(obj.id)
+                    inv_by_type.append(obj)
         else:
             for obj in self.known_clues:  # should append any for topic
                 try:
-                    if obj.item_type == inv_type:
-                        inv_by_type.append(obj.name)
-                        ids_by_type.append(obj.id)
+                    if hasattr(obj, "item_type"):
+                        if obj.item_type == inv_type:
+                            inv_by_type.append(obj)
                 except:
-                    ent_logger.warning(f"PLAYER/get inv type: no item_type for {obj.id}")
+                    ent_logger.warning(f"PLAYER/get inv type: inv_type = {inv_type} \n obj id: {obj.id} \n inv_by_type = {inv_by_type} ")
 
-        #DISPLAY
-        ui.display(f"Choose {inv_type}:")
-        ent_logger.debug(f"inv_by_type = {inv_by_type}")
-        for name in inv_by_type:
+        inv_ids_by_type = []
+        for obj in inv_by_type:
+            if hasattr(obj, "id"):
+                inv_ids_by_type.append(obj.id)
+            else:
+                inv_ids_by_type.append(obj)
 
-            ui.display(f"- {name.capitalize()}")
+        ui.display_menu_type_2(title=f"Choose {inv_type}:", options=inv_ids_by_type)
+        command_id = get_command(ui, self.game_state)
+        if command_id in inv_ids_by_type:
+            return command_id
 
-        command = ui.get_input()
-        command_id = names_to_ids(command, self.game_state)
-        ent_logger.info(f"command id: {command_id}")
-        for id in ids_by_type:
-            if id in command_id:
-                return command_id
-
-        matched_command, matched = match_command_to_option(command, self.game_state, items=inv_by_type)
-        if matched and ui.confirm(matched_command, self.game_state):
-            matched_id = names_to_ids(matched_command, self.game_state)
-            return matched_id
+        matched_command, matched = match_command_to_option(command_id, self.game_state, items=inv_ids_by_type)
+        if matched and ui.confirm(matched_command):
+            #matched_id = names_to_ids(matched_command, self.game_state)
+            return matched_command
         ui.display(f"No {command_id} {inv_type}")
 
 

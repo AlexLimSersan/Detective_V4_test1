@@ -73,8 +73,10 @@ class Mobile_Entity(Entity):
         pass
     def start_loop(self, ui):
         ui.display(self.descriptions.get_description("approaching"))
+        ui.beat(2)
         self.add_player_topic()
         self.loop(ui) #dialogue or interactions
+        ui.beat(2)
         ui.display(self.descriptions.get_description("leaving"))
 
     def add_player_topic(self):

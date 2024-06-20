@@ -1,16 +1,18 @@
 from entities.components.base import Interaction
 from entities.descriptions.base import Descriptions
 from abc import ABC, abstractmethod
-from utilities.state_utils import iterate_states, iterate_keys
+from utilities.state_utils import iterate_states, iterate_vibe_keys
 from config.settings import EXIT_COMMANDS, ENTER_COMMANDS
 
 from config.logging_config import ent_logger
 
 class LockMechanism(ABC):
-    def __init__(self, name, game_state, entity_state, lock_type, outside, is_locked = True, lock_descriptions = None, ):
+    def __init__(self, id, name, game_state, entity_state, is_outdoors, lock_type, outside, is_locked = True, lock_descriptions = None, ):
+        self.id = id
         self.name = name
         self.game_state = game_state
         self.entity_state = entity_state
+        self.is_outdoors = is_outdoors
         self.lock_type = lock_type
         self.outside = outside #loc id the side the mechanism is NOT on. if accessed from this side, you cant just turn the knob
         self.is_locked = is_locked
@@ -33,15 +35,11 @@ class LockMechanism(ABC):
 
 
 class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
-    def __init__(self, name, key, game_state, entity_state, lock_type, outside, is_locked = True, lock_descriptions = None, ):
-        super().__init__(name, game_state, entity_state, lock_type, outside, is_locked, lock_descriptions)
+    def __init__(self, id, name, key, game_state, entity_state, is_outdoors, lock_type, outside, is_locked = True, lock_descriptions = None, ):
+        super().__init__(id, name, game_state, entity_state, is_outdoors, lock_type, outside, is_locked, None)
         self.key = key #id for key needed to open from lock_side
-
-    def get_description(self, description_type):
-        ent_logger.debug(f"LOCKS.PY/KEYLOCK/get_description() description_type = {description_type}")
-        #ALREADY ITERATED STATES IN LID
-        player_side = self.game_state.player.location_history[-2].id
-        default_descriptions = {
+        self.descriptions = Descriptions(id, name, entity_state, game_state, lock_descriptions, is_outdoors)
+        self.default_descriptions = {
             "outside_locking": "You turn the key, locking it.",
             "outside_unlocking": "You turn the key. It unlocks.",
             "inside_locking": "You turn the knob to the lock position.",
@@ -60,24 +58,20 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
             "inside_unlocked": "The knob is in the unlock position."
         }
 
+    def get_description(self, description_type): #could work in lock mechanism base class
+        ent_logger.debug(f"LOCKS.PY/KEYLOCK/get_description() description_type = {description_type}")
+        player_side = self.game_state.player.location_history[-2].id
 
-
-        to_get = description_type
-        if description_type == "at_entity":
-            if player_side == self.outside:
-                to_get = "outside_locked" if self.is_locked else "outside_unlocked"
-            else:
-                to_get = "inside_locked" if self.is_locked else "inside_unlocked"
-        ent_logger.debug(f"toget = {to_get}\n descriptions = {self.descriptions}")
-        state_description_dic = iterate_states(self.game_state, self.entity_state, self.descriptions, to_get)
-        if state_description_dic:
-            description = iterate_keys(state_description_dic, self.game_state.vibe_system.ranked_keys)
-            return description
+        if description_type != "at_entity":
+            raise ValueError(f"locks.get_description no matching description type {description_type}")
+        if player_side == self.outside:
+            description_type = "outside_locked" if self.is_locked else "outside_unlocked"
         else:
-            desc = default_descriptions.get(to_get)
-            if not desc:
-                ent_logger.warning(f"LOCK/GET_descriptin - no default desc !! keys get desc ")
-            return desc
+            description_type = "inside_locked" if self.is_locked else "inside_unlocked"
+
+        description = self.descriptions.get_description(description_type)
+        ent_logger.debug(f"keylock/get desc, toget = {description_type}\n descriptions = {description}")
+        return description or self.default_descriptions.get(description_type)
 
     def get_options(self):
         player_side = self.game_state.player.location_history[-2].id

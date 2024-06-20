@@ -1,6 +1,6 @@
 import random
 from entities.descriptions.base import Descriptions
-from utilities.state_utils import iterate_states, iterate_keys
+from utilities.state_utils import iterate_states, iterate_vibe_keys
 
 from config.logging_config import desc_logger
 
@@ -22,12 +22,14 @@ class Loc_Descriptions(Descriptions):
         # Could prob combine mobile ents, but whateva
         for suspect_id, suspect_data in suspects_present.items():
             sus_desc = suspect_data.descriptions.get_description("at_scene")
-            scene_description.append(sus_desc)
+            if sus_desc:
+                scene_description.append(sus_desc)
             desc_logger.debug(f"Loc_Desc/set_scene(): got sus desc AT SCENE :{sus_desc}")
 
         for item_id, item_data in items_present.items():
             item_desc = item_data.descriptions.get_description("at_scene")
-            scene_description.append(item_desc)
+            if item_desc:
+                scene_description.append(item_desc)
             desc_logger.debug(f"Loc_Desc/set_scene(): got item desc AT SCENE : {item_desc}")
 
         scene_description.append(self.get_connection_descriptions(connections))
@@ -70,8 +72,8 @@ class Door_Descriptions(Loc_Descriptions): #difference is only for setting scene
         desc_logger.debug(f"door setting scene returning scene {scene_description}")
         return scene_description
 
-    def handle_description_keying(self, description_type, descriptions_dic):
-        descriptions_dic = super().handle_description_keying(description_type, descriptions_dic)
+    def handle_description_keying(self, description_type, descriptions_dic, optional_key = None):
+        descriptions_dic = super().handle_description_keying(description_type, descriptions_dic, optional_key)
         if isinstance(descriptions_dic, dict):
             # FIRST, GET DOOR OPEN/CLOSED!
             if self.lid_component.is_open:

@@ -1,7 +1,7 @@
 from config.settings import DEFAULT_STARTING_AMBIANCE, AMBIANCE_KEYS, AMBIANCE_VALUES
 
 
-class Ambiance_System():
+class Vibe_System():
     def __init__(self, starting_value=DEFAULT_STARTING_AMBIANCE):
         self._current_value = starting_value
         self._ranked_keys = self.rank_keys(self._current_value)

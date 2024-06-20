@@ -1,31 +1,94 @@
-import time
-import sys
+
+"""
+
+descriptions = {"at_entity": [
+        {
+        "afternoon_morning_and_night": {
+            "rain_and_sun": {
+                "bad" :["test1"]
+            }
+        }
+    },
+{
+        "rain": {
+            "noon_andnight": {
+                "good_or_bad" :["test2"]
+            }
+        }
+    },
+    ]
+}
+import random
+current_time = "noon"
+current_weather = "rain"
+current_vibe = "bad"
+def get_description(descriptions_dic, description_type):
+    description_to_return = []
+    for descriptions_dic in descriptions.get(description_type):
+        if not descriptions_dic:
+            raise ValueError("test123")
+        while isinstance(descriptions_dic, dict):
+            for desc_key, nested_dic in descriptions_dic.items():
+                if current_time in desc_key:
+                    descriptions_dic = nested_dic
+                if current_weather in desc_key:
+                    descriptions_dic = nested_dic
+                if current_vibe in desc_key:
+                    descriptions_dic = nested_dic
+        description_to_return.append(random.choice(descriptions_dic))
+    return description_to_return
+
+print(get_description(descriptions, "at_entity"))
+
+"""
+
+import random
+
+descriptions = {
+    "at_entity": [
+        {
+            "afternoon_morning_and_night": {
+                "rain_and_sun": {
+                    "bad": ["test1"]
+                }
+            }
+        },
+        {
+            "rain": {
+                "noon_and_night": {
+                    "good_or_bad": ["test2"]
+                }
+            }
+        },
+    ]
+}
+
+current_time = "noon"
+current_weather = "rain"
+current_vibe = "bad"
 
 
-def display_text(text_list, pause_time=0.5, nested_pause_time=1.0):
-    """
-    Display text from a nested list with pauses between each phrase.
+def get_description(descriptions_dic, description_type):
+    description_to_return = []
 
-    :param text_list: Nested list of phrases to display
-    :param pause_time: Pause time between phrases in seconds
-    :param nested_pause_time: Pause time between nested lists in seconds
-    """
-    for item in text_list:
-        if isinstance(item, list):
-            display_text(item, pause_time, nested_pause_time)
-            time.sleep(nested_pause_time)
-        else:
-            print(item)
-            sys.stdout.flush()  # Ensure the text is displayed immediately
-            time.sleep(pause_time)
+    for description_entry in descriptions_dic.get(description_type, []):
+        current_dic = description_entry
+        while isinstance(current_dic, dict):
+            found = False
+            for desc_key, nested_dic in current_dic.items():
+                if (current_time in desc_key or
+                        current_weather in desc_key or
+                        current_vibe in desc_key):
+                    current_dic = nested_dic
+                    found = True
+                    break
+            if not found:
+                break
+
+        if isinstance(current_dic, list):
+            description_to_return.append(random.choice(current_dic))
+
+    return description_to_return
 
 
-# Example usage
-dialogue = [
-    "The night was dark and stormy.",
-    ["A figure appeared in the distance,", "moving slowly towards the alley."],
-    "A sense of dread filled the air.",
-    ["The figure stopped,", "looked around,", "and then continued on its way."]
-]
-
-display_text(dialogue)
+print(get_description(descriptions, "at_entity"))

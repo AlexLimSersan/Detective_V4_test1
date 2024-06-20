@@ -1,7 +1,7 @@
 
 from abc import ABC, abstractmethod
 import random
-from utilities.state_utils import iterate_states, iterate_keys
+from utilities.state_utils import iterate_states, iterate_vibe_keys, check_nested_weather_or_time_keys
 from config.logging_config import desc_logger
 
 class Descriptions(ABC):
@@ -12,94 +12,90 @@ class Descriptions(ABC):
         self.game_state = game_state
         self.descriptions = descriptions
         self.is_outdoors = is_outdoors
+        #approaching, leaving, at entity, connections, at_scene
 
-    def get_description(self, description_type):
+    def get_description(self, description_type, optional_key = None):
         desc_logger.debug(f"Base Descriptions/ get_description() : description type: {description_type}")
         descriptions = iterate_states(self.game_state, self.entity_state, self.descriptions, description_type)
-        if descriptions:
-            return self.fetch_random_description(description_type, descriptions)
+        description_to_return = []
+        # just for now, later always list of dics
+        # can be keyed for time, weather, mood, as desired
+        if isinstance(descriptions, dict):
+            description_to_return.append(self.fetch_random_description(description_type, descriptions, optional_key))
+        # later always list: ; for each dic in list, handle keys and get a description
+        elif isinstance(descriptions, list):
+            for desc_dic in descriptions:
+                if isinstance(desc_dic, dict):  # safety
+                    description_to_return.append(self.fetch_random_description(description_type, desc_dic, optional_key))
+        if description_to_return:
+            return description_to_return
         desc_logger.warning(f"Base Description/get_description(): No descriptions found after iterating states for description type {description_type}")
         #raise ValueError("No description available")
 
-    def fetch_random_description(self, description_type, descriptions_dic):
+    def fetch_random_description(self, description_type, descriptions_dic, optional_key = None):
         desc_logger.debug(f"base descriptions - fetch random desc, type = {description_type}, dic = {descriptions_dic}")
-        descriptions = self.handle_description_keying(description_type, descriptions_dic)
+        descriptions = self.handle_description_keying(description_type, descriptions_dic, optional_key)
         # ITERATE AMBIANCE KEYS (returns input if not found)
-        descriptions = iterate_keys(descriptions, self.game_state.vibe_system.ranked_keys)
+        descriptions = iterate_vibe_keys(descriptions, self.game_state.vibe_system.ranked_keys)
         if descriptions:
             if not isinstance(descriptions, list):
                 desc_logger.error(
                     f"base descriptions : \n type: {description_type}, descriptions not list: {descriptions}")
                 raise ValueError(f"descriptions not list")
 
-            description = random.choice(descriptions)
+            description = random.choice(descriptions) #so would either get a random str descriptioin, or a random list of strs, each str in the list would have a pause time.
+            #i think this was getting messed up in set scene
+            #actually, if i do the scroll text as it prints, then wouldnt really need this?
             return description
         desc_logger.warning(f"Base desc/ No valid description found for type '{description_type}' in ranked keys")
 
-    def handle_description_keying(self, description_type, descriptions_dic):
+    def handle_description_keying(self, description_type, descriptions_dic, optional_key = None):
         temp_dic = None
         if isinstance(descriptions_dic, dict):
-            if description_type in ["1", "2", "3", "at_entity"]:
+            if description_type in ["at_entity"]:
                 temp_dic = descriptions_dic  # just to avoid the warning log below
-            if description_type == "approaching": #ALREADY CHANGED PLAYER LOC
+            # ALREADY CHANGED PLAYER LOC
+            elif description_type == "approaching":  # approaching from
                 temp_dic = descriptions_dic.get(self.game_state.player.location_history[-2].id)
-            if description_type in ["leaving", "connections", "at_scene"]:
+            elif description_type in ["leaving", "connections", "at_scene"]:  # leaving to
                 temp_dic = descriptions_dic.get(self.game_state.player.current_location.id)
+            elif optional_key:
+                temp_dic = descriptions_dic.get(optional_key)
+            else:
+                desc_logger.warning(f"base/handle description keying():\n unaccounted description type {description_type}; dic = {descriptions_dic}")
         if not temp_dic:
             temp_dic = descriptions_dic
-        descriptions_dic = self.check_nested_weather_or_time_keys(temp_dic)
+        descriptions_dic = check_nested_weather_or_time_keys(temp_dic, self.game_state)
 
         return descriptions_dic
-
-    def check_nested_weather_or_time_keys(self, descriptions_dic):
-        if isinstance(descriptions_dic, dict):
-            # ALWAYS key weather, time. or just time. but never time, weather!!!
-            current_weather = self.game_state.weather_system.current_weather
-            current_time = self.game_state.time_system.current_phase
-
-            # try weather key, time key. then try time key. then finally, iterate mood keys.
-            weather_keyed_dic = descriptions_dic.get(current_weather)
-            time_keyed_dic = descriptions_dic.get(current_time)
-            if weather_keyed_dic: #optionally check if there is nested time key in the weather key dic
-                descriptions_dic = weather_keyed_dic
-                if isinstance(weather_keyed_dic, dict):
-                    time_keyed_weather_dic = weather_keyed_dic.get(current_time)
-                    if time_keyed_weather_dic:
-                        descriptions_dic = time_keyed_weather_dic
-
-            elif time_keyed_dic: #optionally check if there is nested weather keys in the time keyed dic
-                descriptions_dic = time_keyed_dic
-                if isinstance(time_keyed_dic, dict):
-                    weather_keyed_time_dic = time_keyed_dic.get(current_weather)
-                    if weather_keyed_time_dic:
-                        descriptions_dic = weather_keyed_time_dic
-
-        return descriptions_dic
-
 
     def set_scene(self, *args, **kwargs):
         # Initialize with an empty string to add a separating line
         scene_description = [" "]
-        #just for now so you can still play, later remove non 123
-        for _ in ["1", "2", "3", "weather", "times", "at_entity"]:
-            scene_description.append(self.get_description(_))
+        #just for now so you can still play, later just get at_ent
+        for _ in ["weather", "times", "at_entity"]:
+            desc = self.get_description(_)
+            if desc:
+                scene_description.append(desc)
         # TAGS
-        scene_description.append(self.decorate_description_tags())
+        desc_decor = self.decorate_description_tags()
+        if desc_decor:
+            scene_description.append(desc_decor)
         return scene_description
 
     def decorate_description_tags(self):
         desc_decorations = []
-        #get tags by iterating states
-        tags = iterate_states(self.game_state, self.entity_state, self.descriptions, "tags")
         # can have frequency logic here
+        # get tags by iterating states
+        tags = iterate_states(self.game_state, self.entity_state, self.descriptions, "tags")
         decor = self.game_state.weather_system.decorate_tags(tags)
         desc_decorations.append(decor)
 
         desc_logger.debug(
                     f"Base Description/ decorate_description_tags() : decorating weather with tags: {tags}; decor: {decor}")
 
-        #other tags can be added as needed, like maybe late game, she greets you like an old friend?
-        #desc_decorations.append(self.game_state.event_system.decorate_tags(tags))
+        # other tags can be added as needed, like maybe late game, she greets you like an old friend?
+        # desc_decorations.append(self.game_state.event_system.decorate_tags(tags))
 
         if desc_decorations:
             return desc_decorations

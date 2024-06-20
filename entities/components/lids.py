@@ -1,7 +1,7 @@
 from entities.components.base import Interaction
 from entities.descriptions.base import Descriptions
 from abc import ABC, abstractmethod
-from utilities.state_utils import iterate_states, iterate_keys
+from utilities.state_utils import iterate_states, iterate_vibe_keys
 from utilities.command_utils import match_command_to_option
 from config.settings import EXIT_COMMANDS, ENTER_COMMANDS
 from entities.components.locks import KeyLock, BoltLock
@@ -10,20 +10,13 @@ from game.game_state import Game_State
 
 from config.logging_config import ent_logger
 
-"""
-self.id = id
-        self.name = name
-        self.entity_state = entity_state
-        self.game_state = game_state
-"""
 
 class Lid(Interaction): #can refactor this for sure
     def __init__(self, id, name, entity_state, game_state, is_outdoors, connections, component_descriptions = None, is_open = False, lock_mechanism = None):
         super().__init__(id, name, game_state, entity_state, is_outdoors)
-
         self.is_outdoors = is_outdoors
         self.connections = connections
-        self.descriptions = component_descriptions #default: type(opened, closed, etc); key:description
+        self.descriptions = Descriptions(id, name, entity_state, game_state, component_descriptions, is_outdoors)
         self.is_open = is_open
         self.lock_mechanism = self.create_lock_mechanism(lock_mechanism)
         # Dictionary mapping commands to their corresponding methods
@@ -41,49 +34,40 @@ class Lid(Interaction): #can refactor this for sure
             lock_type = lock_mechanism.get("lock_type")
             if lock_type == "key_lock":
                 ent_logger.debug(f"LIDS.py/creating lock mechanism: {lock_mechanism}")
-                return KeyLock(entity_state= self.entity_state, game_state= self.game_state, **lock_mechanism)
+                return KeyLock(entity_state= self.entity_state, game_state= self.game_state, is_outdoors = self.is_outdoors, **lock_mechanism)
             elif lock_type == "bolt_lock":
                 return BoltLock(entity_state= self.entity_state, game_state= self.game_state, **lock_mechanism)
             else:
                 ent_logger.warning("ERROR MAKING LID - LOCK NOT RECOGNIZED")
         return None
 
-    def get_description(self, type): #for at_entity
-        ent_logger.debug(f"Lids.py/Get_description() ; starting. type = {type} \n lockmech = {self.lock_mechanism}")
+    def get_description(self, description_type): #for at_entity
+        ent_logger.debug(f"Lids.py/Get_description() ; starting. type = {description_type} \n lockmech = {self.lock_mechanism}")
         description = []
-        if type in ["at_entity"]:
+        to_get_dic = {
+            "opened": "It's open.",
+            "closed": "It's closed.",
+            "opening": "The {name} swings open.",
+            "closing": "The {name} swings shut."
+        }
+        if description_type in ["at_entity"]:
             if self.lock_mechanism:
-
-                description.append(self.lock_mechanism.get_description(type))
+                description.append(self.lock_mechanism.get_description(description_type))
                 ent_logger.debug(f"lids at entity lock mechanism desc {description}")
             if self.is_open:
                 #example specific desc = the wooden door hangs slightly open
-                to_get = "opened"
-                default = "It's open."
+                to_get_key = "opened"
             else:
-
-                to_get = "closed"
-                default = "It's closed."
-
-        elif type in ["opening"]:
-            to_get = "opening"
-            default = "The {name} swings open."
-
-        elif type in ["closing"]:
-            to_get = "closing"
-            default = "The {name} swings shut."
-
+                to_get_key = "closed"
+        elif description_type in ["opening", "closing"]:
+            to_get_key = description_type
         else:
             raise ValueError("lid get description; type not accounted for")
-        ent_logger.debug(f"LIDS.PY/ GET_DESCRIPTION()  toget = {to_get}, iterating states on : {self.descriptions}")
-        state_description_dic = iterate_states(self.game_state, self.entity_state, self.descriptions, to_get) if self.descriptions else None
-        if state_description_dic:
-            description.append(iterate_keys(state_description_dic, self.game_state.vibe_system.ranked_keys))
+        description.append(self.descriptions.get_description(to_get_key))
+        if description:
+            return description
         else:
-            description.append(default.format(name=self.name))
-        ent_logger.info(f"LIDS.PY/ GET_DESCRIPTION() type: {type} -  returning {description}")
-        return description
-
+            return to_get_dic.get(to_get_key).format(name=self.name)
 
     def get_options(self):
         #remember, lid isnt directional
@@ -98,30 +82,19 @@ class Lid(Interaction): #can refactor this for sure
         return options
 
     def process_command(self, command, ui):
-
-
-        # Check if the command is in the options and in the handler dictionary
-        #if command in options and
         if command in self.option_handlers:
-            # Call the corresponding method and pass the UI object
             self.option_handlers[command](ui)
             return True
-
-        else: #COULD PASS ACTIONS HERE
-            current_options = list(self.get_options().keys()) #because it would correct to all options
+        else:
+            current_options = list(self.get_options().keys()) # because else it would correct to all options
             matched_command, matched = match_command_to_option(command, game_state=self.game_state, actions=current_options)
             if matched:
                 if ui.confirm(matched_command, self.game_state):
                     if matched_command in self.option_handlers:
-                        # Call the corresponding method and pass the UI object
                         self.option_handlers[matched_command](ui)
                 return True
-            return False
-
-    def enter(self, ui):
-        if not self.is_open:
-            ui.display(self.get_description("enter_closed"))
-
+            #whimsicals possible here?
+        return False
 
     def open(self, ui):
         if self.lock_mechanism and self.lock_mechanism.is_locked:

@@ -44,6 +44,7 @@ class Hallway(Location):
         ent_logger.debug(f"HALLWAYS/GETNAVIGATION_OPTIONS(): Navigation options = {directional_options}")
         return directional_options
 
+
     def loop(self, ui):
         while True:
             suspects, items, locations, actions = self.get_options()

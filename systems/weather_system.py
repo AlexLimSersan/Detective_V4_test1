@@ -1,6 +1,6 @@
 
 import random
-from utilities.state_utils import iterate_keys
+from utilities.state_utils import iterate_vibe_keys
 from config.settings import START_WEATHERS, ALL_WEATHERS, GOOD_WEATHER
 import logging
 # Get the logger configured in the main script
@@ -89,14 +89,14 @@ class Weather_System:
                 description_dic = weather_dic["default"].get(time_of_day)
                 #if dictionary, iterate keys!
                 if isinstance(description_dic, dict):
-                    description_dic = iterate_keys(self.game_state, description_dic)
+                    description_dic = iterate_vibe_keys(self.game_state, description_dic)
                 default_descs.extend(description_dic)
 
             if tag in weather_dic:
                 description_dic = weather_dic[tag].get(time_of_day)
                 # if dictionary, iterate keys!
                 if isinstance(description_dic, dict):
-                    description_dic = iterate_keys(self.game_state, description_dic)
+                    description_dic = iterate_vibe_keys(self.game_state, description_dic)
                 specific_descs.extend(description_dic)
         # Create a pool of descriptions by combining specific time of day and default descriptions
         combined_descs = specific_descs + default_descs

@@ -2,7 +2,7 @@ from entities.entities.base import Mobile_Entity
 from entities.descriptions.sus_descriptions import Sus_Descriptions
 from entities.components.dialogue import Dialogue
 
-from systems.ambiance_system import Ambiance_System
+from systems.vibe_system import Vibe_System
 
 from config.settings import SUSPECT_STARTING_MOOD
 from config.logging_config import ent_logger
@@ -16,7 +16,7 @@ class Suspect(Mobile_Entity):
         super().__init__(id, name, game_state, None, entity_state, is_outdoors, current_location)
         self.profile = profile
         self.routine = routine
-        self.mood = Ambiance_System(SUSPECT_STARTING_MOOD)
+        self.mood = Vibe_System(SUSPECT_STARTING_MOOD)
         self.descriptions = Sus_Descriptions(id, name, self.mood, entity_state, game_state, descriptions, current_location, is_outdoors)
         assert isinstance(self.game_state, Game_State)
         self.dialogue = Dialogue(dialogue, player_options, id, name, entity_state, self.mood, game_state, current_location, is_outdoors)
@@ -25,7 +25,7 @@ class Suspect(Mobile_Entity):
         #approach and leave desc already shown
         ui.display(self.descriptions.set_scene())
         self.dialogue.start_loop(ui) #arguably better to pull up some logic to here, like locations
-        #bye already dealt with
+        #bye already dealt with in dialogue
 
     def update_location(self):
         time_of_day = self.game_state.time_system.current_phase
