@@ -98,8 +98,8 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
             return
 
         if player_side == self.outside:
-            command_id = self.game_state.player.ask_inv_type("key", ui)
-            if command_id != self.key:
+            command_id = self.game_state.player.ask_inv_type(inv_type="key", ui=ui)
+            if command_id != self.key and command_id:
                 text = self.get_description("key_dont_fit")
                 ui.display(text)
                 return

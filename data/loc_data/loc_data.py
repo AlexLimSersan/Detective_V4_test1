@@ -39,7 +39,7 @@ loc_ent_data = {
         },
         "bertha_office_01": {
             "name": "office",
-            "connections": ["bertha_office_door_01"],
+            "connections": ["bertha_office_door_01", "bertha_office_drawer_01"],
             "is_outdoors": True
         },
         "backroom_01": {
@@ -97,6 +97,7 @@ loc_ent_data = {
                 "key": "brass_key_01",
                 "lock_type": "key_lock",
                 "outside": "hallway_04",
+                "is_locked": False,
                 "lock_descriptions": {
                     "default": {
                         "outside_locking": ["You insert the brass key, feeling it click into place. The lock turns with a solid clunk."],
@@ -115,5 +116,6 @@ loc_ent_data = {
                     }
                 }
             }
-        }
-    }
+        },
+
+}

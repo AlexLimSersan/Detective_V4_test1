@@ -1,5 +1,5 @@
 from entity_managers.base import Entity_Manager
-from entities.entities.items import Item, Clue
+from entities.entities.items import Item, Clue, Drawer
 import random
 
 from config.settings import ITEM_SPAWN_FREQUENCY, ITEM_STATE_FREQUENCY
@@ -63,6 +63,15 @@ class Item_Manager(Entity_Manager):
                                         #any components get unpacked from the data
                                         **item_data)
             ent_logger.debug(f"loading item {item_id}, {item_data}")
+        for item_id, item_data in self.entity_data["drawers"].items():
+            self.entities[item_id] = Drawer(id=item_id,
+                                        game_state=self.game_state,
+                                        descriptions=self.description_data[item_id],
+
+                                        #any components get unpacked from the data
+                                        **item_data)
+
+
 
     def spawn_items(self):
         #spawn entities in locations

@@ -5,7 +5,7 @@ from entities.entities.base import Mobile_Entity
 from entities.entities.locations.locations import Location
 from entities.entities.locations.cab import Cab
 from entities.entities.locations.hallways import Hallway
-from entities.entities.locations.doors import Door
+from entities.entities.locations.doors import Door, Drawer
 from config.logging_config import ent_logger
 
 class Location_Manager(Entity_Manager):
@@ -29,6 +29,7 @@ class Location_Manager(Entity_Manager):
             ent_logger.debug(f"loading halls {loc_id} with {loc_data}")
             self.entities[loc_id] = Hallway(id=loc_id, game_state=self.game_state,
                                                  descriptions=self.description_data[loc_id], **loc_data)
+
 
     def get_location_of_entity(self, entity_id):
         """finds loc where entity is at"""
@@ -65,7 +66,7 @@ class Location_Manager(Entity_Manager):
         if not isinstance(spawn_loc_ids, list):
             spawn_loc_ids = [spawn_loc_ids]
         for id in spawn_loc_ids:
-            loc_obj = self.get_entity(id)
+            loc_obj = self.get_entity(id) #or item manager
             loc_obj.add_entity(mobile_entity)
             ent_logger.info(f"spawning {mobile_entity.id} in {loc_obj.id}")
 

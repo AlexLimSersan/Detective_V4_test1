@@ -44,7 +44,7 @@ class Location(Entity):
     def get_options(self):
         # returns options to display
         suspects = [suspect.id for suspect in self.suspects_present.values()]
-        items = [item.id for item in self.items_present.values()]
+        items = self.get_items()
         locations = self.get_connections()
         actions = self.get_actions()  # doors and other can overide like this
         # display option in options -> option = (entitymanager.get(option) or option) -> hasattr(option, na entity, if entity
@@ -53,7 +53,8 @@ class Location(Entity):
         # return match or None
         # if not process command, bad input
         return suspects, items, locations, actions
-
+    def get_items(self):
+        return [item.id for item in self.items_present.values()]
     def start_loop(self, ui):
         ui.display(self.descriptions.set_scene(self.suspects_present, self.items_present, self.get_connections()))
         matched_command = self.loop(ui)  # dialogue or interactions

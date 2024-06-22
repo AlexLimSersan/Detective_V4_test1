@@ -62,3 +62,16 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
         if not self.components.is_open:
             bump_text = self.descriptions.get_description(f"bump") or f"You bump into the {self.name}."
             ui.display(bump_text)
+
+class Drawer(Door):
+    def __init__(self, id, name, game_state, descriptions, connections, component_descriptions = None, is_open=False, lock_mechanism = None, entity_state = "default", is_outdoors=False):
+        super().__init__(id, name, game_state, descriptions, connections, component_descriptions, is_open, lock_mechanism, entity_state, is_outdoors)
+
+        #can spawn items on drawer like regular loc, and they appear if drawer is open. thats the only difference?
+
+    def get_items(self):
+        if self.components.is_open:
+            return super().get_items()
+
+    def bump(self, ui):
+        ui.display(f'You struggle to enter {self.name}.')

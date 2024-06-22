@@ -13,8 +13,6 @@ class Time_System:
         self.all_phases = ALL_PHASES
         self.phase_time_interval = PHASE_TIME_INTERVAL #how long each phase is
 
-
-
     def elapse_time(self, time_value, ui):
         logger.warning(f"time_system.py/elapsing time() : {time_value}")
         # Elapse time by the given value multiplied by the ticker multiplier
@@ -39,6 +37,8 @@ class Time_System:
         ui.display(f"Time progresses... People move around you.\n #Current phase: {self.current_phase.capitalize()}")  # later will comment out
         ui.display(f"_____________________")
         ui.stall()
+
+        """LIKE WEAHTER, NEED SOME WARNING/TRANSITION THING! TO ABRUPT FOR ROUTINES ESP EVENTS LIKE A SUSPECT VANISHES.."""
 
 
 

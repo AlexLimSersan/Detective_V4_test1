@@ -1,4 +1,21 @@
 item_description_data = {
+"bertha_office_drawer_01": {
+"default": {
+        "approaching": ["approaching desk "],
+        "at_scene": {
+                "bertha_office_01": {
+                    "neutral": ["berthas desk is here in the office."],
+                },
+        },
+        "at_entity": [{
+            "neutral": ["You are atthe desk 1."],
+             },
+            {
+            "neutral": ["ou are atthe desk 2."],
+            },
+            ]
+    },
+},
     "kitchen_knife_01": {
         "default": {
             "at_scene": {

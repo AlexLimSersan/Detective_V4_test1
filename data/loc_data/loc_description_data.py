@@ -489,9 +489,9 @@ loc_description_data = {
                 },
             }
         }
-    }
-
+    },
 }
+
 
 
 

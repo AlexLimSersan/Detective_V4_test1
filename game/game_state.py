@@ -57,5 +57,6 @@ class Game_State:
         self.location_manager.load_entities()
         self.suspect_manager.load_entities()
         self.item_manager.load_entities()
+
         if self.player:
             self.player.initialize()
