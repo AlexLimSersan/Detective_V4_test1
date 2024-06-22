@@ -34,7 +34,18 @@ class Lid(Interaction): #can refactor this for sure
             lock_type = lock_mechanism.get("lock_type")
             if lock_type == "key_lock":
                 ent_logger.debug(f"LIDS.py/creating lock mechanism: {lock_mechanism}")
-                return KeyLock(entity_state= self.entity_state, game_state= self.game_state, is_outdoors = self.is_outdoors, **lock_mechanism)
+                return KeyLock(
+                    id = lock_mechanism["id"],
+                    name= lock_mechanism["name"],
+                    key = lock_mechanism["key"],
+                    game_state=self.game_state,
+                    entity_state= self.entity_state,
+                    is_outdoors = self.is_outdoors,
+                    lock_type=lock_mechanism["lock_type"],
+                    outside=lock_mechanism["outside"],
+                    is_locked=lock_mechanism.get("is_locked", True),
+                    lock_descriptions = lock_mechanism["lock_descriptions"]
+                )
             elif lock_type == "bolt_lock":
                 return BoltLock(entity_state= self.entity_state, game_state= self.game_state, **lock_mechanism)
             else:
@@ -63,10 +74,12 @@ class Lid(Interaction): #can refactor this for sure
             to_get_key = description_type
         else:
             raise ValueError("lid get description; type not accounted for")
-        description.append(self.descriptions.get_description(to_get_key))
-        if description:
-            return description
-        else:
+        try:
+            description.append(self.descriptions.get_description(to_get_key))
+
+            if description:
+                return description
+        finally:
             return to_get_dic.get(to_get_key).format(name=self.name)
 
     def get_options(self):
@@ -89,7 +102,7 @@ class Lid(Interaction): #can refactor this for sure
             current_options = list(self.get_options().keys()) # because else it would correct to all options
             matched_command, matched = match_command_to_option(command, game_state=self.game_state, actions=current_options)
             if matched:
-                if ui.confirm(matched_command, self.game_state):
+                if ui.confirm(matched_command):
                     if matched_command in self.option_handlers:
                         self.option_handlers[matched_command](ui)
                 return True

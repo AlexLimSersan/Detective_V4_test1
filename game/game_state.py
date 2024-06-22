@@ -49,13 +49,13 @@ class Game_State:
             self.event_system.game_state = self
         if self.location_manager:
             self.location_manager.game_state = self
-            self.location_manager.load_entities()
         if self.suspect_manager:
             self.suspect_manager.game_state = self
-            self.suspect_manager.load_entities()
         if self.item_manager:
             self.item_manager.game_state = self
-            self.item_manager.load_entities()
-
+        assert isinstance(self.item_manager.game_state, Game_State)
+        self.location_manager.load_entities()
+        self.suspect_manager.load_entities()
+        self.item_manager.load_entities()
         if self.player:
             self.player.initialize()

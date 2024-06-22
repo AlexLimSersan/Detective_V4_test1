@@ -35,12 +35,10 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
     def greet(self, ui):
         dialogue_dic_to_handle = self.get_dialogue_dic("greet")
         self.handle_dialogue_dic(dialogue_dic_to_handle, ui)
-        ui.beat(2)
 
     def bye(self, ui):
         dialogue_dic_to_handle = self.get_dialogue_dic("bye")
         self.handle_dialogue_dic(dialogue_dic_to_handle, ui)
-        ui.beat(2)
 
     def loop(self, ui):
         while self.talking:  # loop until no longer talking, can be turned off by event/dialogue effect or player action
@@ -151,20 +149,13 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         if self.player_node:
             options = self.player_options.get(self.player_node, {})
             formatted_options = {
-                key: value.format(name=self.name.capitalize(), topic=self.handle_topic_display_logic())
+                key: value.format(name=self.name.capitalize(), topic=self.topic)
                 for key, value in options.items()
             }
             return formatted_options
         else:
             return False
 
-    def handle_topic_display_logic(self):
-        topic_obj = self.game_state.item_manager.get_entity(self.topic) or self.game_state.suspect_manager.get_entity(self.topic)
-        formatted_topic = None
-        from entities.entities.suspects import Suspect
-        if isinstance(topic_obj, Suspect):
-            formatted_topic = self.topic.capitalize()
-        return formatted_topic or self.topic
 
     def reset_convo(self, ui):
         ui.stall() #to reflect that convo is being redirected

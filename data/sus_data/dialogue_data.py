@@ -1,8 +1,8 @@
 
 dialogue_player_options = {
     "default_1": {
-        "chat": "with {name} about {topic}",
-        "grill": "{name} about {topic}",
+        "chat": "about {topic}",
+        "grill": "about {topic}",
         "change": "topic...",
         "return": "leave conversation..."
     }
@@ -66,22 +66,26 @@ sus_dialogue_data = {
         },
     "conditional": [ #witness statements
             {
-                "conditions": ["gibbs"], #murderer traits here
+                "conditions": {"traits":["gibbs"]}, #murderer traits here; has to be like this to follow check condition format for items - possible other conditions?
                 "dialogue": { #will add all these nodes to dialogue if all conditions in murderer profile
-                    "clueid_chat": {
-                        "says": ["test: gibbs is murderer, bertha talking"],
-                        "effects": {},
-                        "options": "default_1"
+                    "default": {
+                        "gibbs_01_chat_neutral": {
+                            "says": ["test: gibbs is murderer, bertha talking"],
+                            "effects": {},
+                            "options": "default_1"
+                        }
                     }
                 }
             },
             {
-                "conditions": ["knife"],
+                "conditions": {"traits":["bertha"]},
                 "dialogue": {
-                    "murder_chat": {
-                        "says": ["murderer traits has knife"],
-                        "effects": {},
-                        "options": "default_1"
+                    "default": {
+                        "bertha_01_chat_neutral": {
+                            "says": ["murderer traits has bertha"],
+                            "effects": {},
+                            "options": "default_1"
+                        }
                     }
                 }
             }
@@ -134,22 +138,26 @@ sus_dialogue_data = {
         },
         "conditional": [ #witness statements
             {
-                "conditions": ["bertha"], #murderer traits here
+                "conditions": {"traits":["bertha"]}, #murderer traits here
                 "dialogue": { #will add all these nodes to dialogue if all conditions in murderer profile
-                    "clueid_chat": {
-                        "says": ["test: bertha is murderer, gibbs talking"],
-                        "effects": {},
-                        "options": "default_1"
+                    "default": {
+                        "bertha_01_chat_neutral": {
+                            "says": ["test: bertha is murderer, gibbs talking"],
+                            "effects": {},
+                            "options": "default_1"
+                        }
                     }
                 }
             },
             {
-                "conditions": ["gun"],
+                "conditions": {"traits":["gibbs"]},
                 "dialogue": {
-                    "murder_chat": {
-                        "says": ["murderer traits has gun"],
-                        "effects": {},
-                        "options": "default_1"
+                    "default": {
+                        "gibbs_01_chat_neutral": {
+                            "says": ["murderer traits has gibbs"],
+                            "effects": {},
+                            "options": "default_1"
+                        }
                     }
                 }
             }

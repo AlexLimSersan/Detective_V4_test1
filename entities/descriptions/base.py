@@ -20,6 +20,7 @@ class Descriptions(ABC):
         description_to_return = []
         # just for now, later always list of dics
         # can be keyed for time, weather, mood, as desired
+
         if isinstance(descriptions, dict):
             description_to_return.append(self.fetch_random_description(description_type, descriptions, optional_key))
         # later always list: ; for each dic in list, handle keys and get a description
@@ -27,9 +28,11 @@ class Descriptions(ABC):
             for desc_dic in descriptions:
                 if isinstance(desc_dic, dict):  # safety
                     description_to_return.append(self.fetch_random_description(description_type, desc_dic, optional_key))
+        if not description_to_return and descriptions:
+            return descriptions
         if description_to_return:
             return description_to_return
-        desc_logger.warning(f"Base Description/get_description(): No descriptions found after iterating states for description type {description_type}")
+        desc_logger.warning(f"Base Description/get_description(): No descriptions found after iterating states for description type {description_type}\n{self.descriptions}")
         #raise ValueError("No description available")
 
     def fetch_random_description(self, description_type, descriptions_dic, optional_key = None):
@@ -62,7 +65,7 @@ class Descriptions(ABC):
             elif optional_key:
                 temp_dic = descriptions_dic.get(optional_key)
             else:
-                desc_logger.warning(f"base/handle description keying():\n unaccounted description type {description_type}; dic = {descriptions_dic}")
+                desc_logger.warning(f"base/handle description keying(): unaccounted description type {description_type}; \n dic = {descriptions_dic}")
         if not temp_dic:
             temp_dic = descriptions_dic
         descriptions_dic = check_nested_weather_or_time_keys(temp_dic, self.game_state)
@@ -73,7 +76,7 @@ class Descriptions(ABC):
         # Initialize with an empty string to add a separating line
         scene_description = [" "]
         #just for now so you can still play, later just get at_ent
-        for _ in ["weather", "times", "at_entity"]:
+        for _ in ["at_entity", "times", "weather"]:
             desc = self.get_description(_)
             if desc:
                 scene_description.append(desc)
@@ -88,10 +91,11 @@ class Descriptions(ABC):
         # can have frequency logic here
         # get tags by iterating states
         tags = iterate_states(self.game_state, self.entity_state, self.descriptions, "tags")
-        decor = self.game_state.weather_system.decorate_tags(tags)
-        desc_decorations.append(decor)
+        if not self.get_description("weather"):
+            decor = self.game_state.weather_system.decorate_tags(tags)
+            desc_decorations.append(decor)
 
-        desc_logger.debug(
+            desc_logger.info(
                     f"Base Description/ decorate_description_tags() : decorating weather with tags: {tags}; decor: {decor}")
 
         # other tags can be added as needed, like maybe late game, she greets you like an old friend?

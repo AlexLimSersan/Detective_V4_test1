@@ -47,7 +47,7 @@ loc_description_data = {
                 # always key weather, time. or just time. but never time, weather!!!
             "porch_01": { #seeing the cab from the porch
                 "sunny": ["The cab is parked nearby."],
-                "rain": ["The cab is parked nearby.", "In the distance, you can see the cab through the rain."],
+                "rain": ["The cab is parked nearby.", "You can see the cab through the downpour."],
                 "grey": ["The cab is parked nearby."],
             },
             "alley_01": ["The cab is parked nearby."],
@@ -91,7 +91,7 @@ loc_description_data = {
                         "Ahead, the porch is lit only by the soft, flickering lights."]
                 },
                 "rain": [
-                        "Ahead, porch is slick from the rain.", ],
+                        "Ahead, the porch is slick from the rain.", ],
                 "grey": ["Ahead, you can see the porch."],
             },
         }
@@ -115,7 +115,7 @@ loc_description_data = {
             "evening": ["It's busy.", "Drunk chatter forms a noisy backdrop."],
             "night": ["It's starting to get rowdy.", "It's packed in here.", "People bump into you as they amble about."]
         },
-        "weather": {
+        "weather": { #replaces weather decorator
             "rain": ["Raindrops slam against the windows."],
             "sunny": ["Sun filters through the blinds.", "The sun casts it all in dramatic lighting."],
             "grey": ["It's dim in here."]
@@ -220,13 +220,15 @@ loc_description_data = {
 "stage_01": {
     "default": { #EMPTY STAGE!
         "approaching": {
-
+            "lounge_01": ["You climb up onto the stage."],
+            "stage_02": ["You walk up to the stage."]
         },
         "at_entity": {
             "neutral": ["You stand on the stage."],
         },
         "leaving": {
-            "neutral": ["You step off the stage."],
+            "lounge_01": ["You step off the stage."],
+            "stage_02": ["You walk towards the back."]
         },
         "times": {
 
@@ -254,14 +256,14 @@ loc_description_data = {
 "stage_02": {
     "default": {#no stage activity
         "approaching": {
-            "neutral": ["You hunch to get through the passage.", ""],
+            "stage_01": ["A small entrance leads backstage."],
+            "hallway_01": ["You hunch to get through the passage."],
         },
         "at_entity": {
             "neutral": ["You are backstage, next to miscellaneous props and equipment."],
             "bad": ["The backstage feels cramped and cluttered."]
         },
         "leaving": {
-            "neutral": ["You hunch to get through the passage.", ""],
         },
         "times": {
 
@@ -308,7 +310,7 @@ loc_description_data = {
 
         },
         "at_entity": {
-            "neutral": [" "],
+
         },
         "leaving": {
         },
@@ -462,7 +464,9 @@ loc_description_data = {
         "weather": {
 
         },
-        "tags": [""],
+        "at_entity": [
+            {"sunny": {"afternoon": {"neutral": ["backroom door worked for sunny afternoon neutral?!"]}}},
+        ],
         "connections": {
             "hallway_04": {
                 "open": ["The iron door is ajar."],

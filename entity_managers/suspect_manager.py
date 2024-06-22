@@ -3,11 +3,12 @@ from entities.entities.suspects import Suspect, Murderer
 from config.logging_config import ent_logger
 
 import random
-
+from entities.components.dialogue import Dialogue
 class Suspect_Manager(Entity_Manager):
     def __init__(self, entity_data, description_data, dialogue_data, player_options, game_state):
         super().__init__(entity_data, description_data, game_state)
         self.dialogue_data = dialogue_data
+        self.processed_dialogue_data = None
         self.player_options = player_options
         self.murderer = None
 
@@ -16,15 +17,15 @@ class Suspect_Manager(Entity_Manager):
         murderer_id = random.choice(suspect_ids)  # Randomly select a murderer ID
         for suspect_id, suspect_data in self.entity_data.items():
             if suspect_id == murderer_id:
-                self.entities[suspect_id] = Murderer(
+                self.murderer = Murderer(
                     id=suspect_id,
                     game_state=self.game_state,
                     descriptions=self.description_data[suspect_id],
-                    dialogue=self.dialogue_data[suspect_id],
+                    dialogue=None,
                     player_options=self.player_options,
                     **suspect_data
                 )
-                self.murderer = self.entities[suspect_id]
+                self.entities[suspect_id] = self.murderer
                 ent_logger.info(f"loading MURDERER:{suspect_id}, {suspect_data}")
                 self.game_state.stat_tracker.murderer = self.murderer
             else:
@@ -32,11 +33,27 @@ class Suspect_Manager(Entity_Manager):
                     id=suspect_id,
                     game_state=self.game_state,
                     descriptions=self.description_data[suspect_id],
-                    dialogue=self.dialogue_data[suspect_id],
+                    dialogue=None,
                     player_options=self.player_options,
                     **suspect_data
                 )
                 ent_logger.info(f"loading suspect: {suspect_id}, {suspect_data}")
+
+        self.processed_dialogue_data = self.preprocess_all_suspect_dialogues()
+        import json
+        #print(json.dumps(self.processed_dialogue_data, indent=4))
+        for suspect_id, suspect in self.entities.items():
+            suspect.dialogue = Dialogue(
+                dialogue=self.processed_dialogue_data[suspect_id],
+                player_options=self.player_options,
+                id=suspect_id,
+                name=suspect.name,
+                entity_state=suspect.entity_state,
+                mood=suspect.mood,
+                game_state=self.game_state,
+                current_location=suspect.current_location,
+                is_outdoors=suspect.is_outdoors
+            )
 
     def update_entity_locations(self):
         for entity in self.entities.values():
@@ -57,26 +74,22 @@ class Suspect_Manager(Entity_Manager):
             self.game_state.location_manager.spawn_entities(obj, loc_id)
 
 
-#dialogue generation -> put in dialogue_manager?
     def preprocess_all_suspect_dialogues(self):
         merged_dialogue_data = {}
         for suspect_id, dialogue_data in self.dialogue_data.items():
-            merged_dialogue = self.preprocess_dialogue(dialogue_data)
+            merged_dialogue = self.preprocess_dialogue(dialogue_data, suspect_id)
             merged_dialogue_data[suspect_id] = merged_dialogue
         return merged_dialogue_data
 
-    def preprocess_dialogue(self, dialogue_template):
+    def preprocess_dialogue(self, dialogue_template, sus_id):
         merged_dialogue = dialogue_template.copy()
         for conditional_dialogues in dialogue_template.get("conditional", []):
-            if self.game_state.item_manager.check_conditions(conditional_dialogues["conditions"], sus_id, "dialogue", conditional_dialogues):
-                self.merge_dialogue(merged_dialogue, conditional_dialogues["dialogue"])
+            if self.game_state.item_manager.check_conditions(conditions_dic = conditional_dialogues["conditions"], item_id = sus_id,
+                                                             query_type = "dialogue", spawn_or_state_id = conditional_dialogues["dialogue"]):
+                self.merge_dialogue(merged_dialogue["topic"], conditional_dialogues["dialogue"])
         return merged_dialogue
 
-    def check_conditions(self):
-        pass
-        #if all(cond in self.murderer.profile.values() for cond in conditions):
-        #    return True
-        #return False
+
 
     def merge_dialogue(self, base_dialogue, additional_dialogue):
         for dialogue_id, dialogue_dic in additional_dialogue.items():

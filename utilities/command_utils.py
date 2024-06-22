@@ -1,16 +1,14 @@
-from utilities.general_utils import names_to_ids, flatten_list, ids_to_names, generate_full_names, find_best_match
+import difflib
+import copy
+from utilities.general_utils import names_to_ids, flatten_list, ids_to_names
 from config.logging_config import app_logger
 
 def get_command(ui, game_state):
     #possible_multiple_option_type is LOCATIONS
     command = ui.get_input()
-    command_id = names_to_ids(command, game_state)  # returns a list
-    app_logger.debug(f"command_utils.py: command: {command};; command_id : {command_id}")
-    # possibly multiple command_id matches, so handle which one here
-    if isinstance(command_id, list):
-        command_id = handle_command_id_list_logic(command_id, game_state)
-    app_logger.info(f"Command ID: {command_id}")
-    return command_id
+
+
+    return command
 
 def handle_command_id_list_logic(command_ids, game_state):
     app_logger.debug(f"command_utils.PY/handling command_id_list_logic() \n "
@@ -40,10 +38,10 @@ def handle_command_id_list_logic(command_ids, game_state):
 
 
 def match_command_to_option(command, game_state, suspects=None, items=None, locations=None, actions=None):
-    suspects = suspects or []
-    items = items or []
-    locations = locations or []
-    actions = actions or []
+    suspects = copy.deepcopy(suspects) if suspects else []
+    items = copy.deepcopy(items) if items else []
+    locations = copy.deepcopy(locations) if locations else []
+    actions = copy.deepcopy(actions) if actions else []
     app_logger.info(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION: command = {command}\n suspects = {suspects}\nitems={items}\n locs={locations}\nactions={actions}\n")
     matched = False
 
@@ -71,6 +69,11 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
     if game_state.player.location_history[-2].id in locations or game_state.player.location_history[-2].id in actions: #might be in loc or actions if door
         actions.append("return")
 
+    from entities.entities.locations.doors import Door
+    if isinstance(game_state.player.current_location, Door):
+        if game_state.player.current_location.components.is_open:
+            actions.append("enter")
+
     #filter out current location id
     locations = [id for id in locations if id != game_state.player.current_location.id]
 
@@ -80,12 +83,22 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
     # Convert to names
     option_names = ids_to_names(combined_options, game_state)
     app_logger.debug(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ;  option names = {option_names}")
-
+    app_logger.warning(f"option_names  {option_names}")
     # Generate full names for all options
-    full_names = generate_full_names(option_names)
-    app_logger.debug(f"GENERAL_UTILS/MATCHCOMMAND_TO_OPTION: full names = {full_names}")
+    # full_names = generate_full_names(option_names)
+    # make item map
+    option_map = {}
+    for option_id in combined_options:
+        #get name
+        option_name = ids_to_names(option_id, game_state)
+        #split to parts (eg; whiskey, bottle)
+        option_parts = option_name.split()
+        for part in option_parts:
+            option_map[part] = option_id
+        option_map[option_name] = option_id
+    app_logger.info(f"option_map = {option_map}")
     # Find the best match across all current options
-    best_match = find_best_match(command, full_names)
+    best_match = option_map.get(find_best_match(command, list(option_map.keys())))
     app_logger.debug(f"GENERAL_UTILS/MATCHCOMMAND_TO_OPTION: before if best match = {best_match}")
     if best_match:
 
@@ -111,3 +124,24 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
     app_logger.info(
         f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ;  \nno best match\nreturning {command}")
     return command, matched  # Return the original command if no matches found
+
+
+def generate_full_names(names):
+    return set(name.lower() for name in names)
+
+
+def find_best_match(command, full_names, threshold=0.6):
+    """NEED TO MATCH TO FIRST PART OF NAME LIKE RUM FOR RUM BOTTLE"""
+    #lower threshold = more likely to match
+    command_lower = command.lower()
+    best_match = None
+    highest_ratio = 0
+    for name in full_names:
+        ratio = difflib.SequenceMatcher(None, command_lower, name).ratio()
+        if ratio > highest_ratio:
+            highest_ratio = ratio
+            best_match = name
+    if highest_ratio >= threshold:
+        return best_match
+    else:
+        return None

@@ -91,4 +91,7 @@ def get_description(descriptions_dic, description_type):
     return description_to_return
 
 
-print(get_description(descriptions, "at_entity"))
+#print(get_description(descriptions, "at_entity"))
+
+text = "aple"
+print(text.split())

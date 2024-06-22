@@ -1,4 +1,3 @@
-import difflib
 from config.logging_config import app_logger
 
 def format_list_as_sentence(list):
@@ -17,27 +16,6 @@ def flatten_list(list_to_fix):
             fixed_list.append(sublist)
     return fixed_list
 
-
-#FUZZY MATCHING
-
-def generate_full_names(names):
-    return set(name.lower() for name in names)
-
-def find_best_match(command, full_names, threshold=0.6):
-    """NEED TO MATCH TO FIRST PART OF NAME LIKE RUM FOR RUM BOTTLE"""
-    #lower threshold = more likely to match
-    command_lower = command.lower()
-    best_match = None
-    highest_ratio = 0
-    for name in full_names:
-        ratio = difflib.SequenceMatcher(None, command_lower, name).ratio()
-        if ratio > highest_ratio:
-            highest_ratio = ratio
-            best_match = name
-    if highest_ratio >= threshold:
-        return best_match
-    else:
-        return None
 
 def names_to_ids(texts, game_state):
     app_logger.debug(f"GENERAL UTILS: names to ids() ; going to replace with texts = {texts}")

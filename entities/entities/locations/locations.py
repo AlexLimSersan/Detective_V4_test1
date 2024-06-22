@@ -7,7 +7,7 @@ from entities.descriptions.loc_descriptions import Loc_Descriptions
 #components
 #utils
 from utilities.general_utils import ids_to_names, names_to_ids, flatten_list
-from utilities.command_utils import get_command, match_command_to_option
+from utilities.command_utils import get_command, match_command_to_option, handle_command_id_list_logic
 #commands and settings
 from config.settings import EXIT_COMMANDS, ENTER_COMMANDS
 from config.logging_config import ent_logger
@@ -47,7 +47,11 @@ class Location(Entity):
         items = [item.id for item in self.items_present.values()]
         locations = self.get_connections()
         actions = self.get_actions()  # doors and other can overide like this
-
+        # display option in options -> option = (entitymanager.get(option) or option) -> hasattr(option, na entity, if entity
+        # should return option map? then:
+        # get command ; if command in option map, return command, else fuzzy matching with option map.
+        # return match or None
+        # if not process command, bad input
         return suspects, items, locations, actions
 
     def start_loop(self, ui):
@@ -67,38 +71,48 @@ class Location(Entity):
             elif command_id in self.whimsical_handlers:
                 self.whimsical_handlers[command_id](ui)
 
-    def process_command(self, command_id, ui, suspects = None, items = None, locations = None, actions = None):
+    def process_command(self, command, ui, suspects = None, items = None, locations = None, actions = None):
         suspects = suspects or []
         items = items or []
         locations = locations or []
         actions = actions or []
+
+        command_id = names_to_ids(command, self.game_state)  # returns a list
+
+        # possibly multiple command_id matches, so handle which one here
+        if isinstance(command_id, list):
+            command_id = handle_command_id_list_logic(command_id, self.game_state)
+
         # RETURN COMMAND TO CHANGE HANDLER
         if command_id in suspects + items + locations:
             return command_id
         elif command_id in actions:
             return self.process_action(command_id, ui)
         elif command_id in EXIT_COMMANDS or command_id in ENTER_COMMANDS:
-            return self.handle_command_id_check_enter_or_exit(command_id)
+            return self.handle_command_id_check_enter_or_exit(command_id, ui)
+            #if result:
+            #    return result
         else:
-            matched_command, matched = match_command_to_option(command_id, self.game_state,
+            matched_command, matched = match_command_to_option(command, self.game_state,
                                                                suspects, items, locations, actions)
             if matched:
                 if ui.confirm(matched_command):
+                    ent_logger.info(f"confirmed matched {matched_command}, actions = {actions}")
                     return self.process_command(matched_command, ui, suspects, items, locations, actions)
                 else:
                     return None
         ui.bad_input()
     def process_action(self, command_id, ui):
         pass
-    def handle_command_id_check_enter_or_exit(self, command_id):
+    def handle_command_id_check_enter_or_exit(self, command_id, ui):
         if command_id in EXIT_COMMANDS:
             previous_loc_id = self.game_state.player.location_history[-2].id
             if previous_loc_id in self.get_connections():
                 return previous_loc_id
         elif command_id in ENTER_COMMANDS:
-            return self.handle_enter_command_logic()
+            return self.handle_enter_command_logic(ui)
 
-    def handle_enter_command_logic(self):
+    def handle_enter_command_logic(self, ui):
         # determine and move to "forward"
         ent_logger.debug(f"LOCATIONS loop:handle_enter_command_id; entering with enter commands ")
         previous_loc_id = self.game_state.player.location_history[-2].id
@@ -115,7 +129,7 @@ class Location(Entity):
             return possible_locations[0]
         elif len(possible_locations) > 1:
             # if more than one
-            ent_logger.debug("LOCATIONS loop:handle_enter_command_id; length possible locs above 1!")
+            ent_logger.debug(f"LOCATIONS loop:handle_enter_command_id; length possible locs above 1! \n {possible_locations}")
             for id in possible_locations:
                 #enter commands will choose the ids that have the same name as current location name. example: continue down dock, continue down alley, etc
                 possible_loc_name = ids_to_names(id, self.game_state)
@@ -123,6 +137,7 @@ class Location(Entity):
                 if current_loc_name == possible_loc_name:
                     ent_logger.debug(f"LOCATIONS loop:handle_enter_command_id; returning possible location {id}")
                     return id
+            ui.bad_input()
         else:
             ent_logger.debug("LOCATIONS loop:handle_enter_command_id;returning NONE")
             return None

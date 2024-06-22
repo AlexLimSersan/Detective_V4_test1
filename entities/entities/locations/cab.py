@@ -18,9 +18,13 @@ class Cab(Location):
 
     def get_actions(self):
         return ["cabbie"]
+
+    def start_loop(self, ui):
+        # buffer towards cab?!?!?
+        ui.beat(2)
+        return super().start_loop(ui)
     def loop(self, ui):
-        #buffer towards cab?!?!?
-        ui.beat()
+
         while True:
             suspects, items, locations, actions = self.get_options()
             #instead of connections, pass the major location names
@@ -29,17 +33,17 @@ class Cab(Location):
 
             command_id = get_command(ui, self.game_state)
             command_id = self.cab_loc_dic.get(command_id, command_id)
-            ent_logger.debug(f"Locations.py/loop: cab changes command_id : {command_id}")
+            ent_logger.info(f"Locations.py/loop: cab changes command_id : {command_id}")
 
             result = self.process_command(command_id, ui, suspects, items, list(self.cab_loc_dic.keys()), actions)
             result = self.cab_loc_dic.get(result, result)
-            ent_logger.debug(f"LOCATIONS.PY/CAB/LOOP() result = {result}")
             if result:
                 if result == "EXIT_GAME":
                     return result
                 #regular processing:
                 if result != self.game_state.player.location_history[-2].id:
                     self.drive(result, ui)
+                ent_logger.info(f"returning result = {result}")
                 return result
     def process_action(self, command_id, ui):
         action_dic = {

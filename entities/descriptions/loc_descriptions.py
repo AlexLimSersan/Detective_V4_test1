@@ -75,7 +75,7 @@ class Door_Descriptions(Loc_Descriptions): #difference is only for setting scene
     def handle_description_keying(self, description_type, descriptions_dic, optional_key = None):
         descriptions_dic = super().handle_description_keying(description_type, descriptions_dic, optional_key)
         if isinstance(descriptions_dic, dict):
-            # FIRST, GET DOOR OPEN/CLOSED!
+            # last, GET DOOR OPEN/CLOSED! but before neutral
             if self.lid_component.is_open:
                 descriptions_dic = descriptions_dic.get("open", descriptions_dic)
             else:

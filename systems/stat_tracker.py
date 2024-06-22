@@ -31,12 +31,15 @@ class Stat_Tracker:
         if query_type == "dialogue":
             suspect_id = item_id
             #maybe pass dilaogue dic? or just says!
-            dialogue_dic = state_or_spawn_id
+            state_dialogue_dic = state_or_spawn_id
             for condition in murder_condition:
                 # would be suspect id?
                 if condition not in self.witness_statements:
                     self.witness_statements[condition] = []
-                self.witness_statements[condition].append({suspect_id: dialogue_dic["says"]})
+                for state, dialogue_dic in state_dialogue_dic.items():
+                    self.witness_statements[condition].append({suspect_id: dialogue_dic}) #condition list of dic
+                    #appending whole dialogue dic - but losing state it gets appended?
+                        #assuming all default for now?
                 # for example, knife - bertha says she saw gibbs eyeing the kitchen often .
 
 
@@ -58,12 +61,13 @@ class Stat_Tracker:
             print(f"MURDERER ALTERED STARTING STATE:")
             for item_id, starting_state in self.murder_cleanup_tracker.items():
                 print(f"- {item_id}: {starting_state}")
-
-            for condition, sus_id_says_pair in self.witness_statements.items():
-                print(f"{condition}:")
-                for dic_pair in sus_id_says_pair:
-                    for item, loc in dic_pair.items():
-                        print(f"- {item}: {loc}")
+            print(f"WITNESS STATEMENTS:")
+            for condition, list_of_sus_dialogue_dic_pair in self.witness_statements.items():
+                print(f"Murder condition {condition}:")
+                for sus_dialogue_dic_pair in list_of_sus_dialogue_dic_pair:
+                    for sus_id, dialogue_dic in sus_dialogue_dic_pair.items():
+                        for node, dialogue_data in dialogue_dic.items():
+                            print(f"- {sus_id}, {node}: {dialogue_data["says"]}")
         #can have a "you found" thing later, and also more additional stats as desired
 
 class StoryGenerator:

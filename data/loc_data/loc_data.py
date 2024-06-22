@@ -90,9 +90,7 @@ loc_ent_data = {
         "bertha_office_door_01": {
             "name": "office door",
             "connections": ["hallway_04", "bertha_office_01"],
-            "component_descriptions": {
 
-            },
             "lock_mechanism": {
                 "id": "not needed lol",
                 "name": "brass lock",
@@ -101,18 +99,18 @@ loc_ent_data = {
                 "outside": "hallway_04",
                 "lock_descriptions": {
                     "default": {
-                        "outside_locking": "You insert the brass key, feeling it click into place. The lock turns with a solid clunk.",
-                        "outside_unlocking": "You turn the brass key. The lock gives way with a soft click.",
-                        "inside_locking": "You turn the brass knob, hearing the lock slide into place.",
-                        "inside_unlocking": "You turn the brass knob, feeling the lock disengage.",
-                        "cant_open": "The door doesn't budge. It's brass locked.",
-                        "key_dont_fit": "You try the key. It doesn't fit. Must be the wrong one.",
-                        "already_locked": "The lock's already in place. No need to turn it again.",
-                        "already_unlocked": "It's already unlocked. No resistance at all.",
-                        "outside_locked": "The lock's in place. The keyhole faces you.",
-                        "outside_unlocked": "The lock's undone. The door's ready to open.",
-                        "inside_locked": "The knob's turned to lock. The door's secure.",
-                        "inside_unlocked": "The knob's in the open position. The door's free."
+                        "outside_locking": ["You insert the brass key, feeling it click into place. The lock turns with a solid clunk."],
+                        "outside_unlocking": ["You turn the brass key. The lock gives way with a soft click."],
+                        "inside_locking": ["You turn the brass knob, hearing the lock slide into place."],
+                        "inside_unlocking": ["You turn the brass knob, feeling the lock disengage."],
+                        "cant_open": ["The door doesn't budge. It's brass locked."],
+                        "key_dont_fit": ["You try the key. It doesn't fit. Must be the wrong one."],
+                        "already_locked": ["The lock's already in place. No need to turn it again."],
+                        "already_unlocked": ["It's already unlocked. No resistance at all."],
+                        "outside_locked": ["The lock's in place. The keyhole faces you."],
+                        "outside_unlocked": ["The lock's undone. The door's ready to open."],
+                        "inside_locked": ["The knob's turned to lock. The door's secure."],
+                        "inside_unlocked": ["The knob's in the open position. The door's free."]
                         }
                     }
                 }

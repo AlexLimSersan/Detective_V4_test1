@@ -11,9 +11,11 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
         # uses loc descriptions, should still work. state is things like default, burned, broken, etc.
         self.components = Lid(id, name, entity_state, game_state, is_outdoors, connections, component_descriptions, is_open, lock_mechanism)
         self.descriptions = Door_Descriptions(id, name, entity_state, game_state, descriptions, is_outdoors, lid_component=self.components)
+        ent_logger.warning(f"{self.descriptions.descriptions}")
         self.whimsical_handlers = {
             "enter": self.bump
         }
+        ent_logger.warning(f"is outdoors/door = {self.id}; {self.is_outdoors}")
     def get_connections(self):
         if self.components.is_open:
             return self.connections
@@ -28,8 +30,11 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
 
             command_id = get_command(ui, self.game_state)
             # get all ids that you want to pass to components as actions
-            actions = list(self.components.option_handlers.keys())
+            #actions = [word.lower() for word in list(actions.keys())]
+            actions=list(self.components.option_handlers.keys())
+            ent_logger.debug(f"act = {actions}\n comm {command_id}")
             result = self.process_command(command_id, ui, suspects, items, locations, actions)
+            ent_logger.info(result)
             if result:
                 return result
             elif command_id in self.whimsical_handlers:
@@ -37,9 +42,7 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
             ui.display(self.descriptions.set_scene(self.suspects_present, self.items_present, self.get_connections()))
 
     def process_action(self, command_id, ui):
-        if self.components.process_command(command_id, ui):
-            #possible door specific logic here
-            pass
+        self.components.process_command(command_id, ui)
     def get_actions(self):
         actions = {}
         # handling front end enter/return type stuff:

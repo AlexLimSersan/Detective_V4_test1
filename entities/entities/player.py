@@ -81,15 +81,17 @@ class Player():
                 inv_ids_by_type.append(obj)
 
         ui.display_menu_type_2(title=f"Choose {inv_type}:", options=inv_ids_by_type)
-        command_id = get_command(ui, self.game_state)
-        if command_id in inv_ids_by_type:
+        command = get_command(ui, self.game_state)
+        command_id = names_to_ids(command, self.game_state)
+        if command_id[0] in inv_ids_by_type:
             return command_id
 
-        matched_command, matched = match_command_to_option(command_id, self.game_state, items=inv_ids_by_type)
+        matched_command, matched = match_command_to_option(command, self.game_state, items=inv_ids_by_type)
         if matched and ui.confirm(matched_command):
             #matched_id = names_to_ids(matched_command, self.game_state)
             return matched_command
-        ui.display(f"No {command_id} {inv_type}")
+        if not matched:
+            ui.display(f"No {command_id} {inv_type}")
 
 
 

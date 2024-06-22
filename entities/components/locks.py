@@ -38,7 +38,9 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
     def __init__(self, id, name, key, game_state, entity_state, is_outdoors, lock_type, outside, is_locked = True, lock_descriptions = None, ):
         super().__init__(id, name, game_state, entity_state, is_outdoors, lock_type, outside, is_locked, None)
         self.key = key #id for key needed to open from lock_side
+        ent_logger.info(f"lock desc = {lock_descriptions}")
         self.descriptions = Descriptions(id, name, entity_state, game_state, lock_descriptions, is_outdoors)
+        ent_logger.info(f"lock desc = {lock_descriptions}")
         self.default_descriptions = {
             "outside_locking": "You turn the key, locking it.",
             "outside_unlocking": "You turn the key. It unlocks.",
@@ -62,12 +64,12 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
         ent_logger.debug(f"LOCKS.PY/KEYLOCK/get_description() description_type = {description_type}")
         player_side = self.game_state.player.location_history[-2].id
 
-        if description_type != "at_entity":
-            raise ValueError(f"locks.get_description no matching description type {description_type}")
-        if player_side == self.outside:
-            description_type = "outside_locked" if self.is_locked else "outside_unlocked"
-        else:
-            description_type = "inside_locked" if self.is_locked else "inside_unlocked"
+        if description_type == "at_entity":
+
+            if player_side == self.outside:
+                description_type = "outside_locked" if self.is_locked else "outside_unlocked"
+            else:
+                description_type = "inside_locked" if self.is_locked else "inside_unlocked"
 
         description = self.descriptions.get_description(description_type)
         ent_logger.debug(f"keylock/get desc, toget = {description_type}\n descriptions = {description}")
