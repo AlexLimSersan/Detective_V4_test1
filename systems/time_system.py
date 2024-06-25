@@ -1,8 +1,6 @@
 
 from config.settings import TICKER_MULTIPLIER, START_PHASE, PHASE_TIME_INTERVAL, ALL_PHASES
-
-import logging
-logger = logging.getLogger('my_game')
+from config.logging_config import app_logger
 #all times like move time, etc, here! i think its better 100%
 class Time_System:
     def __init__(self, game_state):
@@ -14,7 +12,7 @@ class Time_System:
         self.phase_time_interval = PHASE_TIME_INTERVAL #how long each phase is
 
     def elapse_time(self, time_value, ui):
-        logger.warning(f"time_system.py/elapsing time() : {time_value}")
+        app_logger.info(f"time_system.py/elapsing time() : {time_value}")
         # Elapse time by the given value multiplied by the ticker multiplier
         self.ticker += time_value * self.ticker_multiplier
         # Check if the ticker has reached the interval to progress the phase
@@ -38,7 +36,8 @@ class Time_System:
         ui.display(f"_____________________")
         ui.stall()
 
-        """LIKE WEAHTER, NEED SOME WARNING/TRANSITION THING! TO ABRUPT FOR ROUTINES ESP EVENTS LIKE A SUSPECT VANISHES.."""
+        """LIKE WEAHTER, NEED SOME WARNING/TRANSITION THING! TO ABRUPT FOR ROUTINES ESP EVENTS LIKE A SUSPECT VANISHES or appears in the room.."""
+        #SUN, RAIN, TRANSITION ANNOUNCEMENT (THE SKY DARKENS, CLOUDS FORM, THE CLOUDS PART, THE RAIN starts to SLOWS DOWN...
 
 
 

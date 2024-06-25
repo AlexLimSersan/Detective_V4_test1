@@ -35,6 +35,8 @@ class Player():
 
         #leaving from last location, can check against current loc for leaving to
         ui.display(self.location_history[-2].descriptions.get_description("leaving"))
+        ui.beat(1)
+        ui.display(" ")
         #get approaching description from current location; can check against last loc for directional (approaching from)
         ui.display(self.current_location.descriptions.get_description("approaching"))
         ui.beat()

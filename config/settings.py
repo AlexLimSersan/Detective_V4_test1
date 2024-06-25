@@ -11,7 +11,7 @@ MOVE_TIME = 2
 #speak time, interact time
 
 #WEATHER SYSTEM
-START_WEATHERS = ["sunny"]
+START_WEATHERS = ["sun"]
 """ 
 weather notes:
 GOOD
@@ -20,8 +20,11 @@ NEUTRAL, BAD
     grey = chilly + grey
     rain = rain + storm
 """
-ALL_WEATHERS = ["sunny", "grey", "rain"]
-GOOD_WEATHER = ["sunny"]
+#GOING TO CHANGE: sun, rain, and storm. with a TRANSITION ANNOUNCEMENT...
+#like the clouds darken, etc. maybe 2 announcements if detectable before changing.
+#can have references to rain in the sun, but sparingly.
+ALL_WEATHERS = ["sun", "rain", "storm"]# "grey",
+GOOD_WEATHER = ["sun"]
 
 #SPAWN DATA DEFAULT VALUES
 CLUE_SPAWN_FREQUENCY = 0.8
@@ -46,4 +49,4 @@ EVENT_TRIGGER_CAP = 2 #before murder!
 MESSAGE_SLEEP_TIME = 0.4
 # Command Identifiers
 EXIT_COMMANDS = ["return", "leave", "exit", "back"]
-ENTER_COMMANDS = ["enter", "go", "continue", "forward", "down", "cont", "walk"]
+ENTER_COMMANDS = ["enter", "go", "continue", "forward", "down", "cont", "walk", "climb", "up"]

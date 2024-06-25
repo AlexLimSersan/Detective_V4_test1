@@ -21,6 +21,19 @@ class Item(Mobile_Entity):
         self.entity_state = self.determine_state() #this is actually irrelevant outside of initialization due to iterate states?
         self.items_present = {}
 
+    def remove_entity(self, entity):
+        """Remove entity from location"""
+        if entity.id in self.items_present:
+            del self.items_present[entity.id]
+        else:
+            raise ValueError(f"Entity {entity.id} not found")
+
+    def add_entity(self, entity_obj):
+        if entity_obj.id not in self.items_present:
+            self.items_present[entity_obj.id] = entity_obj
+        else:
+            ent_logger.warning(f"ENTITY OBJECT {entity_obj.id} already in {self.id}")
+
     def determine_state(self):
         for state, data in self.state_data.items():
             if random.random() <= data.get("frequency", ITEM_STATE_FREQUENCY):

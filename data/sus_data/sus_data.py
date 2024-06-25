@@ -6,7 +6,7 @@ murderer_profile_all_possibilities = {
             "fight_type": ["strong", "weak"],
             "outfit_type": ["leather", "denim"],
             "smoke_type": ["cigs", "tobacco", "none"],
-            #maybe at bar just for dialogue and story YES
+            "access_to": ["bar", "docks", "butchery"],
             "match_type": ["new_matches", "old_matches", "none"],
             "drink_type": ["whiskey", "rum", "none"],
             "hair_type": ["hair", "bald"],
@@ -22,7 +22,7 @@ sus_ent_data = {
             "fight_type": ["strong", "weak"],
             "outfit_type": ["denim"],
             "smoke_type": ["cigs"],
-            #maybe at bar just for dialogue and story YES
+            "access_to": ["bar"],
             "match_type": ["new"],
             "drink_type": ["whiskey", "rum"],
             "hair_type": ["hair"],
@@ -44,7 +44,7 @@ sus_ent_data = {
             "fight_type": ["strong", "weak"],
             "outfit_type": ["leather", "denim"],
             "smoke_type": ["cigs", "tobacco", "none"],
-            #maybe at bar just for dialogue and story YES
+            "access_to": ["bar"],
             "match_type": ["new_matches", "old_matches", "none"],
             "drink_type": ["whiskey", "rum", "none"],
             "hair_type": ["hair", "bald"],

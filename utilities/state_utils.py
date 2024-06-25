@@ -29,11 +29,11 @@ def iterate_vibe_keys(dictionary, ranked_keys): #for mood keys
             #fails if a list
             keyed_descriptions = dictionary.get(key)
             if keyed_descriptions:
-                app_logger.info(f"returning {key} keyed descriptions {keyed_descriptions} ")
+                app_logger.debug(f"returning {key} keyed descriptions {keyed_descriptions} ")
                 return keyed_descriptions
-        app_logger.warning(f"tried all keys, didnt fail. not returning anything?")
+        app_logger.warning(f"tried all keys, didnt fail. not returning anything? \n dic ; {dictionary}")
     except:
-        app_logger.info(f"failed try, exception: returning {dictionary}")
+        app_logger.debug(f"failed try, exception: returning {dictionary}")
         return dictionary #if cant find key, just return dic anyways
 
 def check_nested_weather_or_time_keys(descriptions_dic, game_state):

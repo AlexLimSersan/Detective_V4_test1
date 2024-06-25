@@ -74,13 +74,21 @@ class Lid(Interaction): #can refactor this for sure
             to_get_key = description_type
         else:
             raise ValueError("lid get description; type not accounted for")
+        result = None
         try:
-            description.append(self.descriptions.get_description(to_get_key))
-
-            if description:
-                return description
+            description_value = self.descriptions.get_description(to_get_key)
+            if description_value:
+                description.append(description_value)
+                ent_logger.warning(f"1{description}")
+                if description:
+                    result = description
+                    ent_logger.warning(f"2{result}")
         finally:
-            return to_get_dic.get(to_get_key).format(name=self.name)
+            if result is None:
+                result = [to_get_dic.get(to_get_key).format(name=self.name)]
+                ent_logger.warning(f"3{result}")
+
+        return result
 
     def get_options(self):
         #remember, lid isnt directional

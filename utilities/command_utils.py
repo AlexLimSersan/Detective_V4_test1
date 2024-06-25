@@ -2,7 +2,7 @@ import difflib
 import copy
 from utilities.general_utils import names_to_ids, flatten_list, ids_to_names
 from config.logging_config import app_logger
-
+from collections import defaultdict
 def get_command(ui, game_state):
     #possible_multiple_option_type is LOCATIONS
     command = ui.get_input()
@@ -82,23 +82,33 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
     app_logger.debug(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ; combined options = {combined_options}")
     # Convert to names
     option_names = ids_to_names(combined_options, game_state)
-    app_logger.debug(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ;  option names = {option_names}")
-    app_logger.warning(f"option_names  {option_names}")
+    app_logger.info(f"option_names  {option_names}")
     # Generate full names for all options
     # full_names = generate_full_names(option_names)
     # make item map
-    option_map = {}
+    option_map = defaultdict(list)
+
     for option_id in combined_options:
-        #get name
+        # Get the name
         option_name = ids_to_names(option_id, game_state)
-        #split to parts (eg; whiskey, bottle)
+
+        # Split to parts (e.g., whiskey, bottle)
         option_parts = option_name.split()
+
         for part in option_parts:
-            option_map[part] = option_id
-        option_map[option_name] = option_id
+            option_map[part].append(option_id)
+
+        option_map[option_name].append(option_id)
+
+    for key, values in option_map.items():
+        if len(values) > 1:
+            option_map[key] = [option_id for option_id in values if option_id != game_state.player.location_history[-2].id]
+
     app_logger.info(f"option_map = {option_map}")
     # Find the best match across all current options
     best_match = option_map.get(find_best_match(command, list(option_map.keys())))
+    if isinstance(best_match, list):
+        best_match = best_match[0]
     app_logger.debug(f"GENERAL_UTILS/MATCHCOMMAND_TO_OPTION: before if best match = {best_match}")
     if best_match:
 
@@ -109,7 +119,7 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
         )
         matched = True
         entity_ids = [id for id in entity_ids if id in locations or id in suspects or id in items]
-        app_logger.debug(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ;  \nbest_match = {best_match}\nentity_ids = {entity_ids}")
+        app_logger.info(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ;  \nbest_match = {best_match}\nentity_ids = {entity_ids}")
         if entity_ids:
             if len(entity_ids) > 1: #command maps to multiple entity ids that are in options. This means same name for multiple locs. so remove last loc so its like it defaults to forward
                 player_last_loc_id = game_state.player.location_history[-2].id

@@ -13,16 +13,21 @@ class Cab(Location):
         self.cab_location_area_names = ["pub", "alley"] #for menu display
         self.cab_loc_dic = {#cab major loc connections to entry point, has entry points and location for command matching
                 "pub": "porch_01",
-                "porch_01": "porch_01"
+                "porch_01": "porch_01",
+                "alley": "alley_01",
+                "alley_01": "alley_01"
             }
 
     def get_actions(self):
         return ["cabbie"]
 
     def start_loop(self, ui):
-        # buffer towards cab?!?!?
         ui.beat(2)
-        return super().start_loop(ui)
+        # buffer towards cab?!?!?
+        ui.display(self.descriptions.set_scene(self.suspects_present, self.items_present, self.game_state.player.location_history[-2].id))
+        matched_command = self.loop(ui)  # dialogue or interactions
+        return matched_command
+
     def loop(self, ui):
 
         while True:

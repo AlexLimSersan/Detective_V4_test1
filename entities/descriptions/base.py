@@ -55,7 +55,7 @@ class Descriptions(ABC):
     def handle_description_keying(self, description_type, descriptions_dic, optional_key = None):
         temp_dic = None
         if isinstance(descriptions_dic, dict):
-            if description_type in ["at_entity"]:
+            if description_type in ["at_entity", "times", "weather"]:
                 temp_dic = descriptions_dic  # just to avoid the warning log below
             # ALREADY CHANGED PLAYER LOC
             elif description_type == "approaching":  # approaching from

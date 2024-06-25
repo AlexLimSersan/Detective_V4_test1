@@ -11,11 +11,9 @@ class Door(Location): #NEED TO SET SCENE FOR CONNECTIONS? WHEN DOOR IS OPEN.
         # uses loc descriptions, should still work. state is things like default, burned, broken, etc.
         self.components = Lid(id, name, entity_state, game_state, is_outdoors, connections, component_descriptions, is_open, lock_mechanism)
         self.descriptions = Door_Descriptions(id, name, entity_state, game_state, descriptions, is_outdoors, lid_component=self.components)
-        ent_logger.warning(f"{self.descriptions.descriptions}")
         self.whimsical_handlers = {
             "enter": self.bump
         }
-        ent_logger.warning(f"is outdoors/door = {self.id}; {self.is_outdoors}")
     def get_connections(self):
         if self.components.is_open:
             return self.connections

@@ -8,19 +8,19 @@ item_ent_data = {
     "clues": {},
     "drawers": {
         "bertha_office_drawer_01": {
-            "name": "desk",
+            "name": "oak desk",
             "spawn_data": {
-                "locations": ["kitchen_01"],
+                "locations": ["bertha_office_01"],
                 "frequency": 1,
                 "count": 1,
             },
             "state_data": {},
             "components": {
                 "name": "drawer",
-                "component_descriptions":{},
+                "component_descriptions": {},
                 "lock_mechanism": {
-                    "id": "not needed lol",
-                    "name": "bebe lock",
+                    "id": "brass_lock_01",
+                    "name": "brass lock",
                     "key": "brass_key_01",
                     "lock_type": "key_lock",
                     "outside": "bertha_office_01",
@@ -46,18 +46,34 @@ item_ent_data = {
         }
     },
 "items": {
-    "kitchen_knife_01": {
-        "name": "knife",
+    "dumpster_01": {
+        "name": "dumpster",
+        "state_data": {
+            "default": {
+                "frequency": 1
+            },
+        },
+        "spawn_data": {
+            "locations": ["dead_end_01"],
+            "frequency": 1,
+            "count": 1,
+        }
+    },
+
+    "kitchen_knife_01": { #can be missing, in alley, or cleaned.
+        #but always want in kitchen.
+        "name": "kitchen knife",
         "state_data": {
             "default": {
                 "frequency": 0.8
             },
             "cleaned": {
-                "conditions": {"traits": ["bertha"]}
+                "conditions": {"traits": ["knife", "at_bar"]},
+                "frequency": 0.5
             }
         },
         "spawn_data": {
-            "locations": ["kitchen_01"],
+            "locations": ["kitchen_01", ""], #i think it should go in order of spawns?!
             "frequency": 1,
             "count": 1,
         }

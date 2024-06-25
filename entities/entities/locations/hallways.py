@@ -9,7 +9,8 @@ class Hallway(Location):
         self.direction_labels = direction_labels # A dict with directions e.g., {"forward": "towards cab", "backward": "towards alley"}
         self.direction_order = {
                     #add more ordered hallway types here. key is not used in code, so just name as desired.
-                    "pub hallway": ["hallway_01", "hallway_02", "hallway_03", "hallway_04"]
+                    "pub hallway": ["hallway_01", "hallway_02", "hallway_03", "hallway_04"],
+                    "alleyway": ["cab_01", "alley_01", "alley_02", "alley_03", "crime_scene_01", "alley_04", "alley_05", "alley_06", "alley_07", "alley_08"]
                 }
 
     def get_directional_locations(self):
@@ -19,30 +20,50 @@ class Hallway(Location):
         previous_location = self.game_state.player.location_history[-2]
         orientation = self.game_state.player.orientation
 
+        cont_title = self.direction_labels.get("continue_title", "continue:")
+        ret_title = self.direction_labels.get("return_title", "return:")
+
         continue_options = []
         return_options = []
         #GET CONTINUE/RETURN OPTIONS
-        for connection in self.connections:
-            connection_name = ids_to_names(connection, self.game_state)
-            if connection_name == current_location.name:
+        if len(self.get_connections()) == 2:
+            for connection in self.connections:
                 if orientation == "forward":
                     if connection != previous_location.id:
-                        continue_options.append(f"continue: {self.direction_labels['forward']}")
+                        continue_options.append(f"{cont_title} {self.direction_labels['forward']}")
                     elif connection == previous_location.id:
-                        return_options.append(f"return: {self.direction_labels['backward']}")
+                        return_options.append(f"{ret_title} {self.direction_labels['backward']}")
                 else:  # orientation == "backward"
                     if connection != previous_location.id:
-                        continue_options.append(f"continue: {self.direction_labels['backward']}")
+                        continue_options.append(f"{cont_title} {self.direction_labels['backward']}")
                     elif connection == previous_location.id:
-                        return_options.append(f"return: {self.direction_labels['forward']}")
-            else:
-                directional_options.append(connection)
+                        return_options.append(f"{ret_title} {self.direction_labels['forward']}")
+        else: #IF BOTH CONNECTIONS SAME NAME, BUT PREVIOUS LOC NOT, CANT SAY CONT DOWN FORWARD FOR BOTH!!
+            #ALLEY - LEAVE ALCOVE -> CONTINUE DOWN ALLEY, CONTINUE TOWARDS CAB,
+            #IF LEN OF HALLWAY POSITION > CURRENT LOC, FORWARDS, ELSE PRINT BACKWARDS LABEL
+            for connection in self.connections:
+                connection_name = ids_to_names(connection, self.game_state)
+                if connection_name == current_location.name:
+                    if orientation == "forward":
+                        if connection != previous_location.id:
+                            continue_options.append(f"{cont_title} {self.direction_labels['forward']}")
+                        elif connection == previous_location.id:
+                            return_options.append(f"{ret_title} {self.direction_labels['backward']}")
+                    else:  # orientation == "backward"
+                        if connection != previous_location.id:
+                            continue_options.append(f"{cont_title} {self.direction_labels['backward']}")
+                        elif connection == previous_location.id:
+                            return_options.append(f"{ret_title} {self.direction_labels['forward']}")
+                else:
+                    directional_options.append(connection)
         #END OF CONT/RETURN OPTIONS
 
         #ORDER THE COMBINED OPTIONS
         directional_options = continue_options + directional_options + return_options
         ent_logger.debug(f"HALLWAYS/GETNAVIGATION_OPTIONS(): Navigation options = {directional_options}")
         return directional_options
+
+
 
 
     def loop(self, ui):

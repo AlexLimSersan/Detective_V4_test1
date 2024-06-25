@@ -10,19 +10,27 @@ loc_description_data = {
         "driving_start": {
             "neutral": [f'"You got it boss."', "The engine sputters, and the cab drives off.", "The cab drives..."]},
         "driving_during": {
-            "neutral": ["You sit in the cab, watching the city pass by through the window."],
-            "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
-            "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
+            "porch_01": {
+                "neutral": ["You sit in the cab, watching the city pass by through the window."],
+                "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
+                "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
+                },
+            "alley_01": {
+                "neutral": ["You sit in the cab, watching the city pass by through the window."],
+                "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
+                "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
+                },
         },
         "driving_arriving": {
-            "porch_01": ["The porch comes into view.."]
+            "porch_01": ["The porch comes into view.."],
+            "alley_01": ["The alley comes into view..."]
         },
         "approaching": { #approaching current loc, FROM last loc. so can optinally add last locs here, then optional weather, time, etc
             "neutral": ["The cab is lazily parked, taking up 3 spots...",  "The cab idles.."],
             "good": ["The cabbie waves as you approach.", "The cab idles, the engine a low, constant hum."],
             "bad": ["The cabbie glances your direction.", "The cab is surrounded by cigarettes", "The cab idles.."]
         },
-        "at_entity": {#driver
+        "at_entity": {#inside cab
             "neutral": ['The driver adjusts his mirror. "Where to?"', "The cabbie nods his head as you climb in.", ],
             "good": ["You are greeted by a friendly nod from the driver.", "The cabbie greets you over the engine purr."],
             "bad": ['The cabbie smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror. "Where to?"' ,'The driver looks indifferent to your presence.']
@@ -37,23 +45,24 @@ loc_description_data = {
             "night":{"neutral": ["The headlights beam onto the street.", "He stares at the night sky.", "He shifts in his seat, restless."],
                         "bad": ["The headlights flicker.", "He looks like he might fall asleep.", "His hands tremble as he reaches for a cigarette.", "His eyes scan the horizon.",]},
         },
-        "weather": { #optionally keyed to time of day
+        "weather": { #optionally keyed to time of day - should make sense from INSIDE CAB!
             "rain": ["Raindrops pelt the cab, streaking its windows.", "The rain makes a rhythmic drumming sound.", "The headlights cast a pyramid in the rain."],
-            "sunny": ["The sun reflects off the cab’s metal, making you squint.", "The sunlight makes the cab shimmer."],
+            "sun": ["The sun reflects off the cab’s metal, making you squint.", "The sunlight makes the cab shimmer."],
             "grey": ["The grey sky paints the cab dull."]
         },
         "tags": ["cab"],
         "connections": {#optional weather or time keys.
                 # always key weather, time. or just time. but never time, weather!!!
             "porch_01": { #seeing the cab from the porch
-                "sunny": ["The cab is parked nearby."],
+                "sun": ["The cab is parked nearby."],
                 "rain": ["The cab is parked nearby.", "You can see the cab through the downpour."],
                 "grey": ["The cab is parked nearby."],
             },
-            "alley_01": ["The cab is parked nearby."],
+            "alley_01": ["The cab is parked nearby.", "You can see the cabbie waiting across the street."]
             },
         "leaving": { #leaving from this loc TO player current loc, so key by current loc, then weather or time,,,
-            "neutral": ["You exit the cab, closing the door behind you."],
+            "neutral": ["You exit the cab, closing the door behind you.", "Your feet hit the ground, and you climb out the car.",
+                        "The pavement scrapes against your shoes.","You clamber out the cab.", "Your back aches."],
         },
 
     },
@@ -61,10 +70,10 @@ loc_description_data = {
 "porch_01": {
     "default": {
         "approaching": {
-            "neutral": ["Wooden planks creak underfoot.",],
+            "cab_01": {"neutral": ["You approach the pub."]}
         },
         "at_entity": {
-            "neutral": ["You stand on the porch, its surface weathered and worn."],
+            "neutral": ["You stand on the porch, its surface weathered and worn.", "Wooden planks creak underfoot.", "The porch is weathered and worn."],
             "bad": ["The wood groans under your weight."],
             "good": ["The porch is a cozy spot."],
         },
@@ -77,11 +86,11 @@ loc_description_data = {
 
         },
 
-        "tags": ["urban"],
+        "tags": [],
         "connections": {#optional weather or time keys.
                 # always key weather, time. or just time. but never time, weather!!!
             "lounge_01": {  # seeing the porch from the lounge
-                "sunny": {
+                "sun": {
                     "morning": ["Ahead, the porch basks in the morning sun."],
                     "afternoon": [
                         "Ahead, the porch basks in the sun."],
@@ -99,15 +108,22 @@ loc_description_data = {
 },
 "lounge_01": {
     "default": {
-        "approaching": {
-            "neutral": ["The air reeks of smoke.", "You're hit with a wave a smoke as you enter."],
-            "bad": ["People glance at you briefly as you enter."]
-        },
+        "approaching": [
+            {
+            "porch_01": {
+                "neutral": ["You push through the pub doors.","You enter the pub."],
+                },
+            },
+            {
+                "neutral": ["The air reeks of smoke.", "You're hit with a wave a smoke."],
+                "bad": ["People glance at you briefly."]
+                },
+        ],
         "at_entity": {
             "neutral": ["The lounge is a bit run down.", "The lounge has a rustic feel.", "", ""],
         },
         "leaving": {
-
+            "porch_01": {"neutral": ["You leave the pub.", "The doors swing as you leave the lounge."]}
         },
         "times": { #lounge is quiet, picks up in the evening/night
             "morning": ["It's a quiet morning.", "A few staff members are cleaning up from last night."],
@@ -117,7 +133,7 @@ loc_description_data = {
         },
         "weather": { #replaces weather decorator
             "rain": ["Raindrops slam against the windows."],
-            "sunny": ["Sun filters through the blinds.", "The sun casts it all in dramatic lighting."],
+            "sun": ["Sun filters through the blinds.", "The sun casts it all in dramatic lighting."],
             "grey": ["It's dim in here."]
         },
         "tags": ["indoors"],
@@ -171,7 +187,7 @@ loc_description_data = {
         },
         "weather": {
             "rain": ["The rain mixes with the chatter.", "The window panes shake with the howling wind."],
-            "sunny": ["Sunlight streams through the windows, casting warm glows on the patrons."],
+            "sun": ["Sunlight streams through the windows, casting warm glows on the patrons."],
             "grey": ["The wind blows against the window, rattling it."]
         },
         "tags": ["indoors"],
@@ -256,12 +272,12 @@ loc_description_data = {
 "stage_02": {
     "default": {#no stage activity
         "approaching": {
-            "stage_01": ["A small entrance leads backstage."],
-            "hallway_01": ["You hunch to get through the passage."],
+            "stage_01": ["You walk towards the back."],
+            "hallway_01": ["You hunch as the ceiling lowers."],
         },
         "at_entity": {
-            "neutral": ["You are backstage, next to miscellaneous props and equipment."],
-            "bad": ["The backstage feels cramped and cluttered."]
+            "neutral": ["You are backstage.","Miscellaneous props and equipment surrounds you."],
+            "bad": ["The backstage feels cramped and cluttered.", "It feels cramped.", "It's messy."]
         },
         "leaving": {
         },
@@ -274,10 +290,10 @@ loc_description_data = {
         "tags": [],
         "connections": {
             "stage_01": { #seeing backstage from stage
-                "neutral": ["You can see the backstage from here."],
+                "neutral": ["You can see the backstage from here.",],
             },
             "hallway_01": {
-                "neutral": ["The hallway connects to the backstage."],
+                "neutral": ["The hallway connects to the backstage.", ],
             }
         }
     }
@@ -362,15 +378,15 @@ loc_description_data = {
         }
     }
 },
-"hallway_04": {
+"hallway_04": { #dim, leave the claustrophobia cramped stuff for alley and maybe butcher..
     "default": {
         "approaching": {
-            "neutral": ["You come to the end of the hallway."],
-
+            "hallway_03": {"neutral": ["You come to the end of the hallway."],},
+            "bertha_office_door_01": {"neutral": ["You enter the hallway."],},
+            "backroom_door_01": {"neutral": ["You enter the hallway."],}
         },
         "at_entity": {
-            "neutral": ["Wood groans underfoot.", "It's a tight area.", "It feels cramped."],
-            "bad": ["The walls feel slightly claustrophobic.", "It feels cramped."]
+            "neutral": ["Wood groans underfoot.", "", ""],
         },
         "leaving": {
 
@@ -464,8 +480,9 @@ loc_description_data = {
         "weather": {
 
         },
+        "bump": {"neutral" : ["A loud ring echoes as your head slams into the door."]},
         "at_entity": [
-            {"sunny": {"afternoon": {"neutral": ["backroom door worked for sunny afternoon neutral?!"]}}},
+
         ],
         "connections": {
             "hallway_04": {
@@ -481,7 +498,7 @@ loc_description_data = {
     },
 "bertha_office_door_01": {
     "default": {
-        "approaching": ["approaching office door"],
+        "approaching": [""],
         "connections": {
             "hallway_04": {
                 "open": ["A wooden door is here, partly open."],
@@ -490,6 +507,395 @@ loc_description_data = {
             }
         }
     },
+
+# ALLEY DESCRIPTIONS
+
+"alley_01": { #standing at alley entrance
+    "default": {
+        "approaching": {
+            "cab_01" : {"neutral": ["You cross the sidewalk...", "Walking up to the alleyway...",]},
+            "alley_02": {"neutral": ["You exit the alleyway, and return to the street."]}
+        },
+        "at_entity": [
+
+        ],
+        "leaving": {
+            "cab_01": {"neutral": ["You leave the alley behind..."]},
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "cab_01": {
+                "neutral": ["The alleyway can be seen from here."],
+            },
+            "alley_02": {
+                "neutral": ["The alley opens up to the street."]
+            }
+        }
+    }
+},
+
+"alley_02": { #start of actually in alley
+    "default": {
+        "approaching": {
+            "alley_01": {"neutral": ["The alley narrows.","The walls close in."]},
+        },
+        "at_entity": [
+            {"neutral": ["Buildings loom overhead.", "The passage stretches on."],
+             "bad": ["It's quite narrow.", "It feels claustrophobic.", "It's cramped."]},
+            {
+                "bad": ["It smells of garbage and decay.", "The walls are covered in graffiti.", "It's eerily quiet."],
+                "good": ["It's surprisingly calm.", "It's surprisingly quiet."],
+            }
+        ],
+
+        "leaving": {
+        },
+        "times": {},
+        "weather": {"sun": ["You hear the sound of dripping water.", "The air is damp and musty."],
+                    "rain": ["Water gushes down an eavestrough.", "An eavestrough gushes water.","A nearby gutter drains the rain."]
+                    },
+        "tags": ["urban"],
+        "connections": {
+            "alley_01": {
+                "neutral": ["The entrance lies before you.", "The alleyway lies before you."],
+            },
+            "alcove_01": {
+                "neutral": ["An alcove connects to the alley."],
+            },
+            "alley_03": {
+                "neutral": ["The alley continues onwards to the street."],
+            }
+        }
+    }
+},
+
+"alcove_01": { #maybe have some object with the ashes nested?
+    "default": {
+        "approaching": {"neutral": ["You step into a small alcove."]},
+        "at_entity": {
+            "neutral": [""],
+        },
+        "leaving": {
+            "neutral": ["You step back into the alley."],
+        },
+        "times": {},
+        "weather": { #prevents regular weather
+            "rain": ["The alcove shields you from the rain."],
+            "sun": ["It's noticeably darker here.", "It provides quite a bit of shade."],
+        },
+        "tags": ["urban"],
+        "connections": {
+            "alley_02": {
+                "neutral": ["An alcove branches off the main path.", "An alcove is beside you."],
+            }
+        }
+    }
+},
+"alley_03": {
+    "default": {
+        "approaching": {
+            "neutral" :["The alley bends slightly.", "Buildings tower above you."]
+        },
+        "at_entity": {
+            "neutral": [],
+
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "alley_02": {
+                "neutral": ["The alley continues, dark and narrow."],
+            },
+            "alley_03_1": {
+                "neutral": ["From here, the path leads all the way back to the cab."],
+            }
+        }
+    }
+},
+"alley_03_1": {
+    "default": {
+        "approaching": {
+            "neutral" :[]
+        },
+        "at_entity": {
+            "neutral": [],
+
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "alley_02": {
+                "neutral": [""],
+            },
+            "alley_03_1": {
+                "neutral": ["From here, the path leads all the way back to the cab."],
+            }
+        }
+    }
+},
+
+"crime_scene_01": { #widens to crime scene
+    "default": {
+        "approaching": {
+            "neutral": ["The alleyway widens.", "The passage opens up to a small court."],
+        },
+        "at_entity": {
+            "neutral": ["You arrive at the crime scene."],
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {"sun": [],
+                    "rain": []
+                    },
+        "tags": ["urban"],
+        "connections": {
+            "alley_03_1": {
+                "neutral": [""],
+            },
+            "alley_04": {
+                "neutral": ["The crime scene is ahead."],
+            }
+        }
+    }
+},
+
+"alley_04": { #narrows again - muddy ground, footprint
+    "default": {
+        "approaching": {"neutral": ["The ground is uneven.", "You walk across uneven footing."]
+        },
+        "at_entity": {
+            "neutral": ["The ground squelches under your feet.", "The mud sticks to your shoes."],
+            #you notice muddy footprints, imprints, they are messed up but clear enough to make out shoe vs boot?
+
+            #MUD STICKS HINT FOR THE CLEAN SHOES
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "crime_scene_01": {
+                "neutral": ["The alley stretches on..."],
+            },
+            "dead_end_01": {
+                "neutral": ["The dead end connects to the alley."],
+            },
+            "alley_05": {
+                "neutral": ["The alley stretches on..."],
+            }
+        }
+    }
+},
+
+"dead_end_01": {
+    "default": {
+        "approaching": {
+        },
+        "at_entity": {
+            "neutral": ["You are at a dead end.", "The area is littered with trash and debris.", "It's a dead end."],
+        },
+        "leaving": {
+            "neutral": ["You turn back."],
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "alley_04": {
+                "neutral": [""],
+            }
+        }
+    }
+},
+
+"alley_05": { #TURN AND FALL
+    "default": {
+        "approaching": {
+            "neutral": ["You follow the sharp turn. ", "The alley turns sharply.", "You follow the bend."],
+        },
+
+        "at_entity": {
+            "neutral": ["Here, the alley is tight and confined.", "The walls press inwards.", "The alley is narrow, but manageable."],
+            "bad": ["The alley feels oppressive and claustrophobic.", "The walls press inwards.", "Here, the alley is tight and confined."],
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "alley_04": {
+                "neutral": ["Ahead, the alley branches.", "The alley branches."],
+            },
+            "alley_06": {
+                "neutral": ["The alley continues further."],
+            }
+        }
+    }
+},
+
+"alley_06": { #get up from fall, come to 3 way branch
+    "default": {
+        "approaching": {
+        },
+        "at_entity": {
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "alley_05": {
+                "neutral": ["The alley leads onwards."],
+            },
+            "alley_07": {
+                "neutral": ["The alley leads onwards."],
+            },
+            "fire_escape_01": {
+                "neutral": ["The fire escape descends into the alleyway.", "The ground is beneath you."],
+            }
+        }
+    }
+},
+
+"fire_escape_01": { #AT BASE OF LADDER.
+    # event (maybe no event needed), janked metal rail, scrap type AND fire escape here
+    "default": {
+        "approaching": {
+            "neutral": [],
+        },
+        "at_entity": {
+            "neutral": ["You stand at the base of the fire escape.", "The ladder hangs just within reach."],
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "alley_06": {
+                "neutral": ["A fire escape is nearby."],
+            },
+            "fire_escape_02": {
+                "neutral": ["The fire escape leads down to the alley."],
+            }
+        }
+    }
+},
+"fire_escape_02": { #ON LADDER #hair
+    "default": {
+        "approaching": {
+            "neutral": ["The ladder shakes as you climb", "The metal creaks."],
+            "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
+        },
+        "at_entity": {
+            "neutral": ["The rungs feel cold under your hands."],
+            "bad": ["The rust digs into your hands."],
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban", "outdoors"],
+        "connections": {
+            "fire_escape_01": {
+                "neutral": ["The ground is beneath you."],
+            },
+            "fire_escape_03": {
+                "neutral": ["The ladder leads all the way to the roof."],
+            }
+        }
+    }
+},
+
+"fire_escape_03": { #ON LADDER #hair
+    "default": {
+        "approaching": {
+            "neutral": ["The ladder shakes as you climb", "The metal creaks."],
+            "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
+        },
+        "at_entity": {
+            "neutral": ["The rungs feel cold under your hands."],
+            "bad": ["The rust digs into your hands."],
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban", "outdoors"],
+        "connections": {
+            "fire_escape_02": {
+                "neutral": ["The ladder extends below."],
+            },
+            "roof_top_01": {
+                "neutral": ["The ladder leads to the rooftop.", "Above, you can see the rooftop."],
+            }
+        }
+    }
+},
+"roof_top_01": {
+    "default": {
+        "approaching": {
+            "neutral": ["You climb up onto the rooftop.", ],
+        },
+        "at_entity": [{
+            "neutral": ["The city stretches out before you.","Your gaze stretches out onto the city.", "You look down at the city."],
+
+        },
+        {"bad": ["A lurch of vertigo hits you.", "It makes you slightly nauseous.", "You feel a pang of fear as you imagine falling."],
+            "good": ["The rooftop offers a stunning view.", "The view from here is breathtaking."],},
+        {"neutral": ["Multiple paths from here lead to different areas of the city... \n *turn back* "]},
+        ],
+        "leaving": {
+            "neutral": ["You climb back down."],
+        },
+        "times": {},
+        #GREAT PLACE FOR WEATHER!!!!
+        "weather": {"sun": ["The roof has special weather text"],
+                    "rain": ["The roof has special weather text"]
+                    },
+        "tags": ["urban"],
+        "connections": {
+            "fire_escape_01": {
+                "neutral": ["The fire escape leads back down to the alley."],
+            }
+        }
+    }
+},
+
+"alley_07": {
+    "default": {
+        "approaching": {
+        },
+        "at_entity": {
+            "neutral": ["From here, the alley continues towards the residential area. \n *turn back*"],
+        },
+        "leaving": {
+            "neutral": ["You turn back."],
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "alley_06": {
+                "neutral": ["The alley leads back the way you came."],
+            }
+        }
+    }
+},
+
+
 }
 
 

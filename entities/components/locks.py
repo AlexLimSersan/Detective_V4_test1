@@ -38,9 +38,7 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
     def __init__(self, id, name, key, game_state, entity_state, is_outdoors, lock_type, outside, is_locked = True, lock_descriptions = None, ):
         super().__init__(id, name, game_state, entity_state, is_outdoors, lock_type, outside, is_locked, None)
         self.key = key #id for key needed to open from lock_side
-        ent_logger.info(f"lock desc = {lock_descriptions}")
         self.descriptions = Descriptions(id, name, entity_state, game_state, lock_descriptions, is_outdoors)
-        ent_logger.info(f"lock desc = {lock_descriptions}")
         self.default_descriptions = {
             "outside_locking": "You turn the key, locking it.",
             "outside_unlocking": "You turn the key. It unlocks.",
@@ -52,7 +50,6 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
 
             "already_locked": "It's already locked.",
             "already_unlocked": "It's already unlocked.",
-
 
             "outside_locked": "It's locked. The keyhole faces you.",
             "outside_unlocked": "It's unlocked.",
@@ -99,7 +96,9 @@ class KeyLock(LockMechanism): #only keylocks for now. maybe padlocks later
 
         if player_side == self.outside:
             command_id = self.game_state.player.ask_inv_type(inv_type="key", ui=ui)
-            if command_id != self.key and command_id:
+            #if not command_id:
+
+            if command_id != self.key:
                 text = self.get_description("key_dont_fit")
                 ui.display(text)
                 return

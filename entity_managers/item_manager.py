@@ -91,7 +91,6 @@ class Item_Manager(Entity_Manager):
                 #CHECK SPAWN_CONDITIONS
                 if self.check_conditions(spawn_data.get('conditions', {}), item_id, "spawn", spawn_locations):
 
-
                     self.game_state.location_manager.spawn_entities(self.entities[item_id], spawn_locations)
                     ent_logger.info(f"Spawning item {item_id} in all {spawn_locations} \nwith state {self.entities[item_id].entity_state}")
 

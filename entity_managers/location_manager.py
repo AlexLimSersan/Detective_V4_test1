@@ -66,7 +66,7 @@ class Location_Manager(Entity_Manager):
         if not isinstance(spawn_loc_ids, list):
             spawn_loc_ids = [spawn_loc_ids]
         for id in spawn_loc_ids:
-            loc_obj = self.get_entity(id) #or item manager
+            loc_obj = self.get_entity(id) or self.game_state.item_manager.get_entity(id) #loc or item accept it
             loc_obj.add_entity(mobile_entity)
             ent_logger.info(f"spawning {mobile_entity.id} in {loc_obj.id}")
 
