@@ -42,7 +42,7 @@ class Item(Mobile_Entity):
         return "default"
     def loop(self, ui):
         #approach and leave desc already shown
-        ui.display(self.descriptions.set_scene())
+        ui.display(self.descriptions.set_scene()) #have to pass entities present?!?!?!?
         while True:
             actions = self.get_options()
             ui.display_menu_type_2(options = actions, title=self.name)

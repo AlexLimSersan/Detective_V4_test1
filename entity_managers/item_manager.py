@@ -77,6 +77,12 @@ class Item_Manager(Entity_Manager):
         #spawn entities in locations
         for item_id, item in self.entities.items():
             spawn_data = item.spawn_data
+            locations_always_spawn = spawn_data.get("locations_always_spawn")
+            if locations_always_spawn:
+                self.game_state.location_manager.spawn_entities(self.entities[item_id], locations_always_spawn)
+                ent_logger.info(
+                    f"Spawning item {item_id} in all {locations_always_spawn} \nwith state {self.entities[item_id].entity_state}")
+            #PROCEED AS NORMAL WITH THE REGULAR DATSET
             #get the locations first so you can pass it to the stat tracker.
             number_to_spawn = spawn_data.get("count", 1)
 
@@ -89,6 +95,9 @@ class Item_Manager(Entity_Manager):
             #CHECK FREQUENCY:
             if random.random() < self.entities[item_id].spawn_frequency: #default vs custom spawn frequency handled in entity (makes CLUES vs ITEMS logic easier)
                 #CHECK SPAWN_CONDITIONS
+                #if conditions_2:
+                    #OR!
+                #else:
                 if self.check_conditions(spawn_data.get('conditions', {}), item_id, "spawn", spawn_locations):
 
                     self.game_state.location_manager.spawn_entities(self.entities[item_id], spawn_locations)

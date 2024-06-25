@@ -43,7 +43,21 @@ item_ent_data = {
                         }
                     }
                 }
+        },
+"bertha_office_closet_01": {
+            "name": "closet",
+            "spawn_data": {
+                "locations": ["bertha_office_01"],
+                "frequency": 1,
+                "count": 1,
+            },
+            "state_data": {},
+            "components": {
+                "name": "closet door",
+                "component_descriptions": {},
+
         }
+    },
     },
 "items": {
     "dumpster_01": {
@@ -60,21 +74,33 @@ item_ent_data = {
         }
     },
 
-    "kitchen_knife_01": { #can be missing, in alley, or cleaned.
-        #but always want in kitchen.
+    "kitchen_knife_01": {
+        #but always want in kitchen. - regular kitchen knife
         "name": "kitchen knife",
         "state_data": {
             "default": {
-                "frequency": 0.8
+                "frequency": 1
             },
-            "cleaned": {
-                "conditions": {"traits": ["knife", "at_bar"]},
-                "frequency": 0.5
-            }
         },
         "spawn_data": {
-            "locations": ["kitchen_01", ""], #i think it should go in order of spawns?!
+            "locations": ["kitchen_01"],
             "frequency": 1,
+            "count": 1,
+        }
+    },
+"murder_knife_01": { #can be missing, in alley, (or returned to kitchen with no one the wiser)
+    #should have exact same desc as kitchen knife -> at bar knife
+    #maybe state could be the murders knife, so the dialogue is conditional or whatever?
+        "name": "bloodied knife",
+        "state_data": {
+            "default": {
+                "frequency": 1
+            },
+        },
+        "spawn_data": {
+            "locations": ["dumpster_01", "dead_end_01"],
+            "conditions": {"traits": ["knife", "at_bar"]},
+            "frequency": 0.8,
             "count": 1,
         }
     },
@@ -84,10 +110,27 @@ item_ent_data = {
         "default": {
             "frequency": 0.8
         },
-
+        "loaded": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["bertha", "gun"]},
+        }
     },
     "spawn_data": {
-        "locations": ["bertha_office_01"],
+        "locations": ["bertha_office_drawer_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"bullets_01": {
+    "name": "bullets",
+    "state_data": {
+        "default": {
+            "frequency": 0.8
+        },
+    },
+    "spawn_data": {
+        "locations": ["bertha_office_drawer_01"],
+        "conditions": {"traits": ["bertha", "gun"]},
         "frequency": 1,
         "count": 1,
     }
@@ -99,11 +142,13 @@ item_ent_data = {
             "frequency": 0.8
         },
         "opened": {
-
+            "frequency": 0.8,
+            "conditions": {"traits": ["bertha", "rum"]},
         }
     },
     "spawn_data": {
-        "locations": ["bar_01", "lounge_01"],
+        "locations_always_spawn": ["bertha_office_01"],
+        "locations": ["bar_01", "backroom_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -114,48 +159,108 @@ item_ent_data = {
         "default": {
             "frequency": 0.8
         },
-        "opened": {
-
+        "opened": { #should have at least one open
+            "frequency": 0.8,
+            "conditions": {"traits": ["at_bar", "whiskey"]},
         }
     },
     "spawn_data": {
-        "locations": ["lounge_01", "porch_01"],
-        "frequency": 1,
-        "count": 1,
-"conditions": {"traits": ["bertha"]}
+        "locations": ["bar_01", "backroom_01", "bar_01"],
+        "frequency": 0.6,
+        "count": 3,
     }
 },
 "matches_01": {
     "name": "engraved matchbook",
     "state_data": {
         "default": {
+            "frequency": 0.8,
+        },
+        "used": {
+            "frequency": 0.8,
+        }
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["bertha_office_01", "bar_01"],
+        "locations": ["porch_01"],
+        "frequency": 0.8,
+        "count": 1,
+        "conditions": {"traits": ["bertha"]}
+    }
+},
+"matches_02": {
+    #CAN HAVE A DIALOGUE ID SYSTEM -> .GET DIALOGUE ID, ENT_ID ; so can have multiple spawning conditions, under the same name.
+    "name": "brown matchbook",
+    "state_data": {
+        "default": {
+            "frequency": 0.8
+        },
+        "used": {
+            "frequency": 0.8
+        }
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["office_trash_01"],
+        "locations": ["stage_02", "porch_01"],
+        "frequency": 0.8,
+        "count": 1,
+    }
+},
+"office_trash_01": {
+    "name": "trash can",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": [],
+        "locations": ["bertha_office_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"pipe_01": {
+    "name": "metal pipe",
+    "state_data": {
+        "default": {
             "frequency": 0.8
         },
 
     },
     "spawn_data": {
-        "locations": ["lounge_01", "porch_01"],
-        "frequency": 1,
+        "locations": ["alcove_01"],
+        "frequency": 0.6,
         "count": 1,
-        "conditions": {"traits": ["bertha"]}
     }
 },
+"murder_pipe_01": {
+        "name": "bloody pipe",
+        "state_data": {
+            "default": {
+                "frequency": 1
+            },
+        },
+        "spawn_data": {
+            "locations": ["dumpster_01", "dead_end_01"],
+            "conditions": {"traits": ["blunt"]},
+            "frequency": 1,
+            "count": 1,
+        }
+    },
 "apple_01": {
     "name": "apple",
     "state_data": {
         "default": {
             "frequency": 0.8
         },
-        "rotten": {
-
-        }
     },
     "spawn_data": {
-        "locations": ["kitchen_01", "backroom_01", "stage_02"],
-        "frequency": 1,
-        "count": 2,
+        "locations": ["kitchen_01", "backroom_01", "stage_02", "dumpster_01", "dead_end_01"],
+        "frequency": 0.8,
+        "count": 3,
     }
+},
+
 }
-
-
-}}
+}

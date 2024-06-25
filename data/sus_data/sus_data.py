@@ -38,17 +38,17 @@ sus_ent_data = {
     },
     "gibbs_01": {
         "name": "gibbs",
-        "profile":{
+        "profile": {
             "murderer": ["gibbs"],
             "weapon_type": ["knife", "gun", "blunt"],
             "fight_type": ["strong", "weak"],
             "outfit_type": ["leather", "denim"],
-            "smoke_type": ["cigs", "tobacco", "none"],
+            "smoke_type": ["none"],
             "access_to": ["bar"],
-            "match_type": ["new_matches", "old_matches", "none"],
-            "drink_type": ["whiskey", "rum", "none"],
-            "hair_type": ["hair", "bald"],
-            "shoe_type": ["shoes", "boots"],
+            "match_type": ["none"],
+            "drink_type": ["whiskey", "none"],
+            "hair_type": ["bald"],
+            "shoe_type": ["shoes"],
         },
         "routine": { #routine management here
             "default": { #can have different states

@@ -10,7 +10,7 @@ class Hallway(Location):
         self.direction_order = {
                     #add more ordered hallway types here. key is not used in code, so just name as desired.
                     "pub hallway": ["hallway_01", "hallway_02", "hallway_03", "hallway_04"],
-                    "alleyway": ["cab_01", "alley_01", "alley_02", "alley_03", "crime_scene_01", "alley_04", "alley_05", "alley_06", "alley_07", "alley_08"]
+                    "alleyway": ["cab_01", "alley_01", "alley_02", "alley_03", "crime_scene_01", "alley_04", "dead_end_01", "alley_05", "alley_06", "alley_07", "alley_08"]
                 }
 
     def get_directional_locations(self):
