@@ -14,6 +14,8 @@ class Game_State:
         self.event_system = None
         #player
         self.player = None
+        #handler
+        self.current_handler = None
 
     def initialize(self, stat_tracker, suspect_manager, location_manager, item_manager,
                    vibe_system, weather_system, time_system, event_system, player):

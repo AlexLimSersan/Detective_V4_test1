@@ -20,17 +20,8 @@ class Loc_Descriptions(Descriptions):
         scene_description = []
         scene_description.append(super().set_scene())
         # Could prob combine mobile ents, but whateva
-        for suspect_id, suspect_data in suspects_present.items():
-            sus_desc = suspect_data.descriptions.get_description("at_scene")
-            if sus_desc:
-                scene_description.append(sus_desc)
-            desc_logger.debug(f"Loc_Desc/set_scene(): got sus desc AT SCENE :{sus_desc}")
+        scene_description.append(super().get_at_scene(suspects_present, items_present))
 
-        for item_id, item_data in items_present.items():
-            item_desc = item_data.descriptions.get_description("at_scene")
-            if item_desc:
-                scene_description.append(item_desc)
-            desc_logger.debug(f"Loc_Desc/set_scene(): got item desc AT SCENE : {item_desc}")
 
         scene_description.append(self.get_connection_descriptions(connections))
 

@@ -129,8 +129,13 @@ class UI:
         #for text in options ids to names self.game_state
         if isinstance(options, dict):
             for option, description in options.items():
-                description = ' '.join(self.handle_topic_display_logic(word) for word in description.split())
-                print(f"- {ids_to_names(option, self.game_state).capitalize()}{f": {ids_to_names(description, self.game_state)}" if description else "..."}")
+
+                if description == "_None":
+                    print(
+                        f"- {ids_to_names(option, self.game_state).capitalize()}")
+                else:
+                    description = ' '.join(self.handle_topic_display_logic(word) for word in description.split())
+                    print(f"- {ids_to_names(option, self.game_state).capitalize()}{f": {ids_to_names(description, self.game_state)}" if description else "..."}")
         elif isinstance(options, list):
             for option in options:
                 print(f"- {ids_to_names(option, self.game_state).capitalize()}")

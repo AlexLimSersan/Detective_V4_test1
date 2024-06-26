@@ -3,6 +3,8 @@ weather_data = {
     #RAIN: Light rain, wind, grey. Occasional thunder but nothing crazy.
     #STORM: a fuckn STORM!!! on some crazy weather shit. should be fairly rare and more likely to happen from rain, not just sun.
     #later, have transition texts here.
+
+
     "sun": {
         "default": {
             "morning": ["The early sun makes you squint.", "It's a beautiful day.", "It's bathed in the morning sun.", "The early sun peeks over the horizon.",
@@ -188,16 +190,44 @@ weather_data = {
                 "Soft, diffuse light comes through the blinds.",
                 "Muffled thunder rumbles in the distance.",
                 "Rainfall fills the background ambiance.",
+                "The window panes shake with the wind."
                         ],
             "afternoon": [
+                "A dull glow comes through the windows.",
+                "The wind howls from outside.",
+                "Raindrops race down the windowpanes.",
+                "The window rattles, the rain drums on.",
+                "Rain patters against the windows.",
+                "Soft, diffuse light comes through the blinds.",
+                "Muffled thunder rumbles in the distance.",
+                "Rainfall fills the background ambiance.",
+                "The window panes shake with the wind.",
 
-                          ],
+            ],
             "evening": [
+                "A dull glow comes through the windows.",
+                "The wind howls from outside.",
+                "Raindrops race down the windowpanes.",
+                "The window rattles, the rain drums on.",
+                "Rain patters against the windows.",
+                "Soft, diffuse light comes through the blinds.",
+                "Muffled thunder rumbles in the distance.",
+                "Rainfall fills the background ambiance.",
+                "The window panes shake with the wind.",
 
-                        ],
+            ],
             "night": [
+                "A dull glow comes through the windows.",
+                "The wind howls from outside.",
+                "Raindrops race down the windowpanes.",
+                "The window rattles, the rain drums on.",
+                "Rain patters against the windows.",
+                "Soft, diffuse light comes through the blinds.",
+                "Muffled thunder rumbles in the distance.",
+                "Rainfall fills the background ambiance.",
+                "The window panes shake with the wind.",
 
-                      ]
+            ]
         },
         "waterfront": {
             "morning": ["Grey skies over the water give the morning a serene, calm feel."],

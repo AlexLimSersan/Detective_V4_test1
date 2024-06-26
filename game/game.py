@@ -8,15 +8,24 @@ class Game:
     def __init__(self, game_state, ui):
         self.game_state = game_state
         self.ui = ui
+        self._current_handler = None
 
+    @property
+    def current_handler(self):
+        return self._current_handler
+
+    @current_handler.setter
+    def current_handler(self, handler_name):
+        self._current_handler = handler_name
+        self.game_state.current_handler = handler_name
     def run(self):
         # intro sequence
         self.exploration_handler()  # time/effects directly change gamestate; causes effects
+
         #outro sequence
 
-
-
     def exploration_handler(self):
+        self.current_handler = "location"
         while True:
             #only locations break loop by returning command - is that true?
 
@@ -44,6 +53,7 @@ class Game:
                 raise ValueError(f"validated command with no handler: {matched_command}")
 
     def dialogue_handler(self, command_id):
+        self.current_handler = "suspect"
         try:
             current_suspect = self.game_state.suspect_manager.get_entity(command_id)
             current_suspect.start_loop(self.ui)
@@ -52,6 +62,7 @@ class Game:
             raise ValueError("ERROR: ID passed to dialogue handler, no matching object")
 
     def item_handler(self, command_id):
+        self.current_handler = "item"
         try:
             current_item = self.game_state.item_manager.get_entity(command_id)
             current_item.start_loop(self.ui)

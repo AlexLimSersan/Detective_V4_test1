@@ -188,6 +188,20 @@ item_ent_data = {
         "conditions": {"traits": ["bertha"]}
     }
 },
+"office_trash_01": {
+    "name": "trash can",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": [],
+        "locations": ["bertha_office_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
 "matches_02": {
     #CAN HAVE A DIALOGUE ID SYSTEM -> .GET DIALOGUE ID, ENT_ID ; so can have multiple spawning conditions, under the same name.
     "name": "brown matchbook",
@@ -203,20 +217,6 @@ item_ent_data = {
         "locations_always_spawn": ["office_trash_01"],
         "locations": ["stage_02", "porch_01"],
         "frequency": 0.8,
-        "count": 1,
-    }
-},
-"office_trash_01": {
-    "name": "trash can",
-    "state_data": {
-        "default": {
-            "frequency": 1
-        },
-    },
-    "spawn_data": {
-        "locations_always_spawn": [],
-        "locations": ["bertha_office_01"],
-        "frequency": 1,
         "count": 1,
     }
 },

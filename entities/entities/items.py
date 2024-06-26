@@ -1,6 +1,6 @@
 
 from entities.entities.base import Mobile_Entity
-
+from entities.entities.suspects import Suspect
 from config.settings import ITEM_SPAWN_FREQUENCY, CLUE_SPAWN_FREQUENCY, EXIT_COMMANDS, ITEM_STATE_FREQUENCY
 from config.logging_config import ent_logger
 from utilities.command_utils import match_command_to_option
@@ -19,20 +19,24 @@ class Item(Mobile_Entity):
         self.components = components
         self.spawn_frequency = spawn_frequency
         self.entity_state = self.determine_state() #this is actually irrelevant outside of initialization due to iterate states?
+
+        self.suspects_present = {}
         self.items_present = {}
 
     def remove_entity(self, entity):
         """Remove entity from location"""
-        if entity.id in self.items_present:
+        if entity.id in self.suspects_present:
+            del self.suspects_present[entity.id]
+        elif entity.id in self.items_present:
             del self.items_present[entity.id]
         else:
             raise ValueError(f"Entity {entity.id} not found")
 
     def add_entity(self, entity_obj):
-        if entity_obj.id not in self.items_present:
+        if isinstance(entity_obj, Suspect):
+            self.suspects_present[entity_obj.id] = entity_obj
+        elif isinstance(entity_obj, Item):
             self.items_present[entity_obj.id] = entity_obj
-        else:
-            ent_logger.warning(f"ENTITY OBJECT {entity_obj.id} already in {self.id}")
 
     def determine_state(self):
         for state, data in self.state_data.items():
@@ -42,7 +46,8 @@ class Item(Mobile_Entity):
         return "default"
     def loop(self, ui):
         #approach and leave desc already shown
-        ui.display(self.descriptions.set_scene()) #have to pass entities present?!?!?!?
+
+        ui.display(self.descriptions.set_scene(self.suspects_present, self.items_present))
         while True:
             actions = self.get_options()
             ui.display_menu_type_2(options = actions, title=self.name)
@@ -69,6 +74,9 @@ class Item(Mobile_Entity):
 
     def get_options(self):
         actions = {}
+        if self.items_present:
+            for item_id, obj in self.items_present.items():
+                actions[item_id] = "_None"
         if self.components:
             actions.update(self.components.get_options())
         actions["return"] = ""
@@ -113,8 +121,10 @@ class Drawer(Item):
 
     def get_options(self):
         actions = {}
-        #if self.components.is_open:
-            #inside_drawer_options =
+        if self.components.is_open:
+            if self.items_present:
+                for item_id, obj in self.items_present.items():
+                    actions[item_id] =  "_None"
         actions.update(self.components.get_options())
         actions["return"] = ""
         return actions  # ITERATE OVER ITEMS PRESENT! THEN DRAWERS OVERWRITES IT COMPONENTS IS OPEN

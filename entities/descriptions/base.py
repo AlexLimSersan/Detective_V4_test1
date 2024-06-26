@@ -39,6 +39,7 @@ class Descriptions(ABC):
         desc_logger.debug(f"base descriptions - fetch random desc, type = {description_type}, dic = {descriptions_dic}")
         descriptions = self.handle_description_keying(description_type, descriptions_dic, optional_key)
         # ITERATE AMBIANCE KEYS (returns input if not found)
+        desc_logger.debug(f"base descriptions - ITERATING descriptions {descriptions}")
         descriptions = iterate_vibe_keys(descriptions, self.game_state.vibe_system.ranked_keys)
         if descriptions:
             if not isinstance(descriptions, list):
@@ -62,14 +63,18 @@ class Descriptions(ABC):
                 temp_dic = descriptions_dic.get(self.game_state.player.location_history[-2].id)
             elif description_type in ["leaving", "connections", "at_scene"]:  # leaving to
                 temp_dic = descriptions_dic.get(self.game_state.player.current_location.id)
+                desc_logger.debug(f"at scene temp = {temp_dic}")
+                if optional_key:
+                    temp_dic = descriptions_dic.get(optional_key, temp_dic)
             elif optional_key:
-                temp_dic = descriptions_dic.get(optional_key)
+                temp_dic = descriptions_dic.get(optional_key, temp_dic)
             else:
                 desc_logger.warning(f"base/handle description keying(): unaccounted description type {description_type}; \n dic = {descriptions_dic}")
         if not temp_dic:
             temp_dic = descriptions_dic
+            desc_logger.debug(f"at scene temp = {temp_dic}")
         descriptions_dic = check_nested_weather_or_time_keys(temp_dic, self.game_state)
-
+        desc_logger.debug(f"RETURNING = {descriptions_dic}")
         return descriptions_dic
 
     def set_scene(self, *args, **kwargs):
@@ -86,6 +91,21 @@ class Descriptions(ABC):
             scene_description.append(desc_decor)
         return scene_description
 
+    def get_at_scene(self, suspects_present, items_present, optional_key = None):
+        scene_description = []
+        desc_logger.warning(f"opt {optional_key}")
+        for suspect_id, suspect_data in suspects_present.items():
+            sus_desc = suspect_data.descriptions.get_description("at_scene", optional_key=optional_key)
+            if sus_desc:
+                scene_description.append(sus_desc)
+            desc_logger.debug(f"Loc_Desc/set_scene(): got sus desc AT SCENE :{sus_desc}")
+
+        for item_id, item_data in items_present.items():
+            item_desc = item_data.descriptions.get_description("at_scene", optional_key=optional_key)
+            if item_desc:
+                scene_description.append(item_desc)
+            desc_logger.debug(f"Loc_Desc/set_scene(): got item desc AT SCENE : {item_desc}")
+        return scene_description
     def decorate_description_tags(self):
         desc_decorations = []
         # can have frequency logic here

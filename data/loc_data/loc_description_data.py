@@ -186,9 +186,7 @@ loc_description_data = {
             "night": ["The bar is at its peak, the noise and energy almost palpable."]
         },
         "weather": {
-            "rain": ["The rain mixes with the chatter.", "The window panes shake with the howling wind."],
-            "sun": ["Sunlight streams through the windows, casting warm glows on the patrons."],
-            "grey": ["The wind blows against the window, rattling it."]
+
         },
         "tags": ["indoors"],
         "connections": {
@@ -272,7 +270,7 @@ loc_description_data = {
 "stage_02": {
     "default": {#no stage activity
         "approaching": {
-            "stage_01": ["You walk towards the back."],
+            "stage_01": [""],
             "hallway_01": ["You hunch as the ceiling lowers."],
         },
         "at_entity": {
