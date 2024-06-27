@@ -36,7 +36,7 @@ loc_description_data = {
             "bad": ['The cabbie smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror. "Where to?"' ,'The driver looks indifferent to your presence.']
         },
         "times": {
-            "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans off to the side."],
+            "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans his head on the window.", "He grips the steering wheel."],
                         "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired."]},
             "afternoon": {"neutral": ["He rubs his eyes.", "He stretches in his seat.", "He leans off to the side.", "He shifts in his seat."],
                         "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired."]},
@@ -696,7 +696,28 @@ loc_description_data = {
     }
 },
 
-"dead_end_01": {
+"dead_end_01": { #archway
+    "default": {
+        "approaching": {
+            "neutral": ["You pass under."]
+        },
+        "at_entity": {
+            "neutral": [""],
+        },
+        "leaving": {
+            "neutral": [""],
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "alley_04": {
+                "neutral": [""],
+            }
+        }
+    }
+},
+"dead_end_02": {
     "default": {
         "approaching": {
         },

@@ -108,9 +108,6 @@ class Game_Manager:
         self.game = Game(self.game_state, self.ui)
 
 
-
-
-
     def run(self):
         self.game.run()
         self.game_state.stat_tracker.dump(self.ui)

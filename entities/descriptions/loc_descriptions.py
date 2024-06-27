@@ -39,9 +39,9 @@ class Loc_Descriptions(Descriptions):
                 if obj:
                     conn_desc.append(obj.descriptions.get_description("connections"))
 
-                    desc_logger.warning(f"Loc_Desc/set_scene():got connected loc desc {connection_id}; {conn_desc}\n {player_last_loc.id} \n {connections}")
+                    desc_logger.debug(f"Loc_Desc/set_scene():got connected loc desc {connection_id}; {conn_desc}\n {player_last_loc.id} \n {connections}")
                 else:
-                    desc_logger.warning(f"no obj for connection descriptions?")
+                    desc_logger.warning(f"no obj for {connections} \n {connection_id} ?")
         return conn_desc
 
 class Door_Descriptions(Loc_Descriptions): #difference is only for setting scene/at entity, handles door open/close / lid logic

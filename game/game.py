@@ -55,7 +55,6 @@ class Game:
                 raise ValueError(f"validated command with no handler: {matched_command}")
 
     def dialogue_handler(self, command_id):
-
         try:
             current_suspect = self.game_state.suspect_manager.get_entity(command_id)
             current_suspect.start_loop(self.ui)

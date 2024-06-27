@@ -24,7 +24,7 @@ class Cab(Location):
     def start_loop(self, ui):
         ui.beat(2)
         # buffer towards cab?!?!?
-        ui.display(self.descriptions.set_scene(self.suspects_present, self.items_present, self.game_state.player.location_history[-2].id))
+        ui.display(self.descriptions.set_scene(suspects_present=self.suspects_present, items_present=self.items_present, connections=[self.game_state.player.location_history[-2].id]))
         matched_command = self.loop(ui)  # dialogue or interactions
         return matched_command
 
@@ -44,6 +44,7 @@ class Cab(Location):
             result = self.cab_loc_dic.get(result, result)
             if result:
                 if result == "EXIT_GAME":
+                    self.drive(result, ui)
                     return result
                 #regular processing:
                 if result != self.game_state.player.location_history[-2].id:
@@ -91,4 +92,5 @@ class Cab(Location):
                 ui.beat(3)
             else:
                 ui.beat()
-        ui.stall(text = f"\nInput any to exit cab...")
+        if result != "EXIT_GAME":
+            ui.stall(text = f"\nInput any to exit cab...")

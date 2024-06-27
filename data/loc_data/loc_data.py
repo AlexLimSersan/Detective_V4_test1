@@ -1,5 +1,5 @@
 
-loc_ent_data = {
+loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD BE ABLE TO FIGURE OUT THE DRAWER THING M8
     "locations": {
         "cab_01": {
             "name": "cab",
@@ -93,8 +93,17 @@ loc_ent_data = {
         },
         # ALLEY
 "dead_end_01": {
-            "name": "corner", #dumpster, possible weapon, etc secret mobster or occult lore?!
-            "connections": ["alley_04"],
+            "name": "archway", #dumpster, possible weapon, etc secret mobster or occult lore?!
+            "connections": ["alley_04", "dead_end_02"],
+            "is_outdoors": True,
+"direction_labels": {
+                 "forward": "down passage",
+                 "backward": "towards the cab"
+            },
+        },
+"dead_end_02": {
+            "name": "dead end", #dumpster, possible weapon, etc secret mobster or occult lore?!
+            "connections": ["dead_end_01"],
             "is_outdoors": True,
 "direction_labels": {
                  "forward": "down alley",
@@ -226,7 +235,7 @@ loc_ent_data = {
             },
         },
 "alley_07": { #the alley continues to the residential area. turn back...
-            "name": "alleyway",
+            "name": "backstreet",
             "connections": ["alley_06"],
             "is_outdoors": True,
             "direction_labels": {
