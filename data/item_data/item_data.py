@@ -8,7 +8,7 @@ item_ent_data = {
     "clues": {},
     "drawers": {
         "bertha_office_drawer_01": {
-            "name": "oak desk",
+            "name": "desk",
             "spawn_data": {
                 "locations": ["bertha_office_01"],
                 "frequency": 1,
@@ -17,7 +17,9 @@ item_ent_data = {
             "state_data": {},
             "components": {
                 "name": "drawer",
-                "component_descriptions": {},
+                "component_descriptions": {"default": {"opening":["You pull the drawer open."], "closing":["You push the drawer closed."],
+                                                       "closed": ["The drawer is closed."], "opened":["The drawer hangs open."],
+                                                       }},
                 "lock_mechanism": {
                     "id": "brass_lock_01",
                     "name": "brass lock",
@@ -44,7 +46,7 @@ item_ent_data = {
                     }
                 }
         },
-"bertha_office_closet_01": {
+    "bertha_office_closet_01": {
             "name": "closet",
             "spawn_data": {
                 "locations": ["bertha_office_01"],
@@ -54,12 +56,56 @@ item_ent_data = {
             "state_data": {},
             "components": {
                 "name": "closet door",
-                "component_descriptions": {},
+                "component_descriptions": {"default": {
+                    "opening":["The doors creak open.","The closet opens.",
+                               "The hinges grate.", "The hinges groan."],
+                    "closing":["The doors swing shut.",
+                               "The hinges grate.", "The hinges groan.",],
+                }},
 
         }
     },
-    },
+},
 "items": {
+#   bertha
+"bertha_clothes_01": {
+            "name": "jackets",
+            "state_data": {
+                "default": { #normal
+                    "frequency": 0.8
+                },
+                "cleaned": { #cleaned,
+                    "frequency": 0.8,
+                    "conditions": {"traits": ["bertha"]},
+                },
+            },
+            "spawn_data": {
+                "locations": ["bertha_office_closet_01"],
+                "frequency": 1,
+                "count": 1,
+            },
+        },
+"bertha_footwear_01": {
+            "name": "footwear",
+            "state_data": {
+                "default": { #normal
+                    "frequency": 0.8
+                },
+                "cleaned_shoes": {
+                    "frequency": 0.8,
+                    "conditions": {"traits": ["bertha", "shoes"]},
+                },
+                "cleaned_boots": {
+                    "frequency": 0.8,
+                    "conditions": {"traits": ["bertha", "boots"]},
+                }
+            },
+            "spawn_data": {
+                "locations": ["bertha_office_closet_01"],
+                "frequency": 1,
+                "count": 1,
+            },
+        },
     "dumpster_01": {
         "name": "dumpster",
         "state_data": {
@@ -124,13 +170,12 @@ item_ent_data = {
 "bullets_01": {
     "name": "bullets",
     "state_data": {
-        "default": {
+        "default": { # closed pack
             "frequency": 0.8
         },
     },
     "spawn_data": {
         "locations": ["bertha_office_drawer_01"],
-        "conditions": {"traits": ["bertha", "gun"]},
         "frequency": 1,
         "count": 1,
     }
@@ -229,6 +274,7 @@ item_ent_data = {
 
     },
     "spawn_data": {
+        "conditions_despawn": {"traits": ["blunt"]},
         "locations": ["alcove_01"],
         "frequency": 0.6,
         "count": 1,

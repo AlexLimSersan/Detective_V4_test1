@@ -77,6 +77,7 @@ class Mobile_Entity(Entity):
         self.add_player_topic()
         self.loop(ui) #dialogue or interactions
         ui.display(self.descriptions.get_description("leaving"))
+        ui.beat()
 
     def add_player_topic(self):
         # FIND OBJECT AND ADD TO PLAYER INV

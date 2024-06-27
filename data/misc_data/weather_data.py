@@ -20,7 +20,7 @@ weather_data = {
                           "Sharp shadows are cast from the overhead sun.",
 
                           "A refreshing breeze blows by.", "The wind howls.", "Wind rushes by your ear.", "A gust of wind catches some debris.",
-                          "Rain sprinkles down in a fine mist."
+                          "Rain sprinkles down in a fine mist.",
                           ],
             "evening": ["The setting sun bathes everything in a soft purple haze.", "Sunlight basks your surroundings amber.",
                         "The sky is a beautiful mix of orange and purple.","The sunset casts a haze of purple hues.",
@@ -30,29 +30,29 @@ weather_data = {
                         "The sun makes you squint.",
 
                         "The wind howls.", "An evening breeze blows by...", "Dirt and dust spiral briefly with the wind.",
-                        "A gust of wind presses your clothes against you.", "The wind thrusts debris towards you, forcing you to squint."
+                        "A gust of wind presses your clothes against you.", "The wind thrusts debris towards you, forcing you to squint.",
 
                         ]
             ,
             "night": ["It's a cold night.", "Stars twinkle brightly above.", "It's dark out.", "The night sky looms overhead.", "Pale moonlight basks your surroundings",
                         "The moon hangs above."
                       "Air rushes by your ear.", "Wind howls in the distance.", "A strong breeze makes your clothes flutter.",
-                      "A sudden wind catches debris in a small vortex.", "A faint breeze blows against you."
+                      "A sudden wind catches debris in a small vortex.", "A faint breeze blows against you.",
 
                       ]
         },
         "urban": {
             "morning": ["The surrounding buildings cast long shadows.", "The morning sun patterns the walls.",
-                        "The sun peeks behind rooftops.", "Dust floats by you, caught in a beam of light...", "Patches of sun are caught on the floor.", "Motes of dust idly float around..."
+                        "The sun peeks behind rooftops.", "Dust floats by you, caught in a beam of light...", "Patches of sun are caught on the floor.", "Motes of dust idly float around...",
 
                         ],
             "afternoon": ["Sunlight beats down directly overhead.","Concrete heats in the noon sun.",
-                          "The noon sun is unrelenting.", "Clouds float in front of the sun. It's noticeably colder."
+                          "The noon sun is unrelenting.", "Clouds float in front of the sun. It's noticeably colder.",
 
                           ],
             "evening": ["The surrounding buildings cast long shadows.", "The evening sun patterns the walls...",
                         "The sun hides behind concrete.", "Motes of dust float by, caught in a beam of light...",
-                        "Patches of the sunset are caught on surrounding walls.", "Motes of dust idly float around..."
+                        "Patches of the sunset are caught on surrounding walls.", "Motes of dust idly float around...",
 
                         ],
             "night": [""]
@@ -60,15 +60,15 @@ weather_data = {
         "indoors": {
             "morning": ["Lances of sunlight pierce the blinds.", "Motes of dust float around, caught in a beam of sunlight.",
                         "A warm glow comes from the window.", "Streams of sunlight fill the room.", "Bands of light filter in through the blinds.",
-                        "The morning sun makes the dust in the air visible.", "The morning sun filters through the window..."
-                        "A draft of air breezes by..."
+                        "The morning sun makes the dust in the air visible.", "The morning sun filters through the window...",
+                        "A draft of air breezes by...",
 
                         ],
-            "afternoon": ["Bright light comes through the blinds.", "Rays of sunlight streak through the window.", "The sun highlights the dust, drifting aimlessly about."
+            "afternoon": ["Bright light comes through the blinds.", "Rays of sunlight streak through the window.", "The sun highlights the dust, drifting aimlessly about.",
 
                           ],
             "evening": ["Rows of sunlight pierce through the blind.","A blend of purple and orange hues bathe the room.",
-                        "Sunlight sneaks in through the blinds, casting sharp shadows.", "Rays from the sun catch the floating dust."
+                        "Sunlight sneaks in through the blinds, casting sharp shadows.", "Rays from the sun catch the floating dust.",
 
                         ],
             "night": ["Moonlight filters in through the window.", "Faint moonlight casts a gentle glow across the room.",
@@ -130,7 +130,7 @@ weather_data = {
                     
                     "The clouds mask the sunset...", "The sky darkens with the setting sun...",  # transition?
                     "A chill sets in...","The sun slowly inches under the horizon...","The sun hides itself..",
-                    "The evening air grows colder", "The sunset is hides behind a veil of grey."
+                    "The evening air grows colder", "The sunset hides behind a veil of grey."
 
                         ],
             "night": [
@@ -148,8 +148,8 @@ weather_data = {
                 "Puddles ripple in the rain."
 
                 "The night is cold.", "It's chilly.", "It's dark without the moonlight.",
-                "The moon hides behind the clouds.", "The moon peeks through fleeting gaps in the clouds."
-                "Fleeting gaps in the clouds lets you see the moon.", "Stars are briefly visible as the clouds drift by."
+                "The moon hides behind the clouds.", "The moon peeks through fleeting gaps in the clouds.",
+                "Fleeting gaps in the clouds lets you see the moon.", "Stars are briefly visible as the clouds drift by.",
 
                       ]
         },

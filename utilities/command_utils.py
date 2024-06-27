@@ -21,8 +21,7 @@ def handle_command_id_list_logic(command_ids, game_state):
     possible_ids = flatten_list(command_ids)
 
     if not possible_ids:
-        raise ValueError(
-            "no possible ids, great.")
+        return
     if len(possible_ids) == 1:
         command_id = possible_ids[0]
         app_logger.debug(f"command_utils.PY/handlecommand_id_list_logic; possible ids {possible_ids}")

@@ -14,7 +14,7 @@ class Loc_Descriptions(Descriptions):
                 also you can definitely REFACTOR DOOR AND LOC DESCRIPTOINS FURTHER!
                 """
 
-    def set_scene(self, suspects_present, items_present, connections):
+    def set_scene(self, suspects_present=None, items_present=None, connections=None, optional_key = None):
         desc_logger.debug(f"Loc_Desc/set_scene(): setting scene with suspects {suspects_present}, items {items_present}, connections {connections}")
 
         scene_description = []
@@ -39,7 +39,7 @@ class Loc_Descriptions(Descriptions):
                 if obj:
                     conn_desc.append(obj.descriptions.get_description("connections"))
 
-                    desc_logger.debug(f"Loc_Desc/set_scene():got connected loc desc {conn_desc}")
+                    desc_logger.warning(f"Loc_Desc/set_scene():got connected loc desc {connection_id}; {conn_desc}\n {player_last_loc.id} \n {connections}")
                 else:
                     desc_logger.warning(f"no obj for connection descriptions?")
         return conn_desc

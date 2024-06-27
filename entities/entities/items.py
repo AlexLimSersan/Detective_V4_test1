@@ -8,6 +8,8 @@ from entities.descriptions.item_descriptions import Item_Descriptions
 import random
 from entities.components.lids import Lid
 from entities.components.locks import KeyLock
+from utilities.general_utils import names_to_ids
+
 class Item(Mobile_Entity):
     # routine hack: event->move mobile entity wherever, then event descriptions-> can be tailored for that location. default is default routine
     def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = ITEM_SPAWN_FREQUENCY, ):
@@ -44,36 +46,68 @@ class Item(Mobile_Entity):
                 if state != "default" and self.game_state.item_manager.check_conditions(data.get("conditions", {}), self.id, "state", state):
                     return state
         return "default"
+
+    def start_loop(self, ui):
+        ui.display(self.descriptions.get_description("approaching", optional_key=self.game_state.current_handler))
+        ui.beat()
+        self.add_player_topic()
+        matched_command = self.loop(ui) #dialogue or interactions
+        ui.display(self.descriptions.get_description("leaving", optional_key=self.game_state.current_handler))
+        ui.beat()
+        return matched_command
+
+    def set_scene(self):
+        scene_desc = []
+        if self.components:
+            comp_desc = self.components.get_description("at_entity")
+            if comp_desc:
+                scene_desc.append(comp_desc)
+        scene_desc.append(self.descriptions.set_scene(self.suspects_present, self.items_present, optional_key=self.id))
+        return scene_desc
+
     def loop(self, ui):
         #approach and leave desc already shown
 
-        ui.display(self.descriptions.set_scene(self.suspects_present, self.items_present))
         while True:
+            ui.display(self.set_scene())
             actions = self.get_options()
             ui.display_menu_type_2(options = actions, title=self.name)
             #you pick up, put down, ??
             command = ui.get_input()
             if self.components:
                 if self.components.process_command(command, ui):
+                    ent_logger.debug(f"components processed {command}")
                     continue
             result = self.process_command(command, ui, actions = actions)
+            if result == "pass":
+                continue
             if result:
                 return result
             ui.bad_input()
 
-    def process_command(self, command_id, ui, actions):
+    def process_command(self, command, ui, actions):
+        command_id = names_to_ids(command, self.game_state)
+        if isinstance(command_id, list):
+            command_id = command_id[0]
         if isinstance(actions, dict):
             actions = list(actions.keys())
+        ent_logger.debug(f"com {command}, com id {command_id}, actions {actions}")
         if command_id in EXIT_COMMANDS:
             return command_id  # game handles switching handlers
-        matched_command, matched = match_command_to_option(command_id, self.game_state, actions = actions)
+        elif command_id in actions:
+            ent_logger.debug(f"command id {command_id} in actions {actions}")
+            if command_id in self.items_present:
+                self.items_present[command_id].start_loop(ui)
+                return "pass"
+        matched_command, matched = match_command_to_option(command, self.game_state, actions = actions)
         if matched:
             if ui.confirm(matched_command):
-                return matched_command
+                return self.process_command(matched_command, ui, actions)
         return None
 
     def get_options(self):
         actions = {}
+
         if self.items_present:
             for item_id, obj in self.items_present.items():
                 actions[item_id] = "_None"
@@ -115,7 +149,7 @@ class Drawer(Item):
             is_open=False,
             lock_mechanism=components.get("lock_mechanism", None)
         )
-
+        self.descriptions.component = self.components
         assert isinstance(self.components, Lid)
 
 

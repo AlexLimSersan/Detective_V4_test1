@@ -1,19 +1,18 @@
 item_description_data = {
 "bertha_office_drawer_01": {
 "default": {
-        "approaching": ["approaching desk "],
+        "approaching": ["You walk up to the desk."],
         "at_scene": {
                 "bertha_office_01": {
-                    "neutral": ["berthas desk is here in the office."],
+                    "neutral": ["The middle of the room hosts a large desk",
+                                "A desk sits in the middle of the room."],
                 },
         },
-        "at_entity": [{
-            "neutral": ["You are atthe desk 1."],
+        "at_entity": { #sturdy oak scratched
+            "neutral": ["Scratches run across the wood grains.", "The surface is coarse and rough.",
+                        "It's quite sturdy.", "The surface pricks your palm.",
+                        "The desk's surface is coarse oak."],
              },
-            {
-            "neutral": ["ou are atthe desk 2."],
-            },
-            ]
     },
 },
 "dumpster_01": {
@@ -93,20 +92,27 @@ item_description_data = {
                 }
             },
             "approaching": {
+                "bertha_office_drawer_01": {
                 "neutral": ["Your fingers curl around the handle.", "The barrel gleams under the light.", "You pick up the revolver."],
+                }
             },
-            "at_entity": {
+            "at_entity": [{
+                "neutral": ["You swing the chamber back.", "You slide the chamber back.",
+                            "The chamber slides back with a click.", "The chamber swings back."],
+            },
+                {
                 "neutral": ["It's not loaded.", "It's empty."],
             },
+            ],
             "leaving": {
-                "neutral": ["You place the revolver back.", "You put it back.", "It makes a clunk as you put it back."],
+                "neutral": ["You place the revolver back.", "You put it back.", "It clunks on the wood."],
             },
             "times": {
             },
             "weather": {
             }
         },
-        "loaded": {
+        "loaded": { #loaded with 3 shots
             "at_scene": {
                 "bertha_office_drawer_01": {
                 }
@@ -114,7 +120,8 @@ item_description_data = {
             "approaching": {
             },
             "at_entity": {
-                "neutral": ["It's loaded, with three shots fired.", "Three bullets are missing from an otherwise full chamber."],
+                "neutral": ["It's loaded, with three shots fired.", "Three bullets are loaded.",
+                            "Three bullets are missing from an otherwise full chamber."],
             },
             "leaving": {
             },
@@ -135,7 +142,7 @@ item_description_data = {
                 "neutral": ["You pick one of the bullets up.", "You pick up one of the bullets."],
             },
             "at_entity": {
-                "neutral": ["It glistens in the light.","It's got some weight to it.","You can see some oil smudges on it. It's been recently handled." ],
+                "neutral": ["It glistens in the light.","It's got some weight to it.","" ],
             },
             "leaving": {
                 "neutral": ["You place the bullet back.", "The bullet rattles as you drop it."],
@@ -146,22 +153,28 @@ item_description_data = {
             }
         },
     },
-    "rum_01": {
+    "rum_01": { #WARM, SWEETT, SYRUP, MOLASSES, CARAMEL, SWEET, fruity? dark, amber,
         "default": { #unsused
             "at_scene": {
                 "bar_01": {
                     "neutral":["A bottle of rum sits atop the bar."],
                 },
                 "bertha_office_01": {
-                    "neutral":["A bottle of rum is on a nearby shelf."],
+                    "sun": {"neutral":["A bottle of rum is caught in the sunlight.","The sun casts a bottle of rum in dramatic lighting.","A bottle of rum is on a nearby shelf."],},
+                    "rain": {"neutral":["A bottle of rum is on a nearby shelf."],},
+                    "storm": {"neutral":["A bottle of rum is on a nearby shelf."],},
+
                 },
                 "backroom_01": {
                     "neutral":["A bottle of rum is on a nearby shelf."],
                 },
             },
             "approaching": {
-                "neutral": ["It's cool and heavy in your hand.",]
-            },
+                    "sun": {"neutral":["It's warm.","The bottle feels warm.", "It's contents glow in the light.","It has a rich, amber glow."],},
+                    "rain": {"neutral":["It's cool and heavy in your hand", "It's cool to the touch"],},
+                    "storm": {"neutral":["It's cool and heavy in your hand", "It's cool to the touch"],},
+
+                },
             "at_entity": {
                 "neutral": ["It hasn't been opened.","The seal is still on, covering the cap."],
             },
@@ -183,12 +196,13 @@ item_description_data = {
                 },
             },
             "approaching": {
-                "neutral": ["It's slightly sticky."],
             },
             "at_entity": {
-                "neutral": ["A cloy, caramel sweetness hits your nose.","It has a dark, sugary scent."],
+                "neutral": ["A cloy, caramel sweetness hits your nose.","It has a dark, sugary scent.",
+                            "The bottle is sticky, with a slight honey scent."],
             },
             "leaving": {
+                "neutral": ["You set the bottle back, it's fragrance lingering."],
             },
             "times": {
             },
@@ -196,7 +210,7 @@ item_description_data = {
             }
         }
     },
-"whiskey_01": {
+"whiskey_01": { #OAK, SPICED, VANILLA, SMOKED OAK ; pale gold #MAYBE RUM AND VODKA IS MORE CONTRASTING
         "default": {#not opened - CAN OPEN TO SMELL IT? WOULD BE EPIC!
             "at_scene": {
                 "bar_01": {
@@ -229,7 +243,7 @@ item_description_data = {
             },
             "approaching": {
             },
-            "at_entity": {
+            "at_entity": { #OAK, SPICED, VANILLA, SMOKED OAK #maybe vodka is more contrasting?
                 "neutral": ["It has a zesty, fruity scent.", "Notes of vanilla mix with a fresh, fruity scent."],
             },
             "leaving": {
@@ -248,7 +262,10 @@ item_description_data = {
                     "neutral": ["A matchbook lies on her desk."],
                 },
                 "porch_01": {
-                    "neutral": ["A matchbook lies on an armrest."],
+                    "rain": {"neutral": ["A matchbook lies soaked on an armrest."],},
+                    "storm": {"neutral": ["A matchbook lies soaked on an armrest."],},
+                    "sun": {"neutral": ["A matchbook basks in the sun.", "A matchbook lies on an armrest."],}
+
                 },
                 "bar_01": {
                     "neutral": ["You see a bowl with some matchbooks in it."],
@@ -258,14 +275,14 @@ item_description_data = {
                 "neutral": ["You pick it up."],
             },
             "at_entity": [{
-                "neutral": ["You thumb the pub's engraved logo.","It has an engraving of the pub logo."],
+                "neutral": ["You thumb the engraving. It's the pub's logo.","It has an engraving of the pub logo."],
             },
                 {
                 "neutral": ["It's in pristine condition.","It looks very new, practically unblemished."],
             },
             ],
             "leaving": {
-                "neutral": ["You leave it engraved matchbook behind."],
+                "neutral": ["You leave it behind."],
             },
             "times": {
             },
@@ -281,7 +298,7 @@ item_description_data = {
                 "neutral": ["You thumb the pub's engraved logo.","It has an engraving of the pub logo."],
             },
                 {
-                "neutral": ["It's in pristine condition, despite missing a few matches.","Although missing some matches, it's practically unblemished."],
+                "neutral": ["It's in pristine condition, despite missing a few matches.","Although missing some matches, the cover is practically unblemished."],
             },
             ],
             "leaving": {
@@ -292,14 +309,17 @@ item_description_data = {
             }
         }
     },
-"matches_02": {
+"matches_02": { #black vs faded black?
         "default": {
             "at_scene": {
                 "office_trash_01": {
                     "neutral": ["You notice a matchbook in the trash."],
                 },
                 "porch_01": {
-                    "neutral": ["A matchbook lies on a table closeby."],
+                    "rain": {"neutral": ["A matchbook lies soaked on a table nearby."],},
+                    "storm": {"neutral": ["A matchbook lies soaked on a table nearby."],},
+                    "sun": {"neutral": ["A matchbook is perched on a table nearby."],},
+
                 },
                 "stage_02": {
                     "neutral": ["You spot a matchbook in the clutter."],
@@ -433,7 +453,8 @@ item_description_data = {
                 "neutral": ["You kneel down and grab the pipe.", "It's cold to the touch."],
             },
             "at_entity": {
-                "neutral": ["It's got a few bloodied dents.","The pipe is bloodied.", "It's heavy, with red colored indents on it's head."]
+                "neutral": ["It's got a few bloodied dents.","The pipe is bloodied.", "Clumps of skin and blood lace a concave dent.",
+                            "It's heavy, with red colored indents on it's head."]
             },
             "leaving": {
                 "neutral": ["You place the pipe back."],
@@ -445,21 +466,131 @@ item_description_data = {
         },
     },
 
+"bertha_clothes_01": {
+        "default": {
+            "at_scene": {
+                "bertha_office_closet_01": {
+                    "neutral": ["Identical denim jackets hang over an equal mix of shoes and boots."],
+                },
+            },
+            "approaching": {
+                "neutral": ["You sift through the jackets.", "The hangers rattle as you sift through them."],
+            },
+            "at_entity": {
+                "neutral": ["They have slight style variations, but are otherwise identical.",
+                            "They are all thick blue denim jackets. Some have more wear and tear than others."]
+            },
+            "leaving": {
+                "neutral": [],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+        "cleaned": { #from murder, cooking/bar, mob 'accident', or whateva
+            "at_scene": {
+                },
+            "approaching": {
+            },
+            "at_entity": [
+                {"neutral": ["They have slight style variations, but are otherwise identical...",
+                            "They are all thick blue denim jackets. Some have more wear and tear than others..."]},
+                {"neutral": ["One of the jackets is has been forcibly cleaned, it's fibers brittle and color stripped.",
+                             "One of the jackets is tattered, with white smears. It's been vigorously cleaned.",
+                             "One of the jackets is faded and torn. Blanched patches form stripes.",
+                             "One of the jackets is frayed, with some discoloration.\nIt's been bleached."]},
+            ],
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+
+    },
+"bertha_footwear_01": {
+        "default": {
+            "at_scene": {
+                "bertha_office_closet_01": {
+                    "neutral": [],
+                },
+            },
+            "approaching": {
+                "neutral": ["You kneel down.", "You hunch over..."],
+            },
+            "at_entity": {
+                "neutral": ["The footwear is a mix of average sized shoes and boots.",
+                            "Shoes and boots of varying designs are loosely arranged in a row.",]
+            },
+            "leaving": {
+                "neutral": [],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+        "cleaned_shoes": { #from murder, cooking/bar, mob 'accident', or whateva
+            "at_scene": {
+                "bertha_office_closet_01": {
+                },
+            },
+            "approaching": {
+            },
+            "at_entity": [
+                {"neutral": ["The footwear is a mix of average sized shoes and boots...",
+                            "Shoes and boots of varying designs are loosely arranged in a row...",]},
+                {"neutral": ["One pair of shoes is noticeably cleaner than the others.",
+                             "One pair of shoes has been recently scrubbed, it's seams unraveling."]},
+            ],
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+    "cleaned_boots": { #from murder, cooking/bar, mob 'accident', or whateva - RECENTLY POLISHED/CLEANED
+            "at_scene": {
+                "bertha_office_closet_01": {
+                },
+            },
+            "approaching": {
+            },
+            "at_entity": [
+                {"neutral": ["The footwear is a mix of average sized shoes and boots...",
+                            "Shoes and boots of varying designs are loosely arranged in a row...",]},
+                {"neutral": ["One pair of boots is noticeably more polished than the others. Shallow scratches run across it's heel.",
+                             "One pair of boots has been thoroughly scrubbed, and recently polished."]},
+            ],
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+    },
 "bertha_office_closet_01": {
         "default": {
             "at_scene": {
                 "bertha_office_01": {
-                    "neutral": ["An oak closet is on the far wall."],
+                    "neutral": ["A closet is on the far wall."],
                 },
             },
             "approaching": {
-                "neutral": ["You open the closet."],
+                "neutral": ["You approach the far wall.", "You come up to the closet."],
             },
             "at_entity": {
-                "neutral": ["Identical denim jackets hang over an equal mix of shoes and boots."]
+                "neutral": []
             },
             "leaving": {
-                "neutral": ["You close the closet doors."],
+                "neutral": ["You step back."],
             },
             "times": {
             },

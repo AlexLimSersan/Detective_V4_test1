@@ -3,7 +3,7 @@ from config.settings import EXIT_COMMANDS, ENTER_COMMANDS
 
 #CHECK EVENTS ALWAYS AFTER A PLAYER INPUT, U CAN INTERRUPT IMMEDIATELY AND THEN CALL WHATEVER IS NEEDED AFTER
 from config.logging_config import app_logger
-
+from entities.entities.items import Item
 class Game:
     def __init__(self, game_state, ui):
         self.game_state = game_state
@@ -18,6 +18,7 @@ class Game:
     def current_handler(self, handler_name):
         self._current_handler = handler_name
         self.game_state.current_handler = handler_name
+        app_logger.warning(f"handler name: {self.game_state.current_handler}")
     def run(self):
         # intro sequence
         self.exploration_handler()  # time/effects directly change gamestate; causes effects
@@ -25,12 +26,13 @@ class Game:
         #outro sequence
 
     def exploration_handler(self):
-        self.current_handler = "location"
+
         while True:
             #only locations break loop by returning command - is that true?
 
             matched_command = self.game_state.player.current_location.start_loop(self.ui) #handles approach/leave descriptiosn
-
+            self.current_handler = matched_command
+            app_logger.info(f"Matched command is now handler: {matched_command}")
             # should CHECK EVENTS HERE so can break before regular processing happens
             self.game_state.event_system.check_events()
             #only announce here
@@ -53,7 +55,7 @@ class Game:
                 raise ValueError(f"validated command with no handler: {matched_command}")
 
     def dialogue_handler(self, command_id):
-        self.current_handler = "suspect"
+
         try:
             current_suspect = self.game_state.suspect_manager.get_entity(command_id)
             current_suspect.start_loop(self.ui)
@@ -62,10 +64,11 @@ class Game:
             raise ValueError("ERROR: ID passed to dialogue handler, no matching object")
 
     def item_handler(self, command_id):
-        self.current_handler = "item"
+
         try:
             current_item = self.game_state.item_manager.get_entity(command_id)
             current_item.start_loop(self.ui)
+
         except:
             # should not be passed if not validated
             raise ValueError("ERROR: ID passed to item handler, no matching object")

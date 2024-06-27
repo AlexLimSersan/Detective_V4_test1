@@ -65,12 +65,12 @@ class Location(Entity):
             suspects, items, locations, actions = self.get_options()
             ui.display_menu(suspects, items, locations, actions)
 
-            command_id = get_command(ui, self.game_state)
-            result = self.process_command(command_id, ui, suspects, items, locations, actions)
+            command = get_command(ui, self.game_state)
+            result = self.process_command(command, ui, suspects, items, locations, actions)
             if result:
                 return result
-            elif command_id in self.whimsical_handlers:
-                self.whimsical_handlers[command_id](ui)
+            elif command in self.whimsical_handlers:
+                self.whimsical_handlers[command](ui)
 
     def process_command(self, command, ui, suspects = None, items = None, locations = None, actions = None):
         suspects = suspects or []

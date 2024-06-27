@@ -95,9 +95,12 @@ class Item_Manager(Entity_Manager):
 
             #CHECK FREQUENCY:
             if random.random() < self.entities[item_id].spawn_frequency: #default vs custom spawn frequency handled in entity (makes CLUES vs ITEMS logic easier)
-                #CHECK SPAWN_CONDITIONS
-                #if conditions_2:
-                    #OR!
+                #CHECK DESPAWN_CONDITIONS, else, proceed as regular.
+                #lets you have mutually exclusive items with different IDS.
+                despawn_conditions = spawn_data.get('conditions_despawn', {})
+                if despawn_conditions:
+                    if self.check_conditions(despawn_conditions, item_id, "spawn", spawn_locations):
+                        continue
                 #else:
                 if self.check_conditions(spawn_data.get('conditions', {}), item_id, "spawn", spawn_locations):
 
@@ -117,8 +120,8 @@ class Item_Manager(Entity_Manager):
                     #can add the STORY TRACKER and STATS tracker stuff here!item_id
                     #can add a -1 tag to related dialogue?
                     ent_logger.info(f"{item_id} is MURDERER CLUE: {condition}, {values}")
-
-                    self.game_state.stat_tracker.track_murderer(item_id, values, query_type, spawn_or_state_id)
+                    if query_type != "despawn":
+                        self.game_state.stat_tracker.track_murderer(item_id, values, query_type, spawn_or_state_id)
                     return True
             # can have other conditions as needed
         return False

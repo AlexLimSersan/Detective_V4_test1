@@ -9,7 +9,7 @@ from entities.components.locks import KeyLock, BoltLock
 from game.game_state import Game_State
 
 from config.logging_config import ent_logger
-
+import random
 
 class Lid(Interaction): #can refactor this for sure
     def __init__(self, id, name, entity_state, game_state, is_outdoors, connections, component_descriptions = None, is_open = False, lock_mechanism = None):
@@ -78,16 +78,18 @@ class Lid(Interaction): #can refactor this for sure
         try:
             description_value = self.descriptions.get_description(to_get_key)
             if description_value:
+                if isinstance(description_value, list):
+                    description_value = random.choice(description_value)
                 description.append(description_value)
-                ent_logger.warning(f"1{description}")
+
                 if description:
                     result = description
-                    ent_logger.warning(f"2{result}")
+
         finally:
             if result is None:
                 result = [to_get_dic.get(to_get_key).format(name=self.name)]
-                ent_logger.warning(f"3{result}")
 
+        ent_logger.info(f"lids returning {result}, desc value {description_value} \n self.desc.desc {self.descriptions.descriptions}")
         return result
 
     def get_options(self):

@@ -416,10 +416,11 @@ loc_description_data = {
 "bertha_office_01": {
     "default": {
         "approaching": {
-            "neutral": ["You enter through the door."],
+            "neutral": [],
         },
         "at_entity": { #should just have a bunch of at scene description stuff here. relevant clues! desk, boxes, flask, etc
-            "neutral": ["You are in the office."]
+            "neutral": ["You are in the office.", "The office is small but cozy.", "It's a well kept place."],
+            "bad": ["You are in the office.", "The mess is slightly off putting.","The office is quite messy.", "It's dirty here."]
         },
         "leaving": {
             "neutral": ["You turn back the way you came..."]
@@ -760,8 +761,10 @@ loc_description_data = {
             "alley_07": {
                 "neutral": ["The alley leads onwards."],
             },
-            "fire_escape_01": {
-                "neutral": ["The fire escape descends into the alleyway.", "The ground is beneath you."],
+            "fire_escape_01": { #at base of ladde,r not actually on the laddeer...
+                "sun":{"neutral": ["The concrete scrapes against your shoes."],},
+                "rain":{"neutral": ["You stand in a puddle."],},
+                "storm":{"neutral": ["You stand in a puddle."],},
             }
         }
     }
@@ -802,16 +805,17 @@ loc_description_data = {
             "bad": ["The rust digs into your hands."],
         },
         "leaving": {
+            "fire_escape_01": {"neutral": ["You drop down to the alley."]}
         },
         "times": {},
         "weather": {},
-        "tags": ["urban", "outdoors"],
+        "tags": ["urban"],
         "connections": {
             "fire_escape_01": {
-                "neutral": ["The ground is beneath you."],
+                "neutral": ["The ladder hangs above you."],
             },
             "fire_escape_03": {
-                "neutral": ["The ladder leads all the way to the roof."],
+                "neutral": ["The ladder leads back down to the alley."],
             }
         }
     }
@@ -834,7 +838,7 @@ loc_description_data = {
         "tags": ["urban", "outdoors"],
         "connections": {
             "fire_escape_02": {
-                "neutral": ["The ladder extends below."],
+                "neutral": ["The ladder leads all the way to the roof."],
             },
             "roof_top_01": {
                 "neutral": ["The ladder leads to the rooftop.", "Above, you can see the rooftop."],
@@ -887,7 +891,7 @@ loc_description_data = {
         "tags": ["urban"],
         "connections": {
             "alley_06": {
-                "neutral": ["The alley leads back the way you came."],
+                "neutral": ["The alley leads all the way to the residential area."],
             }
         }
     }

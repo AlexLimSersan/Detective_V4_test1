@@ -2,7 +2,7 @@
 from config.settings import TICKER_MULTIPLIER, START_PHASE, PHASE_TIME_INTERVAL, ALL_PHASES
 from config.logging_config import app_logger
 #all times like move time, etc, here! i think its better 100%
-class Time_System:
+class Time_System: #could add an event "late game" or similar, which can change descriptions accordingly
     def __init__(self, game_state):
         self.game_state = game_state
         self.ticker = 0 #tracks time, later can have the slow down time in option idea

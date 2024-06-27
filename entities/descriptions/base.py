@@ -32,7 +32,7 @@ class Descriptions(ABC):
             return descriptions
         if description_to_return:
             return description_to_return
-        desc_logger.warning(f"Base Description/get_description(): No descriptions found after iterating states for description type {description_type}\n{self.descriptions}")
+        #desc_logger.warning(f"Base Description/get_description(): No descriptions found after iterating states for description type {description_type}\n{self.descriptions}")
         #raise ValueError("No description available")
 
     def fetch_random_description(self, description_type, descriptions_dic, optional_key = None):
@@ -51,25 +51,30 @@ class Descriptions(ABC):
             #i think this was getting messed up in set scene
             #actually, if i do the scroll text as it prints, then wouldnt really need this?
             return description
-        desc_logger.warning(f"Base desc/ No valid description found for type '{description_type}' in ranked keys")
+        #desc_logger.warning(f"Base desc/ No valid description found for type '{description_type}' in ranked keys")
 
     def handle_description_keying(self, description_type, descriptions_dic, optional_key = None):
         temp_dic = None
         if isinstance(descriptions_dic, dict):
             if description_type in ["at_entity", "times", "weather"]:
                 temp_dic = descriptions_dic  # just to avoid the warning log below
+                if optional_key and not temp_dic:
+                    temp_dic = descriptions_dic.get(optional_key, descriptions_dic)
             # ALREADY CHANGED PLAYER LOC
             elif description_type == "approaching":  # approaching from
                 temp_dic = descriptions_dic.get(self.game_state.player.location_history[-2].id)
+                if optional_key and not temp_dic:
+                    temp_dic = descriptions_dic.get(optional_key, descriptions_dic)
             elif description_type in ["leaving", "connections", "at_scene"]:  # leaving to
                 temp_dic = descriptions_dic.get(self.game_state.player.current_location.id)
                 desc_logger.debug(f"at scene temp = {temp_dic}")
-                if optional_key:
-                    temp_dic = descriptions_dic.get(optional_key, temp_dic)
+                if optional_key and not temp_dic:
+                    temp_dic = descriptions_dic.get(optional_key, descriptions_dic)
             elif optional_key:
                 temp_dic = descriptions_dic.get(optional_key, temp_dic)
             else:
-                desc_logger.warning(f"base/handle description keying(): unaccounted description type {description_type}; \n dic = {descriptions_dic}")
+                ...
+                #desc_logger.warning(f"base/handle description keying(): unaccounted description type {description_type}; \n dic = {descriptions_dic}")
         if not temp_dic:
             temp_dic = descriptions_dic
             desc_logger.debug(f"at scene temp = {temp_dic}")
@@ -77,12 +82,12 @@ class Descriptions(ABC):
         desc_logger.debug(f"RETURNING = {descriptions_dic}")
         return descriptions_dic
 
-    def set_scene(self, *args, **kwargs):
+    def set_scene(self, suspects_present=None, items_present=None, connections=None, optional_key = None):
         # Initialize with an empty string to add a separating line
         scene_description = [" "]
         #just for now so you can still play, later just get at_ent
         for _ in ["at_entity", "times", "weather"]:
-            desc = self.get_description(_)
+            desc = self.get_description(_, optional_key = optional_key)
             if desc:
                 scene_description.append(desc)
         # TAGS
@@ -93,7 +98,7 @@ class Descriptions(ABC):
 
     def get_at_scene(self, suspects_present, items_present, optional_key = None):
         scene_description = []
-        desc_logger.warning(f"opt {optional_key}")
+        desc_logger.debug(f"opt {optional_key}")
         for suspect_id, suspect_data in suspects_present.items():
             sus_desc = suspect_data.descriptions.get_description("at_scene", optional_key=optional_key)
             if sus_desc:

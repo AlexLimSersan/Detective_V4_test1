@@ -52,17 +52,8 @@ loc_ent_data = {
             "is_outdoors": True
         },
 
-"dead_end_01": {
-            "name": "alley", #dumpster, possible weapon, etc secret mobster or occult lore?!
-            "connections": ["alley_04"],
-            "is_outdoors": True
-        },
 
-"roof_top_01": {
-            "name": "roof top",
-            "connections": ["fire_escape_02"],
-            "is_outdoors": True
-        },
+
 
         #MORGUE
     },
@@ -101,6 +92,15 @@ loc_ent_data = {
             },
         },
         # ALLEY
+"dead_end_01": {
+            "name": "corner", #dumpster, possible weapon, etc secret mobster or occult lore?!
+            "connections": ["alley_04"],
+            "is_outdoors": True,
+"direction_labels": {
+                 "forward": "down alley",
+                 "backward": "towards the cab"
+            },
+        },
 "alley_01": { #alley entrance
             "name": "sidewalk",
             "connections": ["cab_01", "alley_02"],
@@ -144,7 +144,7 @@ loc_ent_data = {
 
 "crime_scene_01": { #murder scene
     #widens to an open space/back court/square
-            "name": "crime scene",
+            "name": "alley",
             "connections": ["alley_03_1", "alley_04"],
             "is_outdoors": True,
             "direction_labels": {
@@ -190,7 +190,8 @@ loc_ent_data = {
             "direction_labels": {
                 "forward": "up the ladder",
                 "backward": "to alley",
-                "continue_title": "Climb:"
+                "continue_title": "Climb:",
+                "continue_title_backward": "Continue:"
             },
         },
 "fire_escape_02": { #ON LADDER
@@ -213,8 +214,19 @@ loc_ent_data = {
                 "continue_title": "Climb:"
             },
         },
+
+"roof_top_01": {
+            "name": "roof top",
+            "connections": ["fire_escape_03"],
+            "is_outdoors": True,
+            "direction_labels": {
+                "forward": "shouldnt ever print this",
+                "backward": "downwards",
+                "continue_title": "shouldnt:"
+            },
+        },
 "alley_07": { #the alley continues to the residential area. turn back...
-            "name": "alley",
+            "name": "alleyway",
             "connections": ["alley_06"],
             "is_outdoors": True,
             "direction_labels": {

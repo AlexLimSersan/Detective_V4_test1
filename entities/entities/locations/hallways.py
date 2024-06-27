@@ -9,8 +9,10 @@ class Hallway(Location):
         self.direction_labels = direction_labels # A dict with directions e.g., {"forward": "towards cab", "backward": "towards alley"}
         self.direction_order = {
                     #add more ordered hallway types here. key is not used in code, so just name as desired.
-                    "pub hallway": ["hallway_01", "hallway_02", "hallway_03", "hallway_04"],
-                    "alleyway": ["cab_01", "alley_01", "alley_02", "alley_03", "crime_scene_01", "alley_04", "dead_end_01", "alley_05", "alley_06", "alley_07", "alley_08"]
+            #last position lounge and cab reset the orientation
+                    "pub hallway": ["hallway_01", "hallway_02", "hallway_03", "hallway_04", "lounge_01"],
+                    "alleyway": ["alley_01", "alley_02", "alley_03", "crime_scene_01", "alley_04", "dead_end_01", "alley_05", "alley_06","fire_escape_01", "alley_07", "alley_08", "cab_01"],
+                    "alley_ladder": ["alley_06","fire_escape_01", "fire_escape_02", "fire_escape_03","roof_top_01"],
                 }
 
     def get_directional_locations(self):
@@ -20,8 +22,12 @@ class Hallway(Location):
         previous_location = self.game_state.player.location_history[-2]
         orientation = self.game_state.player.orientation
 
-        cont_title = self.direction_labels.get("continue_title", "continue:")
-        ret_title = self.direction_labels.get("return_title", "return:")
+        if orientation == "forward":
+            cont_title = self.direction_labels.get("continue_title", "continue:")
+            ret_title = self.direction_labels.get("return_title", "return:")
+        else:
+            cont_title = self.direction_labels.get("continue_title_backward", self.direction_labels.get("continue_title", "continue:"))
+            ret_title = self.direction_labels.get("return_title_backward", self.direction_labels.get("return_title", "return:"))
 
         continue_options = []
         return_options = []
@@ -82,10 +88,10 @@ class Hallway(Location):
     def update_orientation(self, result):
         for area, ordered_locs in self.direction_order.items():
             if result in ordered_locs and self.game_state.player.current_location.id in ordered_locs:
-                ent_logger.debug("HALLWAY IF achieved")
+
                 current_value = ordered_locs.index(self.game_state.player.current_location.id)
                 moving_to_value = ordered_locs.index(result)
-
+                ent_logger.warning(f"HALLWAY update orientation \n {self.game_state.player.current_location.id}:{current_value} \n {result}:{moving_to_value}")
                 if current_value < moving_to_value:
                     ent_logger.debug(
                         f"ordered locs if - current location {current_value} less than moving location {moving_to_value}, so going forward")
