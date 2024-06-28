@@ -37,7 +37,7 @@ class Suspect(Mobile_Entity):
             if not loc_id:
                 raise ValueError("SUSPECT LOC ID NOT RECOGNIZED")
         #move through loc manager to sync current location and entity references
-        ent_logger.info(f"suspects.py/updatelocation updating {self.id} to loc {loc_id}")
+        ent_logger.info(f"suspects.py/updatelocation() updating {self.id} to loc {loc_id}")
         self.game_state.location_manager.move_entity(self, loc_id)
 
 class Murderer(Suspect):
@@ -50,7 +50,7 @@ class Murderer(Suspect):
         murderer_profile = {}
         for trait, options in profile.items():
             murderer_profile[trait] = random.choice(options)
-        ent_logger.info(f"MURDERER PROFILE: {self.id}\n {murderer_profile}")
+        ent_logger.info(f"MURDERER/randomized_profile() = {self.id}\n {murderer_profile}")
         return murderer_profile
 
 

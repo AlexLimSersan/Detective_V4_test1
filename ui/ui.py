@@ -123,10 +123,20 @@ class UI:
                 for action in actions:
                     print(f"- {action.capitalize()}")
 
-    def display_menu_type_2(self, options, title="Menu"):
+    def display_menu_type_2(self, options, title="Menu", options_2 = None, title_2=None):
         print(self.bar)
         print(title.capitalize())
         #for text in options ids to names self.game_state
+        if options:
+            self.handle_option_printing_logic(options)
+        else:
+            self.display("-")
+        if options_2:
+            self.handle_option_printing_logic(options_2, title_2)
+
+    def handle_option_printing_logic(self, options, title_2=None):
+        if title_2:
+            print(title_2.capitalize())
         if isinstance(options, dict):
             for option, description in options.items():
 

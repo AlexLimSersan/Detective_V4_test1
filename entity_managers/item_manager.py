@@ -80,7 +80,7 @@ class Item_Manager(Entity_Manager):
             locations_always_spawn = spawn_data.get("locations_always_spawn")
             if locations_always_spawn:
                 ent_logger.info(
-                    f"Spawning locations always spawn \n item {item_id} in all {locations_always_spawn} \nwith state {self.entities[item_id].entity_state}")
+                    f"Spawning locations ALWAYS SPAWN \n item {item_id} in all {locations_always_spawn} \nwith state {self.entities[item_id].entity_state}")
                 self.game_state.location_manager.spawn_entities(self.entities[item_id], locations_always_spawn)
 
             #PROCEED AS NORMAL WITH THE REGULAR DATSET
@@ -100,6 +100,8 @@ class Item_Manager(Entity_Manager):
                 despawn_conditions = spawn_data.get('conditions_despawn', {})
                 if despawn_conditions:
                     if self.check_conditions(despawn_conditions, item_id, "spawn", spawn_locations):
+                        ent_logger.info(
+                            f"despawn - item {item_id} in all {spawn_locations} \nbecause of {despawn_conditions}")
                         continue
                 #else:
                 if self.check_conditions(spawn_data.get('conditions', {}), item_id, "spawn", spawn_locations):

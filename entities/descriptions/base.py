@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 import random
 from utilities.state_utils import iterate_states, iterate_vibe_keys, check_nested_weather_or_time_keys
 from config.logging_config import desc_logger
-
+from utilities.general_utils import merge_dicts
 class Descriptions(ABC):
     def __init__(self, id, name, entity_state, game_state, descriptions, is_outdoors=False):
         self.id = id
@@ -54,6 +54,11 @@ class Descriptions(ABC):
         #desc_logger.warning(f"Base desc/ No valid description found for type '{description_type}' in ranked keys")
 
     def handle_description_keying(self, description_type, descriptions_dic, optional_key = None):
+        #iterated states and have the "desc type" eg approaching dictionary with whatever nested keys...
+        #check first for default, which is the {"neutral": [] } -> will get merged to the nested keys if present.
+        #
+        default_to_add = descriptions_dic.get("default")
+
         temp_dic = None
         if isinstance(descriptions_dic, dict):
             if description_type in ["at_entity", "times", "weather"]:
@@ -78,9 +83,15 @@ class Descriptions(ABC):
         if not temp_dic:
             temp_dic = descriptions_dic
             desc_logger.debug(f"at scene temp = {temp_dic}")
+
         descriptions_dic = check_nested_weather_or_time_keys(temp_dic, self.game_state)
         desc_logger.debug(f"RETURNING = {descriptions_dic}")
-        return descriptions_dic
+        if default_to_add:
+            merged_dic = merge_dicts(default_to_add, descriptions_dic)
+            desc_logger.info(f"BASE / HANDLE KEYING: \nDEFAULT TO ADD = {default_to_add}\n merged_dic = {merged_dic}")
+            return merged_dic
+        else:
+            return descriptions_dic
 
     def set_scene(self, suspects_present=None, items_present=None, connections=None, optional_key = None):
         # Initialize with an empty string to add a separating line

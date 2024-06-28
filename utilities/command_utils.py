@@ -11,7 +11,7 @@ def get_command(ui, game_state):
     return command
 
 def handle_command_id_list_logic(command_ids, game_state):
-    app_logger.debug(f"command_utils.PY/handling command_id_list_logic() \n "
+    app_logger.info(f"command_utils.PY/handling command_id_list_logic() \n "
                      f"COMMAND IDS: {command_ids} ")
     if len(command_ids) == 1:
         return command_ids[0]
@@ -24,13 +24,13 @@ def handle_command_id_list_logic(command_ids, game_state):
         return
     if len(possible_ids) == 1:
         command_id = possible_ids[0]
-        app_logger.debug(f"command_utils.PY/handlecommand_id_list_logic; possible ids {possible_ids}")
+        app_logger.info(f"command_utils.PY/handlecommand_id_list_logic; possible ids {possible_ids}")
         return command_id
     elif len(possible_ids) > 1:
         possible_ids = [id for id in possible_ids if id != game_state.player.location_history[-2].id]
         if not len(possible_ids) == 1:
             raise ValueError(f"FFFFFFFFÙCK")
-        app_logger.debug(f"command_utils.PY/handlecommand_id_list_logic; possible ids {possible_ids}")
+        app_logger.info(f"command_utils.PY/handlecommand_id_list_logic; possible ids {possible_ids}")
         return possible_ids[0]
     else:
         raise ValueError("len of possible ids not accounted for")
@@ -41,13 +41,14 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
     items = copy.deepcopy(items) if items else []
     locations = copy.deepcopy(locations) if locations else []
     actions = copy.deepcopy(actions) if actions else []
-    app_logger.info(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION: command = {command}\n suspects = {suspects}\nitems={items}\n locs={locations}\nactions={actions}\n")
+
     matched = False
 
     if isinstance(command, list):
-        app_logger.warning(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION: command = {command}\n suspects = {suspects}\nitems={items}\n locs={locations}\nactions={actions}\n")
-        command = command[0]
 
+        command = command[0]
+    app_logger.info(
+        f"/MATCH_COMMAND_TO_OPTION: command = {command}\n suspects = {suspects}\nitems={items}\n locs={locations}\nactions={actions}\n")
     # Convert actions to list if it is a dict
     if isinstance(actions, dict):
         action_values = list(actions.values())
@@ -65,6 +66,7 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
                 # locations with same name as current loc
                 if location_name == game_state.player.current_location.name:
                     actions.append("continue")
+                    actions.append("enter")
     if game_state.player.location_history[-2].id in locations or game_state.player.location_history[-2].id in actions: #might be in loc or actions if door
         actions.append("return")
 
@@ -78,7 +80,7 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
 
     # combine options
     combined_options = suspects + items + locations + actions
-    app_logger.debug(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ; combined options = {combined_options}")
+    app_logger.debug(f"comm_util.PY/MATCH_COMMAND_TO_OPTION() ; combined options = {combined_options}")
     # Convert to names
     option_names = ids_to_names(combined_options, game_state)
     app_logger.info(f"option_names  {option_names}")
@@ -118,17 +120,18 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
         )
         matched = True
         entity_ids = [id for id in entity_ids if id in locations or id in suspects or id in items]
-        app_logger.info(f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ;  \nbest_match = {best_match}\nentity_ids = {entity_ids}")
+
         if entity_ids:
             if len(entity_ids) > 1: #command maps to multiple entity ids that are in options. This means same name for multiple locs. so remove last loc so its like it defaults to forward
                 player_last_loc_id = game_state.player.location_history[-2].id
                 entity_ids = [id for id in entity_ids if id != player_last_loc_id]
             if len(entity_ids) > 1:
                 raise ValueError(f"YOU THOUGHT WRONG")
+            app_logger.info(f"  returning entity_ids = {entity_ids} \n best_match = {best_match}" )
             return entity_ids[0], matched
         else:
             app_logger.info(
-                f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ;  \nbest_match = {best_match}\nentity_ids = {entity_ids}")
+                f"returning best_match = {best_match}\n - entity_ids are {entity_ids}")
             return best_match, matched
     app_logger.info(
         f"GENERAL_UTILS.PY/MATCH_COMMAND_TO_OPTION() ;  \nno best match\nreturning {command}")

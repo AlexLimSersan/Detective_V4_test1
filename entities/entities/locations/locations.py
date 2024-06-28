@@ -79,11 +79,13 @@ class Location(Entity):
         actions = actions or []
 
         command_id = names_to_ids(command, self.game_state)  # returns a list
-
+        ent_logger.info(f"___{command_id}")
         # possibly multiple command_id matches, so handle which one here
         if isinstance(command_id, list):
             command_id = handle_command_id_list_logic(command_id, self.game_state)
-
+        #retarded fix but fuckit
+        if not command_id and self.game_state.player.current_location.id == "cab_01":
+            command_id = "alley_01"
         # RETURN COMMAND TO CHANGE HANDLER
         if command_id in suspects + items + locations:
             return command_id
@@ -98,7 +100,7 @@ class Location(Entity):
                                                                suspects, items, locations, actions)
             if matched:
                 if ui.confirm(matched_command):
-                    ent_logger.info(f"confirmed matched {matched_command}, actions = {actions}")
+                    ent_logger.info(f"confirmed matched {matched_command}, {suspects}{items}{locations}{actions}")
                     return self.process_command(matched_command, ui, suspects, items, locations, actions)
                 else:
                     return None

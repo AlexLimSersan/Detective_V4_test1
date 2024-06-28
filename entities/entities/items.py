@@ -9,10 +9,10 @@ import random
 from entities.components.lids import Lid
 from entities.components.locks import KeyLock
 from utilities.general_utils import names_to_ids
-
+from utilities.general_utils import merge_dicts
 class Item(Mobile_Entity):
     # routine hack: event->move mobile entity wherever, then event descriptions-> can be tailored for that location. default is default routine
-    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = ITEM_SPAWN_FREQUENCY, ):
+    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = ITEM_SPAWN_FREQUENCY, is_hidden=False):
         super().__init__(id, name, game_state, None, entity_state, is_outdoors, current_location)
         self.item_type = item_type#need type for inv by type?
         self.descriptions = Item_Descriptions(id, name, entity_state, game_state, descriptions, current_location, is_outdoors)
@@ -24,6 +24,8 @@ class Item(Mobile_Entity):
 
         self.suspects_present = {}
         self.items_present = {}
+        self.hidden_items_present = {}
+        self.is_hidden = is_hidden
 
     def remove_entity(self, entity):
         """Remove entity from location"""
@@ -35,10 +37,14 @@ class Item(Mobile_Entity):
             raise ValueError(f"Entity {entity.id} not found")
 
     def add_entity(self, entity_obj):
+
         if isinstance(entity_obj, Suspect):
             self.suspects_present[entity_obj.id] = entity_obj
         elif isinstance(entity_obj, Item):
-            self.items_present[entity_obj.id] = entity_obj
+            if hasattr(entity_obj, "is_hidden") and entity_obj.is_hidden:
+                self.hidden_items_present[entity_obj.id] = entity_obj
+            else:
+                self.items_present[entity_obj.id] = entity_obj
 
     def determine_state(self):
         for state, data in self.state_data.items():
@@ -48,12 +54,18 @@ class Item(Mobile_Entity):
         return "default"
 
     def start_loop(self, ui):
-        ui.display(self.descriptions.get_description("approaching", optional_key=self.game_state.current_handler))
-        ui.beat()
+        approach_desc = self.descriptions.get_description("approaching", optional_key=self.game_state.current_handler)
+        if approach_desc:
+            ui.display(approach_desc)
+            ui.beat()
+
         self.add_player_topic()
         matched_command = self.loop(ui) #dialogue or interactions
-        ui.display(self.descriptions.get_description("leaving", optional_key=self.game_state.current_handler))
-        ui.beat()
+
+        leave_desc = self.descriptions.get_description("leaving", optional_key=self.game_state.current_handler)
+        if leave_desc:
+            ui.display(leave_desc)
+            ui.beat()
         return matched_command
 
     def set_scene(self):
@@ -62,7 +74,8 @@ class Item(Mobile_Entity):
             comp_desc = self.components.get_description("at_entity")
             if comp_desc:
                 scene_desc.append(comp_desc)
-        scene_desc.append(self.descriptions.set_scene(self.suspects_present, self.items_present, optional_key=self.id))
+        all_ite_objs = merge_dicts(self.items_present, self.hidden_items_present)
+        scene_desc.append(self.descriptions.set_scene(self.suspects_present, all_ite_objs, optional_key=self.id))
         return scene_desc
 
     def loop(self, ui):
@@ -98,6 +111,9 @@ class Item(Mobile_Entity):
             ent_logger.debug(f"command id {command_id} in actions {actions}")
             if command_id in self.items_present:
                 self.items_present[command_id].start_loop(ui)
+                return "pass"
+            if command_id in self.hidden_items_present:
+                self.hidden_items_present[command_id].start_loop(ui)
                 return "pass"
         matched_command, matched = match_command_to_option(command, self.game_state, actions = actions)
         if matched:
@@ -152,13 +168,38 @@ class Drawer(Item):
         self.descriptions.component = self.components
         assert isinstance(self.components, Lid)
 
-
     def get_options(self):
         actions = {}
+        component_actions = {}
+        if self.items_present:
+            for item_id, obj in self.items_present.items():
+                actions[item_id] = "_None"
         if self.components.is_open:
-            if self.items_present:
-                for item_id, obj in self.items_present.items():
-                    actions[item_id] =  "_None"
-        actions.update(self.components.get_options())
-        actions["return"] = ""
-        return actions  # ITERATE OVER ITEMS PRESENT! THEN DRAWERS OVERWRITES IT COMPONENTS IS OPEN
+            if self.hidden_items_present:
+                for item_id, obj in self.hidden_items_present.items():
+                    component_actions[item_id] =  "_None"
+        component_actions.update(self.components.get_options())
+        component_actions["return"] = ""
+        return actions, component_actions  # ITERATE OVER ITEMS PRESENT! THEN DRAWERS OVERWRITES IT COMPONENTS IS OPEN
+
+    def loop(self, ui):
+        #approach and leave desc already shown
+
+        while True:
+            ui.display(self.set_scene())
+            actions,component_actions = self.get_options()
+            ui.display_menu_type_2(options = actions, title=self.name,
+                                   options_2=component_actions, title_2=self.components.name)
+            #you pick up, put down, ??
+            command = ui.get_input()
+            if self.components:
+                if self.components.process_command(command, ui):
+                    ent_logger.debug(f"components processed {command}")
+                    continue
+            actions.update(self.hidden_items_present)
+            result = self.process_command(command, ui, actions = actions)
+            if result == "pass":
+                continue
+            if result:
+                return result
+            ui.bad_input()

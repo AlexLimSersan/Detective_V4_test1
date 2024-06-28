@@ -37,10 +37,11 @@ loc_description_data = {
         },
         "times": {
             "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans his head on the window.", "He grips the steering wheel."],
+                        "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired.",
+                                ]},
+            "afternoon": {"neutral": ["He rubs his eyes.", "He stretches in his seat.", "He leans his head on the window.", "He shifts in his seat."],
                         "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired."]},
-            "afternoon": {"neutral": ["He rubs his eyes.", "He stretches in his seat.", "He leans off to the side.", "He shifts in his seat."],
-                        "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired."]},
-            "evening": {"neutral": ["He scratches his head.", "His eyes wander.", "He leans off to the side.", "He shifts in his seat."],
+            "evening": {"neutral": ["He scratches his head.", "His eyes wander.", "He shifts in his seat.", "He grips the steering wheel."],
                         "bad": ["He looks like he might fall asleep.", "His hands reach for another cigarette.", "His eyes dart, scanning the horizon.",]},
             "night":{"neutral": ["The headlights beam onto the street.", "He stares at the night sky.", "He shifts in his seat, restless."],
                         "bad": ["The headlights flicker.", "He looks like he might fall asleep.", "His hands tremble as he reaches for a cigarette.", "His eyes scan the horizon.",]},
@@ -822,8 +823,17 @@ loc_description_data = {
             "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
         },
         "at_entity": {
-            "neutral": ["The rungs feel cold under your hands."],
-            "bad": ["The rust digs into your hands."],
+            "sun": {"neutral": ["The rungs feel cold under your hands."],
+                    "bad": ["The rust digs into your hands."]
+            ,},
+"rain": {"neutral": ["The rungs feel cold under your hands."],
+                    "bad": ["The rust digs into your hands."]
+            ,},
+"storm": {"neutral": ["The rungs feel cold under your hands."],
+                    "bad": ["The rust digs into your hands."]
+            ,},
+
+
         },
         "leaving": {
             "fire_escape_01": {"neutral": ["You drop down to the alley."]}

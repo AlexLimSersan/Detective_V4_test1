@@ -70,6 +70,7 @@ item_ent_data = {
 #   bertha
 "bertha_clothes_01": {
             "name": "jackets",
+            "is_hidden": True,
             "state_data": {
                 "default": { #normal
                     "frequency": 0.8
@@ -87,6 +88,7 @@ item_ent_data = {
         },
 "bertha_footwear_01": {
             "name": "footwear",
+            "is_hidden": True,
             "state_data": {
                 "default": { #normal
                     "frequency": 0.8
@@ -152,6 +154,7 @@ item_ent_data = {
     },
 "revolver_01": {
     "name": "revolver",
+    "is_hidden": True,
     "state_data": {
         "default": {
             "frequency": 0.8
@@ -169,6 +172,7 @@ item_ent_data = {
 },
 "bullets_01": {
     "name": "bullets",
+    "is_hidden": True,
     "state_data": {
         "default": { # closed pack
             "frequency": 0.8

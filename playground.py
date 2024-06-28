@@ -93,5 +93,22 @@ def get_description(descriptions_dic, description_type):
 
 #print(get_description(descriptions, "at_entity"))
 
-text = "aple"
-print(text.split())
+text = ""
+
+
+
+def test_func(*args, **kwargs):
+    for arg in args:
+        print(f"{arg}")
+    for key, value in kwargs.items():
+            print(f"{key}: ")
+
+            print(f"{value}")
+
+
+# Dictionary with string keys
+my_dict = {
+    "name": "Alice",
+    42: "The answer",
+    (1, 2): "Tuple key"
+}

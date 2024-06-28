@@ -59,3 +59,17 @@ def replace_ids_with_names(text, game_state):
     fixed_text = ' '.join(words)
     app_logger.debug(f"GENERAL UTILS: replaced ids with names() ; returning = {fixed_text}")
     return fixed_text
+
+
+def merge_dicts(*dicts):
+    merged = {}
+    for d in dicts:
+        for key, value in d.items():
+            if key in merged:
+                if isinstance(merged[key], list):
+                    merged[key].append(value)
+                else:
+                    merged[key] = [merged[key], value]
+            else:
+                merged[key] = value
+    return merged

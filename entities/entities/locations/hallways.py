@@ -51,26 +51,26 @@ class Hallway(Location):
                 connection_names.append(connection)
 
             #if all connections have unique names
-            if len(self.connections) == len(set(connection_names)):
-                for connection in self.connections:
+            #if len(self.connections) == len(set(connection_names)):
+            #    for connection in self.connections:
+            #        directional_options.append(connection)
+            #else:
+            for connection in self.connections:
+                connection_name = ids_to_names(connection, self.game_state)
+                connection_names.append(connection)
+                if connection_name == current_location.name:
+                    if orientation == "forward":
+                        if connection != previous_location.id:
+                            continue_options.append(f"{cont_title} {self.direction_labels['forward']}")
+                        elif connection == previous_location.id:
+                            return_options.append(f"{ret_title} {self.direction_labels['backward']}")
+                    else:  # orientation == "backward"
+                        if connection != previous_location.id:
+                            continue_options.append(f"{cont_title} {self.direction_labels['backward']}")
+                        elif connection == previous_location.id:
+                            return_options.append(f"{ret_title} {self.direction_labels['forward']}")
+                else:
                     directional_options.append(connection)
-            else:
-                for connection in self.connections:
-                    connection_name = ids_to_names(connection, self.game_state)
-                    connection_names.append(connection)
-                    if connection_name == current_location.name:
-                        if orientation == "forward":
-                            if connection != previous_location.id:
-                                continue_options.append(f"{cont_title} {self.direction_labels['forward']}")
-                            elif connection == previous_location.id:
-                                return_options.append(f"{ret_title} {self.direction_labels['backward']}")
-                        else:  # orientation == "backward"
-                            if connection != previous_location.id:
-                                continue_options.append(f"{cont_title} {self.direction_labels['backward']}")
-                            elif connection == previous_location.id:
-                                return_options.append(f"{ret_title} {self.direction_labels['forward']}")
-                    else:
-                        directional_options.append(connection)
         #END OF CONT/RETURN OPTIONS
 
         #ORDER THE COMBINED OPTIONS

@@ -15,13 +15,14 @@ class Cab(Location):
                 "pub": "porch_01",
                 "porch_01": "porch_01",
                 "alley": "alley_01",
-                "alley_01": "alley_01"
+                "alley_01": "alley_01",
             }
 
     def get_actions(self):
         return ["cabbie"]
 
     def start_loop(self, ui):
+        self.game_state.player.orientation = "forward"
         ui.beat(2)
         # buffer towards cab?!?!?
         ui.display(self.descriptions.set_scene(suspects_present=self.suspects_present, items_present=self.items_present, connections=[self.game_state.player.location_history[-2].id]))
@@ -37,10 +38,10 @@ class Cab(Location):
             ui.display(f"Input 'cabbie' for additional options")
 
             command_id = get_command(ui, self.game_state)
-            command_id = self.cab_loc_dic.get(command_id, command_id)
-            ent_logger.info(f"Locations.py/loop: cab changes command_id : {command_id}")
+            command = self.cab_loc_dic.get(command_id, command_id)
+            ent_logger.info(f"Locations.py/loop: cab changes command_id {command_id} -> command : {command}")
 
-            result = self.process_command(command_id, ui, suspects, items, list(self.cab_loc_dic.keys()), actions)
+            result = self.process_command(command, ui, suspects, items, list(self.cab_loc_dic.keys()), actions)
             result = self.cab_loc_dic.get(result, result)
             if result:
                 if result == "EXIT_GAME":
