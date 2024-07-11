@@ -12,7 +12,7 @@ from config.logging_config import ent_logger
 import random
 
 class Lid(Interaction): #can refactor this for sure
-    def __init__(self, id, name, entity_state, game_state, is_outdoors, connections, component_descriptions = None, is_open = False, lock_mechanism = None):
+    def __init__(self, id, name, entity_state, game_state, is_outdoors, connections, component_descriptions = None, is_open = False, lock_mechanism = None, option_titles = None):
         super().__init__(id, name, game_state, entity_state, is_outdoors)
         self.is_outdoors = is_outdoors
         self.connections = connections
@@ -26,6 +26,7 @@ class Lid(Interaction): #can refactor this for sure
             "lock": self.lock,
             "unlock": self.unlock,
         }
+        self.option_titles = option_titles or {}
         assert isinstance(self.game_state, Game_State)
 
     def create_lock_mechanism(self, lock_mechanism):
@@ -94,27 +95,42 @@ class Lid(Interaction): #can refactor this for sure
 
     def get_options(self):
         #remember, lid isnt directional
+        open_title = self.option_titles.get("open_title", "open")
+        close_title = self.option_titles.get("close_title", "close")
+        open_desc = self.option_titles.get("open_desc", f"the {self.name}")
+        close_desc = self.option_titles.get("close_desc", f"the {self.name}")
+
         options = {}
         if self.is_open:
-            options["close"] = f"the {self.name}"
+            options[close_title] = close_desc
         else:
-            options["open"] = f"the {self.name}"
+            options[open_title] = open_desc
             if self.lock_mechanism:
                 lock_options = self.lock_mechanism.get_options()
                 options.update(lock_options)
         return options
 
     def process_command(self, command, ui):
-        if command in self.option_handlers:
-            self.option_handlers[command](ui)
+        open_title = self.option_titles.get("open_title", "open")
+        close_title = self.option_titles.get("close_title", "close")
+        com_dic = {
+            open_title: "open",
+            close_title: "close"
+        }
+
+        com_dic_command = com_dic.get(command, command)
+        if com_dic_command in self.option_handlers:
+            self.option_handlers[com_dic_command](ui)
             return True
         else:
             current_options = list(self.get_options().keys()) # because else it would correct to all options
             matched_command, matched = match_command_to_option(command, game_state=self.game_state, actions=current_options)
+
             if matched:
                 if ui.confirm(matched_command):
                     if matched_command in self.option_handlers:
-                        self.option_handlers[matched_command](ui)
+                        com_dic_command = com_dic.get(matched_command, matched_command)
+                        self.option_handlers[com_dic_command](ui)
                 return True
             #whimsicals possible here?
         return False
@@ -122,7 +138,7 @@ class Lid(Interaction): #can refactor this for sure
     def open(self, ui):
         if self.lock_mechanism and self.lock_mechanism.is_locked:
                 text = self.lock_mechanism.get_description("cant_open")
-                ui.display(text)
+                ui.display(random.choice(text))
         elif not self.is_open:
             self.is_open = True
             text = self.get_description("opening")

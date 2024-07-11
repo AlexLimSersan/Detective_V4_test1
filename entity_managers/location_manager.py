@@ -20,7 +20,7 @@ class Location_Manager(Entity_Manager):
             else:
                 self.entities[loc_id] = Location(id=loc_id, game_state=self.game_state,
                                              descriptions = self.description_data[loc_id], **loc_data)
-            ent_logger.debug(f"loading location {loc_id}, {loc_data}")
+            ent_logger.info(f"loading location {loc_id}, {loc_data}")
         for door_id, door_data in self.entity_data["doors"].items():
             ent_logger.debug(f"loading door {door_id} with {door_data}")
             self.entities[door_id] = Door(id=door_id, game_state=self.game_state,
@@ -68,7 +68,7 @@ class Location_Manager(Entity_Manager):
         for id in spawn_loc_ids: #IF OBJ.INDRAWER = TRUE, THEN ADD TO HIDDEN ENTITIES?
             loc_obj = self.get_entity(id) or self.game_state.item_manager.get_entity(id) #loc or item accept it
             if not loc_obj:
-                raise ValueError(f"incorrect initialization order for ent {mobile_entity.id}, loc id {spawn_loc_ids}\n loc_obk = {loc_obj}")
+                raise ValueError(f"incorrect initialization order for ent {mobile_entity.id}, loc id {spawn_loc_ids}\n id = {id}\nloc_obk = {loc_obj}")
             loc_obj.add_entity(mobile_entity)
             ent_logger.info(f"spawning {mobile_entity.id} in {loc_obj.id}")
 

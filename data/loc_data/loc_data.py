@@ -1,9 +1,10 @@
 
 loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD BE ABLE TO FIGURE OUT THE DRAWER THING M8
     "locations": {
+        "void_01": {"name": "void", "connections": []},
         "cab_01": {
             "name": "cab",
-            "connections": ["alley_01", "porch_01", "morgue_01"],  #, "butcher_01", "docks_01", "morgue_01"
+            "connections": ["alley_01", "porch_01", "reception_01"],  #, "butcher_01", "docks_01", "morgue_01"
             "is_outdoors": True
         },
         #PUB
@@ -41,7 +42,7 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
         },
         "backroom_01": {
             "name": "backroom",
-            "connections": ["backroom_door_01"],
+            "connections": ["backroom_door_01","backroom_door_02"],
             "is_outdoors": True
         },
         #ALLEY
@@ -53,9 +54,34 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
         },
 
 
+#################MORGUE############################
+"reception_02": {
+            "name": "reception",
+            "connections": ["reception_01","office_morgue_01", "hallway_morgue_01"],
+            "is_outdoors": True
+        },
+"office_morgue_01": {
+            "name": "office",
+            "connections": ["reception_02"],
+            "is_outdoors": True
+        },
+"refrigeration_02": {
+            "name": "refrigeration",
+            "connections": ["refrigeration_01"],
+            "is_outdoors": True
+        },
+        #these dont actually need to be hallways with only 2... because forward/backward is auto in the ui
+"hallway_morgue_01": { #the alley continues to the residential area. turn back...
+            "name": "hallway",
+            "connections": ["hallway_morgue_02","reception_02"],
+            "is_outdoors": True,
+        },
+"hallway_morgue_02": { #the alley continues to the residential area. turn back...
+            "name": "hallway",
+            "connections": ["hallway_morgue_01","refrigeration_01"],
+            "is_outdoors": True,
+        },
 
-
-        #MORGUE
     },
     "halls": {
         #PUB
@@ -151,10 +177,20 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
             },
         },
 
-"crime_scene_01": { #murder scene
-    #widens to an open space/back court/square
+"crime_scene_01": {
+    #widens to an open space/back court/square = #murder scene
             "name": "alley",
-            "connections": ["alley_03_1", "alley_04"],
+            "connections": ["alley_03_1", "crime_scene_02"],
+            "is_outdoors": True,
+            "direction_labels": {
+                 "forward": "deeper into alley",
+                 "backward": "towards the cab"
+            },
+        },
+"crime_scene_02": {
+    #narrows again. i think this is better to lengthen alley slightly before foot print and wil have a bunch of clues around...
+            "name": "alley",
+            "connections": ["crime_scene_01", "alley_04"],
             "is_outdoors": True,
             "direction_labels": {
                  "forward": "deeper into alley",
@@ -162,16 +198,16 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
             },
         },
 "alley_04": {
-    #narrows again, -> muddy ground, shoetype
+    #narrows again, opens to branches -> muddy ground, shoetype BLOODY FOOTPRINT!!
             "name": "alley",
-            "connections": ["crime_scene_01", "dead_end_01", "alley_05"],
+            "connections": ["crime_scene_02", "dead_end_01", "alley_05"],
             "is_outdoors": True,
             "direction_labels": {
                  "forward": "deeper into alley",
                  "backward": "towards the cab"
             },
         },
-"alley_05": {
+"alley_05": { #FALL
     #falls here.
             "name": "turn",
             "connections": ["alley_04", "alley_06"],
@@ -236,16 +272,20 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
         },
 "alley_07": { #the alley continues to the residential area. turn back...
             "name": "backstreet",
-            "connections": ["alley_06"],
+            "connections": ["alley_06","cab_01"],
             "is_outdoors": True,
             "direction_labels": {
-                 "forward": "deeper into alley",
-                 "backward": "towards the cab"
+                 "forward": "teleport back...",
+                 "backward": "back into alley",
+                "continue_title": "Cab:"
             },
         },
-        # MORGUE
+        # MORGUE################################HALLWAYS
+
+
     },
     "doors": {
+        #PUB##############################
         "backroom_door_01": {
             "name": "iron door",
             "connections": ["backroom_01", "hallway_04"], #2connections max for doors
@@ -254,8 +294,16 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
                                                    "closed": {"neutral": ["The iron door faces you."]},
                                                    }}
         },
+        "backroom_door_02": { #to cab
+            "name": "back door",
+            "connections": ["backroom_01", "cab_01"], #2connections max for doors
+            "component_descriptions": {"default": {"opening": {"neutral": ["The hinges squeal."]},
+                                                   "closing": {"neutral": ["The door slams shut.", ]},
+                                                   "closed": {"neutral": ["The iron door faces you."]},
+                                                   }}
+        },
         "bertha_office_door_01": {
-            "name": "wooden door",
+            "name": "wood door",
             "connections": ["hallway_04", "bertha_office_01"],
 
             "component_descriptions": {"default": {"opening": {"neutral": ["It slides open effortlessly.", "It swings open."]},
@@ -284,10 +332,74 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
                         }
                     }
                 }
-            }
+            },
         # ALLEY
 
         # MORGUE
+"refrigeration_01": {
+            "name": "metal door",
+            "connections": ["hallway_morgue_02", "refrigeration_02"],
+
+            "component_descriptions": {"default": {"opening": {"neutral": ["It opens.", "It swings open."]},
+                                                   "closing": {"neutral": ["It closes.", "It swings closed."]},
+                                                   "closed": {"neutral": ["The door leads to reception.", "The door faces you.",
+                                                                          "It's the door to reception.","A  door faces you."]},
+                                                   "open": {"neutral": ["its open. HAVE SOME WEATHER STFUF SINCE THE DOOR IS OUTDOORS!"]}
+                                                   }},
+            "lock_mechanism": {
+                "id": "office_lock_01",
+                "name": "steel High-Security Deadbolt Lock: ",
+                "key": "brass_key_01",
+                "lock_type": "key_lock",
+                "outside": "hallway_morgue_02",
+                "is_locked": False,
+                "lock_descriptions": {
+                    "default": {
+                        "outside_locking": ["The key clicks into place.", "The lock turns with a solid clunk."],
+                        "outside_unlocking": ["You hear a clunk as the lock disengages.", "The lock gives way with a soft click."],
+                        "inside_locking": ["You turn the knob, hearing the bolt slide into place."],
+                        "inside_unlocking": ["The bolt disengages."],
+                        "cant_open": ["The door doesn't budge.", "The brass lock holds the door still.", "You pull, but the door remains closed."],
+                        "outside_locked": ["A brass keyhole faces you."],
+                        "outside_unlocked": ["It's unlocked."],
+                        "inside_locked": ["A brass knob is in the lock position."],
+                        "inside_unlocked": ["A brass knob is in the unlock position."]
+                        }
+                    }
+                }
+            },
+"reception_01": {
+            "name": "front door",
+            "connections": ["reception_02", "cab_01"],
+
+            "component_descriptions": {"default": {"opening": {"neutral": ["It opens.", "It swings open."]},
+                                                   "closing": {"neutral": ["It closes.", "It swings closed."]},
+                                                   "closed": {"neutral": ["The door leads to reception.", "The door faces you.",
+                                                                          "It's the door to reception.","A  door faces you."]},
+                                                   "open": {"neutral": ["its open. HAVE SOME WEATHER STFUF SINCE THE DOOR IS OUTDOORS!"]}
+                                                   }},
+            "lock_mechanism": {
+                "id": "office_lock_01",
+                "name": "steel High-Security Deadbolt Lock: ",
+                "key": "brass_key_01",
+                "lock_type": "key_lock",
+                "outside": "cab_01",
+                "is_locked": False,
+                "lock_descriptions": {
+                    "default": {
+                        "outside_locking": ["The key clicks into place.", "The lock turns with a solid clunk."],
+                        "outside_unlocking": ["You hear a clunk as the lock disengages.", "The lock gives way with a soft click."],
+                        "inside_locking": ["You turn the knob, hearing the bolt slide into place."],
+                        "inside_unlocking": ["The bolt disengages."],
+                        "cant_open": ["The door doesn't budge.", "The brass lock holds the door still.", "You pull, but the door remains closed."],
+                        "outside_locked": ["A brass keyhole faces you."],
+                        "outside_unlocked": ["It's unlocked."],
+                        "inside_locked": ["A brass knob is in the lock position."],
+                        "inside_unlocked": ["A brass knob is in the unlock position."]
+                        }
+                    }
+                }
+            },
         },
 
 }

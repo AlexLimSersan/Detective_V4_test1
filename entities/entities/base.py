@@ -41,10 +41,11 @@ class Entity(ABC):
 class Mobile_Entity(Entity):
     """base class for items and suspects, that can move and will update description location correspondingly"""
     #routine hack: event->move mobile entity wherever, then event descriptions-> can be tailored for that location. default is default routine
-    def __init__(self, id, name, game_state, descriptions, entity_state = "default", is_outdoors = False, current_location = None):
+    def __init__(self, id, name, game_state, descriptions, entity_state = "default", is_outdoors = False, current_location = None, dialogue_id = None):
         super().__init__(id, name, game_state, None, entity_state, is_outdoors)
         self.descriptions = Mobile_Descriptions(self.id, self.name, self.entity_state, self.game_state, descriptions, current_location, is_outdoors)
         self._current_location = current_location #reference to lcoation object
+        self.dialogue_id = dialogue_id or self.id
 
     @property
     def current_location(self):

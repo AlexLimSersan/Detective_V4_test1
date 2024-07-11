@@ -5,7 +5,7 @@ PLAYER_STARTING_LOCATION = "cab_01"
 START_PHASE = "morning"
 ALL_PHASES = ["morning", "afternoon", "evening", "night"]
 TICKER_MULTIPLIER = 1
-PHASE_TIME_INTERVAL = 10 #time between phases
+PHASE_TIME_INTERVAL = 30 #time between phases
 #ACTION TIME
 MOVE_TIME = 2
 #speak time, interact time
@@ -48,5 +48,5 @@ EVENT_TRIGGER_CAP = 2 #before murder!
 # UI SETTINGS
 MESSAGE_SLEEP_TIME = 0.4
 # Command Identifiers
-EXIT_COMMANDS = ["return", "leave", "exit", "back"]
-ENTER_COMMANDS = ["enter", "go", "continue", "forward", "down", "cont", "walk", "climb", "up"]
+EXIT_COMMANDS = ["return", "leave", "exit", "back","b"]
+ENTER_COMMANDS = ["enter", "go", "continue", "forward", "down", "cont", "walk", "climb", "up", "e"]

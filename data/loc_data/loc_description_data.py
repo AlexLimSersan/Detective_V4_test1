@@ -3,6 +3,36 @@
 # always key weather, time. or just time. but never time, weather!!!
 #why not optional time or weather keys for all of them?
 loc_description_data = {
+
+
+"void_01": { #narrows again - muddy ground, footprint
+    "default": {
+        "approaching": {"neutral": ["The ground is uneven.", "You walk across uneven footing."]
+        },
+        "at_entity": {
+            "neutral": ["The ground squelches under your feet.", "The mud sticks to your shoes."],
+            #you notice muddy footprints, imprints, they are messed up but clear enough to make out shoe vs boot?
+
+            #MUD STICKS HINT FOR THE CLEAN SHOES
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {},
+        "tags": ["urban"],
+        "connections": {
+            "crime_scene_01": {
+                "neutral": ["The alley stretches on..."],
+            },
+            "dead_end_01": {
+                "neutral": ["The dead end connects to the alley."],
+            },
+            "alley_05": {
+                "neutral": ["The alley stretches on..."],
+            }
+        }
+    }
+},
     #FOR APPROACH/LEAVING, TRY CONNECTIONS?
 
 "cab_01": {
@@ -36,10 +66,10 @@ loc_description_data = {
             "bad": ['The cabbie smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror. "Where to?"' ,'The driver looks indifferent to your presence.']
         },
         "times": {
-            "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans his head on the window.", "He grips the steering wheel."],
+            "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans back.", "He grips the steering wheel."],
                         "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired.",
                                 ]},
-            "afternoon": {"neutral": ["He rubs his eyes.", "He stretches in his seat.", "He leans his head on the window.", "He shifts in his seat."],
+            "afternoon": {"neutral": ["He rubs his eyes.", "He stretches in his seat.", "He leans back.", "He shifts in his seat."],
                         "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired."]},
             "evening": {"neutral": ["He scratches his head.", "His eyes wander.", "He shifts in his seat.", "He grips the steering wheel."],
                         "bad": ["He looks like he might fall asleep.", "His hands reach for another cigarette.", "His eyes dart, scanning the horizon.",]},
@@ -59,7 +89,8 @@ loc_description_data = {
                 "rain": ["The cab is parked nearby.", "You can see the cab through the downpour."],
                 "grey": ["The cab is parked nearby."],
             },
-            "alley_01": ["The cab is parked nearby.", "You can see the cabbie waiting across the street."]
+            "alley_01": ["The cab is parked nearby.", "You can see the cabbie waiting across the street."],
+            "backroom_door_02": ["You can walk to the cab from here..."]
             },
         "leaving": { #leaving from this loc TO player current loc, so key by current loc, then weather or time,,,
             "neutral": ["You exit the cab, closing the door behind you.", "Your feet hit the ground, and you climb out the car.",
@@ -496,6 +527,31 @@ loc_description_data = {
             }
         }
     },
+"backroom_door_02": {
+    "default": {
+        "approaching": {
+        },
+
+        "leaving": {
+        },
+        "times": {
+
+        },
+        "weather": {
+
+        },
+        "bump": {"neutral" : ["A loud ring echoes as your head slams into the door."]},
+        "at_entity": [
+
+        ],
+        "connections": {
+            "backroom_01": {
+                "open": ["A backdoor leads out to the street."],
+                "closed": ["A backdoor leads out to the street."],
+                }
+            }
+        }
+    },
 "bertha_office_door_01": {
     "default": {
         "approaching": [""],
@@ -645,7 +701,8 @@ loc_description_data = {
 "crime_scene_01": { #widens to crime scene
     "default": {
         "approaching": {
-            "neutral": ["The alleyway widens.", "The passage opens up to a small court."],
+            "alley_03_1": {"neutral": ["The alleyway widens.", "The passage opens up to a small court."], },
+
         },
         "at_entity": {
             "neutral": ["You arrive at the crime scene."],
@@ -654,15 +711,39 @@ loc_description_data = {
         },
         "times": {},
         "weather": {"sun": [],
-                    "rain": []
+                    "rain": [],
+                    "storm": [],
                     },
         "tags": ["urban"],
         "connections": {
             "alley_03_1": {
                 "neutral": [""],
             },
-            "alley_04": {
+            "crime_scene_02": {
                 "neutral": ["The crime scene is ahead."],
+            }
+        }
+    }
+},
+
+"crime_scene_02": { #widens to crime scene
+    "default": {
+        "approaching": {
+        },
+        "at_entity": {
+        },
+        "leaving": {
+        },
+        "times": {},
+        "weather": {
+                    },
+        "tags": ["urban"],
+        "connections": {
+            "crime_scene_01": {
+                "neutral": [""],
+            },
+            "alley_04": {
+                "neutral": ["The alley narrows again ahead."],
             }
         }
     }
@@ -888,7 +969,7 @@ loc_description_data = {
         },
         {"bad": ["A lurch of vertigo hits you.", "It makes you slightly nauseous.", "You feel a pang of fear as you imagine falling."],
             "good": ["The rooftop offers a stunning view.", "The view from here is breathtaking."],},
-        {"neutral": ["Multiple paths from here lead to different areas of the city... \n *turn back* "]},
+        {"neutral": ["Multiple paths from here lead to different areas of the city... "]},
         ],
         "leaving": {
             "neutral": ["You climb back down."],
@@ -912,7 +993,7 @@ loc_description_data = {
         "approaching": {
         },
         "at_entity": {
-            "neutral": ["From here, the alley continues towards the residential area. \n *turn back*"],
+            "neutral": ["From here, the alley continues towards the residential area. "],
         },
         "leaving": {
             "neutral": ["You turn back."],
@@ -927,6 +1008,179 @@ loc_description_data = {
         }
     }
 },
+
+
+
+###############MORGUE######################
+"reception_01": { #door
+    "default": {
+        "approaching": {
+            "neutral": ["You walk up to the reception 1 ."]
+        },
+        "at_entity": {
+            "neutral": ["You are in the morgue's reception area ` 1."],
+        },
+        "leaving": {
+            "neutral": [""],
+        },
+        "times": {},
+        "weather": {},
+        "tags": [""],
+        "connections": {
+            "cab_01": {
+                "neutral": ["can see reception_01"],
+            },
+            "reception_02": {
+                "neutral": ["can see reception_01."],
+            },
+        }
+    }
+},
+"reception_02": {
+            "default": {
+                "approaching": {
+                    "neutral": ["You walk to reception 2."]
+                },
+                "at_entity": {
+                    "neutral": ["2"],
+                },
+                "leaving": {
+                    "neutral": [""],
+                },
+                "times": {},
+                "weather": {},
+                "tags": [""],
+                "connections": {
+                    "reception_01": {
+                        "neutral": ["u can see reception_02 "],
+                    },
+                    "hallway_morgue_01": {
+                        "neutral": ["u can see reception_02"],
+                    }
+                }
+            },
+
+
+},
+"office_morgue_01": { #utility room
+            "default": {
+                "approaching": {
+                    "neutral": ["You walk to the office."]
+                },
+                "at_entity": {
+                    "neutral": ["You are in the office."],
+                },
+                "leaving": {
+                    "neutral": [""],
+                },
+                "times": {},
+                "weather": {},
+                "tags": ["indoors"],
+                "connections": {
+                    "reception_02": {
+                        "neutral": ["can see office_morgue_01."],
+                    }
+                }
+            }
+},
+"refrigeration_01": {
+            "default": {
+                "approaching": {
+                    "neutral": ["You walk to the refrigeration."]
+                },
+                "at_entity": {
+                    "neutral": ["You are in the refrigeration."],
+                },
+                "leaving": {
+                    "neutral": [""],
+                },
+                "times": {},
+                "weather": {},
+                "tags": ["indoors"],
+                "connections": {
+                    "hallway_morgue_02": {
+                        "neutral": ["the refrigeration leads to the hallway 02."],
+                    }
+                }
+            },
+},
+
+
+
+"hallway_morgue_01": {
+            "default": {
+                "approaching": {
+                    "neutral": ["You walk to hallway."]
+                },
+                "at_entity": {
+                    "neutral": ["1"],
+                },
+                "leaving": {
+                    "neutral": [""],
+                },
+                "times": {},
+                "weather": {},
+                "tags": [""],
+                "connections": {
+                    "reception_01": {
+                        "neutral": ["u can see hallway 1"],
+                    },
+                    "hallway_morgue_02": {
+                        "neutral": ["u can see hallway 1"],
+                    }
+                }
+            },
+},
+
+"hallway_morgue_02": {
+            "default": {
+                "approaching": {
+                    "neutral": ["You walk to hallway 2."]
+                },
+                "at_entity": {
+                    "neutral": ["2"],
+                },
+                "leaving": {
+                    "neutral": [""],
+                },
+                "times": {},
+                "weather": {},
+                "tags": [""],
+                "connections": {
+                    "refrigeration_01": {
+                        "neutral": ["u can see hallway 1"],
+                    },
+                    "hallway_morgue_01": {
+                        "neutral": ["u can see hallway 2"],
+                    }
+                }
+            },
+},
+
+
+
+"refrigeration_02": {
+            "default": {
+                "approaching": {
+                    "neutral": ["You walk into fridge ."]
+                },
+                "at_entity": {
+                    "neutral": ["at refrigeration_02"],
+                },
+                "leaving": {
+                    "neutral": [""],
+                },
+                "times": {},
+                "weather": {},
+                "tags": [""],
+                "connections": {
+                    "refrigeration_01": {
+                        "neutral": ["u can see refrige - 01"],
+                    },
+                }
+            },
+},
+
 
 
 }

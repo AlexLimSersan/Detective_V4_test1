@@ -12,10 +12,31 @@ class Item_Descriptions(Mobile_Descriptions):
         scene_description = []
         scene_description.append(super().set_scene(optional_key = optional_key))
         # Could prob combine mobile ents, but whateva
-        if self.component:
-            if self.component.is_open:
-                scene_description.append(super().get_at_scene(suspects_present, items_present, self.id))
-        else:
-            scene_description.append(super().get_at_scene(suspects_present, items_present, self.id))
+        scene_description.append(super().get_at_scene(suspects_present, items_present, self.id))
         desc_logger.debug(f"ITE_DESC set scene: returnins {scene_description}")
         return scene_description
+
+    def set_drawer_scene(self, suspects_present=None, items_present=None, hidden_items_present=None, optional_key = None):
+        desc_logger.debug(f"ITE_DESC set drawer scene: data {suspects_present} {items_present}")
+        scene_description = []
+
+        #gets desk only if drawer is closed:
+        if not self.component.is_open:
+            scene_description.append(super().set_scene(optional_key = optional_key))
+
+        #get desk at scene
+        if not self.component.is_open:
+            scene_description.append(super().get_at_scene(suspects_present, items_present, self.id))
+
+        if self.component:
+            #get drawer
+            comp_desc = self.component.get_description("at_entity")
+            if comp_desc:
+                scene_description.append(comp_desc)
+            #get drawer at scene if open
+            if self.component.is_open:
+                scene_description.append(super().get_at_scene(suspects_present, hidden_items_present, self.id))
+
+        desc_logger.debug(f"ITE_DESC set drawer scene: returnins {scene_description}")
+        return scene_description
+

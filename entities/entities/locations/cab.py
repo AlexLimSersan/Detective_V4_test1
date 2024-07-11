@@ -10,12 +10,15 @@ import random
 class Cab(Location):
     def __init__(self, id, name, game_state, descriptions, connections, entity_state="default", is_outdoors=False):
         super().__init__(id, name, game_state, descriptions, connections, entity_state, is_outdoors)
-        self.cab_location_area_names = ["pub", "alley"] #for menu display
+        self.cab_location_area_names = ["pub", "alley", "morgue"] #for menu display
         self.cab_loc_dic = {#cab major loc connections to entry point, has entry points and location for command matching
                 "pub": "porch_01",
                 "porch_01": "porch_01",
                 "alley": "alley_01",
                 "alley_01": "alley_01",
+                "morgue": "reception_01",
+                "reception": "reception_01",
+                "reception_01": "reception_01"
             }
 
     def get_actions(self):
@@ -62,11 +65,15 @@ class Cab(Location):
             return action_dic[command_id](ui)
 
     def accuse(self, ui):
-        ui.display(f"ACCUSING #later, have something here about you can hang whoever...")
+        ui.display(f"ACCUSING #later, have something here about you can hang whoever...\nTHIS IS SERIOUS STUFF BUD!")
         choice = self.game_state.player.ask_inv_type(ui, "suspect")
         if choice:
-            # handle accusation logic
-            ...
+            if isinstance(choice, list):
+                choice = choice[0]
+            ent_logger.warning(f"choice {choice}")
+            if choice == self.game_state.suspect_manager.murderer.id:
+                ui.display(f"CORRECT!")
+
     def exit_game(self, ui):
         if ui.confirm(text= "Are you sure you want to leave town? (y/n)"):
             return "EXIT_GAME"

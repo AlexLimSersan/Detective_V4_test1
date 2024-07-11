@@ -43,7 +43,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
     def loop(self, ui):
         while self.talking:  # loop until no longer talking, can be turned off by event/dialogue effect or player action
             options = self.get_options()
-            ent_logger.info(
+            ent_logger.warning(
                 f"DIALOGUE/ loop: {self.id} ; mood: {self.mood.current_value} \n options = {options}\n topic = {self.topic}\n ")
             if not options:
                 self.reset_convo(ui)

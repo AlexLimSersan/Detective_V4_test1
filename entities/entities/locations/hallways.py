@@ -11,8 +11,10 @@ class Hallway(Location):
                     #add more ordered hallway types here. key is not used in code, so just name as desired.
             #last position lounge and cab reset the orientation
                     "pub hallway": ["hallway_01", "hallway_02", "hallway_03", "hallway_04", "lounge_01"],
-                    "alleyway": ["alley_01", "alley_02", "alley_03", "crime_scene_01", "alley_04", "dead_end_01","dead_end_02", "alley_05", "alley_06","fire_escape_01", "alley_07", "alley_08", "cab_01"],
+                    "alleyway": ["alley_01", "alley_02", "alley_03", "alley_03_1","crime_scene_01", "crime_scene_02","alley_04",
+                                 "dead_end_01","dead_end_02", "alley_05", "alley_06","fire_escape_01", "alley_07", "alley_08"],
                     "alley_ladder": ["alley_06","fire_escape_01", "fire_escape_02", "fire_escape_03","roof_top_01"],
+                "morgue": ["hallway_morgue_01", "hallway_morgue_02"]
                 }
 
     def get_directional_locations(self):
@@ -83,6 +85,7 @@ class Hallway(Location):
 
     def loop(self, ui):
         while True:
+            #lmao just fix here like if alcove, forward?
             suspects, items, locations, actions = self.get_options()
             #locations displayed as actions in hallways
             ui.display_menu(suspects, items, self.get_directional_locations(), actions)

@@ -83,5 +83,51 @@ sus_description_data = {
                 "grey": ["The overcast sky outside matches Gibbs' concentrated expression."]
             }
         }
-    }
+    },
+"mortician_01": {
+        "default": {
+            "at_scene": {
+                "bar_01": {
+                    "neutral": ["Bertha stands behind the bar, working.","Bertha is tending to customers.", "Bertha pours a drink", "Bertha is wiping down the table."],
+                    "bad": ["Bertha looks annoyed, her movements sharp and impatient."]
+                },
+                "porch_01": {
+                    "neutral": ["Bertha is on the porch, smoking"],
+                    "good": ["bertha is on the porch ; smiles warmly as she tends to her patrons."],
+                    "bad": ["bertha is on the porch ; looks annoyed, her movements sharp and impatient."]
+                },
+                "bertha_office_01": {
+                    "neutral": ["Bertha stands behind the bar, her eyes watching the room intently."],
+                    "good": ["Bertha smiles warmly as she tends to her patrons."],
+                    "bad": ["Bertha looks annoyed, her movements sharp and impatient."]
+                },
+            },
+            "approaching": {
+                "neutral": ["You see Bertha behind the bar."],
+                "good": ["Bertha's face lights up as you approach."],
+                "bad": ["Bertha frowns slightly as you get closer."]
+            },
+            "at_entity": {
+                "neutral": ["You are standing next to Bertha."],
+                "good": ["Bertha greets you with a friendly nod."],
+                "bad": ["Bertha glares at you, clearly in a bad mood."]
+            },
+            "leaving": {
+                "neutral": ["You step away from Bertha."],
+                "good": ["Bertha waves goodbye, a smile on her face."],
+                "bad": ["Bertha turns her back on you as you leave."]
+            },
+            "times": {
+                "morning": ["Bertha cleans the bar, preparing for the day's patrons."],
+                "afternoon": ["Bertha serves drinks efficiently, chatting with the customers."],
+                "evening": ["Bertha handles the busy evening crowd with practiced ease."],
+                "night": ["Bertha counts the day's earnings, the bar quieting down."]
+            },
+            "weather": {
+                "rain": ["Raindrops patter against the bar's window as Bertha serves a drink."],
+                "sunny": ["Sunlight streams in, highlighting Bertha's smile."],
+                "grey": ["The overcast sky outside mirrors Bertha's serious expression."]
+            }
+        }
+    },
 }

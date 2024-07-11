@@ -47,31 +47,31 @@ class Stat_Tracker:
 
 
     def dump(self, ui):
-        if ui.confirm(text = f"Dump data? (y/n)"):
-            ui.display(f"MURDERER PROFILE:")
-            for trait_category, trait in self.murderer.profile.items():
-                ui.display(f"{trait_category}: {trait}")
+        #if ui.confirm(text = f"Dump data? (y/n)"):
+        ui.display(f"MURDERER PROFILE:")
+        for trait_category, trait in self.murderer.profile.items():
+            ui.display(f"{trait_category}: {trait}")
 
-            ui.display(f"\nMURDERER LEFT THE FOLLOWING CLUES")
-            # condition: {item_id: spawn_locs}
+        ui.display(f"\nMURDERER LEFT THE FOLLOWING CLUES")
+        # condition: {item_id: spawn_locs}
 
-            for condition, item_loc_pair in self.murder_clues_tracker.items():
-                ui.display(f"{condition}:")
-                for dic_pair in item_loc_pair:
-                    for item, loc in dic_pair.items():
-                        ui.display(f"- {item}: {loc}")
+        for condition, item_loc_pair in self.murder_clues_tracker.items():
+            ui.display(f"{condition}:")
+            for dic_pair in item_loc_pair:
+                for item, loc in dic_pair.items():
+                    ui.display(f"- {item}: {loc}")
 
-            ui.display(f"\nMURDERER ALTERED STARTING STATE:")
-            for item_id, starting_state in self.murder_cleanup_tracker.items():
-                ui.display(f"- {item_id}: {starting_state}")
+        ui.display(f"\nMURDERER ALTERED STARTING STATE:")
+        for item_id, starting_state in self.murder_cleanup_tracker.items():
+            ui.display(f"- {item_id}: {starting_state}")
 
-            ui.display(f"\nWITNESS STATEMENTS:")
-            for condition, list_of_sus_dialogue_dic_pair in self.witness_statements.items():
-                ui.display(f"Murder condition {condition}:")
-                for sus_dialogue_dic_pair in list_of_sus_dialogue_dic_pair:
-                    for sus_id, dialogue_dic in sus_dialogue_dic_pair.items():
-                        for node, dialogue_data in dialogue_dic.items():
-                            ui.display(f"- {sus_id}, {node}: {dialogue_data["says"]}")
+        ui.display(f"\nWITNESS STATEMENTS:")
+        for condition, list_of_sus_dialogue_dic_pair in self.witness_statements.items():
+            ui.display(f"Murder condition {condition}:")
+            for sus_dialogue_dic_pair in list_of_sus_dialogue_dic_pair:
+                for sus_id, dialogue_dic in sus_dialogue_dic_pair.items():
+                    for node, dialogue_data in dialogue_dic.items():
+                        ui.display(f"- {sus_id}, {node}: {dialogue_data["says"]}")
         #can have a "you found" thing later, and also more additional stats as desired
 
 class StoryGenerator:

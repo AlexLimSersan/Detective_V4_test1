@@ -20,18 +20,18 @@ sus_ent_data = {
             "murderer": ["bertha"],
             "weapon_type": ["knife", "gun", "blunt"],
             "fight_type": ["strong", "weak"],
-            "outfit_type": ["denim"],
-            "smoke_type": ["cigs"],
+            "hair_type": ["med_black"],
+            "scrap_type": ["denim","leather"],
+            "smoke_type": ["cigs","tobacco"],
             "access_to": ["bar"],
             "match_type": ["new"],
-            "drink_type": ["whiskey", "rum"],
-            "hair_type": ["hair"],
-            "shoe_type": ["shoes"],
+            "drink_type": ["rum", "white","red"],
+            "stain_type": ["tomato", "grease", "pie"],
+            "shoe_type": ["sneakers","work_boots"],
         },
         "routine": { #routine management here
             "default": { #can have different states
                 "morning": "porch_01",
-                "afternoon": "bertha_office_01",
                 "else": "bar_01" #ids!
             }
         }
@@ -40,19 +40,42 @@ sus_ent_data = {
         "name": "gibbs",
         "profile": {
             "murderer": ["gibbs"],
-            "weapon_type": ["knife", "gun", "blunt"],
-            "fight_type": ["strong", "weak"],
-            "outfit_type": ["leather", "denim"],
-            "smoke_type": ["none"],
-            "access_to": ["bar"],
-            "match_type": ["none"],
-            "drink_type": ["whiskey", "none"],
+            "weapon_type": ["knife", "blunt"],
+            "fight_type": ["strong"],
             "hair_type": ["bald"],
-            "shoe_type": ["shoes"],
+            "scrap_type": ["denim","suit"],
+            "smoke_type": ["cigs"],
+            "access_to": ["bar"],
+            "match_type": ["new","old"],
+            "drink_type": ["rum", "white","whiskey"],
+            "stain_type": ["tomato", "mustard"],
+            "shoe_type": ["sneakers","dress_shoes"],
         },
         "routine": { #routine management here
             "default": { #can have different states
                 "else": "backroom_01" #ids!
+            }
+        }
+    },
+    "mortician_01": {
+        "name": "mortician",
+        "profile": {
+            "murderer": ["mortician"],
+            "weapon_type": ["knife", "gun"],
+            "fight_type": ["weak"],
+            "hair_type": ["med_black"],
+            "scrap_type": ["suit","leather"],
+            "smoke_type": ["cigs","tobacco"],
+            "access_to": ["morgue"],
+            "match_type": ["old"],
+            "drink_type": ["whiskey","red"],
+            "stain_type": ["tomato", "mustard", "grease", "pie"],
+            "shoe_type": ["dress_shoes","work_boots"],
+        },
+        "routine": { #routine management here
+            "default": { #can have different states
+                "night": "void_01",
+                "else": "office_morgue_01" #ids!
             }
         }
     }

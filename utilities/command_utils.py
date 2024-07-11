@@ -15,6 +15,8 @@ def handle_command_id_list_logic(command_ids, game_state):
                      f"COMMAND IDS: {command_ids} ")
     if len(command_ids) == 1:
         return command_ids[0]
+
+    #HAVE TO DO THIS FOR ITEMS TOO! ASHES?!?
     # remove ids that are not in locations (which is current connections)
     command_ids = [id for id in command_ids if id in game_state.player.current_location.get_connections()]
     # Flatten the list but avoid splitting strings into characters
@@ -109,7 +111,10 @@ def match_command_to_option(command, game_state, suspects=None, items=None, loca
     # Find the best match across all current options
     best_match = option_map.get(find_best_match(command, list(option_map.keys())))
     if isinstance(best_match, list):
-        best_match = best_match[0]
+        try:
+            best_match = best_match[0]
+        except:
+            app_logger.warning(f"best match list thing wouldve crashed {best_match} \n {option_map}")
     app_logger.debug(f"GENERAL_UTILS/MATCHCOMMAND_TO_OPTION: before if best match = {best_match}")
     if best_match:
 

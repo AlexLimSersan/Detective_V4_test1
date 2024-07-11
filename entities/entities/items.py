@@ -12,9 +12,9 @@ from utilities.general_utils import names_to_ids
 from utilities.general_utils import merge_dicts
 class Item(Mobile_Entity):
     # routine hack: event->move mobile entity wherever, then event descriptions-> can be tailored for that location. default is default routine
-    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = ITEM_SPAWN_FREQUENCY, is_hidden=False):
-        super().__init__(id, name, game_state, None, entity_state, is_outdoors, current_location)
-        self.item_type = item_type#need type for inv by type?
+    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = ITEM_SPAWN_FREQUENCY, is_hidden=False, dialogue_id = None):
+        super().__init__(id, name, game_state, None, entity_state, is_outdoors, current_location, dialogue_id)
+        self.item_type = item_type # need type for inv by type?
         self.descriptions = Item_Descriptions(id, name, entity_state, game_state, descriptions, current_location, is_outdoors)
         self.state_data = state_data
         self.spawn_data = spawn_data
@@ -46,7 +46,7 @@ class Item(Mobile_Entity):
             else:
                 self.items_present[entity_obj.id] = entity_obj
 
-    def determine_state(self):
+    def determine_state(self): #would check conditions every time, so murderer would open every whiskey bottle?1
         for state, data in self.state_data.items():
             if random.random() <= data.get("frequency", ITEM_STATE_FREQUENCY):
                 if state != "default" and self.game_state.item_manager.check_conditions(data.get("conditions", {}), self.id, "state", state):
@@ -55,15 +55,22 @@ class Item(Mobile_Entity):
 
     def start_loop(self, ui):
         approach_desc = self.descriptions.get_description("approaching", optional_key=self.game_state.current_handler)
-        if approach_desc:
-            ui.display(approach_desc)
+        if approach_desc: #stupid fucking fix but whatves
+            if isinstance(approach_desc, list):
+                approach_desc = random.choice(approach_desc)
+
             ui.beat()
+            ui.display(approach_desc)
 
         self.add_player_topic()
         matched_command = self.loop(ui) #dialogue or interactions
 
         leave_desc = self.descriptions.get_description("leaving", optional_key=self.game_state.current_handler)
         if leave_desc:
+              # stupid fucking fix but whatves
+            if isinstance(leave_desc, list):
+                leave_desc = random.choice(leave_desc)
+
             ui.display(leave_desc)
             ui.beat()
         return matched_command
@@ -115,6 +122,7 @@ class Item(Mobile_Entity):
             if command_id in self.hidden_items_present:
                 self.hidden_items_present[command_id].start_loop(ui)
                 return "pass"
+
         matched_command, matched = match_command_to_option(command, self.game_state, actions = actions)
         if matched:
             if ui.confirm(matched_command):
@@ -126,6 +134,9 @@ class Item(Mobile_Entity):
 
         if self.items_present:
             for item_id, obj in self.items_present.items():
+                actions[item_id] = "_None"
+        if self.hidden_items_present:
+            for item_id, obj in self.hidden_items_present.items():
                 actions[item_id] = "_None"
         if self.components:
             actions.update(self.components.get_options())
@@ -139,8 +150,8 @@ class Item(Mobile_Entity):
 
 
 class Clue(Item):
-    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = CLUE_SPAWN_FREQUENCY, ):
-        super().__init__(id, name, game_state, descriptions, spawn_data, state_data, components, item_type, entity_state, is_outdoors, current_location, None )
+    def __init__(self, id, name, game_state, descriptions, spawn_data, state_data = None, components = None, item_type = None, entity_state="default", is_outdoors=False, current_location=None, spawn_frequency = CLUE_SPAWN_FREQUENCY, is_hidden=False, dialogue_id=None):
+        super().__init__(id, name, game_state, descriptions, spawn_data, state_data, components, item_type, entity_state, is_outdoors, current_location, None, is_hidden, dialogue_id )
         self.spawn_frequency = spawn_frequency
 
 class Drawer(Item):
@@ -163,7 +174,8 @@ class Drawer(Item):
             None,
             component_descriptions=components.get("component_descriptions", {}),
             is_open=False,
-            lock_mechanism=components.get("lock_mechanism", None)
+            lock_mechanism=components.get("lock_mechanism", None),
+            option_titles=components.get("option_titles", {})
         )
         self.descriptions.component = self.components
         assert isinstance(self.components, Lid)
@@ -186,7 +198,7 @@ class Drawer(Item):
         #approach and leave desc already shown
 
         while True:
-            ui.display(self.set_scene())
+            ui.display(self.set_drawer_scene())
             actions,component_actions = self.get_options()
             ui.display_menu_type_2(options = actions, title=self.name,
                                    options_2=component_actions, title_2=self.components.name)
@@ -196,10 +208,18 @@ class Drawer(Item):
                 if self.components.process_command(command, ui):
                     ent_logger.debug(f"components processed {command}")
                     continue
-            actions.update(self.hidden_items_present)
+            if self.components.is_open:
+                actions.update(self.hidden_items_present)
             result = self.process_command(command, ui, actions = actions)
             if result == "pass":
                 continue
             if result:
                 return result
             ui.bad_input()
+
+    def set_drawer_scene(self):
+        scene_desc = []
+        #all_ite_objs = merge_dicts(self.items_present, self.hidden_items_present)
+        scene_desc.append(self.descriptions.set_drawer_scene(self.suspects_present, self.items_present, self.hidden_items_present, optional_key=self.id))
+
+        return scene_desc

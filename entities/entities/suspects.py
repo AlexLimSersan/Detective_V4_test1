@@ -12,8 +12,8 @@ from game.game_state import Game_State
 
 class Suspect(Mobile_Entity):
     #ROUTINE HACK: TIME DESCRIPTIONS FOR ACTIONS! also event?
-    def __init__(self, id, name, profile, routine, game_state, descriptions, dialogue, player_options, entity_state="default", is_outdoors=False, current_location=None):
-        super().__init__(id, name, game_state, None, entity_state, is_outdoors, current_location)
+    def __init__(self, id, name, profile, routine, game_state, descriptions, dialogue, player_options, entity_state="default", is_outdoors=False, current_location=None, dialogue_id = None):
+        super().__init__(id, name, game_state, None, entity_state, is_outdoors, current_location, dialogue_id)
         self.profile = profile
         self.routine = routine
         self.mood = Vibe_System(SUSPECT_STARTING_MOOD)

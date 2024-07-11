@@ -125,12 +125,12 @@ class UI:
 
     def display_menu_type_2(self, options, title="Menu", options_2 = None, title_2=None):
         print(self.bar)
-        print(title.capitalize())
-        #for text in options ids to names self.game_state
         if options:
+            print(title.capitalize())
+            #for text in options ids to names self.game_state
+
             self.handle_option_printing_logic(options)
-        else:
-            self.display("-")
+
         if options_2:
             self.handle_option_printing_logic(options_2, title_2)
 

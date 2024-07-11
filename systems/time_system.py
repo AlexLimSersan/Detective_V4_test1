@@ -38,6 +38,11 @@ class Time_System: #could add an event "late game" or similar, which can change 
 
         """LIKE WEAHTER, NEED SOME WARNING/TRANSITION THING! TO ABRUPT FOR ROUTINES ESP EVENTS LIKE A SUSPECT VANISHES or appears in the room.."""
         #SUN, RAIN, TRANSITION ANNOUNCEMENT (THE SKY DARKENS, CLOUDS FORM, THE CLOUDS PART, THE RAIN starts to SLOWS DOWN...
+        """
+        simple like, it's almost nighttime.... halfway through the phase.and done need to stall..
+        
+        
+        """
 
 
 

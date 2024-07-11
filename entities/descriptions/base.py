@@ -15,7 +15,7 @@ class Descriptions(ABC):
         #approaching, leaving, at entity, connections, at_scene
 
     def get_description(self, description_type, optional_key = None):
-        desc_logger.debug(f"Base Descriptions/ get_description() : description type: {description_type}")
+        desc_logger.debug(f"Base Descriptions/ get_description() : description type: {description_type}\n{self.entity_state}")
         descriptions = iterate_states(self.game_state, self.entity_state, self.descriptions, description_type)
         description_to_return = []
         # just for now, later always list of dics
@@ -29,8 +29,10 @@ class Descriptions(ABC):
                 if isinstance(desc_dic, dict):  # safety
                     description_to_return.append(self.fetch_random_description(description_type, desc_dic, optional_key))
         if not description_to_return and descriptions:
+            desc_logger.debug(f"{description_to_return}, {descriptions}")
             return descriptions
         if description_to_return:
+            desc_logger.debug(f"{description_to_return}")
             return description_to_return
         #desc_logger.warning(f"Base Description/get_description(): No descriptions found after iterating states for description type {description_type}\n{self.descriptions}")
         #raise ValueError("No description available")
@@ -62,7 +64,7 @@ class Descriptions(ABC):
         temp_dic = None
         if isinstance(descriptions_dic, dict):
             if description_type in ["at_entity", "times", "weather"]:
-                temp_dic = descriptions_dic  # just to avoid the warning log below
+                temp_dic = descriptions_dic.get(self.game_state.player.current_location.id)#GOING TO TRY THIS, NOW CAN HAVE DIFFERENT at ent DESCRIPTIONS BASED ON LOCATION!  # just to avoid the warning log below
                 if optional_key and not temp_dic:
                     temp_dic = descriptions_dic.get(optional_key, descriptions_dic)
             # ALREADY CHANGED PLAYER LOC
@@ -71,10 +73,21 @@ class Descriptions(ABC):
                 if optional_key and not temp_dic:
                     temp_dic = descriptions_dic.get(optional_key, descriptions_dic)
             elif description_type in ["leaving", "connections", "at_scene"]:  # leaving to
+                from entities.entities.items import Drawer
+                drawer_dic = None
+                drawer = self.game_state.item_manager.get_entity(self.id)
+                if isinstance(drawer, Drawer):
+                    if drawer.components.is_open:
+                        drawer_dic = descriptions_dic.get("open")
+                    else:
+                        drawer_dic = descriptions_dic.get("closed")
+                if drawer_dic:
+                    descriptions_dic = drawer_dic
                 temp_dic = descriptions_dic.get(self.game_state.player.current_location.id)
                 desc_logger.debug(f"at scene temp = {temp_dic}")
                 if optional_key and not temp_dic:
                     temp_dic = descriptions_dic.get(optional_key, descriptions_dic)
+
             elif optional_key:
                 temp_dic = descriptions_dic.get(optional_key, temp_dic)
             else:

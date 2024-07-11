@@ -58,6 +58,8 @@ class Weather_System:
         if not description_tags:
             return []
 
+        if random.random() < 0.7: #30% chance for generic weather description
+            return []
 
         # Get current time of day and weather type
         time_of_day = self.game_state.time_system.current_phase
