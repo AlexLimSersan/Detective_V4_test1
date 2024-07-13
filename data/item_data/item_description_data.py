@@ -1,4 +1,46 @@
 item_description_data = {
+"matchbook_alley_01": {
+        "brown": {
+            "at_scene": {
+                "default": {
+                    "neutral": ["A reddish brown matchbook is squashed into the mud."],
+                },
+            },
+            "approaching": {
+                "neutral": [""],
+            },
+            "at_entity": {
+                "neutral": ["Flecks of dried blood cover a faded brown matchbook."],
+            },
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+        "black": {
+            "at_scene": {
+                "default": {
+                    "neutral": ["A reddish black matchbook is squashed into the mud."],
+                },
+            },
+            "approaching": {
+                "neutral": [""],
+            },
+            "at_entity": {
+                "neutral": ["Flecks of dried blood cover a glossy, black matchbook."],
+            },
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+},
 "alley_ash_cigs_01": {
         "default": {
             "at_scene": {
@@ -190,7 +232,7 @@ item_description_data = {
                 "neutral": [""],
             },
             "at_entity": {
-                "neutral": ["The force of the impacts were clearly great, her ribs broken, her forearm snapped in two."],
+                "neutral": ["The force of the impacts were clearly great, her ribs broken, her forearm snapped in two. FIST MARKS TO CONTRAST PIPE?"],
             },
             "leaving": {
                 "neutral": [""],

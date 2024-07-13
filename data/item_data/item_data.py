@@ -7,6 +7,26 @@
 item_ent_data = {
     "clues": {
 
+"matchbook_alley_01": {
+    "name": "bloody matchbook",
+    "state_data": {
+        "default": {
+            "frequency": 0
+        },
+        "brown": {
+            "frequency": 1, "match_type": ["old"],
+        },
+        "black": {
+            "frequency": 1, "match_type": ["new"],
+        },
+    },
+    "spawn_data": {
+        "locations": ["alley_05"],
+        "frequency": 0.8,
+        "count": 1,
+    }
+},
+
 #ashes in alley
 "alley_ash_cigs_01": {
     "name": "fine ashes",
@@ -453,26 +473,6 @@ item_ent_data = {
                         "closing":["You office_morgue_desk the cabinet doors."],
                         "closed": ["office_morgue_desk, LIQUORS, WINES, BEERS, GLASSES, CANS, ETC... JUICES AND ICE TOOLS... NAPKINS, LEMONS/LIMES, FOOD!\n relates to something? deb?"],
                         "opened":["It's office_morgue_desk."],
-                    }
-                }
-            }
-        },
-"morgue_workbench" : {
-            "name": "workbench",
-            "spawn_data": {
-                "locations": ["refrigeration_02"],
-                "frequency": 1,
-                "count": 1,
-            },
-            "state_data": {},
-            "components": {
-                "name": "compartment", #gotta put stuff here?! lol
-                "component_descriptions": {
-                    "default": {
-                        "opening":["morgue_workbench open the cabinet doors."],
-                        "closing":["You morgue_workbench the cabinet doors."],
-                        "closed": ["morgue_workbench, LIQUORS, WINES, BEERS, GLASSES, CANS, ETC... JUICES AND ICE TOOLS... NAPKINS, LEMONS/LIMES, FOOD!\n relates to something? deb?"],
-                        "opened":["It's morgue_workbench."],
                     }
                 }
             }

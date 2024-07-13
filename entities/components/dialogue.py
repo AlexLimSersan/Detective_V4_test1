@@ -7,12 +7,13 @@ from utilities.command_utils import match_command_to_option
 from config.logging_config import ent_logger
 
 
+
 class Dialogue(Interaction): #will move this later, i think in entites/components makes sense
     def __init__(self, dialogue, player_options, id, name, entity_state, mood, game_state, current_location, is_outdoors):
         super().__init__(id, name, game_state, entity_state, is_outdoors)
         self.current_location = current_location
         self.mood = mood
-        self.node_history = [] #list of topic ids
+        self.node_history = ["_"] #list of topic ids
         #dialogue types: {state : {topic, {non topic, }}}
         self.dialogue = dialogue #data
         self.current_node = None
@@ -22,6 +23,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         self.talking = False #for the dialogue loop
         self.topic = "night of the murder"
         #reaction dics using description keying?
+        self.should_react = True #STUPID FUCKING FIX, whatever
 
         # Ensure game_state is an instance of Game_State
         assert isinstance(self.game_state, Game_State), f"Expected Game_State, got {type(self.game_state)}"
@@ -42,11 +44,13 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
 
     def loop(self, ui):
         while self.talking:  # loop until no longer talking, can be turned off by event/dialogue effect or player action
+
             options = self.get_options()
             ent_logger.warning(
                 f"DIALOGUE/ loop: {self.id} ; mood: {self.mood.current_value} \n options = {options}\n topic = {self.topic}\n ")
             if not options:
                 self.reset_convo(ui)
+                ui.display(self.get_idle_text())
                 continue
             command_executed = False
             while not command_executed:
@@ -55,6 +59,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
                 command = ui.get_input()
                 command_executed = self.process_command(command, options, ui)
             # timesystem.advance time here!?
+
 
     def process_command(self, command, options, ui):
         if command in EXIT_COMMANDS:
@@ -85,56 +90,109 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         ui.bad_input()
         return False
 
+    def check_already_talked(self, ui, command=None):
+
+        count = 0
+        for x in self.node_history:
+            if x == self.topic:
+                count += 1
+        if not any(keyword in self.current_node for keyword in ["greet", "redirect", "bye", "talk", "react"]):
+            ent_logger.warning(
+                f"count {count}, command {command}; \nhistory {self.node_history} \n topic : {self.topic}")
+
+            if count == 1:
+                #just talked or again -> will respond
+                _type = "just_talked" if self.node_history[-1] == self.topic else "again"
+                self.only_effects_and_says(self.get_dialogue_dic(_type, player_input=command), ui, command)
+                self.should_react = False
+                return False
+            if count > 1:
+                #just talked or already talked -> wont respond
+                _type = "just_talked" if self.node_history[-1] == self.topic else "already_talked"
+                self.handle_dialogue_dic(self.get_dialogue_dic(type=_type, player_input=command), ui, command)
+                return True
+
+        return False
+
     def handle_dialogue_dic(self, dialogue_dic, ui, command=None):
         ent_logger.debug(f" handle_dialogue_dic: dialogue_dic {dialogue_dic}")
+        if self.check_already_talked(ui,command):
+            return
         #handle effects first to reflect reaction
         self.handle_effects(dialogue_dic, command)
-        self.handle_says_logic(dialogue_dic, ui)
+        self.handle_says_logic(dialogue_dic, ui,command)
         # next player node
+        if command:
+            self.node_history.append(self.topic)
         # this SHOULD be set to none if there is No options, to reflect that the convo for that topic ends. this will trigger the redirect
         self.player_node = dialogue_dic.get("options")
 
-    def handle_says_logic(self, dialogue_dic, ui):
+    def only_effects_and_says(self, dia_dic, ui, command = None):
+        self.handle_effects(dia_dic, command)
+        self.handle_says_logic(dia_dic, ui)
+
+    def get_idle_text(self):
+        ent = self.game_state.suspect_manager.get_entity(self.id)
+        desc = ent.descriptions.get_description("at_entity")
+        return desc
+    def get_reactions(self, dialogue_dic, ui, command=None):
+        default = "react"
+        before_react_type = dialogue_dic.get("before_react_type", default)
+        after_react_type = dialogue_dic.get("after_react_type", None) #none will break if looking for keys
+        ent_logger.warning(f"{self.current_node}; {before_react_type} ; {after_react_type}")
+
+        before_react_dic = self.get_dialogue_dic(before_react_type, command)
+        #after_react_dic = self.get_dialogue_dic(after_react_type) #should be idle?
+        ent_logger.warning(f"{self.current_node}; {before_react_type} ; {after_react_type}\n{before_react_dic} ")
+        return before_react_dic #, after_react_dic #only print after if after react!
+
+    def handle_says_logic(self, dialogue_dic, ui, command=None):
+        if command and self.should_react:
+            before_react_dic = self.get_reactions(dialogue_dic,ui,command)
+
+            self.only_effects_and_says(before_react_dic,ui,command)
+
         # Already keyed by state and mood, so now just optional check weather/time checks if desired.
         says_dic = dialogue_dic.get("says", [...])
-        if isinstance(says_dic, dict):
+        self.say(says_dic, ui)
+        self.should_react = True
+
+
+    def say(self, text, ui):
+        if isinstance(text, dict):
             #i feel like using a list of str numbers is no good lmao...
             #maybe make says a list of dics, the dic is time or weather or text (always) : list of possible responses to print
             #then for the len of list, random from list?
             test_list = []
             for _ in test_list:
-                says = check_nested_weather_or_time_keys(says_dic.get(_), self.game_state)
+                says = check_nested_weather_or_time_keys(text.get(_), self.game_state)
                 if says:
                     ui.display(random.choice(says))
                     ui.beat()
         else:  # not a dic becuase ur lazy
-            ui.display(random.choice(says_dic))
-
+            ui.display(random.choice(text).format(topic=self.topic, current_phase = self.game_state.time_system.current_phase))
     def handle_effects(self, dialogue_dic, command=None): #this could even be in event system?
         effects = dialogue_dic.get("effects")
-        test_ids = ["apple_01", "whiskey_01", "gibbs_01", "bertha_01", "unknown", "redirect"]
         ent_logger.info(f"self.current node = {self.current_node}")
-        for id in test_ids:
-            if id in self.current_node:
-                ent_logger.info(f"this could work?")
+        mood_tally = 0
         if "chat" in self.current_node:
             ...
         elif "grill" in self.current_node:
-            ...
+            mood_tally += -1
         if command:
             ent_logger.info(f"command = {command}; possible reaction?!")
         #or could be in base interaction class?
         #effects is a dictionary of effect, value/id ; mood changes, game vibe changes, or IDS for events
         if not effects:
             return
-        for effect, data in effects:
+        for effect, data in effects.items():
             ent_logger.debug(f"handling effects: effect {effect}, data {data}")
             if effect == "mood":
                 #if data + or - or 0, can react accordingly right here!
                 #could tally up mood modifier + if in murderer_clue_ids and suspect, then just change it later if there is any to be changed
                 #then have one unified react, x2 if murderer? ;;
                 #can also get reaction based on current location, is outdoors?
-                self.mood += data
+                mood_tally += data
                 #reactions for mood changes!
             elif effect == "vibe":
                 self.game_state.vibe_system += data
@@ -143,6 +201,9 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
                 self.game_state.event_system.add_event(data)
             else:
                 raise ValueError("effect not recognized")
+        ent_logger.warning(f"mood {self.mood.current_value} changing by {mood_tally}")
+        self.mood.current_value += mood_tally
+        #initial react
         self.game_state.event_system.check_events()
 
     def get_options(self):
@@ -185,7 +246,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
                 for key in mood_keys_by_preference: #then iterate moods.if none, next player choice if no mood found
                     dialogue_keys_by_preference.append(f"{_type}_{f"{choice}_" if player_input else ""}{key}")
 
-        ent_logger.info(f"dialogue_keys_by_preference: {dialogue_keys_by_preference}")
+        ent_logger.warning(f"dialogue_keys_by_preference: {dialogue_keys_by_preference}")
         #GET THE DIALOGUE DIC ACCORDING TO IF THE PLAYER GAVE AN INPUT; THIS TRANSLATES TO TOPIC VS NON TOPIC DIALOGUE
         if player_input:
             ent_logger.debug(f"if player input True: {player_input}")
@@ -200,7 +261,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
             ent_logger.debug(f"trying dialogue key {dialogue_key}\n iterating states on dialogue_dic {dialogue_dic}")
             response_dic = iterate_states(self.game_state, self.entity_state, dialogue_dic, dialogue_key)
             if response_dic: #respond with first match
-                ent_logger.info(f"using dialogue key {dialogue_key}\n response found: {response_dic}")
+                ent_logger.warning(f"using dialogue key {dialogue_key}\n response found: {response_dic}")
                 self.current_node = dialogue_key
                 return response_dic
         raise ValueError("dialogue response did not default to unknown properly")

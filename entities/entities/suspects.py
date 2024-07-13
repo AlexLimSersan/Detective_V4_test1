@@ -53,5 +53,7 @@ class Murderer(Suspect):
         ent_logger.info(f"MURDERER/randomized_profile() = {self.id}\n {murderer_profile}")
         return murderer_profile
 
+    #need murderer mood multiplier
+
 
 

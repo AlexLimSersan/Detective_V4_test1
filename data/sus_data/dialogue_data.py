@@ -27,7 +27,7 @@ sus_dialogue_data = {
                 },
                 "redirect_bad": {
                     "says": ["Let's get this over with.", "What now?", "Anything else?", "She looks annoyed."],
-                    "effects": {"mood": -1},
+                    "effects": {},
                     "options": "default_1"
                 },
                 "bye_good": {
@@ -41,28 +41,88 @@ sus_dialogue_data = {
         },
         "topic": {
             "default": {
+                #REACTIONS
+                "react_chat_neutral": {
+                    "says": ["A beat passes before she responds.", "'Uhhhmm...'", "She shrugs.",
+                             "She exhales, pausing for a second.",
+                             "'Oh, {topic}? I mean...", "Oh, that?", "I mean...",
+                             ],
+                },
+                "react_grill_neutral": {
+                    "says": ['Her eyes furrow.', "She takes a deep breath, calming herself.",
+                             "Her eyes flash in annoyance.",
+                             "Her shoulders tense..", "She pauses for a moment before answering.",
+                             "Could you lay off me?"],
+                    "effects": {"mood": -1},
+                },
+                #
+                "again_chat_neutral": { #still responds, but warns player they already asked
+                    "says": ['"Again?.."',"I already told you...", "How many times do I have to say it?..",
+                             "For the last time,","Alright, I'll repeat myself...","Okay, listen up because I dont want to repeat it again.",
+                             "Pay attention so you dont keep pestering me..."],
+                    "effects": {"mood": -1},
+                },
+                #just talked: if topic is most recent;  respond if count = 1 else no
+                "just_talked_chat_neutral": {
+                    "says": ['...\n"You literally JUST brought that up..?"',"You really wanna keep talking about {topic}?",
+                             "We just talked about this...","Can't we change the subject for a bit?","You really are fixated on {topic}, huh?"],
+                    "effects": {"mood": -1},
+                },
+                "just_talked_grill_neutral": {
+                    "says": ['...\n"You JUST brought that up..','We just talked about that, whats the matter with you?"',"You really want to keep grilling me about {topic}?",
+                             "Annoy me more with {topic}, why not...","{topic} again? Really?...", "Keep asking about that, why don't you..." ],
+                    "effects": {"mood": -1},
+                },
+                # already_talked: if topic in history, wont respond
+                "already_talked_chat_neutral": {
+                    "says": ['"Again? Lets chat maybe another time, okay?"',"Dude, we talked about that this {current_phase}, remember?", "{topic} again?.. How about something else?",
+                             "Don't you want to talk about something else this {topic}?"],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_grill_neutral": {
+                    "says": ['... "Please relax, you already brought that up, remember?"',"You already pressed me about that this {current_phase}!",
+                             "Nothing's change since you last questioned me, move on.","What are you hoping changed since you last questioned me?"],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_chat_bad": {
+                    "says": ['"Look, you\'re starting to annoy me with your badgering..."',"Honestly, you are really irritating me.. {topic} again?",
+                             "You really want to chat about {topic} all {current_phase}, huh?", "Nag me some more, why don't you...", "What do you think's changed since our last conversation?",],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_grill_bad": {
+                    "says": ['"You are pissing me off with your repetitive questioning..."',"How many times do you want to interrogate me about {topic}?",
+                             "You really are going to ask about {topic} all {current_phase}?", "Grill me more, why don't you..."],
+                    "effects": {"mood": -1},
+                },
+                #unknown
                 "unknown_chat_neutral": {
-                    "says": ["She shrugs. What do you wanna know about {topic}?", "... Don't know much about that."],
+                    "says": ["She shrugs. What do you wanna know about {topic}?", "... Don't know much about that.", "I'm afraid I can't help much with that...",
+                             "I mean.. It's {topic}", "What can I say? It's {topic}.", "Afraid I can't help you much with that."],
                     "effects": {},
                     "options": None
                 },
                 "unknown_grill_neutral": {
-                    "says": ["Lay off me, would you? I told you I don't know anything.", "Honestly, relax. I dont' know anything."],
+                    "says": ["Lay off me, would you? I told you I don't know anything.", "Honestly, relax. I dont' know anything.", "Could you lay off me?",
+                             "I really don't know much about {topic}."],
                     "effects": {},
                     "options": None
                 },
+                #START OF ACTUAL TOPICS! LOL
+
                 "kitchen_knife_01_chat_neutral": {
-                    "says": ["'I mean.. I guess anyone with kitchen access could grab one?" ],
+                    "says": ["Yeah, we got plenty of those... We use them.. to cook...", "It's a kitchen knife. Anything specific you want to know?",
+                             "I've done my fair share of cooking with those..."],
                     "effects": {},
                     "options": None
                 },
                 "kitchen_knife_01_grill_neutral": {
-                    "says": ["'A kitchen knife - I mean, we need those to cook...'","Wouldnt be much of a food place without those..." ],
+                    "says": ["'A kitchen knife - I mean, we need those to cook...'","Wouldnt be much of a food place without that.",
+                             "'I guess anyone with kitchen access could grab one?"],
                     "effects": {},
                     "options": None
                 },
                 "revolver_01_chat_neutral": {
-                    "says": ["'Dude, you really opened my desk drawer? Could you not?", ],
+                    "says": ["'Dude, you really opened my desk drawer? Could you not?" ],
                     "effects": {},
                     "options": None
                 },
@@ -289,8 +349,63 @@ sus_dialogue_data = {
         },
         "topic": {
             "default": {
+                #REACTIONS
+                "react_chat_neutral": {
+                    "says": ["He cracks his knuckles.", "'Oh yes, {topic}...'", "Ah, {topic} - ",
+                             "Well, if I may - ",
+                             "'Excellent topic my good sir.'", "{topic}? well you see...", "Uhh.",
+                             ],
+                },
+                "react_grill_neutral": {
+                    "says": ['His eyes narrow.', "His face is unreadable.",
+                             "Ahh, excellent line of questioning -",
+                             "My good sir, I have just the piece of information you need -", "For a fleeting moment, rage sweeps across his face.",
+                             "Ah, {topic}, yes yes indeed - "],
+                    "effects": {"mood": -1},
+                },
+                #
+                "again_chat_neutral": { #still responds, but warns player they already asked
+                    "says": ['"That again?.."',"Have I not told you?", "Why beat a dead horse, you knawsayinn?\nHe makes some bizarre gesture with his arms.",
+                             "If you really must know about {topic} - ","He seems confused.","I shall repeat myself...",
+                             "Must we discuss this more?"],
+                    "effects": {"mood": -1},
+                },
+                #just talked: if topic is most recent;  respond if count = 1 else no
+                "just_talked_chat_neutral": {
+                    "says": ['...\n"You just brought that up.. no?"',"We just talked about that!", "Why that again?",
+                             "Again?.. why?","It's kind of boring to talk about the same thing so often, no?","Why the obsession with {topic}?"],
+                    "effects": {"mood": -1},
+                },
+                "just_talked_grill_neutral": {
+                    "says": ['...\n"Why must you inquire again about {topic}','I have no further information for you, sire.',"Do you think something changed since.. half a second?",
+                             "Why must you ask me again about such a thing?","{topic} again? Really?...", "Will you ask about that all {current_phase}?" ],
+                    "effects": {"mood": -1},
+                },
+                # already_talked: if topic in history, wont respond
+                "already_talked_chat_neutral": {
+                    "says": ['"Perhaps we continue this conversation another time?"',"Have we not discussed that this {current_phase}?",
+                             "{topic}? Could you not give it some rest?",
+                             "I would rather we discuss another topic..."],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_grill_neutral": {
+                    "says": ['... "You already asked me questions about that...?"',"Have we not already discussed that this {current_phase}?",
+                             "Nothing's changed, my answer would be the same...","That same line of questioning?"],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_chat_bad": {
+                    "says": ['"How about you go bother Bertha."',"Please, you are a very poor conversational partner. It's like a dance you know.. And you need practice, talking about {topic} all {current_phase}...",
+                             "I politely decline this subject of conversation due to it being... BORING!", "Quite the bother, aren't you.", "What do you think's changed? Hint - nothing!",],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_grill_bad": {
+                    "says": ['Rage flashes in his face, his knuckles whitening before he controls himself.\nDont bother me with that again.',"How many times do you want to interrogate me about {topic}?",
+                             "Must you bug me all {current_phase} with your questions?", "Have you thought of... not being a dick?"],
+                    "effects": {"mood": -1},
+                },
+                #unknown
                 "unknown_chat_neutral": {
-                    "says": ["Tell me more, I care so much.","Cool! What other cool conversation ideas do you have?"],
+                    "says": ["Tell me more, I care so much.","Cool! What other topic ideas do you have?\nHe looks at you, making a funny face."],
                     "effects": {},
                     "options": None
                 },
@@ -549,6 +664,63 @@ sus_dialogue_data = {
         },
         "topic": {
             "default": {
+                #REACTIONS
+                "react_chat_neutral": {
+                    "says": ["He looks at you, blankly.", "'Oh yes... {topic}...'", "Hmmm, {topic}..  ",
+                             "Ah yes. ",
+                             "His face never changes.", "He takes his time talking.", "His response is monotone and dry.",
+                             ],
+                },
+                "react_grill_neutral": {
+                    "says": ['His eyes grow distant.', "His face seems bored.",
+                             "'Hmm, let me think...'",
+                             "A beat passes before he responds.", "He shrugs his shoulders.",
+                             "He clears his throat."],
+                    "effects": {"mood": -1},
+                },
+                #again = WILL TALK, already = WONT talk
+                "again_chat_neutral": { #still responds, but warns player they already asked
+                    "says": ['"I guess I can repeat myself for you..."',"I just told you - ", "Detective, there isn't more I can say.",
+                             "If you want to hear it again - ",],
+                    "effects": {"mood": -1},
+                },
+                #just talked: if topic is most recent;  respond if count = 1 else no
+                "just_talked_chat_neutral": {
+                    "says": ['Must I repeat myself?',"Quite forgetful, aren't you?",
+                             ".. If you want to hear it again,", "{topic}? If you've forgotten - "],
+                    "effects": {"mood": -1},
+                },
+                "just_talked_grill_neutral": {
+                    "says": ["I told you, ",
+                             "Nothing more I can say about that, Detective.",
+                             "I just told you - ","{topic}? I just told you...", "Will you be questioning me about that all {current_phase}?" ],
+                    "effects": {"mood": -1},
+                },
+                # already_talked: if topic in history, wont respond
+                "already_talked_chat_neutral": {
+                    "says": ['Please detective, you just questioned me about that.','I have no further answers on this topic.',
+                            "I would rather not talk about that all {current_phase}...",
+                             "{topic}? Could we not move on from that?",
+                             "Give that some rest, would you?"],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_grill_neutral": {
+                    "says": ['I have no further comments.',"I've told you enough about that already.",
+                             "Nothing's changed, Detective.","Dont be so brash, you've already questioned me on that same topic."],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_chat_bad": {
+                    "says": ['"I don\'t want to talk about that again."',"Detective, I am not going to talk about {topic} all {current_phase}...",
+                             "I decline to discuss that any further, thank you.", "Detective, I'd rather you... left.", ],
+                    "effects": {"mood": -1},
+                },
+                "already_talked_grill_bad": {
+                    "says": ['His eyes look blank, but you can tell he is angry.\n"Detective, stop grilling me about that."',
+                             "How many questions will suffice for you?",
+                             "Is your plan to repetitively bug me all {current_phase}?"],
+                    "effects": {"mood": -1},
+                },
+                #unknown
                 "unknown_chat_neutral": {
                     "says": ["I really don't know much...","Afraid I can't help you with that..."],
                     "effects": {},
@@ -576,7 +748,7 @@ sus_dialogue_data = {
                 },
 
                 "hair_01_chat_neutral": {
-                    "says": ["'Its quite a common hair type, unfortunately...'\nHe gestures to his head.\n'Too common...'", ],
+                    "says": ["'Its quite a common hair type, unfortunately...'\nHe gestures to his black hair.\n'Too common...'", ],
                     "effects": {},
                     "options": None
                 },
@@ -591,7 +763,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "gibbs_01_chat_neutral": {
-                    "says": ["Word is, he has trouble crediting his debtors. \nNot a good reputation to have.", ],
+                    "says": ["Word is, he has trouble crediting his debtors... \nNot a good reputation to have.", ],
                     "effects": {},
                     "options": None
                 },

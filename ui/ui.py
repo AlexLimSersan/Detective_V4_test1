@@ -25,6 +25,7 @@ class UI:
 
     def stall(self, text = None, beat_multiplier = 1):
         self.beat(beat_multiplier)
+        self.display(" ")
         self.display(text or "Input any to continue...")
         #sys.stdout.flush()
         self.get_input()
@@ -41,7 +42,7 @@ class UI:
                 self.display(nested_str)
                 time.sleep(nested_pause_time)
         elif isinstance(text, dict):
-            for key, value in text:
+            for key, value in text.items():
                 self.display(f"{key}{f": {value}" if value else ""}")
         else:
             print(text)
