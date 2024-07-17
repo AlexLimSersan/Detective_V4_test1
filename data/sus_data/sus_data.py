@@ -1,4 +1,4 @@
-
+import random
 
 murderer_profile_all_possibilities = {
             "murderer": ["bertha", "gibbs", "phil", "bob", "maxwell"],
@@ -20,13 +20,13 @@ sus_ent_data = {
             "murderer": ["bertha"],
             "weapon_type": ["knife", "gun", "blunt"],
             "fight_type": ["strong", "weak"],
-            "hair_type": ["med_black"],
+            "hair_type": ["hair"],
             "scrap_type": ["denim","leather"],
             "smoke_type": ["cigs","tobacco"],
             "access_to": ["bar"],
             "match_type": ["new"],
-            "drink_type": ["rum", "white","red"],
-            "stain_type": ["tomato", "grease", "pie"],
+            "drink_type": ["rum", "gin"],
+            "stain_type": ["tomato", "pie"],
             "shoe_type": ["sneakers","work_boots"],
         },
         "routine": { #routine management here
@@ -44,10 +44,10 @@ sus_ent_data = {
             "fight_type": ["strong"],
             "hair_type": ["bald"],
             "scrap_type": ["denim","suit"],
-            "smoke_type": ["cigs"],
+            "smoke_type": ["cigs","premium"],
             "access_to": ["bar"],
             "match_type": ["new","old"],
-            "drink_type": ["rum", "white","whiskey"],
+            "drink_type": ["rum", "whiskey"],
             "stain_type": ["tomato", "mustard"],
             "shoe_type": ["sneakers","dress_shoes"],
         },
@@ -63,19 +63,19 @@ sus_ent_data = {
             "murderer": ["mortician"],
             "weapon_type": ["knife", "gun"],
             "fight_type": ["weak"],
-            "hair_type": ["med_black"],
+            "hair_type": ["hair"],
             "scrap_type": ["suit","leather"],
-            "smoke_type": ["cigs","tobacco"],
+            "smoke_type": ["premium","tobacco"],
             "access_to": ["morgue"],
             "match_type": ["old"],
-            "drink_type": ["whiskey","red"],
-            "stain_type": ["tomato", "mustard", "grease", "pie"],
+            "drink_type": ["whiskey","gin"],
+            "stain_type": ["mustard", "pie"],
             "shoe_type": ["dress_shoes","work_boots"],
         },
         "routine": { #routine management here
             "default": { #can have different states
                 "night": "void_01",
-                "else": "office_morgue_01" #ids!
+                "else": "morgue_office_01" #ids!
             }
         }
     }

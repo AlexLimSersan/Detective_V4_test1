@@ -13,7 +13,8 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         super().__init__(id, name, game_state, entity_state, is_outdoors)
         self.current_location = current_location
         self.mood = mood
-        self.node_history = ["_"] #list of topic ids
+        self.topic_history = ["_"] #list of topic ids
+        self.node_history = ["_", "_"]
         #dialogue types: {state : {topic, {non topic, }}}
         self.dialogue = dialogue #data
         self.current_node = None
@@ -46,7 +47,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         while self.talking:  # loop until no longer talking, can be turned off by event/dialogue effect or player action
 
             options = self.get_options()
-            ent_logger.warning(
+            ent_logger.debug(
                 f"DIALOGUE/ loop: {self.id} ; mood: {self.mood.current_value} \n options = {options}\n topic = {self.topic}\n ")
             if not options:
                 self.reset_convo(ui)
@@ -54,7 +55,6 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
                 continue
             command_executed = False
             while not command_executed:
-                ent_logger.debug(f"entering not command executed loop")
                 ui.display_menu_type_2(options=options, title=self.name.capitalize())
                 command = ui.get_input()
                 command_executed = self.process_command(command, options, ui)
@@ -91,28 +91,36 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         return False
 
     def check_already_talked(self, ui, command=None):
+        repeat_node_toggle = False
+        if self.current_node == self.node_history[-2]:
+            assert self.node_history[-1] == self.node_history[-2]  # this should be the case,
+            repeat_node_toggle = True
 
         count = 0
-        for x in self.node_history:
+        for x in self.topic_history:
             if x == self.topic:
                 count += 1
         if not any(keyword in self.current_node for keyword in ["greet", "redirect", "bye", "talk", "react"]):
             ent_logger.warning(
-                f"count {count}, command {command}; \nhistory {self.node_history} \n topic : {self.topic}")
+                f"count {count}, command {command}; toggle {repeat_node_toggle}\nhistory {self.topic_history} \n topic : {self.topic}\nnode ; {self.current_node} ; {self.node_history} ")
 
             if count == 1:
                 #just talked or again -> will respond
-                _type = "just_talked" if self.node_history[-1] == self.topic else "again"
-                self.only_effects_and_says(self.get_dialogue_dic(_type, player_input=command), ui, command)
-                self.should_react = False
+                if repeat_node_toggle: #exact same node is being used:
+                    _type = "again"
+                    self.only_effects_and_says(self.get_dialogue_dic(_type, player_input=command), ui, command)
+                    self.should_react = False
                 return False
-            if count > 1:
+            if count >= 1:
                 #just talked or already talked -> wont respond
-                _type = "just_talked" if self.node_history[-1] == self.topic else "already_talked"
+                _type = "just_talked" if self.topic_history[-1] == self.topic else "already_talked"
                 self.handle_dialogue_dic(self.get_dialogue_dic(type=_type, player_input=command), ui, command)
                 return True
+            #later can have count above 3 or something for SHUT THE FUCK UP ABOUT THAT!
 
         return False
+
+
 
     def handle_dialogue_dic(self, dialogue_dic, ui, command=None):
         ent_logger.debug(f" handle_dialogue_dic: dialogue_dic {dialogue_dic}")
@@ -123,7 +131,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         self.handle_says_logic(dialogue_dic, ui,command)
         # next player node
         if command:
-            self.node_history.append(self.topic)
+            self.topic_history.append(self.topic)
         # this SHOULD be set to none if there is No options, to reflect that the convo for that topic ends. this will trigger the redirect
         self.player_node = dialogue_dic.get("options")
 
@@ -137,13 +145,14 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         return desc
     def get_reactions(self, dialogue_dic, ui, command=None):
         default = "react"
+
         before_react_type = dialogue_dic.get("before_react_type", default)
         after_react_type = dialogue_dic.get("after_react_type", None) #none will break if looking for keys
-        ent_logger.warning(f"{self.current_node}; {before_react_type} ; {after_react_type}")
+        ent_logger.debug(f"{self.current_node}; {before_react_type} ; {after_react_type}")
 
         before_react_dic = self.get_dialogue_dic(before_react_type, command)
         #after_react_dic = self.get_dialogue_dic(after_react_type) #should be idle?
-        ent_logger.warning(f"{self.current_node}; {before_react_type} ; {after_react_type}\n{before_react_dic} ")
+        ent_logger.debug(f"{self.current_node}; {before_react_type} ; {after_react_type}\n{before_react_dic} ")
         return before_react_dic #, after_react_dic #only print after if after react!
 
     def handle_says_logic(self, dialogue_dic, ui, command=None):
@@ -180,7 +189,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         elif "grill" in self.current_node:
             mood_tally += -1
         if command:
-            ent_logger.info(f"command = {command}; possible reaction?!")
+            ent_logger.debug(f"command = {command}; possible reaction?!")
         #or could be in base interaction class?
         #effects is a dictionary of effect, value/id ; mood changes, game vibe changes, or IDS for events
         if not effects:
@@ -246,7 +255,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
                 for key in mood_keys_by_preference: #then iterate moods.if none, next player choice if no mood found
                     dialogue_keys_by_preference.append(f"{_type}_{f"{choice}_" if player_input else ""}{key}")
 
-        ent_logger.warning(f"dialogue_keys_by_preference: {dialogue_keys_by_preference}")
+        ent_logger.debug(f"dialogue_keys_by_preference: {dialogue_keys_by_preference}")
         #GET THE DIALOGUE DIC ACCORDING TO IF THE PLAYER GAVE AN INPUT; THIS TRANSLATES TO TOPIC VS NON TOPIC DIALOGUE
         if player_input:
             ent_logger.debug(f"if player input True: {player_input}")
@@ -262,6 +271,11 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
             response_dic = iterate_states(self.game_state, self.entity_state, dialogue_dic, dialogue_key)
             if response_dic: #respond with first match
                 ent_logger.warning(f"using dialogue key {dialogue_key}\n response found: {response_dic}")
-                self.current_node = dialogue_key
+                self.new_node_key(dialogue_key)
                 return response_dic
         raise ValueError("dialogue response did not default to unknown properly")
+
+    def new_node_key(self, node_key):
+        if not any(keyword in node_key for keyword in ["greet", "redirect", "bye", "talk", "react"]):
+            self.node_history.append(node_key)
+        self.current_node = node_key

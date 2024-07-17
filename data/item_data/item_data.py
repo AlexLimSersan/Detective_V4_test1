@@ -7,17 +7,17 @@
 item_ent_data = {
     "clues": {
 
-"matchbook_alley_01": {
+"murder_matchbook_01": {
     "name": "bloody matchbook",
     "state_data": {
         "default": {
             "frequency": 0
         },
         "brown": {
-            "frequency": 1, "match_type": ["old"],
+            "frequency": 1, "conditions": {"traits": ["old"]},
         },
         "black": {
-            "frequency": 1, "match_type": ["new"],
+            "frequency": 1, "conditions": {"traits": ["new"]},
         },
     },
     "spawn_data": {
@@ -27,50 +27,61 @@ item_ent_data = {
     }
 },
 
-#ashes in alley
-"alley_ash_cigs_01": {
-    "name": "fine ashes",
+#ashes in alley - its okay cig ashes are more common because debbie smokes
+"murder_ash_01": {
+    "name": "ashes",
     "state_data": {
-        "default": {
-            "frequency": 1
+        "default": { #cigs or premium
+            "frequency": 1,
+        },
+        "tobacco": {
+            "frequency": 1,
+            "conditions": {"traits": ["tobacco"]},
         },
     },
     "spawn_data": {
         "locations": ["alcove_01"],
-        "conditions": {"traits": ["cigs"]},
-        "frequency": 0.2,
+        "frequency": 0.8,
         "count": 1,
     }
 },
-"alley_ash_tobacco_01": {
-    "name": "coarse ashes",
+"murder_roach_01": {
+    "name": "squashed roach",
     "state_data": {
-        "default": {
+        "default": { #debbie with lipstick
             "frequency": 1
+        },
+        "cigs": {
+            "frequency": 1,
+            "conditions": {"traits": ["cigs"]},
+        },
+        "premium": {
+            "frequency": 1,
+            "conditions": {"traits": ["premium"]},
         },
     },
     "spawn_data": {
-        "locations": ["alcove_01"],
-        "conditions": {"traits": ["tobacco"]},
+        "locations": ["alcove_01","alley_03", "alley_03_1","alley_02"],
         "frequency": 0.5,
         "count": 1,
     }
 },
-"cig_butt_01": {
+
+"roach_01": {
     "name": "roach",
     "state_data": {
-        "default": {
+        "default": { #generic vs premium in description keys
             "frequency": 1
         },
     },
     "spawn_data": {
-        "conditions": {"traits": ["cigs"]},
-        "locations": ["alcove_01", "alley_02"],
+        "locations_always_spawn": ["office_morgue_desk_01", "bertha_office_drawer_01"],
+        "locations": ["porch_01", "bar_01",],
         "frequency": 0.4,
-        "count": 1,
+        "count": 2,
     }
 },
-
+#ashes in ashtray always mixed except for sus, fuckit
 
 "blood_01": {
         "name": "blood",
@@ -99,54 +110,6 @@ item_ent_data = {
         }
     },
 
-#WEAPONS
-
-"murder_knife_01": { #can be missing, in alley, (or returned to kitchen with no one the wiser)
-    #should have exact same desc as kitchen knife -> at bar knife
-    #maybe state could be the murders knife, so the dialogue is conditional or whatever?
-        "name": "bloody knife",
-        "state_data": {
-            "default": {
-                "frequency": 1
-            },
-        },
-        "spawn_data": {
-            "locations": ["dumpster_01", "dead_end_02"],
-            "conditions": {"traits": ["knife", "at_bar"]},
-            "frequency": 0.7,
-            "count": 1,
-        }
-    },
-"murder_pipe_01": {
-        "name": "bloody pipe",
-        "state_data": {
-            "default": {
-                "frequency": 1
-            },
-        },
-        "spawn_data": {
-            "locations": ["dumpster_01", "dead_end_02"],
-            "conditions": {"traits": ["blunt"]},
-            "frequency": 1,
-            "count": 1,
-        }
-    },
-
-"murder_gun_01": {
-        "name": "bullet casing",
-        "state_data": {
-            "default": {
-                "frequency": 1
-            },
-        },
-        "spawn_data": {
-            "locations": ["crime_scene_01","crime_scene_02","alley_03_1"],
-            "conditions": {"traits": ["gun"]},
-            "frequency": 0.3,
-            "count": 2,
-        }
-    },
-
 "tooth_01": {
         "name": "tooth",
         "state_data": {
@@ -156,12 +119,12 @@ item_ent_data = {
         },
         "spawn_data": {
             "locations": ["crime_scene_01", "crime_scene_02"],
-            "conditions": {"traits": ["blunt, strong"]},
+            "conditions": {"traits": ["void"]}, #fails the condition check so that it doesnt spawn, then moves to conditions any
+            "conditions_any": {"traits": ["blunt, strong"]},
             "frequency": 0.7,
             "count": 1,
         }
     },
-
 "bruising_01": { #to be on limbs and what not later
     "name": "bruising",
     "is_hidden": True,
@@ -208,55 +171,110 @@ item_ent_data = {
     }
 },
 
+#WEAPONS
+
+"murder_knife_01": { #can be missing, in alley, (or returned to kitchen with no one the wiser)
+    #should have exact same desc as kitchen knife -> at bar knife
+    #maybe state could be the murders knife, so the dialogue is conditional or whatever?
+        "name": "bloody knife",
+        "state_data": {
+            "default": {
+                "frequency": 1
+            },
+        },
+        "spawn_data": {
+            "locations": ["dumpster_01", "dead_end_02", "rooftop_01"],
+            "conditions": {"traits": ["knife", "at_bar"]},
+            "frequency": 0.7,
+            "count": 1,
+        }
+    },
+
+"murder_gun_01": {
+        "name": "bullet casing",
+        "state_data": {
+            "default": {
+                "frequency": 1
+            },
+        },
+        "spawn_data": {
+            "locations": ["crime_scene_01","crime_scene_02","alley_03_1"],
+            "conditions": {"traits": ["gun"]},
+            "frequency": 0.3,
+            "count": 2,
+        }
+    },
+
+"murder_pipe_01": {
+        "name": "bloody pipe",
+        "state_data": {
+            "default": {
+                "frequency": 1
+            },
+        },
+        "spawn_data": {
+            "locations": ["dumpster_01", "dead_end_02"],
+            "conditions": {"traits": ["blunt"]},
+            "frequency": 1,
+            "count": 1,
+        }
+    },
+
 #alley spill trip 05
 
-"drink_stain_type_01": { #spilled onto garbage
+"garbage_01": { #spilled onto garbage
     "name": "garbage",
     "state_data": {
-        "default": { #not used
+        "default": { #no scent
             "frequency": 1
         },
         "rum": {
-            "frequency": 1,
+            "frequency": 0.8,
             "conditions": {"traits": ["rum"]},
         },
         "whiskey": {
-            "frequency": 1,
+            "frequency": 0.8,
             "conditions": {"traits": ["whiskey"]},
         },
-        "white": {
-            "frequency": 1,
-            "conditions": {"traits": ["white"]},
-        },
-        "red": {
-            "frequency": 1,
-            "conditions": {"traits": ["red"]},
+        "gin": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["gin"]},
         },
     },
     "spawn_data": {
         "locations": ["alley_05"], #could also put on scrap piece, or glass
-        "frequency": 0.8,
+        "frequency": 1,
         "count": 1,
     }
 },
 
         #SMOKETYPE
+#need spill different because of name
 "spilled_cigs_01": {
     "name": "loose cigarettes",
     "state_data": {
         "default": {
-            "frequency": 1
+            "frequency": 0,#should never be used
+        },
+        "cigs": {
+            "frequency": 1,
+            "conditions": {"traits": ["cigs"]},
+        },
+        "premium": {
+            "frequency": 1,
+            "conditions": {"traits": ["premium"]},
         },
     },
     "spawn_data": {
         "locations": ["alley_05"],
-        "conditions": {"traits": ["cigs"]},
+        "conditions": {"traits": ["void"]},
+        "conditions_any": {"traits": ["cigs","premium"]},
         "frequency": 0.8,
         "count": 1,
     }
 },
 "spilled_tobacc_01": {
-    "name": "loose tobacco",
+    "name": "spilled tobacco",
     "state_data": {
         "default": {
             "frequency": 1
@@ -270,56 +288,81 @@ item_ent_data = {
     }
 },
 
-"scrap_01": {
-    "name": "torn fabric",
+"scrap_leather_01": {
+    "name": "torn leather",
     "state_data": {
-        "default": { #not used
-            "frequency": 0
-        },
-        "denim": {
-            "frequency": 1,
-            "conditions": {"traits": ["denim"]},
-        },
-        "leather": {
-            "frequency": 1,
-            "conditions": {"traits": ["leather"]},
-        },
-        "suit": {
-            "frequency": 1,
-            "conditions": {"traits": ["suit"]},
-        },
-    },
-    "spawn_data": {
-        "locations": ["fire_escape_01", "fire_escape_02", "fire_escape_03"],
-        "frequency": 0.8,
-        "count": 1,
-    }
-},
-"food_stain_01": {
-    "name": "stain",
-    "state_data": {
-        "default": { #not used
-            "frequency": 0
+        "default": { #no stain
+            "frequency": 1
         },
         "mustard": {
-            "frequency": 1,
+            "frequency": 0.8,
             "conditions": {"traits": ["mustard"]},
         },
         "tomato": {
-            "frequency": 1,
+            "frequency": 0.8,
             "conditions": {"traits": ["tomato"]},
         },
-        "grease": {
-            "frequency": 1,
-            "conditions": {"traits": ["grease"]},
-        },
         "pie": {
-            "frequency": 1,
+            "frequency": 0.8,
             "conditions": {"traits": ["pie"]},
         },
     },
     "spawn_data": {
-        "locations": ["scrap_01"],
+        "locations": ["fire_escape_01", "fire_escape_02", "fire_escape_03"],
+
+        "conditions": {"traits": ["leather"]},
+        "frequency": 0.8,
+        "count": 1,
+    }
+},
+"scrap_denim_01": {
+    "name": "torn denim",
+    "state_data": {
+        "default": { #no stain
+            "frequency": 1
+        },
+        "mustard": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["mustard"]},
+        },
+        "tomato": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["tomato"]},
+        },
+        "pie": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["pie"]},
+        },
+    },
+    "spawn_data": {
+        "locations": ["fire_escape_01", "fire_escape_02", "fire_escape_03"],
+        "conditions": {"traits": ["denim"]},
+        "frequency": 0.8,
+        "count": 1,
+    }
+},
+"scrap_suit_01": {
+    "name": "torn suit",
+    "state_data": {
+        "default": { #no stain
+            "frequency": 1
+        },
+        "mustard": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["mustard"]},
+        },
+        "tomato": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["tomato"]},
+        },
+        "pie": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["pie"]},
+        },
+    },
+    "spawn_data": {
+        "locations": ["fire_escape_01", "fire_escape_02", "fire_escape_03"],
+        "conditions": {"traits": ["suit"]},
         "frequency": 0.8,
         "count": 1,
     }
@@ -340,57 +383,64 @@ item_ent_data = {
     }
 },
 
-"footprint_01": {
+"footprint_01": { #later + debbie to sort through!!
     "name": "mud",
     "state_data": {
-        "default": { #not used
+        "default": { #debbie
             "frequency": 1
         },
         "sneakers": {
-            "frequency": 1,
+            "frequency": 0.8,
             "conditions": {"traits": ["sneakers"]},
         },
         "dress_shoes": {
-            "frequency": 1,
+            "frequency": 0.8,
             "conditions": {"traits": ["dress_shoes"]},
         },
         "work_boots": {
-            "frequency": 1,
+            "frequency": 0.8,
             "conditions": {"traits": ["work_boots"]},
         },
     },
     "spawn_data": {
-        "locations": ["alley_04"],
+        "locations": ["crime_scene_02"], #to allow #later + debbie to sort through!!
         "frequency": 0.8,
         "count": 1,
             }
         },
-
-
 },
 
     "drawers": {
+"morgue_shelf_01" : {
+            "name": "cabinet",
+            "spawn_data": {
+                "locations": ["morgue_office_01"],
+                "frequency": 1,
+                "count": 1,
+            },
+            "state_data": {},
+            "components": {
+                "name": "drawer", #gotta put stuff here?! lol
+                "component_descriptions": {
+                    "default": {
+                        "opening":["You pull the handle."],
+                        "closing":["You push the doors."],
+                        "closed": ["It's closed"],
+                        "opened":["It's open."],
+                    }
+                }
+            }
+        },
         ###
 #ALL drinks for drink stain types!
 "bar_cabinet_01" : {# behind the bar can access maybe if not bertha ; also maybe lowers mood?
-            "name": "cabinet",
+            "name": "shelf",
             "spawn_data": {
                 "locations": ["bar_01"],
                 "frequency": 1,
                 "count": 1,
             },
             "state_data": {},
-            "components": {
-                "name": "sliding doors", #gotta put stuff here?! lol
-                "component_descriptions": {
-                    "default": {
-                        "opening":["You open the cabinet doors."],
-                        "closing":["You close the cabinet doors."],
-                        "closed": ["BEVERAGES, LIQUORS, WINES, BEERS, GLASSES, CANS, ETC... JUICES AND ICE TOOLS... NAPKINS, LEMONS/LIMES, FOOD!\n relates to something? deb?"],
-                        "opened":["It's open."],
-                    }
-                }
-            }
         },
         ###
 #ALL ingredients for food stain types!
@@ -406,9 +456,9 @@ item_ent_data = {
                 "name": "fridge", #gotta put stuff here?! lol
                 "component_descriptions": {
                     "default": {
-                        "opening":["You open the fridge."],
-                        "closing":["You close the fridge."],
-                        "closed": ["FOOD AND BEVERAGES?! relates to something like debbs?"],
+                        "opening":["It takes a bit more force than you expected.","The vacuum makes you have to pull it twice."],
+                        "closing":["The door's weight makes the fridge sway."],
+                        "closed": ["It's closed"],
                         "opened":["It's open."],
                     }
                 }
@@ -457,26 +507,6 @@ item_ent_data = {
                 }
             }
         },
-"office_morgue_desk" : {
-            "name": "steel desk",
-            "spawn_data": {
-                "locations": ["office_morgue_01"],
-                "frequency": 1,
-                "count": 1,
-            },
-            "state_data": {},
-            "components": {
-                "name": "file cabinet", #gotta put stuff here?! lol
-                "component_descriptions": {
-                    "default": {
-                        "opening":["office_morgue_desk open the cabinet doors."],
-                        "closing":["You office_morgue_desk the cabinet doors."],
-                        "closed": ["office_morgue_desk, LIQUORS, WINES, BEERS, GLASSES, CANS, ETC... JUICES AND ICE TOOLS... NAPKINS, LEMONS/LIMES, FOOD!\n relates to something? deb?"],
-                        "opened":["It's office_morgue_desk."],
-                    }
-                }
-            }
-        },
 
         ### tbh head, torso, arms, etc, feels good here. purse, cardigan..
 "debbie_01": { #
@@ -487,7 +517,7 @@ item_ent_data = {
                 "count": 1,
             },
             "state_data": {
-                "default": {
+                "default": { #could have weapon?
                     "frequency": 1
                 },
             },
@@ -512,52 +542,24 @@ item_ent_data = {
 
 
 
-
-
-
-
-
-
 },
-
 
 
 
 "items": {
 
 
-
-#MORTICIAN office stuff
-"morgue_leather_jacket": { #on a hanger
-            "name": "leather jacket", #its new ok?
-            "state_data": {
-                "default": { #normal
-                    "frequency": 1
-                },
-            },
+"office_morgue_desk_01" : {
+            "name": "workbench",
             "spawn_data": {
-                "locations": ["office_morgue_01"],
+                "locations": ["morgue_office_01"],
                 "frequency": 1,
                 "count": 1,
             },
+            "state_data": {},
         },
-
-
 #BACKROOM
-"gambling_tables":{
-    "name": "side tables", #put gibbs stuff here
-    "state_data": {
-        "default": {
-            "frequency": 1
-        },
-    },
-    "spawn_data": {
-        "locations": ["backroom_01"],
-        "frequency": 1,
-        "count": 1,
-    }
-},
-"backroom_counter":{
+"backroom_counter_01":{
     "name": "counter",  #more gibbs stuff here
     "state_data": {
         "default": {
@@ -570,7 +572,7 @@ item_ent_data = {
         "count": 1,
     }
 },
-"ledger":{
+"secret_01":{
     "name": "ledger",  #gibbs secret
     "state_data": {
         "default": {
@@ -578,7 +580,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["backroom_counter"],
+        "locations": ["backroom_counter_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -586,7 +588,7 @@ item_ent_data = {
 
 #ashtrays
 "ashtray_01": {
-    "name": "glass ashtray",  #public ashtrays
+    "name": "ashtray",  #public ashtrays
     "state_data": {
         "default": { #mix
             "frequency": 0.8
@@ -596,66 +598,15 @@ item_ent_data = {
                 },
     },
     "spawn_data": {
-        "locations": ["porch_table_01", "bar_01", "gambling_tables",],
-        "frequency": 1,
-        "count": 3,
-    }
-},
-
-
-"ashtray_02": { #bertha office
-    "name": "copper ashtray",
-    "state_data": {
-        "default": { #mix  #NEED TO ADD CONDITIONS
-            "frequency": 0.8
-                },
-        "empty": {
-            "frequency": 0.2
-                },
-        "tobacco": {
-            "frequency": 0.8,
-            "conditions": {"traits": ["bertha", "tobacco"]}
-                },
-        "cigarettes": {
-            "frequency": 0.8,
-            "conditions": {"traits": ["bertha", "cigs"]}
-                },
-    },
-    "spawn_data": {
-        "locations": ["bertha_office_drawer_01"],
-        "frequency": 1,
-        "count": 1,
-    }
-},
-
-"ashtray_03": { #morgue
-    "name": "wood ashtray",
-    "state_data": {
-        "default": { #mix
-            "frequency": 0.8
-                },
-        "empty": {
-            "frequency": 0.2
-                },
-        "tobacco": {
-            "frequency": 0.8,
-            "conditions": {"traits": ["mortician", "tobacco"]}
-                },
-        "cigarettes": {
-            "frequency": 0.8,
-            "conditions": {"traits": ["mortician", "cigs"]}
-                },
-    },
-    "spawn_data": {
-        "locations": ["office_morgue_desk"],
+        "locations_always_spawn": ["office_morgue_desk_01","bertha_office_drawer_01"],
+        "locations": [ "bar_01", "backroom_counter_01",],
         "frequency": 1,
         "count": 1,
     }
 },
 
 
-
-    "dumpster_01": {
+"dumpster_01": {
         "name": "dumpster",
         "state_data": {
             "default": {
@@ -669,51 +620,6 @@ item_ent_data = {
         }
     },
 
-#   BERTHA CLUES
-"bertha_clothes_01": {
-    #CLOTHES AND FOOT COMBOS: if murderer - @ 80%,
-        #64% chance both cleaned
-        #32% chance one cleaned
-        #4% chance neither
-            "name": "jackets",
-            "is_hidden": True,
-            "state_data": {
-                "default": { #normal
-                    "frequency": 0.8
-                },
-                "cleaned": { #cleaned,
-                    "frequency": 0.8,
-                    "conditions": {"traits": ["bertha"]},
-                },
-            },
-            "spawn_data": {
-                "locations": ["bertha_office_closet_01"],
-                "frequency": 1,
-                "count": 1,
-            },
-        },
-"bertha_footwear_01": {
-            "name": "footwear",
-            "is_hidden": True,
-            "state_data": {
-                "default": { #normal
-                    "frequency": 0.8
-                },
-                "cleaned_shoes": {
-                    "frequency": 0.8,
-                    "conditions": {"traits": ["bertha", "shoes"]},
-                },
-                "cleaned_boots": {
-                    "frequency": 0.8,
-                    "conditions": {"traits": ["bertha", "boots"]},
-                }
-            },
-            "spawn_data": {
-                "locations": ["bertha_office_closet_01"],
-                "frequency": 1,
-                "count": 1,
-            },
-        },
 
 "kitchen_knife_01": { #regular kitchen knife, always be in kitchen
         "name": "kitchen knife",
@@ -724,6 +630,20 @@ item_ent_data = {
         },
         "spawn_data": {
             "locations": ["kitchen_01"],
+            "frequency": 1,
+            "count": 1,
+        }
+    },
+"knife_01": { #regular kitchen knife, always be in kitchen
+        "name": "pocket knife",
+        "is_hidden": True,
+        "state_data": {
+            "default": {
+                "frequency": 1
+            },
+        },
+        "spawn_data": {
+            "locations": ["office_morgue_desk_01","suit_jacket_01","leather_jacket_02"],
             "frequency": 1,
             "count": 1,
         }
@@ -746,11 +666,25 @@ item_ent_data = {
         "count": 1,
     }
 },
+"revolver_02": {
+    "name": "pistol",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 0.8
+        },
+    },
+    "spawn_data": {
+        "locations": ["leather_jacket_02","suit_jacket_01","office_morgue_desk_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
 "bullets_01": {
     "name": "bullets",
     "is_hidden": True,
     "state_data": {
-        "default": { # closed pack
+        "default": {
             "frequency": 0.8
         },
     },
@@ -768,7 +702,6 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations_always_spawn": [],
         "locations": ["bertha_office_01"],
         "frequency": 1,
         "count": 1,
@@ -783,7 +716,7 @@ item_ent_data = {
                 },
             },
             "spawn_data": {
-                "locations": ["porch_01"],
+                "locations": [],
                 "frequency": 1,
                 "count": 1,
             },
@@ -800,11 +733,30 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["bertha_office_drawer_01", "bar_01"],
-        "locations": ["porch_table_01"],
+        "locations": ["porch_01"],
         "frequency": 0.6,
         "count": 1,
     }
 },
+
+"matches_02": {
+    "name": "brown matchbook",
+    "state_data": {
+        "default": {
+            "frequency": 0.4
+        },
+        "used": {
+            "frequency": 0.8
+        }
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["office_trash_01", "leather_jacket_02"],
+        "locations": ["porch_01", "office_morgue_desk_01","backroom_counter_01"],
+        "frequency": 0.5,
+        "count": 2,
+    }
+},
+
 "pipe_01": {
     "name": "metal pipe",
     "state_data": {
@@ -815,7 +767,7 @@ item_ent_data = {
     },
     "spawn_data": {
         "conditions_despawn": {"traits": ["blunt"]}, #CAUSE THEN MURDER PIPE SPAWNS
-        "locations": ["alcove_01"],
+        "locations": ["alcove_01","alley_03","alley_02"],
         "frequency": 0.8,
         "count": 1,
     }
@@ -829,13 +781,51 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["kitchen_01", "backroom_01", "stage_02", "dumpster_01", "dead_end_01", "bar_01", "porch_table_01", "office_morgue_desk"],
-        "frequency": 0.8,
-        "count": 3,
+        "locations": ["kitchen_01", "backroom_01", "stage_02", "dumpster_01", "dead_end_01", "bar_01", "porch_01", "office_morgue_desk_01"],
+        "frequency": 0.6,
+        "count": 2,
     }
 },
 
+#BERTHA
+"flask_01": {
+    "name": "flask",
+    "state_data": {
+        "default": {
+            "frequency": 0
+        },
+        "1": { #1 gin, 2 other
+            "frequency": 1,
+            "conditions": {"traits": ["gin"]}
+        },
+        "2": {
+            "frequency": 1,
+        },
+    },
+    "spawn_data": {
+        "locations": ["bertha_office_01","morgue_shelf_01"],
+        "frequency": 1,
+        "count": 2,
+    }
+},
 
+"gin_01": {
+    "name": "gin",
+    "state_data": {
+        "default": {
+            "frequency": 0.8
+        },
+        "opened": {
+            "frequency": 0.8
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["bar_cabinet_01","morgue_shelf_01"],
+        "locations": [ "stage_02", "porch_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
 "whiskey_01": {
     "name": "whiskey",
     "state_data": {
@@ -847,9 +837,10 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["kitchen_01", "backroom_counter", "gambling_tables", "bar_01", "porch_table_01", "office_morgue_desk"],
-        "frequency": 0.8,
-        "count": 3,
+        "locations_always_spawn": ["bar_cabinet_01", "morgue_shelf_01"],
+        "locations": [ "backroom_counter_01",],
+        "frequency": 1,
+        "count": 1,
     }
 },
 
@@ -864,31 +855,423 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["kitchen_01", "backroom_counter", "gambling_tables", "bar_01", "porch_table_01" ,"office_morgue_desk"],
-        "frequency": 0.8,
-        "count": 3,
+        "locations_always_spawn": ["bar_cabinet_01"],
+        "locations": ["backroom_counter_01", "porch_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"tomato_01": {
+    "name": "tomato soup",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["fridge_01"],
+        "locations": ["bar_01","stage_02"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"mustard_01": {
+    "name": "sandwich",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["fridge_01", "morgue_shelf_01"],
+        "locations": ["backroom_counter_01","lounge_01","backroom_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"pie_01": {
+    "name": "pie",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["fridge_01",  "morgue_shelf_01"],
+        "locations": ["stage_02",],
+        "frequency": 1,
+        "count": 1,
     }
 },
 
 
-"matches_02": {
-    "name": "brown matchbook",
+"lighter_01": {
+    "name": "lighter",
+    "is_hidden": True,
     "state_data": {
         "default": {
-            "frequency": 0.4
+            "frequency": 1
         },
-        "used": {
-            "frequency": 0.8
-        }
     },
     "spawn_data": {
-        "locations_always_spawn": ["office_trash_01", "morgue_leather_jacket"],
-        "locations": ["porch_table_01", "office_morgue_desk"],
+        "locations": ["cardigan_01","debbie_01", "crime_scene_01", "crime_scene_02"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"cardigan_01": {
+    "name": "cardigan",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 0.8
+        },
+        "torn": {
+            "frequency": 1,
+            "conditions": {"traits": ["strong"]}
+        },
+    },
+    "spawn_data": {
+        "locations": ["debbie_01"],
+        "frequency": 0.8,
+        "count": 1,
+    }
+},
+
+"cardigan_scraps_01": {
+    "name": "wool shreds",
+    "state_data": {
+        "default": {
+            "frequency": 0.8
+        },
+    },
+    "spawn_data": {
+        "locations": [ "crime_scene_01", "crime_scene_02", "alley_04"],
+        "conditions": {"traits": ["strong"]},
+        "frequency": 0.8,
+        "count": 1,
+    }
+},
+
+"glass_01": {
+    "name": "wine glass",
+    "state_data": {
+        "default": {
+            "frequency": 0
+        },
+        "white": {
+            "frequency": 0.5
+        },
+        "red": {
+            "frequency": 0.5
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["stage_02"],
+        "locations": ["bar_01", "porch_01", "office_morgue_desk_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"ticket_01": {
+    "name": "bus ticket",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["stage_02","stage_02","stage_02","crime_scene_01", "crime_scene_02", "alley_03_1", "alley_04","debbie_01","cardigan_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"lipstick_01": { #debbies lipstick for the cig + cups/handkerchief?
+    "name": "lipstick",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["crime_scene_01", "crime_scene_02", "alley_03_1", "cardigan_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"purse_01": {
+    "name": "purse",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["crime_scene_01", "crime_scene_02", "alley_03_1", "alley_04","debbie_01"],
+        "frequency": 1,
+        "count": 0,#why have purse?
+    }
+},
+
+
+"cigs_01": {
+    "name": "cigarettes",
+    "state_data": {
+        "default": {#loose
+            "frequency": 0.6
+        },
+        "pack": {
+            "frequency": 0.6
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn" : [], #can have jackets or whateva?
+        "locations": ["porch_01", "leather_jacket_01",  "backroom_counter_01", "morgue_shelf_01"],
+        "frequency": 0.8,
+        "count": 2,
+    }
+},
+"cigs_02": {
+    "name": "premium cigarettes",
+    "state_data": {
+        "default": {#loose
+            "frequency": 0.6
+        },
+        "pack": {
+            "frequency": 0.6
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn" : ["office_morgue_desk_01"], #can have jackets or whateva?
+        "locations": ["leather_jacket_02"], #maybe gibbs coat?
+        "frequency": 0.6,
+        "count": 1,
+    }
+},
+
+"smoke_pipe_01": {
+    "name": "tobacco pipe",
+    "state_data": {
+        "default": {
+            "frequency": 0.6
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn" : ["bertha_office_drawer_01"], #can have jackets or whateva?
+        "locations": ["office_morgue_desk_01", "morgue_shelf_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"fibers_01": { #under debbies fingernails
+    "name": "fingernails",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1 #general dirt and debris, smokes descs
+        },
+        "hair": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["hair"]},
+        },
+        "denim": { #somnething maybe like ; a few fibers, could be denim or cotton; or something like that?
+            "frequency": 0.8,
+            "conditions": {"traits": ["denim"]},
+        },
+        "leather": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["leather"]},
+        },
+        "suit": {
+            "frequency": 0.8,
+            "conditions": {"traits": ["suit"]},
+        },
+    },
+    "spawn_data": {
+        "locations": ["debbie_01"],
+        "conditions": {"traits": ["strong"]},
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"earring_01": {
+    "name": "ear ring",
+    "state_data": {
+        "default": {
+            "frequency": 0.6
+        },
+    },
+    "spawn_data": {
+        "locations": ["crime_scene_01", "crime_scene_02", "debbie_01"],
+        "frequency": 0.8,
+        "count": 1,
+    }
+},
+
+"shoe_rack_01": { #all shoe types
+    "name": "shoe rack",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["lounge_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"hanger_01": { #all jacket types
+    "name": "hanger",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["lounge_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"denim_jacket_01": {  #BERTHA
+    "name": "denim jacket",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["hanger_01", "bertha_office_closet_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"leather_jacket_01": { #BERTHA ;
+    "name": "bomber jacket",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["bertha_office_closet_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"leather_jacket_02": { #MORTICIAN ; classic clean
+    "name": "leather jacket",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["morgue_office_01", "reception_02"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"suit_jacket_01": { #MORTICIAN
+    "name": "suit jacket",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["morgue_office_01", "reception_02"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"suit_jacket_02": { #GIBBS
+    "name": "formal blazer",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["hanger_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
+"high_heels_01": { #debbie
+    "name": "high heels",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["debbie_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"sneakers_01": { #bertha wearing
+    "name": "sneakers",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["shoe_rack_01", "bertha_office_closet_01"],
+        "locations": [],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"dress_shoes_01": { #mort wearing, gibbs wearing
+    "name": "dress shoes",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["shoe_rack_01"],
+        "locations": ["morgue_office_01", "reception_02"], #MORT also WEARING DRESS SHOES
+        "frequency": 0.5,
+        "count": 1,
+    }
+},
+"workboots_01": { #
+    "name": "work boots",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["shoe_rack_01"],
+        "locations": ["bertha_office_closet_01","morgue_office_01","reception_02"],
         "frequency": 0.5,
         "count": 2,
     }
 },
-
 
 },
 }

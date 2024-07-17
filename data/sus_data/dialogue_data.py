@@ -62,6 +62,12 @@ sus_dialogue_data = {
                              "Pay attention so you dont keep pestering me..."],
                     "effects": {"mood": -1},
                 },
+                "again_grill_neutral": { #still responds, but warns player they already asked
+                    "says": ['"Again?.."',"I already told you...", "How many times do I have to say it?..",
+                             "For the last time,","Alright, I'll repeat myself...","Okay, listen up because I dont want to repeat it again.",
+                             "Pay attention so you dont keep pestering me..."],
+                    "effects": {"mood": -1},
+                },
                 #just talked: if topic is most recent;  respond if count = 1 else no
                 "just_talked_chat_neutral": {
                     "says": ['...\n"You literally JUST brought that up..?"',"You really wanna keep talking about {topic}?",

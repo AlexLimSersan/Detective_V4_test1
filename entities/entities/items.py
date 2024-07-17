@@ -111,7 +111,7 @@ class Item(Mobile_Entity):
             command_id = command_id[0]
         if isinstance(actions, dict):
             actions = list(actions.keys())
-        ent_logger.debug(f"com {command}, com id {command_id}, actions {actions}")
+        ent_logger.warning(f"com {command}, com id {command_id}, actions {actions}")
         if command_id in EXIT_COMMANDS:
             return command_id  # game handles switching handlers
         elif command_id in actions:
@@ -127,6 +127,8 @@ class Item(Mobile_Entity):
         if matched:
             if ui.confirm(matched_command):
                 return self.process_command(matched_command, ui, actions)
+            else:
+                return "pass"
         return None
 
     def get_options(self):

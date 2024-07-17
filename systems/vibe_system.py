@@ -11,7 +11,7 @@ class Vibe_System():
         return self._current_value
 
     @current_value.setter
-    def current_value(self, value): #need to clamp -10 - 10?
+    def current_value(self, value): #need to clamp -10 - 10? #change to acommodate way more values
         self._current_value = value
         self._current_value = clamp(self.current_value, min_value = -10, max_value=10)
         self._ranked_keys = self.rank_keys(value)

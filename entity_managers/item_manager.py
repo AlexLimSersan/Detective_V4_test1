@@ -90,37 +90,37 @@ class Item_Manager(Entity_Manager):
             number_to_spawn = spawn_data.get("count", 1)
 
             spawn_locations = spawn_data.get("locations")
-            random.shuffle(spawn_locations)
-            ent_logger.info(f"item: {item_id}, spawn_locations: {spawn_locations}\n{spawn_data}")
-            spawn_locations = spawn_locations[:number_to_spawn]
-            #end of location logic
-            spawn_frequency = spawn_data.get(f"frequency", self.entities[item_id].spawn_frequency)
+            if spawn_locations:
+                random.shuffle(spawn_locations)
+                ent_logger.info(f"item: {item_id}, spawn_locations: {spawn_locations}\n{spawn_data}")
+                spawn_locations = spawn_locations[:number_to_spawn]
+                #end of location logic
+                spawn_frequency = spawn_data.get(f"frequency", self.entities[item_id].spawn_frequency)
 
-            #CHECK DESPAWN_CONDITIONS, else, proceed as regular.
-            #lets you have mutually exclusive items with different IDS.
-            despawn_conditions = spawn_data.get('conditions_despawn', {})
-            if despawn_conditions:
-                if self.check_conditions(despawn_conditions, item_id, "spawn", spawn_locations):
-                    ent_logger.info(
-                        f"despawn - item {item_id} in all {spawn_locations} \nbecause of {despawn_conditions}")
-                    continue
-            #else:
-            conditions = spawn_data.get('conditions', {})
-            #conditions_or = spawn_data.get('conditions_or', {})
-
-            if self.check_conditions(conditions, item_id, "spawn", spawn_locations):
+                #CHECK DESPAWN_CONDITIONS, else, proceed as regular.
+                #lets you have mutually exclusive items with different IDS.
+                despawn_conditions = spawn_data.get('conditions_despawn', {})
+                if despawn_conditions:
+                    if self.check_conditions(despawn_conditions, item_id, "spawn", spawn_locations):
+                        ent_logger.info(
+                            f"despawn - item {item_id} in all {spawn_locations} \nbecause of {despawn_conditions}")
+                        continue
+                #else:
+                conditions = spawn_data.get('conditions', {}) #no conditions = True , will spawn
+                conditions_any = spawn_data.get('conditions_any', {}) #no conditions = False; if conditions, will check to see any, then spawn
                 for loc in spawn_locations:
-                    # CHECK FREQUENCY:
-                    if random.random() < spawn_frequency:  # default vs custom spawn frequency handled in entity (makes CLUES vs ITEMS logic easier)
-                        self.game_state.location_manager.spawn_entities(self.entities[item_id], loc)
-                        ent_logger.warning(f"Spawning item {item_id} in {loc} \nwith state {self.entities[item_id].entity_state}")
-                    else:
-                        ent_logger.warning(f"NOT SPAWNING {item_id} in {loc}, didnt pass {spawn_frequency}")
-            #if conditions_or:
-            #    if self.check_conditions_or(conditions, item_id, "spawn", spawn_locations):
-            #        self.game_state.location_manager.spawn_entities(self.entities[item_id], spawn_locations)
-            #        ent_logger.info(
-            #            f"Spawning item {item_id} in all {spawn_locations} \nwith state {self.entities[item_id].entity_state}")
+                    if random.random() < spawn_frequency:
+                        if self.check_conditions(conditions, item_id, "spawn", spawn_locations):
+
+                        # CHECK FREQUENCY:
+                          # default vs custom spawn frequency handled in entity (makes CLUES vs ITEMS logic easier)
+                            self.game_state.location_manager.spawn_entities(self.entities[item_id], loc)
+
+                        if conditions_any:
+                            if self.check_conditions_any(conditions_any, item_id, "spawn", spawn_locations):
+                                self.game_state.location_manager.spawn_entities(self.entities[item_id], spawn_locations)
+                                ent_logger.info(
+                                    f"Spawning item {item_id} in all {spawn_locations} \nwith state {self.entities[item_id].entity_state}")
 
 
 
@@ -142,7 +142,7 @@ class Item_Manager(Entity_Manager):
             # can have other conditions as needed
         return False
 
-    def check_conditions_or(self, conditions_dic, item_id, query_type=None, spawn_or_state_id=None): #last two are for stat tracker, state vs spawn and relevant ids
+    def check_conditions_any(self, conditions_dic, item_id, query_type=None, spawn_or_state_id=None): #last two are for stat tracker, state vs spawn and relevant ids
         if not conditions_dic:
             return True
         murderer_profile = self.game_state.suspect_manager.murderer.profile

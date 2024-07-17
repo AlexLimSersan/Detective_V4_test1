@@ -24,12 +24,18 @@ class Hallway(Location):
         previous_location = self.game_state.player.location_history[-2]
         orientation = self.game_state.player.orientation
 
+        # dumbest fucking fix who cares lelelel
+        if (self.game_state.player.current_location.id == "alley_02" and
+                self.game_state.player.location_history[-2].id == "alcove_01"):
+            orientation = "forward"
+
         if orientation == "forward":
             cont_title = self.direction_labels.get("continue_title", "continue:")
             ret_title = self.direction_labels.get("return_title", "return:")
         else:
             cont_title = self.direction_labels.get("continue_title_backward", self.direction_labels.get("continue_title", "continue:"))
             ret_title = self.direction_labels.get("return_title_backward", self.direction_labels.get("return_title", "return:"))
+
 
         continue_options = []
         return_options = []
@@ -113,3 +119,4 @@ class Hallway(Location):
                     self.game_state.player.orientation = "backward"
             else:
                 ent_logger.debug(f"Leaving hallway or bug lol")
+

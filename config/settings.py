@@ -1,6 +1,6 @@
 # Game Settings
 #PLAYER
-PLAYER_STARTING_LOCATION = "porch_01"
+PLAYER_STARTING_LOCATION = "cab_01"
 #TIME SYSTEM
 START_PHASE = "morning"
 ALL_PHASES = ["morning", "afternoon", "evening", "night"]

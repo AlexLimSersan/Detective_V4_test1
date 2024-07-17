@@ -55,5 +55,6 @@ class Murderer(Suspect):
 
     #need murderer mood multiplier
 
-
+class Debbie(Mobile_Entity):
+    ... #could randomize her activites from that night?
 

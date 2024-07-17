@@ -57,10 +57,10 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
 #################MORGUE############################
 "reception_02": {
             "name": "reception",
-            "connections": ["reception_01","office_morgue_01", "hallway_morgue_01"],
+            "connections": ["reception_01","morgue_office_01", "hallway_morgue_01"],
             "is_outdoors": True
         },
-"office_morgue_01": {
+"morgue_office_01": {
             "name": "office",
             "connections": ["reception_02"],
             "is_outdoors": True
@@ -68,7 +68,7 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
 "refrigeration_02": {
             "name": "refrigeration",
             "connections": ["refrigeration_01"],
-            "is_outdoors": True
+            "is_outdoors": False
         },
         #these dont actually need to be hallways with only 2... because forward/backward is auto in the ui
 "hallway_morgue_01": { #the alley continues to the residential area. turn back...
@@ -79,7 +79,7 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
 "hallway_morgue_02": { #the alley continues to the residential area. turn back...
             "name": "hallway",
             "connections": ["hallway_morgue_01","refrigeration_01"],
-            "is_outdoors": True,
+            "is_outdoors": False,
         },
 
     },
@@ -343,7 +343,7 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
             "component_descriptions": {"default": {"opening": {"neutral": ["It opens.", "It swings open."]},
                                                    "closing": {"neutral": ["It closes.", "It swings closed."]},
                                                    "closed": {"neutral": ["The door leads to reception.", "The door faces you.",
-                                                                          "It's the door to reception.","A  door faces you."]},
+                                                                          "It's the door to reception.","A door faces you."]},
                                                    "open": {"neutral": ["its open. HAVE SOME WEATHER STFUF SINCE THE DOOR IS OUTDOORS!"]}
                                                    }},
             "lock_mechanism": {
@@ -375,7 +375,7 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
             "component_descriptions": {"default": {"opening": {"neutral": ["It opens.", "It swings open."]},
                                                    "closing": {"neutral": ["It closes.", "It swings closed."]},
                                                    "closed": {"neutral": ["The door leads to reception.", "The door faces you.",
-                                                                          "It's the door to reception.","A  door faces you."]},
+                                                                          "It's the door to reception.","A door faces you."]},
                                                    "open": {"neutral": ["its open. HAVE SOME WEATHER STFUF SINCE THE DOOR IS OUTDOORS!"]}
                                                    }},
             "lock_mechanism": {

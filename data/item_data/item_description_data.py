@@ -1,24 +1,14 @@
 item_description_data = {
-"matchbook_alley_01": {
+"murder_matchbook_01": {
         "brown": {
             "at_scene": {
                 "default": {
                     "neutral": ["A reddish brown matchbook is squashed into the mud."],
                 },
             },
-            "approaching": {
-                "neutral": [""],
-            },
             "at_entity": {
                 "neutral": ["Flecks of dried blood cover a faded brown matchbook."],
             },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "black": {
             "at_scene": {
@@ -26,69 +16,187 @@ item_description_data = {
                     "neutral": ["A reddish black matchbook is squashed into the mud."],
                 },
             },
-            "approaching": {
-                "neutral": [""],
-            },
             "at_entity": {
-                "neutral": ["Flecks of dried blood cover a glossy, black matchbook."],
+                "neutral": ["Flecks of dried blood cover a matte, black matchbook."],
             },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
-"alley_ash_cigs_01": {
+"murder_ash_01": {
+        "default": { #cigs or premium
+            "at_scene": {
+                "default": {
+                    "neutral": ["On a windowsill, you notice smeared, fine ashes."],
+                },
+            },
+            "at_entity": {
+                "neutral": ["The ashes are a mix of black and white, each thin flake curling at the edges.", "A black circular imprint centers around streaks of thin, white ash."],
+            },
+        },
+        "tobacco": {
+            "at_scene": {
+                "default": {
+                    "neutral": ["On a windowsill, you notice a small pile of ashes. "],
+                },
+            },
+            "at_entity": {
+                "neutral": ["Soot mixes with bits of unburnt tobacco, forming sticky, granular clumps."],
+            },
+        },
+},
+"murder_roach_01": {
+        "default": { #debs
+            "at_scene": {
+                "default": {
+                    "neutral": ["Squashed into the ground lies a roach."],
+                },
+            },
+            "at_entity": {
+                "neutral": ["It's burned right down to the butt. Glossy, pink smears contrast against the crumpled white filter."],
+            },
+        },
+        "cigs": {
+            "at_entity": {
+                "neutral": ["It's burned right down to the butt, the white filter crushed into a wrinkled fold."],
+            },
+        },
+        "premium": {
+            "at_entity": {
+                "neutral": ["It's burned right down to the butt, the silver filter crushed into a wrinkled fold."],
+            },
+        },
+},
+"roach_01": {
         "default": {
             "at_scene": {
                 "default": {
-                    "neutral": ["Fine ashes are smeared nearby."],
+                    "neutral": ["Some cigarette butts rest near the edge."],
                 },
             },
-            "approaching": {
-                "neutral": [""],
-            },
             "at_entity": {
-                "neutral": ["The ashes are a mix of black and white, each flake curling at the edges."],
+                "office_morgue_desk_01": {"neutral": ["Scorch marks form a symmetric circle around a solid, silver filter."]},
+                "bertha_office_drawer_01": {"neutral": ["The paper is burned unevenly, down to the solid, white filter."],},
+                "neutral": ["The paper is burned unevenly, down to the solid, white filter."],
             },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
-"alley_ash_tobacco_01": {
+"blood_01": { #later, key to location
+        "default": {
+        },
+        "knife": {
+            "at_scene": {
+                "neutral": ["Streaks of blood mar the wall.",
+                            "Blood patterns the walls in long, irregular arcs."],
+            },
+            "at_entity": {
+                "neutral": ["They form jagged rows, pooling in a puddle near your feat.",
+                            "They form a series of jagged sprays. Below, you see a puddle of crimson, its edges irregular and smeared."
+                            ],
+            },
+        },
+        "gun": {
+            "at_scene": {
+                "neutral": ["Blood covers the walls in a fine mist.", "Small drops of red are scattered across the alley in a fine mist."],
+            },
+            "at_entity": {
+                "neutral": ["At shoulder level, diffuse splotches of blood center around circles of tiny droplets.",
+
+                            "At the center, you see a darker pool of blood, presumably where the body was."
+                            ],
+            },
+        },
+        "blunt": {
+            "at_scene": {
+                "neutral": ["Blood covers the alley, splattered around unevenly."],
+            },
+            "at_entity": {
+                "neutral": ["Specks of blood cast thick, branching streaks across the walls."],
+            },
+        },
+},
+"tooth_01": {
         "default": {
             "at_scene": {
-                "default": {
-                    "neutral": ["Coarse ashes lie in a pile."],
-                },
-            },
-            "approaching": {
-                "neutral": [""],
+                "neutral": ["The blood red forms a contrasting background to a white tooth."],
             },
             "at_entity": {
-                "neutral": ["Bits of unburnt tobacco and sticky, granular ashes clump together."],
+                "neutral": ["It's roots are jagged, it's crown chipped."],
             },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
+"bruising_01": {
+        "default": {
+            "at_scene": {
+                "neutral": ["Abrasions run across the front of her forearms and knees."],
+            },
+            "at_entity": {
+                "neutral": ["They look like minor scrapes and bruises."],
+            },
+        },
+        "strong": {
+            "at_scene": {
+                "neutral": ["Deep, purple bruising mark her ribs and limbs WHAT ABOUT HER CLOTHES?."],
+            },
+            "at_entity": {
+                "neutral": ["The force of the impacts were clearly great, her ribs broken, her forearm snapped in two. "
+                            "FIST MARKS TO CONTRAST PIPE? also   boot prints?!!"],
+            },
+        },
+},
+"wounds_01": {
+        "default": {
+        },
+        "knife": {
+            "at_scene": {
+                "neutral": ["Her flesh dangles at awkward angles - successive slices and stabs line her torso."
+                            "\nYou can see right to the bone on some of them."],
+            },
+            "at_entity": {
+                "neutral": ["Her right jugular has been cut, a three inch gap between the two edges. \n...\nIt looks lethal."],
+            },
+        },
+        "gun": {
+            "at_scene": {
+                "neutral": ["Bullet are embedded in her head, chest, and abdomen."],
+            },
+            "at_entity": {
+                "neutral": ["Each wound houses a straight path from her front to back."],
+            },
+        },
+        "blunt": {
+            "at_scene": {
+                "neutral": ["Rows of indents form distinct, concave lines. The deepest runs from her ear, through her jaw, to her neck."],
+            },
+            "at_entity": {
+                "neutral": ["Mottled, purple bruises form alongside the crushed bones."],
+            },
+        },
+},
+
+"murder_knife_01": { #kitchen knife?
+        "default": {
+            "at_scene": {
+                "dumpster_01" : {
+                    "neutral": ["You notice a knife buried in the trash.", "A knife is stashed under some trash."],
+                },
+                "dead_end_01": {
+                    "neutral": ["A knife lies next to the dumpster.", "You notice a knife nearby."],
+                }
+            },
+            "approaching": {
+                "neutral": ["You hunch over, and grip the handle.","You kneel down and pick it up."],
+            },
+            "at_entity": {
+                "neutral": ["It's blade is bloodied and dented. It's handle is cracked.","The blade has a few dents, but its nonetheless quite sharp."],
+            },
+            "leaving": {
+                "neutral": ["You put it back.", "You place the knife back."],
+            },
+        },
+    },
 "murder_gun_01": {
         "default": {
             "at_scene": {
-                "neutral": ["A bullet casing sits on the concrete floor."],
+                "neutral": ["The glint from a bullet casing catches your eye."],
             },
             "approaching": {
                 "neutral": ["You kneel down."],
@@ -99,557 +207,312 @@ item_description_data = {
             "leaving": {
                 "neutral": ["You stand back up."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
-"blood_01": {
-        "default": {
-            "at_scene": {
-                "neutral": [""],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": [""],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "knife": {
-            "at_scene": {
-                "neutral": ["Streaks of blood mar the wall.",
-                            "Blood patterns the walls in long, irregular arcs."],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["They form jagged rows, pooling in a puddle near your feat.",
-                            "They form a series of jagged sprays. Below, you see a puddle of crimson, its edges irregular and smeared."
-                            ],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "gun": {
-            "at_scene": {
-                "neutral": ["Blood covers the walls in a fine mist.", "Small drops of red are scattered across the alley in a fine mist."],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["At shoulder level, diffuse splotches of blood center around circles of tiny droplets.",
 
-                            "At the center, you see a darker pool of blood, presumably where the body was."
-                            ],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "blunt": {
-            "at_scene": {
-                "neutral": ["Blood covers the alley, splattered around unevenly."],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["The blood pools beneath you."],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-"tooth_01": {
+"murder_pipe_01": {
         "default": {
             "at_scene": {
-                "neutral": ["A tooth sits on the concrete."],
+                "dumpster_01": {
+                    "neutral": ["The edge of a pipe sticks out amidst the filth."],
+                },
+                "dead_end_01": {
+                    "neutral": ["A metal pipe is in the far corner."],
+                },
             },
             "approaching": {
-                "neutral": [""],
+                "neutral": ["You kneel down and grab the pipe.", "It's cold to the touch."],
             },
             "at_entity": {
-                "neutral": ["It's a tooth."],
+                "neutral": ["Clumps of skin and blood lace a concave dent.",
+                            "It's heavy, with red colored indents on it's head."]
             },
             "leaving": {
-                "neutral": [""],
+                "neutral": ["You place the pipe back."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
-},
-"bruising_01": {
+    },
+"garbage_01": {
         "default": {
             "at_scene": {
-                "neutral": ["Abrasions run across the front of her forearms and knees."],
+                "neutral": ["A heap of old cardboard and garbage makes the alley awkward to traverse."],
             },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["They look like minor scrapes and bruises."],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "strong": {
-            "at_scene": {
-                "neutral": ["Deep, purple bruising lines her ribs and limbs."],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["The force of the impacts were clearly great, her ribs broken, her forearm snapped in two. FIST MARKS TO CONTRAST PIPE?"],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-"wounds_01": {
-        "default": {
-            "at_scene": {
-                "neutral": [""],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": [""],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "knife": {
-            "at_scene": {
-                "neutral": ["Her flesh dangles at awkward angles - successive slices and stabs line her torso."
-                            "\nYou can see right to the bone on some of them."],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["Her right jugular has been cut, a three inch gap between the two edges. \n...\nIt looks lethal."],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "gun": {
-            "at_scene": {
-                "neutral": ["Bullet are embedded in her head, chest, and abdomen."],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["Each wound houses a straight path from her front to back."],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "blunt": {
-            "at_scene": {
-                "neutral": ["Her body is completely battered, rows of mottled, purple bruises forming distinct lines."],
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["Her skin and bone are crushed along each bruise."],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-"drink_stain_type_01": {
-        "default": {
-            "at_scene": {
-                "neutral": ["You notice an alcoholic scent coming from the garbage."],
-            },
-            "approaching": {
-                "neutral": ["It's damp."],
-            },
-            "at_entity": {
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "rum": {
-            "at_scene": {
-            },
             "approaching": {
+                "neutral": ["You notice an alcoholic scent, out of place amongst the rubbish. Something was spilled."],
             },
             "at_entity": {
-                "neutral": ["Its rum."],
+                "neutral": ["The scent is somewhere between molasses and sugarcane - with a hint of nutmeg."],
             },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "whiskey": {
-            "at_scene": {
-            },
             "approaching": {
+                "neutral": ["You notice an alcoholic scent, out of place amongst the rubbish. Something was spilled."],
             },
             "at_entity": {
-                "neutral": ["Its whiskey."],
+                "neutral": ["The scent is somewhere between vanilla and caramel - with a hint of oak."],
             },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
-        "white": {
-            "at_scene": {
-            },
+        "gin": {
             "approaching": {
+                "neutral": ["You notice an alcoholic scent, out of place amongst the rubbish. Something was spilled."],
             },
             "at_entity": {
-                "neutral": ["Its white wine."],
+                "neutral": ["The scent is pure - a strong, neutral alcohol."],
             },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "red": {
-            "at_scene": {
-                "neutral": []
-            },
-            "approaching": {
-            },
-            "at_entity": {
-                "neutral": ["Its red wine."],
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
+
 "spilled_cigs_01": {
         "default": {
             "at_scene": {
-                "neutral": ["Loose cigarettes are sprawled out in front of you."],
-            },
+                "alley_05": {"neutral": ["Loose cigarettes are sprawled in front of you."]} #could also put spill on them
+                },
             "approaching": {
-                "neutral": [""],
+                "neutral": ["You take a closer look..."],
             },
+        },
+        "cigs": {
             "at_entity": {
-                "neutral": ["They look like generic cigarettes."],
+                "alley_05": {"neutral": ["They look like generic, white cigarettes."]},
             },
-            "leaving": {
-                "neutral": [""],
+        },
+        "premium": {
+            "at_entity": {
+                "alley_05": {"neutral": ["Faint concentric rings run down the body, to a matte silver filter."]},
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
+
 "spilled_tobacc_01": {
         "default": {
             "at_scene": {
-                "neutral": ["Loose shreds of tobacco are sprawled out in front of you."],
-            },
+                "alley_05": {"neutral": ["Loose, ground leaves of tobacco are sprawled out in front of you.", "Shreds of tobacco are sprawled out in front of you."]}
+                },
             "approaching": {
-                "neutral": [""],
+                "neutral": ["You take a closer look..."],
             },
             "at_entity": {
-                "neutral": ["They look like generic tobacco."],
+                "alley_05": {"neutral": ["It's got a rich, sweet aroma.", "Each strip is a shade of brown, with a pliable texture."]},
+
             },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
-"food_stain_01": {
+
+"scrap_leather_01": {
         "default": {
             "at_scene": {
-                "neutral": [],
-            },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": [],
-            },
-            "leaving": {
-                "neutral": [],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "tomato": {
-            "at_scene": {
-                "neutral": ["Along with the reddish brown blood stains, some brighter orange ones underneath catch your eye..."],
-            },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": ["It looks like... tomato."],
-            },
-            "leaving": {
-                "neutral": [],
-            },
-            "times": {
-            },
-            "weather": {
-            }
+                "neutral": ["A piece of torn leather dangles, caught on a jagged metal rail."],
+                },
         },
         "mustard": {
-            "at_scene": {
-                "neutral": ["Some yellow stain catches your eye..."],
-            },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": ["It looks like mustard."],
-            },
-            "leaving": {
-                "neutral": [],
-            },
-            "times": {
-            },
-            "weather": {
-            }
+            "at_entity": [
+                {"neutral": ["The leather has small tears and creases running through it, it's edges look uneven and frayed."]},
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some yellow smears line the edge - mustard?"]},
+
+            ]
         },
-        "grease": {
-            "at_scene": {
-                "neutral": ["Some oil residue catches your eye..."],
-            },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": ["It looks like some sort of grease stain."],
-            },
-            "leaving": {
-                "neutral": [],
-            },
-            "times": {
-            },
-            "weather": {
-            }
+        "tomato": {
+            "at_entity": [
+                {"neutral": ["The leather has small tears and creases running through it, it's edges look uneven and frayed."]},
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some orange smears line the edge - tomato?"]},
+
+            ]
         },
         "pie": {
-            "at_scene": {
-                "neutral": ["Blue stains catch your eye."],
-            },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": ["It looks like... blueberry."],
-            },
-            "leaving": {
-                "neutral": [],
-            },
-            "times": {
-            },
-            "weather": {
-            }
+            "at_entity": [
+                {"neutral": ["The leather has small tears and creases running through it, it's edges look uneven and frayed."]},
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some blue smears line the edge - blueberry?"]},
+
+            ]
         },
 },
+
+"scrap_denim_01": {
+        "default": {
+            "at_scene": {
+                "neutral": ["A piece of torn denim dangles, caught on a jagged metal rail."],
+                },
+        },
+        "mustard": {
+            "at_entity": [
+                {
+                    "neutral": ["Blue and white threads form a tattered scrap, it's threads unraveling at the seams."]
+                },
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some yellow smears line the edge - mustard?"]},
+
+            ]
+        },
+        "tomato": {
+            "at_entity": [
+                {
+                    "neutral": ["Blue and white threads form a tattered scrap, it's threads unraveling at the seams."]
+                },
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some orange smears line the edge - tomato?"]},
+
+            ]
+        },
+        "pie": {
+            "at_entity": [
+                {
+                    "neutral": ["Blue and white threads form a tattered scrap, it's threads unraveling at the seams."]
+                },
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some blue smears line the edge - blueberry?"]},
+
+            ]
+        },
+},
+"scrap_suit_01": {
+        "default": {
+            "at_scene": {
+                "neutral": ["A piece of torn fabric dangles, caught on a jagged metal rail."],
+                },
+        },
+        "mustard": {
+            "at_entity": [
+                {
+                "neutral": ["Finely weaved wool flutters in the wind - it looks like it's from formal wear."]
+                },
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some yellow smears line the edge - mustard?"]},
+
+            ]
+        },
+        "tomato": {
+            "at_entity": [
+                {
+                "neutral": ["Finely weaved wool flutters in the wind - it looks like it's from formal wear."]
+                },
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some orange smears line the edge - tomato?"]},
+
+            ]
+        },
+        "pie": {
+            "at_entity": [
+                {
+                "neutral": ["Finely weaved wool flutters in the wind - it looks like it's from formal wear."]
+                },
+
+                {"neutral": [
+                    "You notice that aside from the blood stains, some blue smears line the edge - blueberry?"]},
+
+            ]
+        },
+},
+
 
 "footprint_01": {
         "default": {
             "at_scene": {
                 "neutral": ["A singular footprint is distinct in the mud."],
             },
-            "approaching": {
-            },
             "at_entity": {
+                "neutral": ["It's a narrow imprint. A broad flat area tapers forward - behind it, a sharp dot forms a deep circular impression."],
             },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "sneakers": {
-            "at_scene": {
-            },
-            "approaching": {
-            },
             "at_entity": {
                 "neutral": ["It's a narrow imprint, with shallow, wavy grooves."],
             },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "work_boots": {
-            "at_scene": {
-            },
-            "approaching": {
-            },
             "at_entity": {
                 "neutral": ["It's a wide imprint, with deep, cross-hatched grooves."],
             },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "dress_shoes": {
-            "at_scene": {
-            },
-            "approaching": {
-            },
             "at_entity": {
                 "neutral": ["It's a narrow imprint with minimal, smooth grooves. It deepens at the heel."],
             },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
+
+"hair_01": {
+        "default": {
+            "at_scene": {
+                "neutral": ["A few locks of hairs are caught on the corner of the guard rails.",
+                            "A few locks of hairs hang, snagged on the edge of the guard rails."]
+                },
+            "at_entity": {
+                "neutral": ["They are black strands, medium in length..."]
+            },
+        },
+},
+
+#DRAWERS!!!!@@@@@@@@@@@@@
+#morg
+"morgue_shelf_01": { #OAK, SPICED, VANILLA, SMOKED OAK ; pale gold #MAYBE RUM AND gin IS MORE CONTRASTING
+        "default": {#not opened - CAN OPEN TO SMELL IT? WOULD BE EPIC!
+            "at_scene": {
+                    "neutral": ["The corner of the room houses a shelf."],
+            },
+        },
+    },
+#bar
+"bar_cabinet_01": {
+        "default": {
+            "at_scene": {
+                "neutral": ["Where the counter meets the wall, theres a large cabinet."],
+            },
+        },
+},
+
+"fridge_01": {
+        "default": {
+            "at_scene": {
+                "neutral": ["The refrigerator hums."]
+                },
+        }
+},
+
 "gambling_tables": {
         "default": {
             "at_scene": {
                 "neutral": ["Gambling tables take center stage."],
             },
-            "approaching": {
-                "neutral": [""],
-            },
             "at_entity": {
                 "neutral": ["The felt looks worn, but clean."],
             },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
-"backroom_counter": {
+"backroom_counter_01": {
         "default": {
             "at_scene": {
                 "neutral": ["The side of the room houses a casual looking bar counter."],
             },
             "approaching": {
-                "neutral": [],
             },
             "at_entity": {
-                "neutral": ["It's study."],
+                "neutral": ["It's sturdy."],
             },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
-"ledger": {
+"secret_01": {
         "default": {
             "at_scene": {
                 "neutral": ["You see a small ledger."],
             },
             "approaching": {
-                "neutral": [],
             },
             "at_entity": {
                 "neutral": ["It looks like something important is here."],
             },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
 
@@ -658,244 +521,45 @@ item_description_data = {
 "ashtray_01": { #glass
         "default": {
             "at_scene": {
-                "neutral": ["A glass ashtray is here."]
+                "bertha_office_drawer_01": {
+                            "neutral": ["A steel ashtray sits on the desk."],
+                        },
+                "neutral": ["Glass from an ashtray glints momentarily."]
                 },
             "approaching": {
                 "neutral": ["You take a closer look..."],
             },
             "at_entity": {
-                "neutral": ["It's filled with a mix of fine soot, and thick clumps of half burnt tobacco."]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "empty": {
-            "at_scene": {
-                "neutral": []
+                "bertha_office_drawer_01": {
+                    "neutral": ["Sticky, burned tobacco forms granular clumps.", "Bits of half burned tobacco form coarse, sticky lumps."]
                 },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": ["It's been emptied, with only tarry residue left."]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
+                "office_morgue_desk_01": {
+                    "neutral": ["It's filled with a mix of fine soot, and thick clumps of half burnt tobacco."],
+                },
+                "neutral": ["Cigarette butts are buried in their own thin ashes.", "A few roaches mingle in their own finely burned ashes."]
 
-
-"ashtray_02": { #copper
-        "default": {
-            "at_scene": {
-                "neutral": ["A copper ashtray sits on the desk."],
             },
-            "approaching": {
-                "neutral": ["You take a closer look..."],
-            },
-            "at_entity": {
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "empty": {
-            "at_scene": {
-                "neutral": []
-                },
-            "approaching": {
-                "neutral": [],
-            },
             "at_entity": {
-                "neutral": ["It's empty - it looks recently cleaned."]
+                "neutral": ["It's empty - it looks recently cleaned.","It's been emptied, with only tarry residue left."]
             },
-            "leaving": {
-                "neutral": [],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "tobacco": {
-            "at_scene": {
-                "neutral": []
-                },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": ["Sticky, burned tobacco forms granular clumps."]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "cigarettes": {
-            "at_scene": {
-                "neutral": []
-                },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": ["Cigarette butts are buried in their own thin ashes."]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-"ashtray_03": { #wood
-        "default": {
-            "at_scene": {
-                "neutral": ["A wood ashtray sits on the desk."],
-            },
-            "approaching": {
-            },
-            "at_entity": {
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "empty": {
-            "at_scene": {
-                },
-            "approaching": {
-            },
-            "at_entity": {
-                "neutral": ["It's empty."]
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "tobacco": {
-            "at_scene": {
-                },
-            "approaching": {
-            },
-            "at_entity": {
-                "neutral": ["Thick bits of half burned tobacco form sticky lumps. "]
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "cigarettes": {
-            "at_scene": {
-                },
-            "approaching": {
-            },
-            "at_entity": {
-                "neutral": ["A few roaches mingle in their own finely burned ashes."]
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
 "porch_table_01": {
         "default": {
             "at_scene": {
-                "neutral": ["A small, round table is surrounded with 3 seats."],
+                "neutral": ["A small, round table is surrounded with three seats.", "The corner of the deck has a small, round table."],
+            },
+        },
+},
+"office_morgue_desk_01": {
+        "default": {
+            "at_scene": {
+                "neutral": ["The steel surface looks cold and clean.","Solid steel forms the surface of the workbench."],
             },
             "approaching": {
                 "neutral": [],
-            },
-            "at_entity": {
-                "neutral": [""],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-"morgue_leather_jacket": {
-        "default": {
-            "at_scene": {
-                "neutral": ["Hanging from the wall, you see a rugged leather jacket."],
-            },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": ["It's black leather."],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-"office_morgue_desk": {
-        "default": {
-            "at_scene": {
-                "neutral": ["The desk's steel surface looks cold, clean, and clinical."],
-            },
-            "approaching": {
-                "neutral": [],
-            },
-            "at_entity": {
-                "neutral": [""],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-"bar_cabinet_01": {
-        "default": {
-            "at_scene": {
-                "neutral": ["A cabinet is behind the bar."],
-            },
-            "approaching": {
-                "neutral": [""],
             },
             "at_entity": {
                 "neutral": [""],
@@ -947,13 +611,9 @@ item_description_data = {
             "leaving": {
                 "neutral": ["You turn around."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
 },
-    "kitchen_knife_01": {
+"kitchen_knife_01": {
         "default": {
             "at_scene": {
                 "kitchen_01": {
@@ -971,37 +631,27 @@ item_description_data = {
             "leaving": {
                 "neutral": ["You put the knife back.", "You place the knife back where it was."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
     },
-"murder_knife_01": { #kitchen knife?
+
+
+"knife_01": {
         "default": {
             "at_scene": {
-                "dumpster_01" : {
-                    "neutral": ["You notice a knife buried in the trash.", "A knife is stashed under some trash."],
-                },
-                "dead_end_01": {
-                    "neutral": ["A knife lies next to the dumpster.", "You notice a knife nearby."],
-                }
+                    "neutral": ["You notice the hilt of a pocket knife sticking out the side."],
             },
             "approaching": {
-                "neutral": ["You hunch over, and grip the handle.","You kneel down and pick it up."],
+                "neutral": ["Your hand grips the handle.", "Your fingers curl around the hilt."],
             },
-            "at_entity": {
-                "neutral": ["It's blade is bloody and dented. It's handle is cracked.", "It's bloody.","The blade has a few dents, but its nonetheless quite sharp."],
-            },
+            "at_entity": [{
+                "neutral": ["The blade shines in the light."],
+            },],
             "leaving": {
-                "neutral": ["You put it back.", "You place the knife back."],
+                "neutral": ["You put the knife back.", "You place the knife back where it was."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
     },
+
     "revolver_01": { #3 shots fired IN THE MRUDER!
         "default": { #unloaded
             "at_scene": {
@@ -1024,28 +674,31 @@ item_description_data = {
             "leaving": {
                 "neutral": ["You place the revolver back.", "You put it back.", "It clunks on the wood."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "loaded": { #loaded with 3 shots
-            "at_scene": {
-                "bertha_office_drawer_01": {
-                }
-            },
-            "approaching": {
-            },
             "at_entity": {
                 "neutral": ["It's loaded, with three shots fired.", "Three bullets are loaded.",
                             "Three bullets are missing from an otherwise full chamber."],
             },
+        },
+    },
+
+    "revolver_02": {  # 3 shots fired IN THE MRUDER!
+        "default": {  # unloaded
+            "at_scene": {
+                "neutral": ["There's a pistol here."]
+            },
+            "approaching": {
+                    "neutral": ["Your fingers curl around the handle.", "The barrel gleams under the light.",
+                                "You pick up the gun."],
+            },
+            "at_entity": [{
+                "neutral": ["It has some noticeable weight. The barrel is smooth and polished."],
+            },
+            ],
             "leaving": {
+                "neutral": ["You place the gun back.", "You put it back.", "You set it down with a clunk."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
     },
 "bullets_01": {
@@ -1064,13 +717,300 @@ item_description_data = {
             "leaving": {
                 "neutral": ["You place the bullet back.", "The bullet rattles as you drop it."],
             },
+        },
+    },
+
+"office_trash_01": {
+        "default": {
+            "at_scene": {
+                "bertha_office_01": {
+                    "neutral": ["A trashcan is in the corner."],
+                },
+            },
+            "approaching": {
+                "neutral": ["You walk up to the trash."],
+            },
+            "at_entity": {
+                "neutral": ["It's full of miscellaneous garbage."]
+            },
+            "leaving": {
+                "neutral": ["You step back."],
+            },
+        },
+    },
+
+
+
+    "matches_01": {
+        "default": {
+            "at_scene": {
+                "bertha_office_01": {
+                    "neutral": ["A matchbook lies on her desk."],
+                },
+                "porch_01": {
+                    "rain": {"neutral": ["A matchbook lies soaked on an armrest."],},
+                    "storm": {"neutral": ["A matchbook lies soaked on an armrest."],},
+                    "sun": {"neutral": ["A matchbook basks in the sun.", "A matchbook lies on an armrest."],}
+
+                },
+                "bar_01": {
+                    "neutral": ["You see a bowl with some matchbooks in it."],
+                },
+            },
+            "approaching": {
+                "neutral": ["You pick it up."],
+            },
+            "at_entity": [{
+                "neutral": ["You thumb the engraving. It's the pub's logo.","It has an engraving of the pub logo."],
+            },
+                {
+                "neutral": ["It's in pristine condition.","It looks very new, practically unblemished."],
+            },
+            ],
+            "leaving": {
+                "neutral": ["You leave it behind."],
+            },
+        },
+        "used": {
+            "at_entity": [{
+                "neutral": ["You thumb the pub's engraved logo.","It has an engraving of the pub logo."],
+            },
+                {
+                "neutral": ["It's in pristine condition, despite missing a few matches.","Although missing some matches, the cover is practically unblemished."],
+            },
+            ],
+        }
+    },
+"matches_02": { #black vs faded black?
+        "default": {
+            "at_scene": {
+                "office_trash_01": {
+                    "neutral": ["You notice a matchbook in the trash."],
+                },
+                "porch_01": {
+                    "rain": {"neutral": ["A matchbook lies soaked on a table nearby."],},
+                    "storm": {"neutral": ["A matchbook lies soaked on a table nearby."],},
+                    "sun": {"neutral": ["A matchbook is perched on a table nearby."],},
+
+                },
+                "stage_02": {
+                    "neutral": ["You spot a matchbook in the clutter."],
+                },
+            },
+            "approaching": {
+                "neutral": ["You pick it up."],
+            },
+            "at_entity": [{
+                "neutral": ["It's worn, with a faded brown color.","The brown colour has faded over time."],
+            },
+            ],
+            "leaving": {
+                "neutral": ["You leave it behind."],
+            },
             "times": {
             },
             "weather": {
             }
         },
+        "used": {
+            "at_scene": {
+            },
+            "approaching": {
+            },
+            "at_entity": [{
+                "neutral": ["It's worn, with a faded brown color.","The brown colour has faded over time."],
+            },
+                {
+                "neutral": ["It's completely empty.","There isn't a single match left."],
+            },
+            ],
+            "leaving": {
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        }
     },
-    "rum_01": { #WARM, SWEETT, SYRUP, MOLASSES, CARAMEL, SWEET, fruity? dark, amber,
+"pipe_01": {
+        "default": {
+            "at_scene": {
+                "alcove_01": {
+                    "neutral": ["A metal pipe is propped against the wall."],
+                },
+            },
+            "approaching": {
+                "neutral": ["You grab the pipe, feeling its weight."],
+            },
+            "at_entity": {
+                "neutral": ["It's solid lead.", "It's quite heavy."]
+            },
+            "leaving": {
+                "neutral": ["You place the pipe back."],
+            },
+        },
+    },
+
+"apple_01": {
+        "default": {
+            "at_scene": {
+                "default": {"neutral": ["DEFAULT WORKED FOR APPLLLEEE"],},
+                "kitchen_01": {
+                    "neutral": ["An apple sits on the counter."],
+                },
+                "backroom_01": {
+                    "neutral": ["An apple is on a nearby table."],
+                },
+                "stage_02": {
+                    "neutral": ["An apple sits on a prop table."],
+                },
+                "dumpster_01": {
+                    "neutral": ["You notice an apple buried in the trash."],
+                },
+                "dead_end_01": {
+                    "neutral": ["An apple is next to the dumpster."],
+                }
+            },
+            "approaching": {
+                "neutral": ["You grab the apple"],
+            },
+            "at_entity": {
+                "good": ["The apple feels firm and ripe in your hand."],
+                "bad": ["The apple feels soft and bruised."]
+            },
+            "leaving": {
+                "neutral": ["You leave the apple behind."],
+            },
+        },
+    },
+"bertha_office_closet_01": {
+        "default": {
+            "at_scene": {
+                "bertha_office_01": {
+                    "neutral": ["A closet is on the far wall."],
+                },
+            },
+            "approaching": {
+                "neutral": ["You approach the far wall.", "You come up to the closet."],
+            },
+            "at_entity": {
+                "neutral": []
+            },
+            "leaving": {
+                "neutral": ["You step back."],
+            },
+        },
+    },
+
+
+
+
+"coat_hanger_01": {
+        "default": {
+            "at_scene": {
+                "neutral": ["A coat hanger perches in the corner."]
+                },
+            "approaching": {
+                "neutral": [""],
+            },
+            "at_entity": {
+                "neutral": ["It's a coat hanger."]
+            },
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+},
+
+
+
+
+"debbie_01": {
+        "default": {
+            "at_scene": {
+                "open": {"neutral": ["The corpse lays flat on a slab."],},
+                "closed": {"neutral": ["A white cloth covers a corpse."],},
+            },
+            "approaching": {
+                "neutral": [""],
+            },
+            "at_entity": {
+                "neutral": [""],
+            },
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+},
+
+"flask_01": {
+        "default": {
+            "at_scene": {"neutral": ["A steel flask lays on it's side."]},
+        },
+        "1": {
+            "at_entity": {
+                "bertha_office_01": {
+                    "neutral": ["The cap is loose - a spicy, citrus scent comes from the lid."],
+                    },
+                "office_morgue_desk_01": {
+                    "neutral": ["The cap is loose - a spicy, citrus scent comes from the lid."],
+                    },
+            },
+        },
+        "2": {
+            "at_entity": {
+                "bertha_office_01": {
+                    "neutral": ["The cap is loose - a sweet, molasses scent comes from the lid."],
+                    },
+                "office_morgue_desk_01": {
+                    "neutral": ["The cap is loose - a smoked, vanilla scent with oak undertones comes from the lid."],
+                    },
+            },
+        },
+    },
+
+"gin_01": {
+        "default": {
+            "at_scene": {
+                "neutral":["Near the railing, a dull green bottle of gin perches within arms length."],
+            },
+            "approaching": {
+                "neutral":["You grab the neck"],
+            },
+            "at_entity": {
+                "neutral": ["It hasn't been opened.","The seal is still on, covering the cap."],
+            },
+            "leaving": {
+                "neutral": ["The bottle clunks as you set it back.", "You set the bottle back."],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+        "opened": {
+            "at_entity": {
+                "neutral": ["The odor is a spicy, floral citrus."],
+            },
+            "leaving": {
+                "neutral": ["You set the bottle back, it's fragrance lingering."],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        }
+    },
+
+"rum_01": { #WARM, SWEETT, SYRUP, MOLASSES, CARAMEL, SWEET, fruity? dark, amber,
         "default": { #unsused
             "at_scene": {
                 "bar_01": {
@@ -1127,7 +1067,8 @@ item_description_data = {
             }
         }
     },
-"whiskey_01": { #OAK, SPICED, VANILLA, SMOKED OAK ; pale gold #MAYBE RUM AND VODKA IS MORE CONTRASTING
+
+"whiskey_01": { #OAK, SPICED, VANILLA, SMOKED OAK ; pale gold #MAYBE RUM AND gin IS MORE CONTRASTING
         "default": {#not opened - CAN OPEN TO SMELL IT? WOULD BE EPIC!
             "at_scene": {
                 "bar_01": {
@@ -1160,7 +1101,7 @@ item_description_data = {
             },
             "approaching": {
             },
-            "at_entity": { #OAK, SPICED, VANILLA, SMOKED OAK #maybe vodka is more contrasting?
+            "at_entity": { #OAK, SPICED, VANILLA, SMOKED OAK #maybe gin is more contrasting?
                 "neutral": ["It has a zesty, fruity scent.", "Notes of vanilla mix with a fresh, fruity scent."],
             },
             "leaving": {
@@ -1172,217 +1113,393 @@ item_description_data = {
             }
         }
     },
-    "matches_01": {
-        "default": {
+"red_wine_01": { #OAK, SPICED, VANILLA, SMOKED OAK ; pale gold #MAYBE RUM AND gin IS MORE CONTRASTING
+        "default": {#not opened - CAN OPEN TO SMELL IT? WOULD BE EPIC!
             "at_scene": {
-                "bertha_office_01": {
-                    "neutral": ["A matchbook lies on her desk."],
-                },
-                "porch_01": {
-                    "rain": {"neutral": ["A matchbook lies soaked on an armrest."],},
-                    "storm": {"neutral": ["A matchbook lies soaked on an armrest."],},
-                    "sun": {"neutral": ["A matchbook basks in the sun.", "A matchbook lies on an armrest."],}
-
-                },
-                "bar_01": {
-                    "neutral": ["You see a bowl with some matchbooks in it."],
-                },
+                    "neutral": ["A bottle of red wine stands nearby."],
             },
             "approaching": {
-                "neutral": ["You pick it up."],
+                "neutral": ["You grab it's neck."],
             },
-            "at_entity": [{
-                "neutral": ["You thumb the engraving. It's the pub's logo.","It has an engraving of the pub logo."],
+            "at_entity": {
+                "neutral": ["It's not opened.","The cork is firmly in place."],
             },
-                {
-                "neutral": ["It's in pristine condition.","It looks very new, practically unblemished."],
-            },
-            ],
             "leaving": {
-                "neutral": ["You leave it behind."],
+                "neutral": ["You leave the wine bottle behind."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         },
-        "used": {
-            "at_scene": {
+        "opened": {
+            "at_entity": {
+                "neutral": ["It smells of red wine."],
             },
-            "approaching": {
-            },
-            "at_entity": [{
-                "neutral": ["You thumb the pub's engraved logo.","It has an engraving of the pub logo."],
-            },
-                {
-                "neutral": ["It's in pristine condition, despite missing a few matches.","Although missing some matches, the cover is practically unblemished."],
-            },
-            ],
             "leaving": {
+                "neutral": ["You leave the bottle behind, it's aroma lingering."],
             },
-            "times": {
-            },
-            "weather": {
-            }
         }
     },
-"matches_02": { #black vs faded black?
-        "default": {
-            "at_scene": {
-                "office_trash_01": {
-                    "neutral": ["You notice a matchbook in the trash."],
-                },
-                "porch_01": {
-                    "rain": {"neutral": ["A matchbook lies soaked on a table nearby."],},
-                    "storm": {"neutral": ["A matchbook lies soaked on a table nearby."],},
-                    "sun": {"neutral": ["A matchbook is perched on a table nearby."],},
 
-                },
-                "stage_02": {
-                    "neutral": ["You spot a matchbook in the clutter."],
-                },
-            },
-            "approaching": {
-                "neutral": ["You pick it up."],
-            },
-            "at_entity": [{
-                "neutral": ["It's worn, with a faded brown color.","The brown colour has faded over time."],
-            },
-            ],
-            "leaving": {
-                "neutral": ["You leave it behind."],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-        "used": {
+
+
+"white_wine_01": { #OAK, SPICED, VANILLA, SMOKED OAK ; pale gold #MAYBE RUM AND gin IS MORE CONTRASTING
+        "default": {#not opened - CAN OPEN TO SMELL IT? WOULD BE EPIC!
             "at_scene": {
+                    "neutral": ["A bottle of white wine stands nearby."],
             },
             "approaching": {
+                "neutral": ["You grab it's neck."],
             },
-            "at_entity": [{
-                "neutral": ["It's worn, with a faded brown color.","The brown colour has faded over time."],
+            "at_entity": {
+                "neutral": ["It's not opened.","The cap is screwed down tight."],
             },
-                {
-                "neutral": ["It's completely empty.","There isn't a single match left."],
-            },
-            ],
             "leaving": {
+                "neutral": ["You leave the wine bottle behind."],
             },
-            "times": {
+        },
+        "opened": {
+            "at_entity": {
+                "neutral": ["It smells of white wine."],
             },
-            "weather": {
-            }
+            "leaving": {
+                "neutral": ["You leave the bottle behind, it's aroma lingering."],
+            },
         }
     },
-"apple_01": {
-        "default": {
+
+
+"tomato_01": { #OAK, SPICED, VANILLA, SMOKED OAK ; pale gold #MAYBE RUM AND gin IS MORE CONTRASTING
+        "default": {#not opened - CAN OPEN TO SMELL IT? WOULD BE EPIC!
             "at_scene": {
-                "kitchen_01": {
-                    "neutral": ["An apple sits on the counter."],
-                },
-                "backroom_01": {
-                    "neutral": ["An apple is on a nearby table."],
-                },
-                "stage_02": {
-                    "neutral": ["An apple sits on a prop table."],
-                },
-                "dumpster_01": {
-                    "neutral": ["You notice an apple buried in the trash."],
-                },
-                "dead_end_01": {
-                    "neutral": ["An apple is next to the dumpster."],
-                }
-            },
-            "approaching": {
-                "neutral": ["You grab the apple"],
+                    "neutral": ["Near you, theres a bowl of tomato soup."],
             },
             "at_entity": {
-                "good": ["The apple feels firm and ripe in your hand."],
-                "bad": ["The apple feels soft and bruised."]
+                "neutral": ["A thin sheen of oil covers the half eaten soup - the color somewhere between orange and red, with a green basil leaf sitting on top."],
             },
-            "leaving": {
-                "neutral": ["You leave the apple behind."],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-    },
-"office_trash_01": {
-        "default": {
-            "at_scene": {
-                "bertha_office_01": {
-                    "neutral": ["A trashcan is in the corner."],
-                },
-            },
-            "approaching": {
-                "neutral": ["You walk up to the trash."],
-            },
-            "at_entity": {
-                "neutral": ["It's full of miscellaneous garbage."]
-            },
-            "leaving": {
-                "neutral": ["You step back."],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-    },
-"pipe_01": {
-        "default": {
-            "at_scene": {
-                "alcove_01": {
-                    "neutral": ["A metal pipe is propped against the wall."],
-                },
-            },
-            "approaching": {
-                "neutral": ["You grab the pipe, feeling its weight."],
-            },
-            "at_entity": {
-                "neutral": ["It's solid lead.", "It's quite heavy."]
-            },
-            "leaving": {
-                "neutral": ["You place the pipe back."],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-    },
-"murder_pipe_01": {
-        "default": {
-            "at_scene": {
-                "dumpster_01": {
-                    "neutral": ["A bloody pipe lies on top some garbage."],
-                },
-                "dead_end_01": {
-                    "neutral": ["A metal pipe, colored red, is behind some garbage."],
-                },
-            },
-            "approaching": {
-                "neutral": ["You kneel down and grab the pipe.", "It's cold to the touch."],
-            },
-            "at_entity": {
-                "neutral": ["It's got a few bloodied dents.","The pipe is bloodied.", "Clumps of skin and blood lace a concave dent.",
-                            "It's heavy, with red colored indents on it's head."]
-            },
-            "leaving": {
-                "neutral": ["You place the pipe back."],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
     },
 
+
+
+"mustard_01": { #OAK, SPICED, VANILLA, SMOKED OAK ; pale gold #MAYBE RUM AND gin IS MORE CONTRASTING
+        "default": {#not opened - CAN OPEN TO SMELL IT? WOULD BE EPIC!
+            "at_scene": {
+                    "neutral": ["Beside that, a half eaten deli sandwich."],
+            },
+            "at_entity": {
+                "neutral": ["The rye split around halfway, spilling out it's contents - mustard, ham, and lettuce."],
+            },
+        },
+    },
+
+
+"pie_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Thick blueberry pie forms a gelatinous mess on it's plate."],
+            },
+            "at_entity": {
+                "neutral": ["The crust flakes along the cut of the thick slice, blue filling oozing out it's sides."],
+            },
+        },
+    },
+
+
+"lighter_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["A gold lighter shines, sticking out from it's surroundings."],
+            },
+            "at_entity": {
+                "neutral": ["It's gold plated, with a dull, brushed finish."],
+            },
+        },
+    },
+"cardigan_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["A laced cardigan is here."],
+            },
+            "at_entity": {
+                "neutral": ["It's a cardigan."],
+            },
+        },
+        "torn": {
+            "at_entity": {
+                "neutral": ["It's in tatters."],
+            },
+        },
+    },
+
+"cardigan_scraps_01": { #can now maybe also be something else that is thin laced wool!@!@!@
+        "default": {
+            "at_scene": {
+                    "neutral": ["Some wool fiber are strewn about."],
+            },
+            "at_entity": {
+                "neutral": ["They are from a thin, laced article - it look like they were forcefully torn off."],
+            },
+        },
+    },
+
+"glass_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["A wine glass is here."],
+            },
+        },
+        "white": {
+
+            "at_entity": {
+                "stage_02": {
+                    "neutral": ["LIPSTICK AT THE BRIM."],
+                },
+                "neutral": ["It's filled with white wine."],
+            },
+        },
+        "red": {
+            "at_entity": {
+                "stage_02": {
+                                "neutral": ["LIPSTICK AT THE BRIM."],
+                            },
+                "neutral": ["It's filled with red wine."],
+            },
+        },
+    },
+"ticket_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Amidst the clutter, you notice a bus ticket."],
+            },
+            "at_entity": {
+                "neutral": ["It's stamped - the departure date is the morning of the night of the murder."],
+            },
+        },
+    },
+"lipstick_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Half opened lipstick is on the floor."],
+            },
+            "at_entity": {
+                "neutral": ["A brass tube holds pink, glossy lipstick."],
+            },
+        },
+    },
+"purse_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["A light brown purse is here."],
+            },
+            "at_entity": {
+                "neutral": ["It's a purse."],
+            },
+        },
+    },
+"bench_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["BENCH here."],
+            },
+            "at_entity": {
+                "neutral": ["It's a BENCH ticket."],
+            },
+        },
+    },
+"cigs_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Perched around the ashtray are some cigarettes."],
+            },
+            "at_entity": {
+                "neutral": ["The body is made of thin paper surrounding tobacco, the base a white filter. It's a cigarette."],
+            },
+        },
+        "pack": {
+            "at_scene": {
+                    "neutral": ["There's a pack of cigarettes - it looks like a generic brand."],
+            },
+            "at_entity": {
+                "neutral": ["It looks like a common, cheap brand."],
+            },
+        },
+    },
+"cigs_02": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Perched around the ashtray are some cigarettes."],
+            },
+            "at_entity": {
+                "neutral": ["The body is made of thin paper surrounding tobacco, the base a solid silver filter. It's a cigarette."],
+            },
+        },
+        "pack": {
+            "at_scene": {
+                    "neutral": ["There's a pack of cigarettes - it looks like a nice brand."],
+            },
+            "at_entity": {
+                "neutral": ["The package makes it clear that it's a premium brand."],
+            },
+        },
+    },
+"smoke_pipe_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["On it's side, a curved, wooden pipe points it's mouthpiece at you."],
+            },
+            "at_entity": {
+                "neutral": ["The grains run along the sides, the bowl quite large, filled with clumping bits of sticky, half burned tobacco."],
+            },
+        },
+    },
+"fibers_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Her fingernails are jagged and scraped, with something under it."],
+            },
+            "at_entity": {
+                "neutral": ["It looks like general dirt and debris."],
+            },
+        },
+        "hair": {
+            "at_entity": {
+                "neutral": ["It looks like someone's hair - it's black."],
+            },
+        },
+        "denim": {
+            "at_entity": {
+                "neutral": ["Theres some dirt - and some blue and white fibers."],
+            },
+        },
+        "leather": {
+            "at_entity": {
+                "neutral": ["Theres some dirt - and some leather fibers."],
+            },
+        },
+        "suit": {
+            "at_entity": {
+                "neutral": ["Theres some dirt - and some finely woven fibers."],
+            },
+        },
+    },
+"shoe_rack_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Footwear is loosely lined on a nearby shoe rack. "],
+            },
+            "at_entity": {
+                "neutral": ["On top of the rack,"],
+            },
+        },
+    },
+"hanger_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Miscellaneous clothing articles are piled atop a hanger."],
+            },
+            "at_entity": {
+                "neutral": ["The items include,"],
+            },
+        },
+    },
+"earring_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Something catches the light on the ground - an ear ring. "],
+            },
+            "at_entity": {
+                "neutral": ["It's a small, copper hoop with a tiny jewel."],
+            },
+        },
+    },
+"denim_jacket_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["A denim jacket, with clear wear and tear from use."],
+            },
+            "at_entity": {
+                "neutral": ["Blue and white fibers fray at the seams."],
+            },
+        },
+    },
+"leather_jacket_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["A bomber jacket, rugged and cracked around the shoulders."],
+            },
+            "at_entity": {
+                "neutral": ["It's black leather, with some cracks running through it."],
+            },
+        },
+    },
+"leather_jacket_02": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Hanging from the wall, a rugged leather jacket droops heavily."],
+            },
+            "at_entity": {
+                "neutral": ["Aside from some tears along the sleeve, the black leather looks well maintained."],
+            },
+        },
+    },
+"suit_jacket_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Underneath, a formal jacket is folded neatly, draped across a chair."],
+            },
+            "at_entity": {
+                "neutral": ["It's fibers are finely woven wool, the color is a deep, navy - almost black."],
+            },
+        },
+    },
+"suit_jacket_02": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["A deep navy blue formal blazer."],
+            },
+            "at_entity": {
+                "neutral": ["Despite some tears across the lining, it's finely woven wool fibers look well maintained."],
+            },
+        },
+    },
+"high_heels_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Blood coats her high heels a glossy, crimson finish. "],
+            },
+            "at_entity": {
+                "neutral": ["They connect loosely at the ankle, the brace almost off. A sharp heel juts out, the rest of the sole smooth tapering towards the toes. "],
+            },
+        },
+    },
+"sneakers_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Sneakers, the laces dangle across the narrow shape."],
+            },
+            "at_entity": {
+                "neutral": ["Bits of mud are lodged into the wavy, grooved pattern on the soles."],
+            },
+        },
+    },
+"dress_shoes_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Dress shoes, the laces neatly tucked into the inside."],
+            },
+            "at_entity": {
+                "neutral": ["The glossy sheen contrasts with the dirt lining the shallow heel, the sole narrow and flat."],
+            },
+        },
+    },
+"workboots_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["Work boots, with a steel toe."],
+            },
+            "at_entity": {
+                "neutral": ["Caked mud fills the deep, cross hatched grooves."],
+            },
+        },
+    },
 "bertha_clothes_01": {
         "default": {
             "at_scene": {
@@ -1397,19 +1514,8 @@ item_description_data = {
                 "neutral": ["They have slight style variations, but are otherwise identical.",
                             "They are all thick blue denim jackets. Some have more wear and tear than others."]
             },
-            "leaving": {
-                "neutral": [],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "cleaned": { #from murder, cooking/bar, mob 'accident', or whateva
-            "at_scene": {
-                },
-            "approaching": {
-            },
             "at_entity": [
                 {"neutral": ["They have slight style variations, but are otherwise identical...",
                             "They are all thick blue denim jackets. Some have more wear and tear than others..."]},
@@ -1418,13 +1524,6 @@ item_description_data = {
                              "One of the jackets is faded and torn. Blanched patches form stripes.",
                              "One of the jackets is frayed, with some discoloration.\nIt's been bleached."]},
             ],
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
 
     },
@@ -1442,20 +1541,11 @@ item_description_data = {
                 "neutral": ["The footwear is a mix of average sized shoes and boots.",
                             "Shoes and boots of varying designs are loosely arranged in a row.",]
             },
-            "leaving": {
-                "neutral": [],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
         "cleaned_shoes": { #from murder, cooking/bar, mob 'accident', or whateva
             "at_scene": {
                 "bertha_office_closet_01": {
                 },
-            },
-            "approaching": {
             },
             "at_entity": [
                 {"neutral": ["The footwear is a mix of average sized shoes and boots...",
@@ -1463,13 +1553,6 @@ item_description_data = {
                 {"neutral": ["One pair of shoes is noticeably cleaner than the others.",
                              "One pair of shoes has been recently scrubbed, it's seams unraveling."]},
             ],
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
         },
     "cleaned_boots": { #from murder, cooking/bar, mob 'accident', or whateva - RECENTLY POLISHED/CLEANED
             "at_scene": {
@@ -1493,344 +1576,6 @@ item_description_data = {
             }
         },
     },
-"bertha_office_closet_01": {
-        "default": {
-            "at_scene": {
-                "bertha_office_01": {
-                    "neutral": ["A closet is on the far wall."],
-                },
-            },
-            "approaching": {
-                "neutral": ["You approach the far wall.", "You come up to the closet."],
-            },
-            "at_entity": {
-                "neutral": []
-            },
-            "leaving": {
-                "neutral": ["You step back."],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-    },
-
-
-"cigs_01": {
-        "default": {
-            "at_scene": {
-                "alley_05": {"neutral": ["Some loose cigarettes are sprawled in front of you."]} #could also put spill on them
-                },
-            "approaching": {
-                "neutral": ["You take a closer look..."],
-            },
-            "at_entity": {
-                "alley_05": {"neutral": ["They look like generic cigarettes."]},
-
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-"tobacco_01": {
-        "default": {
-            "at_scene": {
-                "alley_05": {"neutral": ["Loose, ground leaves of tobacco are sprawled out in front of you.", "Shreds of tobacco are sprawled out in front of you."]}
-                },
-            "approaching": {
-                "neutral": ["You take a closer look..."],
-            },
-            "at_entity": {
-                "alley_05": {"neutral": ["It's got a rich, sweet aroma.", "Each strip is a shade of brown, with a pliable texture."]},
-
-            },
-            "leaving": {
-                "neutral": ["."],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-
-"ash_cigs_01": {
-        "default": {
-            "at_scene": {
-                "alcove_01": {"neutral": ["On the windowsill, you notice some ash residue."]}
-                },
-            "approaching": {
-                "neutral": ["You take a closer look..."],
-            },
-            "at_entity": {
-                "alcove_01": {"neutral": ["A black circular imprint centers around streaks of fine, white ash."]},
-
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-
-"ash_tobacco_01": {
-        "default": {
-            "at_scene": {
-                "alcove_01": {"neutral": ["On the windowsill, you notice some ash residue."]}
-                },
-            "approaching": {
-                "neutral": ["You take a closer look..."],
-            },
-            "at_entity": {
-                "alcove_01": {"neutral": ["Coarse, partially burned tobacco lie in a matted clump."]},
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-"cig_butt_01": {
-        "default": {
-            "at_scene": {
-                "neutral": ["The butt of a cigarette is squashed into the ground."]
-                },
-            "approaching": {
-                "neutral": ["You take a closer look..."],
-            },
-            "at_entity": [{
-                "neutral": ["It's a partially burned cigarette.","It's a discarded roach."]
-            },{
-                "neutral": ["It looks relatively fresh."]
-            },
-            ],
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-
-"coat_hanger_01": {
-        "default": {
-            "at_scene": {
-                "neutral": ["A coat hanger perches in the corner."]
-                },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["It's a coat hanger."]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-
-"fridge_01": {
-        "default": {
-            "at_scene": {
-                "neutral": ["The refrigerator hums."]
-                },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": [""]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-
-"spill_01": {
-        "default": {
-            "at_scene": {
-                "neutral": ["You notice the ground has a faint alcoholic scent..."]
-                },
-            "approaching": {
-                "neutral": [""],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-"rum": {
-
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["It's rum."]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-"whiskey": {
-            "at_scene": {
-                },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["It's whiskey."]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-"scrap_01": {
-        "default": {
-            "at_scene": {
-                "neutral": ["Some torn fabric is caught dangling from some janked metal railing."]
-                },
-            "approaching": {
-            },
-            "at_entity": {
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-"denim": {
-            "approaching": {
-            },
-            "at_entity": {
-                "neutral": ["It's denim."]
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-"leather": {
-            "at_scene": {
-                },
-            "approaching": {
-            },
-            "at_entity": {
-                "neutral": ["It's leather."]
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-"suit": {
-            "at_scene": {
-                },
-            "approaching": {
-            },
-            "at_entity": {
-                "neutral": ["It's suit."]
-            },
-            "leaving": {
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-
-"hair_01": {
-        "default": {
-            "at_scene": {
-                "neutral": ["A few hairs are caught on the corner of the guard rails."]
-                },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": ["They are black strands, and medium in length..."]
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-"debbie_01": {
-        "default": {
-            "at_scene": {
-                "open": {"neutral": ["The corpse lays flat on a slab."],},
-                "closed": {"neutral": ["A white cloth covers a corpse."],},
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": [""],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
-
 
 
 }

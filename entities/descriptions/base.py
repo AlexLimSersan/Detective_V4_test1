@@ -60,7 +60,7 @@ class Descriptions(ABC):
         #check first for default, which is the {"neutral": [] } -> will get merged to the nested keys if present.
         #
         default_to_add = descriptions_dic.get("default")
-
+        desc_logger.debug(f"desc_base {description_type}; default to add:\n{default_to_add}; ")
         temp_dic = None
         if isinstance(descriptions_dic, dict):
             if description_type in ["at_entity", "times", "weather"]:
