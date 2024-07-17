@@ -420,13 +420,13 @@ item_ent_data = {
             },
             "state_data": {},
             "components": {
-                "name": "drawer", #gotta put stuff here?! lol
+                "name": "sliding doors", #gotta put stuff here?! lol
                 "component_descriptions": {
                     "default": {
-                        "opening":["You pull the handle."],
-                        "closing":["You push the doors."],
-                        "closed": ["It's closed"],
-                        "opened":["It's open."],
+                        "opening":["You slide the doors open."],
+                        "closing":["You slide the doors closed."],
+                        "closed": [""],
+                        "opened":[""],
                     }
                 }
             }
@@ -490,7 +490,7 @@ item_ent_data = {
             "spawn_data": {
                 "locations": ["bertha_office_01"],
                 "frequency": 1,
-                "count": 1,
+                "count": 0,
             },
             "state_data": {},
             "components": {
@@ -643,7 +643,7 @@ item_ent_data = {
             },
         },
         "spawn_data": {
-            "locations": ["office_morgue_desk_01","suit_jacket_01","leather_jacket_02"],
+            "locations": ["office_morgue_desk_01","leather_jacket_02"],
             "frequency": 1,
             "count": 1,
         }
@@ -675,7 +675,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["leather_jacket_02","suit_jacket_01","office_morgue_desk_01"],
+        "locations": ["leather_jacket_02","office_morgue_desk_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -1137,7 +1137,7 @@ item_ent_data = {
 },
 
 "hanger_01": { #all jacket types
-    "name": "hanger",
+    "name": "coat rack",
     "state_data": {
         "default": {
             "frequency": 1
@@ -1158,25 +1158,12 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["hanger_01", "bertha_office_closet_01"],
+        "locations": ["hanger_01"],
         "frequency": 1,
         "count": 1,
     }
 },
-"leather_jacket_01": { #BERTHA ;
-    "name": "bomber jacket",
-    "state_data": {
-        "default": {
-            "frequency": 1
-        },
-    },
-    "spawn_data": {
-        "locations": ["bertha_office_closet_01"],
-        "frequency": 1,
-        "count": 1,
-    }
-},
-"leather_jacket_02": { #MORTICIAN ; classic clean
+"leather_jacket_01": { #BERTHA ; wearing denim, has leather jacket
     "name": "leather jacket",
     "state_data": {
         "default": {
@@ -1184,20 +1171,20 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["morgue_office_01", "reception_02"],
+        "locations": ["hanger_01"],
         "frequency": 1,
         "count": 1,
     }
 },
-"suit_jacket_01": { #MORTICIAN
-    "name": "suit jacket",
+"leather_jacket_02": { #MORTICIAN ; classic clean
+    "name": "leather coat",
     "state_data": {
         "default": {
             "frequency": 1
         },
     },
     "spawn_data": {
-        "locations": ["morgue_office_01", "reception_02"],
+        "locations": ["reception_02"],
         "frequency": 1,
         "count": 1,
     }
@@ -1238,7 +1225,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations_always_spawn": ["shoe_rack_01", "bertha_office_closet_01"],
+        "locations_always_spawn": ["shoe_rack_01"],
         "locations": [],
         "frequency": 1,
         "count": 1,
@@ -1266,10 +1253,10 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations_always_spawn": ["shoe_rack_01"],
-        "locations": ["bertha_office_closet_01","morgue_office_01","reception_02"],
+        "locations_always_spawn": ["shoe_rack_01", "reception_02"],
+        "locations": [],
         "frequency": 0.5,
-        "count": 2,
+        "count": 1,
     }
 },
 

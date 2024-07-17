@@ -15,7 +15,7 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
         },
         "lounge_01": {
             "name": "lounge",
-            "connections": ["porch_01", "bar_01", "kitchen_01", "stage_01", "hallway_01"],
+            "connections": ["porch_01", "bar_01", "stage_01", "kitchen_01", "hallway_01"],
             "is_outdoors": True #tag indoors
         },
         "bar_01": {
@@ -372,11 +372,10 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
             "name": "front door",
             "connections": ["reception_02", "cab_01"],
 
-            "component_descriptions": {"default": {"opening": {"neutral": ["It opens.", "It swings open."]},
-                                                   "closing": {"neutral": ["It closes.", "It swings closed."]},
-                                                   "closed": {"neutral": ["The door leads to reception.", "The door faces you.",
-                                                                          "It's the door to reception.","A door faces you."]},
-                                                   "open": {"neutral": ["its open. HAVE SOME WEATHER STFUF SINCE THE DOOR IS OUTDOORS!"]}
+            "component_descriptions": {"default": {"opening": {"neutral": ["The hinges grate.", "The hinges groan in resistance.","The hinges grind as you pull"]},
+                                                   "closing": {"neutral": ["The hinges scrape", "The hinges whine as they move.", "The hinges grate as they budge. "]},
+                                                   "closed": {"neutral": []},
+                                                   "open": {"neutral": []}
                                                    }},
             "lock_mechanism": {
                 "id": "office_lock_01",

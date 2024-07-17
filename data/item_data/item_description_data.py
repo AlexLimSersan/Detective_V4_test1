@@ -259,7 +259,7 @@ item_description_data = {
                 "neutral": ["You notice an alcoholic scent, out of place amongst the rubbish. Something was spilled."],
             },
             "at_entity": {
-                "neutral": ["The scent is pure - a strong, neutral alcohol."],
+                "neutral": ["The scent is a spiced, piney alcohol."],
             },
         },
 },
@@ -932,7 +932,7 @@ item_description_data = {
 "debbie_01": {
         "default": {
             "at_scene": {
-                "open": {"neutral": ["The corpse lays flat on a slab."],},
+                "open": {"neutral": ["The corpse lays flat on a slab. WHAT ABOUT HER DRESS BRO? WHAT BOUT WOUND DESCRIPTIONS? IMRPOOVEE"],},
                 "closed": {"neutral": ["A white cloth covers a corpse."],},
             },
             "approaching": {
@@ -960,7 +960,7 @@ item_description_data = {
                 "bertha_office_01": {
                     "neutral": ["The cap is loose - a spicy, citrus scent comes from the lid."],
                     },
-                "office_morgue_desk_01": {
+                "morgue_shelf_01": {
                     "neutral": ["The cap is loose - a spicy, citrus scent comes from the lid."],
                     },
             },
@@ -970,7 +970,7 @@ item_description_data = {
                 "bertha_office_01": {
                     "neutral": ["The cap is loose - a sweet, molasses scent comes from the lid."],
                     },
-                "office_morgue_desk_01": {
+                "morgue_shelf_01": {
                     "neutral": ["The cap is loose - a smoked, vanilla scent with oak undertones comes from the lid."],
                     },
             },
@@ -998,10 +998,9 @@ item_description_data = {
         },
         "opened": {
             "at_entity": {
-                "neutral": ["The odor is a spicy, floral citrus."],
+                "neutral": ["The odor is a spicy, floral citrus. It reminds you of pine."],
             },
             "leaving": {
-                "neutral": ["You set the bottle back, it's fragrance lingering."],
             },
             "times": {
             },
@@ -1386,7 +1385,7 @@ item_description_data = {
                     "neutral": ["Footwear is loosely lined on a nearby shoe rack. "],
             },
             "at_entity": {
-                "neutral": ["On top of the rack,"],
+                "neutral": ["On top of the rack, you see:"],
             },
         },
     },
@@ -1396,7 +1395,7 @@ item_description_data = {
                     "neutral": ["Miscellaneous clothing articles are piled atop a hanger."],
             },
             "at_entity": {
-                "neutral": ["The items include,"],
+                "neutral": ["The items include:"],
             },
         },
     },
@@ -1413,10 +1412,11 @@ item_description_data = {
 "denim_jacket_01": {
         "default": {
             "at_scene": {
-                    "neutral": ["A denim jacket, with clear wear and tear from use."],
+                    "neutral": ["A faded denim jacket, hung by the neck."],
             },
             "at_entity": {
-                "neutral": ["Blue and white fibers fray at the seams."],
+                "neutral": ["Blue and white fibers fray at the seams.", "Ragged ends of blue and white threads line the sleeves.",
+                            "Patches of blue and white fibers unravel along the seams"],
             },
         },
     },
@@ -1433,30 +1433,20 @@ item_description_data = {
 "leather_jacket_02": {
         "default": {
             "at_scene": {
-                    "neutral": ["Hanging from the wall, a rugged leather jacket droops heavily."],
+                    "neutral": ["Hanging from the wall, a rugged leather coat droops down and in folds."],
             },
             "at_entity": {
-                "neutral": ["Aside from some tears along the sleeve, the black leather looks well maintained."],
-            },
-        },
-    },
-"suit_jacket_01": {
-        "default": {
-            "at_scene": {
-                    "neutral": ["Underneath, a formal jacket is folded neatly, draped across a chair."],
-            },
-            "at_entity": {
-                "neutral": ["It's fibers are finely woven wool, the color is a deep, navy - almost black."],
+                "neutral": ["Aside from some cracks and tears, the black leather looks well maintained."],
             },
         },
     },
 "suit_jacket_02": {
         "default": {
             "at_scene": {
-                    "neutral": ["A deep navy blue formal blazer."],
+                    "neutral": ["A deep navy blue formal blazer.", "A neatly folded formal jacket, draped on it's side."],
             },
             "at_entity": {
-                "neutral": ["Despite some tears across the lining, it's finely woven wool fibers look well maintained."],
+                "neutral": ["Despite some tears across the lining, it's finely woven wool fibers look well maintained.", "It's fibers are finely woven wool, the color is a deep navy."],
             },
         },
     },
@@ -1473,7 +1463,7 @@ item_description_data = {
 "sneakers_01": {
         "default": {
             "at_scene": {
-                    "neutral": ["Sneakers, the laces dangle across the narrow shape."],
+                    "neutral": ["Narrow sneakers, it's laces dangling off the sides."],
             },
             "at_entity": {
                 "neutral": ["Bits of mud are lodged into the wavy, grooved pattern on the soles."],
@@ -1483,17 +1473,17 @@ item_description_data = {
 "dress_shoes_01": {
         "default": {
             "at_scene": {
-                    "neutral": ["Dress shoes, the laces neatly tucked into the inside."],
+                    "neutral": ["Dress shoes, with a dull, glossy sheen.","Dress shoes, the laces neatly tucked into the heel."],
             },
             "at_entity": {
-                "neutral": ["The glossy sheen contrasts with the dirt lining the shallow heel, the sole narrow and flat."],
+                "neutral": ["The polish contrasts with the dirt lining the shallow heel, the sole narrow and flat."],
             },
         },
     },
 "workboots_01": {
         "default": {
             "at_scene": {
-                    "neutral": ["Work boots, with a steel toe."],
+                    "neutral": ["Rugged, broad work boots, with a steel toe."],
             },
             "at_entity": {
                 "neutral": ["Caked mud fills the deep, cross hatched grooves."],

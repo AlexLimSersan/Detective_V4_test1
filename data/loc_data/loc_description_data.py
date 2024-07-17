@@ -5,33 +5,7 @@
 loc_description_data = {
 
 
-"void_01": { #narrows again - muddy ground, footprint
-    "default": {
-        "approaching": {"neutral": ["The ground is uneven.", "You walk across uneven footing."]
-        },
-        "at_entity": {
-            "neutral": ["The ground squelches under your feet.", "The mud sticks to your shoes."],
-            #you notice muddy footprints, imprints, they are messed up but clear enough to make out shoe vs boot?
-
-            #MUD STICKS HINT FOR THE CLEAN SHOES
-        },
-        "leaving": {
-        },
-        "times": {},
-        "weather": {},
-        "tags": ["urban"],
-        "connections": {
-            "crime_scene_01": {
-                "neutral": ["The alley stretches on..."],
-            },
-            "dead_end_01": {
-                "neutral": ["The dead end connects to the alley."],
-            },
-            "alley_05": {
-                "neutral": ["The alley stretches on..."],
-            }
-        }
-    }
+"void_01": {
 },
     #FOR APPROACH/LEAVING, TRY CONNECTIONS?
 
@@ -55,11 +29,15 @@ loc_description_data = {
                 "good": ["You relax in the cab", "The gentle hum of the engine feels soothing."],
                 "bad": ["You brace yourself as the cab hits another pothole, the ride anything but smooth."]
                 },
+            "EXIT_GAME": {
+                "neutral": ["You take one last look at the town...", "The city passes you by through the window..."],
+                },
         },
         "driving_arriving": {
-            "porch_01": ["The porch comes into view.."],
+            "porch_01": ["The pub comes into view.."],
             "alley_01": ["The alley comes into view..."],
-            "reception_01": ["The morgue comes into view..."]
+            "reception_01": ["The morgue comes into view..."],
+            "EXIT_GAME": ["The cab drives off, leaving it all behind.\n"],
         },
         "approaching": { #approaching current loc, FROM last loc. so can optinally add last locs here, then optional weather, time, etc
             "neutral": ["The cab is lazily parked, taking up 3 spots...",  "The cab idles.."],
@@ -67,23 +45,23 @@ loc_description_data = {
             "bad": ["The cabbie glances your direction.", "The cab is surrounded by cigarettes", "The cab idles.."]
         },
         "at_entity": {#inside cab
-            "neutral": ['The driver adjusts his mirror. "Where to?"', "The cabbie nods his head as you climb in.", ],
-            "good": ["You are greeted by a friendly nod from the driver.", "The cabbie greets you over the engine purr."],
-            "bad": ['The cabbie smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror. "Where to?"' ,'The driver looks indifferent to your presence.']
+            "neutral": ['The driver adjusts his mirror. "Where to?"', "The cabbie glances your way as you climb in.", ],
+            "good": ["You are acknowledged with a friendly nod.", "The cabbie greets you over the engine purr."],
+            "bad": ['The cabbie smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror, you catch a glimpse of his tired eyes. "Where to?"' ,'The driver looks indifferent to your presence.']
         },
         "times": {
             "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans back.", "He grips the steering wheel."],
                         "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired.",
                                 ]},
-            "afternoon": {"neutral": ["He rubs his eyes.", "He stretches in his seat.", "He leans back.", "He shifts in his seat."],
+            "afternoon": {"neutral": ["He rubs his eyes.", "He stretches in his seat.", "He sinks into his seat.", "He shifts in his seat."],
                         "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired."]},
             "evening": {"neutral": ["He scratches his head.", "His eyes wander.", "He shifts in his seat.", "He grips the steering wheel."],
                         "bad": ["He looks like he might fall asleep.", "His hands reach for another cigarette.", "His eyes dart, scanning the horizon.",]},
-            "night":{"neutral": ["The headlights beam onto the street.", "He stares at the night sky.", "He shifts in his seat, restless."],
-                        "bad": ["The headlights flicker.", "He looks like he might fall asleep.", "His hands tremble as he reaches for a cigarette.", "His eyes scan the horizon.",]},
+            "night":{"neutral": ["The headlights beam onto the street.", "He gazes at the night sky.", "He squirms in his seat, restless."],
+                        "bad": ["The headlights flicker.", "He looks like he might fall asleep.", "His hands shakily reach for a cigarette.", "His eyes dart across the horizon.",]},
         },
         "weather": { #optionally keyed to time of day - should make sense from INSIDE CAB!
-            "storm":["Raindrops pelt the cab, streaking its windows.", "The rain makes a rhythmic drumming sound.", "The headlights cast a pyramid in the rain."],
+            "storm":["The wind hammers the rain against the cab.", "Lightning arcs across the sky, followed by thunderous, roaring crack.", "The headlights cast the storm with a cone of light."],
             "rain": ["Raindrops pelt the cab, streaking its windows.", "The rain makes a rhythmic drumming sound.", "The headlights cast a pyramid in the rain."],
             "sun": ["The sun reflects off the hood, making you squint.", "The sunlight makes the hood shimmer."],
         },
@@ -92,10 +70,11 @@ loc_description_data = {
                 # always key weather, time. or just time. but never time, weather!!!
             "porch_01": { #seeing the cab from the porch
                 "sun": ["The cab is parked nearby."],
-                "rain": ["The cab is parked nearby.", "You can see the cab through the downpour."],
-                "storm": ["The cab is parked nearby.", "You can see the cab through the downpour."],
+                "rain": ["Through the rain, you can see the idling cab."],
+                "storm": ["You can see the cab through the downpour."],
             },
-            "alley_01": ["The cab is parked nearby.", "You can see the cabbie waiting across the street."],
+            "alley_01": ["You can see the cabbie waiting across the street."],
+            "alley_07": ["You can see the cabbie waiting across the street."],
             "backroom_door_02": ["You can walk to the cab from here..."]
             },
         "leaving": { #leaving from this loc TO player current loc, so key by current loc, then weather or time,,,
@@ -108,12 +87,11 @@ loc_description_data = {
 "porch_01": {
     "default": {
         "approaching": {
-            "cab_01": {"neutral": ["You approach the pub."]}
+            "cab_01": {"neutral": ["You approach the pub, and arrive at the porch."]}
         },
         "at_entity": {
-            "neutral": ["You stand on the porch, its surface weathered and worn.", "Wooden planks creak underfoot.", "The porch is weathered and worn."],
-            "bad": ["The wood groans under your weight."],
-            "good": ["The porch is a cozy spot."],
+            "neutral": ["Its surface is weathered and worn.", "Wooden planks creak underfoot."],
+            "bad": ["The wood groans under your weight.", "Wood is rotting near the foundation."],
         },
         "leaving": {
         },
@@ -129,17 +107,17 @@ loc_description_data = {
                 # always key weather, time. or just time. but never time, weather!!!
             "lounge_01": {  # seeing the porch from the lounge
                 "sun": {
-                    "morning": ["Ahead, the porch basks in the morning sun."],
+                    "morning": ["Ahead, the porch basks in the morning sun.","The morning sun bathes the porch in soft light."],
                     "afternoon": [
-                        "Ahead, the porch basks in the sun."],
+                        "Ahead, the porch basks in the noon sun.", "The sun casts the porch with sharp shadows."],
                     "evening": [
-                        "Ahead, the porch basks in the evening sun."],
+                        "Ahead, the porch offers a view of the sunset.","Ahead, the porch basks in the evening sun."],
                     "night": [
-                        "Ahead, the porch is lit only by the soft, flickering lights."]
+                        "Ahead, the porch is lit only by soft, dancing candles."]
                 },
                 "rain": [
-                        "Ahead, the porch is slick from the rain.", ],
-                "grey": ["Ahead, you can see the porch."],
+                        "You can see the porch ahead, slick from the rain.", ],
+                "storm": ["The storm rages on outside, drenching the porch in rain."],
             },
         }
     }
@@ -148,53 +126,38 @@ loc_description_data = {
     "default": {
         "approaching": [
             {
-            "porch_01": {
-                "neutral": ["You push through the pub doors.","You enter the pub."],
-                },
+                "porch_01": {"neutral": ["You push through the pub doors.","You enter the pub."],},
             },
             {
                 "neutral": ["The air reeks of smoke.", "You're hit with a wave a smoke."],
-                "bad": ["People glance at you briefly."]
-                },
+                "bad": ["People glance at you briefly.",]
+            },
         ],
         "at_entity": {
-            "neutral": ["The lounge is a bit run down.", "The lounge has a rustic feel.", "", ""],
+            "neutral": ["The lounge is a bit run down.", "The lounge has a rustic feel.", "It's a quiet {current_phase}."],
         },
         "leaving": {
             "porch_01": {"neutral": ["You leave the pub.", "The doors swing as you leave the lounge."]}
         },
-        "times": { #lounge is quiet, picks up in the evening/night
-            "morning": ["It's a quiet morning.", "A few staff members are cleaning up from last night."],
-            "afternoon": ["People laze around."],
-            "evening": ["It's busy.", "Drunk chatter forms a noisy backdrop."],
-            "night": ["It's starting to get rowdy.", "It's packed in here.", "People bump into you as they amble about."]
+        "times": {
         },
-        "weather": { #replaces weather decorator
-            "rain": ["Raindrops slam against the windows."],
-            "sun": ["Sun filters through the blinds.", "The sun casts it all in dramatic lighting."],
-            "grey": ["It's dim in here."]
+        "weather": {
         },
         "tags": ["indoors"],
         "connections": {
             "porch_01": { #seeing the lounge from the porch
-                "morning": ["The entrance to the lounge is directly ahead."],
-                "afternoon": ["The entrance to the lounge is directly ahead."],
-                "evening": ["You can hear commotion from the lounge.", "Ahead, the lounge seems busy."],
-                "night": ["You can hear commotion from the lounge.", "Ahead, the lounge seems busy."],
+                "neutral": ["The entrance to the lounge is directly ahead."],
             },
             "bar_01": ["The lounge is back the way you came."],
             "kitchen_01": ["The lounge is back the way you came."],
             "stage_01": { #seeing the lounge from the stage
-                "morning": ["The stage faces the lounge."],
-                "afternoon": ["The stage faces the lounge."],
+                "morning": ["You face the lounge."],
+                "afternoon": ["You face the lounge."],
                 "evening": ["From the lounge, people stare with a puzzle expression."],
                 "night": ["People seem to expect you to perform."]
             },
             "hallway_01": { #seeing the lounge from the hallway
-                "morning": ["Ahead, you can see the lounge."],
-                "afternoon": ["Ahead, you can see the lounge."],
-                "evening": ["Ahead, you can see the lounge.", "People squeeze by you to get to the lounge."],
-                "night": ["Ahead, you can see the lounge.", "People squeeze by you to get to the lounge."],
+                "neutral": ["Ahead, you can see the lounge.","The hallway opens up to the lounge."],
             }
         },
     },
@@ -202,23 +165,24 @@ loc_description_data = {
 "bar_01": {
     "default": {
         "approaching": {
-            "neutral": ["You find a seat at the quieter end of the counter.", "You maneuver around a few drunks to get a seat.",],
-            "bad":  [ "The patrons seem briefly annoyed at your presence.", "You notice a few scowls as you find a seat."],
-
+            "morning": ["You take a seat.","The stool rocks as you sit.", "You take a seat. The stool rocks unevenly.",],
+            "afternoon": ["You take a seat.","The stool rocks as you sit.", "You take a seat. The stool rocks unevenly.",],
+            "evening": ["You maneuver around a few drunks to get a seat.", "You find a seat at the quieter end of the counter."],
+            "night": ["You maneuver around a few drunks to get a seat.", "You find a seat at the quieter end of the counter."],
         },
         "at_entity": {
             "neutral": [  #might have to be in approaching
                         "The counter is rough and weathered.",
-                        "You notice the coarseness of the counter top.", "You take a seat. The stool rocks unevenly.", ],
+                        "You notice the coarseness of the counter top.",  ],
         },
         "leaving": {
-            "neutral": ["You step away from the bar." ,"You turn back the way you came.", "You push past the swinging doors as you leave."],
+            "neutral": ["You step away from the bar." ,"You turn back the way you came.", ],
         },
         "times": { #must be of
             "morning": ["Only a few stragglers from the night are here."],
-            "afternoon": ["The bar is quiet."],
-            "evening": ["The steady hum of conversation drones on.","A mix of chatter and laughter form the backdrop."],
-            "night": ["The steady hum of conversation drones on.","A mix of chatter and laughter form the backdrop."]
+            "afternoon": ["The bar is quiet.",],
+            "evening": ["The steady hum of conversation drones on.","Chatter forms a low backdrop."],
+            "night": ["The steady hum of conversation drones on.","Chatter forms a low backdrop."]
         },
         "weather": {
 
@@ -237,10 +201,10 @@ loc_description_data = {
 "kitchen_01": {
     "default": {
         "approaching": {
-            "neutral": ["The kitchen doors swing open.", "The smell of grease hits your nostrils."],
+            "neutral": ["The doors swing open.", "The smell of grease hits your nostrils."],
         },
         "at_entity": {
-            "good": ["The kitchen is well maintained."],
+            "good": ["The kitchen is well maintained.","It looks clean here"],
             "bad": ["The kitchen is in disarray.", "The kitchen is a mess."]
         },
         "leaving": {
@@ -249,7 +213,7 @@ loc_description_data = {
         "times": {
             "morning": ["Looks like they are just starting to prep for the day."],
             "afternoon": ["A few cooks and clattering pots surround you."],
-            "evening": ["It's a quiet night.", "They don't look rushed at all."],
+            "evening": ["It's a quiet night.", "It's not busy at all."],
             "night": ["No one's here."]
         },
         "weather": {
@@ -258,10 +222,7 @@ loc_description_data = {
         "tags": [],
         "connections": {
             "lounge_01": { #seeing the kitchen from the lounge
-        "morning": ["The kitchen doors are in the corner."],
-        "afternoon": ["The kitchen doors are in the corner."],
-        "evening": ["Cooks come in and out the kitchen doors.", "The kitchen doors are in the corner."],
-        "night": ["The kitchen doors are in the corner."],
+        "neutral": ["Swinging doors in the corner lead to the kitchen."],
             }
         }
     }
@@ -288,10 +249,7 @@ loc_description_data = {
         "tags": [],
         "connections": {
             "lounge_01": { #seeing the stage from the lounge
-                "morning": ["The stage is empty."],
-                "afternoon": ["The stage is empty."],
-                "evening": ["The stage is empty."],
-                "night": ["The stage is empty."],
+                "neutral": ["Opposite the bar, a small, raised platform marks the stage."],
             },
             "stage_02": { #seeing the stage from the backstage
                 "morning": ["The stage is empty."],
@@ -345,7 +303,7 @@ loc_description_data = {
 
         "connections": {
             "lounge_01": { #seeing the hallway from the lounge
-                "neutral" : ["Theres a hallway closeby.", "The hallway entrance can be seen from here.", "The entrance to the hallway is in the far corner of the room."],
+                "neutral" : ["The hallway entrance can be seen from here.", "The entrance to the hallway is in the far corner of the room."],
             },
             "stage_02": {  #seeing the hallway from the backstage
                 "neutral": ["The backstage connects directly to the hallway."],
@@ -359,15 +317,12 @@ loc_description_data = {
 
         },
         "at_entity": {
+            "neutral": ["The hallway stretches on.", "It's silent and empty."],
 
         },
         "leaving": {
         },
         "times": {
-            "morning": ["The hallway stretches on.", "The hallway stretches on, silent and empty." ],
-            "afternoon": ["The hallway stretches on.","The hallway stretches on, with occasional footsteps echoing."],
-            "evening": ["The hallway stretches on.","The hallway stretches on, with people moving to and fro.", "The hallway stretches on, dimly lit."],
-            "night": ["The hallway stretches on.","The hallway stretches on, late nighters stumbling about."]
         },
         "weather": {
 
@@ -379,7 +334,7 @@ loc_description_data = {
                 "bad": []
             },
             "hallway_03": {
-                "neutral": ["The pub's lounge is at the end of the hall."]
+                "neutral": ["The pub's lounge is at the end of the hall.","The hallway leads back to the lounge."]
             }
         }
     }
@@ -406,7 +361,7 @@ loc_description_data = {
                 "neutral": ["Doors face you at the end of the hall.", "You can see doors at the end of the hall."],
             },
             "hallway_04": {
-                "neutral": ["Ahead is the path to the pub.", "The hallway stretches on, all the way to the pub."],
+                "neutral": ["The hall leads back to the pub.", "The hallway stretches on, all the way to the pub."],
             }
         }
     }
@@ -454,8 +409,8 @@ loc_description_data = {
             "neutral": [],
         },
         "at_entity": { #should just have a bunch of at scene description stuff here. relevant clues! desk, boxes, flask, etc
-            "neutral": ["You are in the office.", "The office is small but cozy.", "It's a well kept place."],
-            "bad": ["You are in the office.", "The mess is slightly off putting.","The office is quite messy.", "It's dirty here."]
+            "neutral": ["It's a small, quaint space.", "It's well kept."],
+            "bad": ["The mess is slightly off putting.","The office is quite messy."]
         },
         "leaving": {
             "neutral": ["You turn back the way you came..."]
@@ -613,7 +568,8 @@ loc_description_data = {
         },
         "times": {},
         "weather": {"sun": ["You hear the sound of dripping water.", "The air is damp and musty."],
-                    "rain": ["Water gushes down an eavestrough.", "An eavestrough gushes water.","A nearby gutter drains the rain."]
+                    "rain": ["Water trickles down an eavestrough.", "An eavestrough drains a thin stream of water.","A nearby gutter dribbles out the rain."],
+                    "storm": ["Water jets out an eavestrough.", "An eavestrough gushes water.","A nearby gutter lets our a heavy flow of rain."]
                     },
         "tags": ["urban"],
         "connections": {
@@ -641,6 +597,7 @@ loc_description_data = {
         },
         "times": {},
         "weather": { #prevents regular weather
+            "storm": ["The alcove shields you from the storm."],
             "rain": ["The alcove shields you from the rain."],
             "sun": ["It's noticeably darker here.", "It provides quite a bit of shade."],
         },
@@ -688,7 +645,6 @@ loc_description_data = {
         "leaving": {
         },
         "times": {},
-        "weather": {},
         "tags": ["urban"],
         "connections": {
             "alley_02": {
@@ -708,22 +664,17 @@ loc_description_data = {
 
         },
         "at_entity": {
-            "neutral": ["You arrive at the crime scene."],
+            "neutral": [],
         },
         "leaving": {
         },
         "times": {},
-        "weather": {"sun": [],
-                    "rain": [],
-                    "storm": [],
-                    },
         "tags": ["urban"],
         "connections": {
             "alley_03_1": {
                 "neutral": [""],
             },
             "crime_scene_02": {
-                "neutral": ["The crime scene is ahead."],
             }
         }
     }
@@ -784,7 +735,7 @@ loc_description_data = {
 "dead_end_01": { #archway
     "default": {
         "approaching": {
-            "neutral": ["You pass under."]
+            "neutral": ["You pass under.","You duck under the arch."]
         },
         "at_entity": {
             "neutral": [""],
@@ -908,15 +859,19 @@ loc_description_data = {
             "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
         },
         "at_entity": {
-            "sun": {"neutral": ["The rungs feel cold under your hands."],
-                    "bad": ["The rust digs into your hands."]
+            "sun": {
+                "night": ["The rungs feel cold under your hands."],
+                "neutral": ["The rungs feel hot under your hands.",],
+                "bad": ["Hot rust digs into your hands."]
             ,},
-"rain": {"neutral": ["The rungs feel cold under your hands."],
-                    "bad": ["The rust digs into your hands."]
-            ,},
-"storm": {"neutral": ["The rungs feel cold under your hands."],
-                    "bad": ["The rust digs into your hands."]
-            ,},
+            "rain": {
+                "neutral": ["The rungs feel cold under your hands."],
+                "bad": ["Wet rust digs into your hands."]
+                        ,},
+            "storm": {
+                "neutral": ["The rungs feel cold under your hands."],
+                "bad": ["Wet rust digs into your hands."]
+                        ,},
 
 
         },
@@ -944,14 +899,27 @@ loc_description_data = {
             "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
         },
         "at_entity": {
-            "neutral": ["The rungs feel cold under your hands."],
-            "bad": ["The rust digs into your hands."],
+            "sun": {
+                "night": ["The rungs feel cold under your hands."],
+                "neutral": ["The rungs feel hot under your hands.",],
+                "bad": ["Hot rust digs into your hands."]
+            ,},
+            "rain": {
+                "neutral": ["The rungs feel cold under your hands."],
+                "bad": ["Wet rust digs into your hands."]
+                        ,},
+            "storm": {
+                "neutral": ["The rungs feel cold under your hands."],
+                "bad": ["Wet rust digs into your hands."]
+                        ,},
+
+
         },
         "leaving": {
         },
         "times": {},
         "weather": {},
-        "tags": ["urban", "outdoors"],
+        "tags": ["urban"],
         "connections": {
             "fire_escape_02": {
                 "neutral": ["The ladder leads all the way to the roof."],
@@ -1031,7 +999,12 @@ loc_description_data = {
             "evening": ["A lantern flickers ominously."],
             "night": ["A lantern flickers ominously."],
         },
-        "weather": {},
+        "weather": {
+            "sun": ["The sun brings out each peeling flake of paint.","The handle glints in the sun.", "Each curling flake of paint has a matching shadow."],
+            "rain": ["It's coated slick from the rain.","Water beads down door, pooling at odd places.","Water drips from the handle at regular intervals."],
+            "storm": ["Thunder rumbles in the distance.","A thunderclap echoes.","Lightning flashes.","Rain slams against the door.","The wind howls, rain slamming into the door.","The wind brings a shower of rain onto the door."],
+
+        },
         "tags": [""],
         "connections": {
             "cab_01": {
@@ -1130,7 +1103,7 @@ loc_description_data = {
                 },
                 "times": {},
                 "weather": {},
-                "tags": [""],
+                "tags": ["indoors"],
                 "connections": {
                     "reception_02": {
                         "neutral": ["Across the office, a hallway leads deeper in to the morgue."],
@@ -1161,7 +1134,7 @@ loc_description_data = {
                         "neutral": [""],
                     },
                     "hallway_morgue_01": {
-                        "neutral": ["u can see hallway 2"],
+                        "neutral": ["The hallway leads to a metal door."],
                     }
                 }
             },
@@ -1185,7 +1158,7 @@ loc_description_data = {
                 "tags": [""],
                 "connections": {
                     "refrigeration_01": {
-                        "neutral": ["u can read this ?"],
+                        "neutral": ["Cold air rushes through the gap."],
                     },
                 }
             },
