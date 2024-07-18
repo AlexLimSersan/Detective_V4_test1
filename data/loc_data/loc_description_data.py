@@ -527,7 +527,7 @@ loc_description_data = {
 "alley_01": { #standing at alley entrance
     "default": {
         "approaching": {
-            "cab_01" : {"neutral": ["You cross the sidewalk...", "Walking up to the alleyway...",]},
+            "cab_01" : {"neutral": ["You cross the street...", "You step up onto the curb...",]},
             "alley_02": {"neutral": ["You exit the alleyway, and return to the street."]}
         },
         "at_entity": [
@@ -544,7 +544,7 @@ loc_description_data = {
                 "neutral": ["The alleyway can be seen from here."],
             },
             "alley_02": {
-                "neutral": ["The alley opens up to the street."]
+                "neutral": ["Close by, the alley exits to the road."]
             }
         }
     }
@@ -625,7 +625,7 @@ loc_description_data = {
         "tags": ["urban"],
         "connections": {
             "alley_02": {
-                "neutral": ["The alley continues, dark and narrow."],
+                "neutral": [],
             },
             "alley_03_1": {
                 "neutral": ["From here, the path leads all the way back to the cab."],
@@ -647,11 +647,11 @@ loc_description_data = {
         "times": {},
         "tags": ["urban"],
         "connections": {
-            "alley_02": {
-                "neutral": [""],
+            "crime_scene_01": {
+                "neutral": ["The alley continues, dark and narrow."],
             },
-            "alley_03_1": {
-                "neutral": ["From here, the path leads all the way back to the cab."],
+            "alley_03": {
+                "neutral": [""],
             }
         }
     }
@@ -1048,7 +1048,7 @@ loc_description_data = {
                     "neutral": ["You walk into the office."]
                 },
                 "at_entity": {
-                    "neutral": ["It's a small, run down office, each surface sterile and clean."],
+                    "neutral": ["It's a small office."],
                 },
                 "leaving": {
                     "neutral": [""],
@@ -1076,10 +1076,10 @@ loc_description_data = {
                 },
                 "times": {},
                 "weather": {},
-                "tags": [""],
+                "tags": ["indoors"],
                 "connections": {
                     "hallway_morgue_02": {
-                        "neutral": ["A heavy metal door faces you at the end of the hall."],
+                        "neutral": ["A heavy metal door faces you.","You face a heavy metal door."],
                     },
                     "refrigeration_02": {
                         "neutral": ["The door leads back to the hallway."],
@@ -1093,7 +1093,7 @@ loc_description_data = {
 "hallway_morgue_01": {
             "default": {
                 "approaching": {
-                    "neutral": ["You walk to hallway."]
+                    "neutral": ["You step towards the hallway."]
                 },
                 "at_entity": {
                     "neutral": [""],
@@ -1106,7 +1106,7 @@ loc_description_data = {
                 "tags": ["indoors"],
                 "connections": {
                     "reception_02": {
-                        "neutral": ["Across the office, a hallway leads deeper in to the morgue."],
+                        "neutral": ["Adjacent the office, a hallway leads deeper into the morgue."],
                     },
                     "hallway_morgue_02": {
                         "neutral": ["The hallway leads back to reception."],
@@ -1134,7 +1134,7 @@ loc_description_data = {
                         "neutral": [""],
                     },
                     "hallway_morgue_01": {
-                        "neutral": ["The hallway leads to a metal door."],
+                        "neutral": ["It leads to a metal door."],
                     }
                 }
             },
@@ -1148,7 +1148,7 @@ loc_description_data = {
                     "neutral": ["The temperature plummets as soon as you enter."]
                 },
                 "at_entity": {
-                    "neutral": ["Each exhale emits a fleeting puff of condensed breath."],
+                    "neutral": ["Each exhale emits a fleeting puff of condensed breath.","A droning buzz comes from the ventilation."],
                 },
                 "leaving": {
                     "neutral": [""],
@@ -1158,7 +1158,7 @@ loc_description_data = {
                 "tags": [""],
                 "connections": {
                     "refrigeration_01": {
-                        "neutral": ["Cold air rushes through the gap."],
+                        "neutral": ["Cold air rushes into the hall.","Through the gap, cold air blows into the hall."],
                     },
                 }
             },

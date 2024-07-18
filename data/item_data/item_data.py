@@ -138,9 +138,9 @@ item_ent_data = {
                     },
     },
     "spawn_data": {
-        "locations": ["debbie_01"],
+        "locations": ["limbs_01","torso_01","head_01"],
         "frequency": 1,
-        "count": 1,
+        "count": 3,
     }
 },
 
@@ -165,9 +165,9 @@ item_ent_data = {
                     },
     },
     "spawn_data": {
-        "locations": ["debbie_01"],
+        "locations": ["limbs_01","head_01","torso_01"],
         "frequency": 1,
-        "count": 1,
+        "count": 3,
     }
 },
 
@@ -411,6 +411,27 @@ item_ent_data = {
 },
 
     "drawers": {
+
+"office_morgue_desk_01" : {
+            "name": "workbench",
+            "spawn_data": {
+                "locations": ["morgue_office_01"],
+                "frequency": 1,
+                "count": 1,
+            },
+            "state_data": {},
+            "components": {
+                "name": "drawer", #gotta put stuff here?! lol
+                "component_descriptions": {
+                    "default": {
+                        "opening":["You pull the drawer open."],
+                        "closing":["You slide the drawer closed."],
+                        "closed": [""],
+                        "opened":[""],
+                    }
+                }
+            }
+        },
 "morgue_shelf_01" : {
             "name": "cabinet",
             "spawn_data": {
@@ -531,10 +552,10 @@ item_ent_data = {
                 },
                 "component_descriptions": {
                         "default": {
-                            "opening":["You pull the cloth away."],
-                            "closing":[ "You throw the cloth over her."],
-                            "closed": ["A white cloth covers the corpse."],
-                            "opened":["Her corpse lays flat on the table."],
+                            "opening":["You pull the cloth away.\n"],
+                            "closing":[ "You throw the cloth over her.\n"],
+                            "closed": ["A white cloth covers the corpse.CONCAVE, CONVEX?\n"],
+                            "opened":["Her corpse lays flat on the table.\n"],
                         }
                 }
             }
@@ -549,15 +570,6 @@ item_ent_data = {
 "items": {
 
 
-"office_morgue_desk_01" : {
-            "name": "workbench",
-            "spawn_data": {
-                "locations": ["morgue_office_01"],
-                "frequency": 1,
-                "count": 1,
-            },
-            "state_data": {},
-        },
 #BACKROOM
 "backroom_counter_01":{
     "name": "counter",  #more gibbs stuff here
@@ -689,7 +701,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["bertha_office_drawer_01"],
+        "locations": ["bertha_office_drawer_01","office_morgue_desk_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -920,13 +932,13 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["cardigan_01","debbie_01", "crime_scene_01", "crime_scene_02"],
+        "locations": ["cardigan_01", "crime_scene_01", "crime_scene_02"],
         "frequency": 1,
         "count": 1,
     }
 },
 "cardigan_01": {
-    "name": "cardigan",
+    "name": "clothing",
     "is_hidden": True,
     "state_data": {
         "default": {
@@ -938,8 +950,8 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["debbie_01"],
-        "frequency": 0.8,
+        "locations": ["torso_01"],
+        "frequency": 1,
         "count": 1,
     }
 },
@@ -974,7 +986,7 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["stage_02"],
-        "locations": ["bar_01", "porch_01", "office_morgue_desk_01"],
+        "locations": ["bar_01", "porch_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -989,7 +1001,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["stage_02","stage_02","stage_02","crime_scene_01", "crime_scene_02", "alley_03_1", "alley_04","debbie_01","cardigan_01"],
+        "locations": ["stage_02","stage_02","stage_02","crime_scene_01", "crime_scene_02", "alley_03_1", "alley_04","cardigan_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -1101,7 +1113,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["debbie_01"],
+        "locations": ["limbs_01"],
         "conditions": {"traits": ["strong"]},
         "frequency": 1,
         "count": 1,
@@ -1111,13 +1123,19 @@ item_ent_data = {
 "earring_01": {
     "name": "ear ring",
     "state_data": {
-        "default": {
-            "frequency": 0.6
+        "default": { #both
+            "frequency": 1
+        },
+        "single": { #only 1
+            "frequency": 1,
+            "conditions": {"traits": ["strong"]},
         },
     },
     "spawn_data": {
-        "locations": ["crime_scene_01", "crime_scene_02", "debbie_01"],
-        "frequency": 0.8,
+        "locations_always_spawn": ["head_01"], #can match earing to her ear
+        "locations": ["crime_scene_01", "crime_scene_02"],
+        "conditions": {"traits": ["strong"]},
+        "frequency": 0.6,
         "count": 1,
     }
 },
@@ -1212,7 +1230,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["debbie_01"],
+        "locations": ["limbs_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -1240,9 +1258,9 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["shoe_rack_01"],
-        "locations": ["morgue_office_01", "reception_02"], #MORT also WEARING DRESS SHOES
+        "locations": [], #MORT also WEARING DRESS SHOES
         "frequency": 0.5,
-        "count": 1,
+        "count": 0,
     }
 },
 "workboots_01": { #
@@ -1254,6 +1272,55 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["shoe_rack_01", "reception_02"],
+        "locations": [],
+        "frequency": 0.5,
+        "count": 1,
+    }
+},
+
+
+"head_01": { #
+    "name": "head",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["debbie_01"],
+        "locations": [],
+        "frequency": 0.5,
+        "count": 1,
+    }
+},
+
+"torso_01": { #
+    "name": "torso",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["debbie_01",],
+        "locations": [],
+        "frequency": 0.5,
+        "count": 1,
+    }
+},
+
+"limbs_01": { #
+    "name": "limbs",
+    "is_hidden": True,
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn": ["debbie_01"],
         "locations": [],
         "frequency": 0.5,
         "count": 1,

@@ -29,7 +29,7 @@ item_description_data = {
                 },
             },
             "at_entity": {
-                "neutral": ["The ashes are a mix of black and white, each thin flake curling at the edges.", "A black circular imprint centers around streaks of thin, white ash."],
+                "neutral": ["A mix of black and white ashes surround a burn mark.","Ashes follow a scorch mark, each thin flake curling at the edges.", "A black circular imprint centers around streaks of thin, white ash."],
             },
         },
         "tobacco": {
@@ -73,9 +73,10 @@ item_description_data = {
                 },
             },
             "at_entity": {
-                "office_morgue_desk_01": {"neutral": ["Scorch marks form a symmetric circle around a solid, silver filter."]},
+                "morgue_office_01": {"neutral": ["Scorch marks form a symmetric circle around a solid, silver filter."]},
                 "bertha_office_drawer_01": {"neutral": ["The paper is burned unevenly, down to the solid, white filter."],},
-                "neutral": ["The paper is burned unevenly, down to the solid, white filter."],
+                "porch_01": ["The paper is burned unevenly, down to the solid, white filter."],
+                "bar_01": ["The paper is burned unevenly, down to the solid, white filter."],
             },
         },
 },
@@ -420,8 +421,9 @@ item_description_data = {
 "footprint_01": {
         "default": {
             "at_scene": {
-                "neutral": ["A singular footprint is distinct in the mud."],
+                "neutral": ["Printed in the mud is a distinct, singular footprint."],
             },
+            "approaching":{"neutral": ["You kneel down..."]},
             "at_entity": {
                 "neutral": ["It's a narrow imprint. A broad flat area tapers forward - behind it, a sharp dot forms a deep circular impression."],
             },
@@ -533,7 +535,7 @@ item_description_data = {
                 "bertha_office_drawer_01": {
                     "neutral": ["Sticky, burned tobacco forms granular clumps.", "Bits of half burned tobacco form coarse, sticky lumps."]
                 },
-                "office_morgue_desk_01": {
+                "morgue_office_01": {
                     "neutral": ["It's filled with a mix of fine soot, and thick clumps of half burnt tobacco."],
                 },
                 "neutral": ["Cigarette butts are buried in their own thin ashes.", "A few roaches mingle in their own finely burned ashes."]
@@ -556,7 +558,7 @@ item_description_data = {
 "office_morgue_desk_01": {
         "default": {
             "at_scene": {
-                "neutral": ["The steel surface looks cold and clean.","Solid steel forms the surface of the workbench."],
+                "neutral": ["The steel surface looks cold and clean.","Solid steel forms the surface of the workbench.","The desk looks sterile and clean."],
             },
             "approaching": {
                 "neutral": [],
@@ -796,6 +798,9 @@ item_description_data = {
                 "stage_02": {
                     "neutral": ["You spot a matchbook in the clutter."],
                 },
+                "leather_jacket_02": {
+                    "neutral": ["The left pocket has a matchbook."],
+                },
             },
             "approaching": {
                 "neutral": ["You pick it up."],
@@ -929,27 +934,6 @@ item_description_data = {
 
 
 
-"debbie_01": {
-        "default": {
-            "at_scene": {
-                "open": {"neutral": ["The corpse lays flat on a slab. WHAT ABOUT HER DRESS BRO? WHAT BOUT WOUND DESCRIPTIONS? IMRPOOVEE"],},
-                "closed": {"neutral": ["A white cloth covers a corpse."],},
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": [""],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
 
 "flask_01": {
         "default": {
@@ -960,7 +944,7 @@ item_description_data = {
                 "bertha_office_01": {
                     "neutral": ["The cap is loose - a spicy, citrus scent comes from the lid."],
                     },
-                "morgue_shelf_01": {
+                "morgue_office_01": {
                     "neutral": ["The cap is loose - a spicy, citrus scent comes from the lid."],
                     },
             },
@@ -970,7 +954,7 @@ item_description_data = {
                 "bertha_office_01": {
                     "neutral": ["The cap is loose - a sweet, molasses scent comes from the lid."],
                     },
-                "morgue_shelf_01": {
+                "morgue_office_01": {
                     "neutral": ["The cap is loose - a smoked, vanilla scent with oak undertones comes from the lid."],
                     },
             },
@@ -1212,29 +1196,14 @@ item_description_data = {
             },
         },
     },
-"cardigan_01": {
-        "default": {
-            "at_scene": {
-                    "neutral": ["A laced cardigan is here."],
-            },
-            "at_entity": {
-                "neutral": ["It's a cardigan."],
-            },
-        },
-        "torn": {
-            "at_entity": {
-                "neutral": ["It's in tatters."],
-            },
-        },
-    },
 
 "cardigan_scraps_01": { #can now maybe also be something else that is thin laced wool!@!@!@
         "default": {
             "at_scene": {
-                    "neutral": ["Some wool fiber are strewn about."],
+                    "neutral": ["White fibers are strewn about."],
             },
             "at_entity": {
-                "neutral": ["They are from a thin, laced article - it look like they were forcefully torn off."],
+                "neutral": ["They are from some laced, wool article - it look like they were forcefully torn off."],
             },
         },
     },
@@ -1314,10 +1283,10 @@ item_description_data = {
         },
         "pack": {
             "at_scene": {
-                    "neutral": ["There's a pack of cigarettes - it looks like a generic brand."],
+                    "neutral": ["Closeby, there's a pack of cigarettes - it looks like a generic brand."],
             },
             "at_entity": {
-                "neutral": ["It looks like a common, cheap brand."],
+                "neutral": ["It looks like a common, cheap brand. Each white cigarette butt peeks out the opening."],
             },
         },
     },
@@ -1332,10 +1301,10 @@ item_description_data = {
         },
         "pack": {
             "at_scene": {
-                    "neutral": ["There's a pack of cigarettes - it looks like a nice brand."],
+                    "neutral": ["Closeby, there's a pack of cigarettes - it looks like a nice brand."],
             },
             "at_entity": {
-                "neutral": ["The package makes it clear that it's a premium brand."],
+                "neutral": ["The package makes it clear that it's a premium brand. The silver butts of each cigarette peek out the opening."],
             },
         },
     },
@@ -1433,7 +1402,7 @@ item_description_data = {
 "leather_jacket_02": {
         "default": {
             "at_scene": {
-                    "neutral": ["Hanging from the wall, a rugged leather coat droops down and in folds."],
+                    "neutral": ["Hanging from the wall, a rugged leather coat droops down in folds."],
             },
             "at_entity": {
                 "neutral": ["Aside from some cracks and tears, the black leather looks well maintained."],
@@ -1483,13 +1452,100 @@ item_description_data = {
 "workboots_01": {
         "default": {
             "at_scene": {
-                    "neutral": ["Rugged, broad work boots, with a steel toe."],
+                "reception_02": {"neutral": ["Next to the door, a pair of work boots are neatly set on a mat."],},
+                "shoe_rack_01": {"neutral": ["Rugged, broad work boots, with a steel toe."],},
+
             },
             "at_entity": {
-                "neutral": ["Caked mud fills the deep, cross hatched grooves."],
+                "neutral": ["Caked mud fills the deep, cross hatched grooves that pattern the wide sole."],
             },
         },
     },
+
+
+
+"debbie_01": {
+        "default": {
+            "at_scene": {
+                "open": {"neutral": ["The corpse lays flat on a slab."],},
+                "closed": {"neutral": ["A white cloth covers a corpse.CONCAVE/CONVEX"],},
+            },
+            "approaching": {
+                "neutral": [""],
+            },
+            "at_entity": {
+                "neutral": [""],
+            },
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+},
+
+"cardigan_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": [
+                        "A simple, green dress covers her collarbones to her knees. \n"
+                        "Resting overtop, she wears a white cardigan, open at the front."
+                                ],
+            },
+            "at_entity": {
+                "neutral": ["The cardigans laced wool creates a textured, warm fabric.\n"
+                            "The dress contours her form, wrinkling at the waist."],
+            },
+        },
+        "torn": {
+            "at_entity": {
+                "neutral": ["From the shoulder to her elbow, large rips stretch and distort the cardigan's laced pattern.\n"
+                            "Her dress is warped and fits unevenly - jagged tears run along the seams, exposing her ribs."],
+            },
+        },
+    },
+
+
+"head_01": {
+    "default": {
+        "at_scene": {"neutral": ["Long, brown hair forms a tangled mess. \n"
+                        "Open, grey eyes stare into the void, her skin abnormally pale."], },
+
+        "at_entity": {
+            "neutral": ["Brown hair is splayed around her hollow, gaunt face.\n"
+                        "Her skin has taken on a waxy pallor; her features and neck locked and tense.\n"
+                        "Glassy, fixed eyes have dried out, sinking into their sockets. \n"
+                        "Her lips are parted, thin, and chapped.\n"],
+        },
+    },
+},
+"torso_01": {
+    "default": {
+        "at_scene": {"neutral": ["A simple, green dress covers her collarbones to her knees.\n"
+                        "Resting overtop, she wears a white cardigan, open at the front."], },
+        "at_entity": {
+            "neutral": ["Her shoulders down through her back are colored a mottled purple.\n"
+                        "Her muscles are rigid and stiff."],
+        },
+    },
+},
+"limbs_01": {
+    "default": {
+        "at_scene": {"neutral": ["Her limbs are locked at awkward angles."], },
+        "at_entity": {
+            "neutral": ["Her arms and legs are tense and inflexible - her fingers and toes curl, each nail pale and blue."],
+        },
+    },
+},
+
+
+
+
+
+
+
 "bertha_clothes_01": {
         "default": {
             "at_scene": {
