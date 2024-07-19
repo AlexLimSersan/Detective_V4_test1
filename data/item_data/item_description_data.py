@@ -1462,30 +1462,6 @@ item_description_data = {
         },
     },
 
-
-
-"debbie_01": {
-        "default": {
-            "at_scene": {
-                "open": {"neutral": ["The corpse lays flat on a slab."],},
-                "closed": {"neutral": ["A white cloth covers a corpse.CONCAVE/CONVEX"],},
-            },
-            "approaching": {
-                "neutral": [""],
-            },
-            "at_entity": {
-                "neutral": [""],
-            },
-            "leaving": {
-                "neutral": [""],
-            },
-            "times": {
-            },
-            "weather": {
-            }
-        },
-},
-
 "cardigan_01": {
         "default": {
             "at_scene": {
@@ -1506,6 +1482,30 @@ item_description_data = {
             },
         },
     },
+
+
+
+"debbie_01": {
+        "default": {
+            "at_scene": {
+                "open": {"neutral": ["A corpse lays flat in the center of the room."],},
+                "closed": {"neutral": ["A white cloth covers a corpse.CONCAVE/CONVEX"],},
+            },
+            "approaching": {
+                "neutral": [""],
+            },
+            "at_entity": {
+                "neutral": ["Her corpse lays flat on the table."],
+            },
+            "leaving": {
+                "neutral": [""],
+            },
+            "times": {
+            },
+            "weather": {
+            }
+        },
+},
 
 
 "head_01": {

@@ -138,6 +138,7 @@ item_ent_data = {
                     },
     },
     "spawn_data": {
+        "locations_always_spawn": ["debbie_01"],
         "locations": ["limbs_01","torso_01","head_01"],
         "frequency": 1,
         "count": 3,
@@ -165,6 +166,7 @@ item_ent_data = {
                     },
     },
     "spawn_data": {
+        "locations_always_spawn": ["debbie_01"],
         "locations": ["limbs_01","head_01","torso_01"],
         "frequency": 1,
         "count": 3,
@@ -552,10 +554,24 @@ item_ent_data = {
                 },
                 "component_descriptions": {
                         "default": {
-                            "opening":["You pull the cloth away.\n"],
-                            "closing":[ "You throw the cloth over her.\n"],
-                            "closed": ["A white cloth covers the corpse.CONCAVE, CONVEX?\n"],
-                            "opened":["Her corpse lays flat on the table.\n"],
+                            "opening":["You pull the cloth away.","You remove the cover.",
+                                       "The fabric drags as you pull.","You peel the cloth away.",""],
+                            "closing":[ "You throw the cloth over her.","It lowers as air escapes.",
+                                        "You drape the cloth across her.","You cover her with the cloth."],
+                            "closed": ["A white cloth forms subtle, alternating curves.",
+                                       "Concave and convex slopes trace a still form.",
+                                       "A white cloth covers her body.",
+                                       "The cloth drapes, its edges gently brushing the floor."],
+                            "opened":[
+                                "Glassy, fixed eyes stare into the void."
+                                "Long, brown hair splays in a tangled mess, framing a waxy, pale face.",
+
+                                "Brown hair curves around a bloody figure,"
+                "Her limbs are locked at awkward angles, "
+                                ,
+
+
+                                      ],
                         }
                 }
             }
@@ -950,6 +966,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
+        "locations_always_spawn": ["debbie_01"],
         "locations": ["torso_01"],
         "frequency": 1,
         "count": 1,
@@ -1113,6 +1130,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
+        "locations_always_spawn": ["debbie_01"],
         "locations": ["limbs_01"],
         "conditions": {"traits": ["strong"]},
         "frequency": 1,
@@ -1122,6 +1140,7 @@ item_ent_data = {
 
 "earring_01": {
     "name": "ear ring",
+    "is_hidden": True,
     "state_data": {
         "default": { #both
             "frequency": 1
@@ -1132,7 +1151,8 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations_always_spawn": ["head_01"], #can match earing to her ear
+        "locations_always_spawn": ["debbie_01"],
+        #"locations_always_spawn": ["head_01"], #can match earing to her ear
         "locations": ["crime_scene_01", "crime_scene_02"],
         "conditions": {"traits": ["strong"]},
         "frequency": 0.6,
@@ -1288,7 +1308,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations_always_spawn": ["debbie_01"],
+        #"locations_always_spawn": ["debbie_01"],
         "locations": [],
         "frequency": 0.5,
         "count": 1,
@@ -1304,7 +1324,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations_always_spawn": ["debbie_01",],
+        #"locations_always_spawn": ["debbie_01",],
         "locations": [],
         "frequency": 0.5,
         "count": 1,
@@ -1320,7 +1340,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations_always_spawn": ["debbie_01"],
+        #"locations_always_spawn": ["debbie_01"],
         "locations": [],
         "frequency": 0.5,
         "count": 1,
