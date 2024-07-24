@@ -2,6 +2,9 @@
 from config.settings import TICKER_MULTIPLIER, START_PHASE, PHASE_TIME_INTERVAL, ALL_PHASES
 from config.logging_config import app_logger
 #all times like move time, etc, here! i think its better 100%
+import random
+
+
 class Time_System: #could add an event "late game" or similar, which can change descriptions accordingly
     def __init__(self, game_state):
         self.game_state = game_state
@@ -35,14 +38,34 @@ class Time_System: #could add an event "late game" or similar, which can change 
         ui.display(f"Time progresses... People move around you.\n #Current phase: {self.current_phase.capitalize()}")  # later will comment out
         ui.display(f"_____________________")
         ui.stall()
+        self.display_weather_change(ui)
 
-        """LIKE WEAHTER, NEED SOME WARNING/TRANSITION THING! TO ABRUPT FOR ROUTINES ESP EVENTS LIKE A SUSPECT VANISHES or appears in the room.."""
-        #SUN, RAIN, TRANSITION ANNOUNCEMENT (THE SKY DARKENS, CLOUDS FORM, THE CLOUDS PART, THE RAIN starts to SLOWS DOWN...
-        """
-        simple like, it's almost nighttime.... halfway through the phase.and done need to stall..
-        
-        
-        """
+    def display_weather_change(self, ui):
+        if self.game_state.weather_system.current_weather == "sun":
+            if self.game_state.weather_system.weather_history[-2] == "sun":
+                if self.current_phase == "night":
+                    ui.display(random.choice([f"The moon shines brightly overhead...",
+                               f"The clouds clear, and the stars come out..."]))
+                else:
+                    ui.display(random.choice([f"The sun beats down overhead...",
+                               f"The sun shines brightly above..."]))
+            else:
+                ui.display(random.choice([f"The clouds part, and the rain dwindles...",
+                                          f"The sun comes out, and the rain stops...",
+                                          f"The rain stops, and the sun comes out..."]))
+        else:
+            if self.game_state.weather_system.weather_history[-2] == "sun":
+                ui.display(random.choice([f"The clouds darken... It begins to rain.",
+                           f"Rain clouds form overhead, obscuring the sun..."]))
+            else:
+                if self.game_state.weather_system.current_weather == "storm":
+                    ui.display(random.choice([f"The rain worsens...",f"The rain intensifies..."]))
+                else:
+                    ui.display(random.choice([f"The rain continues...",
+                               f"The rain shows no signs of stopping..."]))
+
+
+
 
 
 

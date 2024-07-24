@@ -5,7 +5,7 @@ from config.settings import START_WEATHERS, ALL_WEATHERS, GOOD_WEATHER
 import logging
 # Get the logger configured in the main script
 logger = logging.getLogger('my_game')
-
+from config.logging_config import app_logger
 class Weather_System:
     def __init__(self, weather_data, game_state):
         #weather attributes
@@ -14,6 +14,7 @@ class Weather_System:
         self.good_weathers = GOOD_WEATHER
         #weather descriptions - sun, rain, after rain (puddles?) BASICALLY, NEED WEATHER TRANSITIONS!!! its a bright sunny day... then next thing: thunder claps in the rain
         self.weather_descriptions = weather_data
+        self.weather_history = [self.current_weather]
         #gamestate
         self.game_state = game_state
         assert self.weather_descriptions.get("rain") is not None
@@ -26,13 +27,13 @@ class Weather_System:
     def current_weather(self, value):
         if value in self.all_weathers:
             self._current_weather = value
+            self.weather_history.append(value)
             logger.info(f"Setting weather: {value}")
         else:
             raise ValueError(f"Invalid weather type: {value}")
 
     def set_weather(self, new_weather):
         self.current_weather = new_weather
-
 
     def roll_weather(self):
         chance = random.random()
@@ -52,6 +53,9 @@ class Weather_System:
         else:
             new_weather = random.choice(self.all_weathers)
         self.current_weather = new_weather
+        app_logger.error(f"{self.weather_history}\n{self.current_weather}")
+
+
 
     def decorate_tags(self, description_tags):
         logger.info(f"weather_system decorate tags: all description_tags: {description_tags}")

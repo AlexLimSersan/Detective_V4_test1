@@ -3,8 +3,48 @@ weather_data = {
     #RAIN: Light rain, wind, grey. Occasional thunder but nothing crazy.
     #STORM: a fuckn STORM!!! on some crazy weather shit. should be fairly rare and more likely to happen from rain, not just sun.
     #later, have transition texts here.
+    # to rain, to sun
+    "to_rain": {
+        "default": {
+            "morning":["The clouds darken..."],
+            "afternoon":["The clouds darken..."],
+            "evening":["The clouds darken..."],
+            "night":["The clouds darken..."],
+        },
+        "urban":{
+            "morning":["The clouds darken..."],
+            "afternoon":["The clouds darken..."],
+            "evening":["The clouds darken..."],
+            "night":["The clouds darken..."],
+        },
+        "indoors":{
+            "morning":["The clouds darken..."],
+            "afternoon":["The clouds darken..."],
+            "evening":["The clouds darken..."],
+            "night":["The clouds darken..."],
+        },
 
-
+    },
+    "to_sun": {
+        "default": {
+            "morning":["The clouds part..."],
+            "afternoon":["The clouds part..."],
+            "evening":["The clouds part..."],
+            "night":["The clouds part..."],
+        },
+        "urban":{
+            "morning":["The clouds part..."],
+            "afternoon":["The clouds part..."],
+            "evening":["The clouds part..."],
+            "night":["The clouds part..."],
+        },
+        "indoors":{
+            "morning":["The clouds part..."],
+            "afternoon":["The clouds part..."],
+            "evening":["The clouds part..."],
+            "night":["The clouds part..."],
+        },
+    },
     "sun": {
         "default": {
             "morning": ["The early sun makes you squint.", "It's a beautiful day.", "It's bathed in the morning sun.", "The early sun peeks over the horizon.",
