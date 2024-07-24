@@ -103,9 +103,25 @@ class Descriptions(ABC):
         descriptions_dic = check_nested_weather_or_time_keys(temp_dic, self.game_state)
         desc_logger.debug(f"RETURNING = {descriptions_dic}")
         if default_to_add:
-            merged_dic = merge_dicts(default_to_add, descriptions_dic)
-            desc_logger.info(f"BASE / HANDLE KEYING: \nDEFAULT TO ADD = {default_to_add}\n merged_dic = {merged_dic}")
-            return merged_dic
+            #this is weird lol but fuckit
+            merged_dic = None
+            if isinstance(default_to_add, dict) and isinstance(descriptions_dic, dict):
+                merged_dic = merge_dicts(default_to_add, descriptions_dic)
+
+                desc_logger.info(f"1\n{merged_dic},{default_to_add}, {descriptions_dic}")
+            elif isinstance(default_to_add, list) and isinstance(descriptions_dic, list):
+                merged_dic = []
+                merged_dic.extend(descriptions_dic)
+                merged_dic.extend(default_to_add)
+                desc_logger.info(f"2\n{merged_dic},{default_to_add}, {descriptions_dic}")
+            else:
+                desc_logger.info(
+                    f"3\n BASE / HANDLE KEYING: \nDEFAULT TO ADD = {default_to_add}\n merged_dic = {merged_dic}")
+            if merged_dic:
+                return merged_dic
+            else:
+                return descriptions_dic
+
         else:
             return descriptions_dic
 

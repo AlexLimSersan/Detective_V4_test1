@@ -84,19 +84,39 @@ class Suspect_Manager(Entity_Manager):
     def preprocess_dialogue(self, dialogue_template, sus_id):
         merged_dialogue = dialogue_template.copy()
         for conditional_dialogues in dialogue_template.get("conditional", []):
-            if self.game_state.item_manager.check_conditions(conditions_dic = conditional_dialogues["conditions"], item_id = sus_id,
+            #80% chance conditions MUST be met, 20% chance added anyways (witness unreliability)
+            if random.random() < 0.8:
+                ent_logger.warning(f"DIALOGUE - evaluating conditions; 80%: {sus_id} -  {conditional_dialogues["dialogue"]["default"].keys()} ")
+                if self.game_state.item_manager.check_conditions(conditions_dic = conditional_dialogues["conditions"], item_id = sus_id,
                                                              query_type = "dialogue", spawn_or_state_id = conditional_dialogues["dialogue"]):
+                    ent_logger.warning(f"DIALOGUE CONDITIONS MET 80%: {sus_id}\n {conditional_dialogues["dialogue"]} ")
+                    self.merge_dialogue(merged_dialogue["topic"], conditional_dialogues["dialogue"])
+                    self.game_state.stat_tracker.track_dialogue(sus_id=sus_id,
+                                                                condition=conditional_dialogues["conditions"],
+                                                                dialogue_dic=conditional_dialogues["dialogue"],
+                                                                track_type="80")
+                else:
+                    ent_logger.warning(
+                        f"conditions failed")
+            else:
+                ent_logger.warning(f"DIALOGUE UNCONDITIONAL 20%: {sus_id}\n{conditional_dialogues["dialogue"]} ")
                 self.merge_dialogue(merged_dialogue["topic"], conditional_dialogues["dialogue"])
+                self.game_state.stat_tracker.track_dialogue(sus_id=sus_id,condition = conditional_dialogues["conditions"],dialogue_dic=conditional_dialogues["dialogue"],track_type="20")
         return merged_dialogue
 
-
-
     def merge_dialogue(self, base_dialogue, additional_dialogue):
-        for dialogue_id, dialogue_dic in additional_dialogue.items():
-            if dialogue_id in base_dialogue:
-                if isinstance(base_dialogue[dialogue_id], dict) and isinstance(dialogue_dic, dict):
-                    self.merge_dialogue(base_dialogue[dialogue_id], dialogue_dic)
-                else:
-                    base_dialogue[dialogue_id] = dialogue_dic
-            else:
-                base_dialogue[dialogue_id] = dialogue_dic
+        for dialogue_type,base_dialogue_dics in base_dialogue.items():
+            for _dialogue_type,_dialogue_dic in additional_dialogue.items():
+                if dialogue_type == _dialogue_type:
+
+                    for dialogue_id, dialogue_dic in _dialogue_dic.items():
+                        if dialogue_id in base_dialogue_dics:
+                            for key, value in dialogue_dic.items():
+                                if key in base_dialogue_dics[dialogue_id]:
+
+                                    if key == "says":
+                                        ent_logger.info(f"{key} {value} \n{base_dialogue_dics[dialogue_id]}")
+                                        base_dialogue_dics[dialogue_id][key].extend(value)
+                                    #can add merge stuff later like options, effects,
+
+

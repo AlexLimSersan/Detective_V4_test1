@@ -8,6 +8,12 @@ class Stat_Tracker:
         self.murder_clues_tracker = {} #condition: [{item_id: spawn_locs}]
         self.murder_cleanup_tracker = {} #item: starting_state
         self.witness_statements = {} #condition: [{ suspect, dialogue id}]
+        # NEW tests:
+        self.unreliable_witness_statements = {}
+        self.unreliable_witness_conditions = {}
+        self.true_statements = {}
+        self.true_statements_conditions = {}
+        self.murderer_clues = {}
 
     def track_murderer(self, item_id, murder_condition, query_type, state_or_spawn_id):
 
@@ -44,14 +50,38 @@ class Stat_Tracker:
                     #appending whole dialogue dic - but losing state it gets appended?
                         #assuming all default for now?
                 # for example, knife - bertha says she saw gibbs eyeing the kitchen often .
+    def track_dialogue(self, sus_id, condition, dialogue_dic, track_type):
+        if track_type == "80":
+            for x, y in dialogue_dic["default"].items(): #fuckit
+                if sus_id in self.true_statements:
+                    for key, value in self.true_statements.items():
+                        if key == sus_id:
+                            value.append(y["says"])
+                            for _key, _value in self.true_statements_conditions.items():
+                                if _key == sus_id:
+                                    _value.append(condition)
+                else:
+                    self.true_statements[sus_id] = y["says"]
+                    self.true_statements_conditions[sus_id] = [condition]
+        if track_type == "20":
+            for x, y in dialogue_dic["default"].items(): #fuckit
+                if sus_id in self.unreliable_witness_conditions:
+                    for key, value in self.unreliable_witness_statements.items():
+                        if key == sus_id:
+                            value.append(y["says"])
+                            for _key, _value in self.unreliable_witness_conditions.items():
+                                if _key == sus_id:
+                                    _value.append(condition)
+                else:
+                    self.unreliable_witness_statements[sus_id] = y["says"]
+                    self.unreliable_witness_conditions[sus_id] = [condition]
 
-
-    def dump(self, ui):
-        #if ui.confirm(text = f"Dump data? (y/n)"):
+    def dump_profile(self, ui):
         ui.display(f"MURDERER PROFILE:")
         for trait_category, trait in self.murderer.profile.items():
             ui.display(f"{trait_category}: {trait}")
 
+    def dump_spawned_clues(self, ui):
         ui.display(f"\nMURDERER LEFT THE FOLLOWING CLUES")
         # condition: {item_id: spawn_locs}
 
@@ -61,10 +91,15 @@ class Stat_Tracker:
                 for item, loc in dic_pair.items():
                     ui.display(f"- {item}: {loc}")
 
+    def dump_altered_states(self,ui):
         ui.display(f"\nMURDERER ALTERED STARTING STATE:")
         for item_id, starting_state in self.murder_cleanup_tracker.items():
-            ui.display(f"- {item_id}: {starting_state}")
+            item_ent = self.game_state.item_manager.get_entity(item_id)
+            if item_ent.spawned:
+                ui.display(f"- {item_id}: {starting_state}")
 
+
+    def dump_witness_statements(self,ui):
         ui.display(f"\nWITNESS STATEMENTS:")
         for condition, list_of_sus_dialogue_dic_pair in self.witness_statements.items():
             ui.display(f"Murder condition {condition}:")
@@ -72,6 +107,27 @@ class Stat_Tracker:
                 for sus_id, dialogue_dic in sus_dialogue_dic_pair.items():
                     for node, dialogue_data in dialogue_dic.items():
                         ui.display(f"- {sus_id}, {node}: {dialogue_data["says"]}")
+
+    def dump_true_statements(self, ui):
+        ui.display(f"\nSUSPECTS SAY: 80 - CONDITIONS MET")
+        for x, y in self.true_statements.items():
+            ui.display(f"Suspect {x} claims {self.true_statements_conditions[x]}:")
+            for _ in y:
+                ui.display(f"- {_}")
+    def dump_false_statements(self, ui):
+        ui.display(f"\nSUSPECTS SAY: 20 - UNRELIABLE:")
+        for x, y in self.unreliable_witness_statements.items():
+            ui.display(f"Suspect {x} claims {self.unreliable_witness_conditions[x]}:")
+            for _ in y:
+                ui.display(f"- {_}")
+    def dump(self, ui):
+        #if ui.confirm(text = f"Dump data? (y/n)"):
+        self.dump_profile(ui)
+        self.dump_spawned_clues(ui)
+        self.dump_altered_states(ui)
+
+        self.dump_true_statements(ui)
+        self.dump_false_statements(ui)
         #can have a "you found" thing later, and also more additional stats as desired
 
 class StoryGenerator:

@@ -185,8 +185,8 @@ item_ent_data = {
             },
         },
         "spawn_data": {
-            "locations": ["dumpster_01", "dead_end_02", "rooftop_01"],
-            "conditions": {"traits": ["knife", "at_bar"]},
+            "locations": ["dumpster_01", "roof_top_01"],
+            "conditions": {"traits": ["knife"]},
             "frequency": 0.7,
             "count": 1,
         }
@@ -227,20 +227,8 @@ item_ent_data = {
 "garbage_01": { #spilled onto garbage
     "name": "garbage",
     "state_data": {
-        "default": { #no scent
+        "default": {
             "frequency": 1
-        },
-        "rum": {
-            "frequency": 0.8,
-            "conditions": {"traits": ["rum"]},
-        },
-        "whiskey": {
-            "frequency": 0.8,
-            "conditions": {"traits": ["whiskey"]},
-        },
-        "gin": {
-            "frequency": 0.8,
-            "conditions": {"traits": ["gin"]},
         },
     },
     "spawn_data": {
@@ -249,6 +237,32 @@ item_ent_data = {
         "count": 1,
     }
 },
+
+"scent_01": {  # spilled onto garbage
+        "name": "scent",
+        "state_data": {
+            "default": {  # regular stinky? should never be used?
+                "frequency": 1
+            },
+            "rum": {
+                "frequency": 1,
+                "conditions": {"traits": ["rum"]},
+            },
+            "whiskey": {
+                "frequency": 1,
+                "conditions": {"traits": ["whiskey"]},
+            },
+            "gin": {
+                "frequency": 1,
+                "conditions": {"traits": ["gin"]},
+            },
+        },
+        "spawn_data": {
+            "locations": ["garbage_01"],  # could also put on scrap piece, or glass
+            "frequency": 0.8,
+            "count": 1,
+        }
+    },
 
         #SMOKETYPE
 #need spill different because of name
@@ -410,6 +424,17 @@ item_ent_data = {
         "count": 1,
             }
         },
+        ###
+#ALL drinks for drink stain types!
+"bar_cabinet_01" : {# behind the bar can access maybe if not bertha ; also maybe lowers mood?
+            "name": "shelf",
+            "spawn_data": {
+                "locations": ["bar_01"],
+                "frequency": 1,
+                "count": 1,
+            },
+            "state_data": {},
+        },
 },
 
     "drawers": {
@@ -453,17 +478,6 @@ item_ent_data = {
                     }
                 }
             }
-        },
-        ###
-#ALL drinks for drink stain types!
-"bar_cabinet_01" : {# behind the bar can access maybe if not bertha ; also maybe lowers mood?
-            "name": "shelf",
-            "spawn_data": {
-                "locations": ["bar_01"],
-                "frequency": 1,
-                "count": 1,
-            },
-            "state_data": {},
         },
         ###
 #ALL ingredients for food stain types!
@@ -563,13 +577,20 @@ item_ent_data = {
                                        "A white cloth covers her body.",
                                        "The cloth drapes, its edges gently brushing the floor."],
                             "opened":[
-                                "Glassy, fixed eyes stare into the void."
-                                "Long, brown hair splays in a tangled mess, framing a waxy, pale face.",
+                                "Glassy, fixed eyes stare into the void.\n"
+                                "Long, brown hair forms a tangled mess, framing a waxy, pale face.",
 
-                                "Brown hair curves around a bloody figure,"
-                "Her limbs are locked at awkward angles, "
+                                "Brown hair splays around a bloody figure.\n"
+                                "Her limbs are locked at awkward angles, her skin abnormally pale. "
                                 ,
-
+                                "A sunken, gaunt face looks through you.\n"
+                                "Her muscles are rigid and stiff, her hair brown and bloodied.; "
+                                ,
+                                "Brown strands of hair lace across bloody features.\n"
+                                "Her eyes are sunken and dry, her lips parted, chapped and blue."
+                                ,
+                                "Her face is locked in terror.\n"
+                                "Glassy, unseeing eyes are framed by tangled, brown hair."
 
                                       ],
                         }
@@ -585,10 +606,36 @@ item_ent_data = {
 
 "items": {
 
+"morgue_tools_01":{
+    "name": "tools",
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["morgue_office_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
 
 #BACKROOM
 "backroom_counter_01":{
     "name": "counter",  #more gibbs stuff here
+    "state_data": {
+        "default": {
+            "frequency": 1
+        },
+    },
+    "spawn_data": {
+        "locations": ["backroom_01"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+"backroom_table_01":{
+    "name": "gambling tables",  #more gibbs stuff here
     "state_data": {
         "default": {
             "frequency": 1
@@ -662,20 +709,6 @@ item_ent_data = {
             "count": 1,
         }
     },
-"knife_01": { #regular kitchen knife, always be in kitchen
-        "name": "pocket knife",
-        "is_hidden": True,
-        "state_data": {
-            "default": {
-                "frequency": 1
-            },
-        },
-        "spawn_data": {
-            "locations": ["office_morgue_desk_01","leather_jacket_02"],
-            "frequency": 1,
-            "count": 1,
-        }
-    },
 "revolver_01": {
     "name": "revolver",
     "is_hidden": True,
@@ -719,7 +752,7 @@ item_ent_data = {
     "spawn_data": {
         "locations": ["bertha_office_drawer_01","office_morgue_desk_01"],
         "frequency": 1,
-        "count": 1,
+        "count": 2,
     }
 },
 "office_trash_01": {
@@ -761,7 +794,7 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["bertha_office_drawer_01", "bar_01"],
-        "locations": ["porch_01"],
+        "locations": ["porch_01", "leather_jacket_01", "suit_jacket_02"],
         "frequency": 0.6,
         "count": 1,
     }
@@ -779,7 +812,7 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["office_trash_01", "leather_jacket_02"],
-        "locations": ["porch_01", "office_morgue_desk_01","backroom_counter_01"],
+        "locations": ["porch_01", "office_morgue_desk_01","backroom_counter_01","suit_jacket_02"],
         "frequency": 0.5,
         "count": 2,
     }
@@ -809,13 +842,13 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["kitchen_01", "backroom_01", "stage_02", "dumpster_01", "dead_end_01", "bar_01", "porch_01", "office_morgue_desk_01"],
+        "locations": ["kitchen_01", "backroom_01", "stage_02", "dumpster_01", "office_trash_01",
+                      "dead_end_01", "bar_01", "porch_01", "office_morgue_desk_01"],
         "frequency": 0.6,
         "count": 2,
     }
 },
 
-#BERTHA
 "flask_01": {
     "name": "flask",
     "state_data": {
@@ -916,7 +949,7 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["fridge_01", "morgue_shelf_01"],
-        "locations": ["backroom_counter_01","lounge_01","backroom_01"],
+        "locations": ["backroom_counter_01","backroom_01","bar_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -932,14 +965,14 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["fridge_01",  "morgue_shelf_01"],
-        "locations": ["stage_02",],
+        "locations": ["stage_02"],
         "frequency": 1,
         "count": 1,
     }
 },
 
 
-"lighter_01": {
+"lighter_01": { #maybe not always debbies later?
     "name": "lighter",
     "is_hidden": True,
     "state_data": {
@@ -974,7 +1007,7 @@ item_ent_data = {
 },
 
 "cardigan_scraps_01": {
-    "name": "wool shreds",
+    "name": "wool fibers",
     "state_data": {
         "default": {
             "frequency": 0.8
@@ -1003,7 +1036,7 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations_always_spawn": ["stage_02"],
-        "locations": ["bar_01", "porch_01"],
+        "locations": ["bar_01", "porch_01", "backroom_01","morgue_office_01"],
         "frequency": 1,
         "count": 1,
     }
@@ -1033,7 +1066,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["crime_scene_01", "crime_scene_02", "alley_03_1", "cardigan_01"],
+        "locations": ["crime_scene_01", "crime_scene_02", "alley_03_1", "cardigan_01", "stage_02"],
         "frequency": 1,
         "count": 1,
     }
@@ -1055,7 +1088,7 @@ item_ent_data = {
 },
 
 
-"cigs_01": {
+"cigs_01": { #could make pack vs loose by item vs clue then state/spawn logic
     "name": "cigarettes",
     "state_data": {
         "default": {#loose
@@ -1105,6 +1138,22 @@ item_ent_data = {
     }
 },
 
+
+"tobacco_01": {
+    "name": "tobacco pouch",
+    "state_data": {
+        "default": {
+            "frequency": 0.6
+        },
+    },
+    "spawn_data": {
+        "locations_always_spawn" : ["bertha_office_drawer_01"], #can have jackets or whateva?
+        "locations": ["office_morgue_desk_01", "leather_jacket_02"],
+        "frequency": 1,
+        "count": 1,
+    }
+},
+
 "fibers_01": { #under debbies fingernails
     "name": "fingernails",
     "is_hidden": True,
@@ -1114,19 +1163,19 @@ item_ent_data = {
         },
         "hair": {
             "frequency": 0.8,
-            "conditions": {"traits": ["hair"]},
+            "conditions": {"traits": ["hair","strong"]},
         },
         "denim": { #somnething maybe like ; a few fibers, could be denim or cotton; or something like that?
             "frequency": 0.8,
-            "conditions": {"traits": ["denim"]},
+            "conditions": {"traits": ["denim","strong"]},
         },
         "leather": {
             "frequency": 0.8,
-            "conditions": {"traits": ["leather"]},
+            "conditions": {"traits": ["leather","strong"]},
         },
         "suit": {
             "frequency": 0.8,
-            "conditions": {"traits": ["suit"]},
+            "conditions": {"traits": ["suit","strong"]},
         },
     },
     "spawn_data": {
@@ -1255,7 +1304,7 @@ item_ent_data = {
         "count": 1,
     }
 },
-"sneakers_01": { #bertha wearing
+"sneakers_01": { #bertha wearing, gibbs on rack
     "name": "sneakers",
     "state_data": {
         "default": {

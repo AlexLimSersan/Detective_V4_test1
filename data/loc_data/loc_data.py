@@ -292,6 +292,9 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
             "component_descriptions": {"default": {"opening": {"neutral": ["The hinges squeal."]},
                                                    "closing": {"neutral": ["The door slams shut.", ]},
                                                    "closed": {"neutral": ["The iron door faces you."]},
+
+                                                   "bump": {"neutral": [
+                                                       "A loud ring echoes as your head slams into the door."]},
                                                    }}
         },
         "backroom_door_02": { #to cab
@@ -299,7 +302,7 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
             "connections": ["backroom_01", "cab_01"], #2connections max for doors
             "component_descriptions": {"default": {"opening": {"neutral": ["The hinges squeal."]},
                                                    "closing": {"neutral": ["The door slams shut.", ]},
-                                                   "closed": {"neutral": ["The iron door faces you."]},
+                                                   "closed": {"neutral": ["The door faces you."]},
                                                    }}
         },
         "bertha_office_door_01": {

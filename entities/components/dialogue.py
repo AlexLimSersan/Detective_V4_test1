@@ -91,6 +91,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         return False
 
     def check_already_talked(self, ui, command=None):
+        return False #just for now
         repeat_node_toggle = False
         if self.current_node == self.node_history[-2]:
             assert self.node_history[-1] == self.node_history[-2]  # this should be the case,
@@ -104,14 +105,42 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
             ent_logger.warning(
                 f"count {count}, command {command}; toggle {repeat_node_toggle}\nhistory {self.topic_history} \n topic : {self.topic}\nnode ; {self.current_node} ; {self.node_history} ")
 
+            # count == 1, will respond
+            # exact same option AND topic as last;
+                # again?
+            # exact same topic as last, different option;
+                # still on matches? ;; you really are fixated on matches huh?
+            # already talked this phase;
+                # we already talk about this... my answer hasnt changed since last time...
+
+            # count above 1, wont respond (REACTS as normal!)
+            # exact same option AND topic as last;
+                # you really gna grill me about matches all morning!?
+            # exact same topic as last, different option;
+                # look ive told you everything, i dont want to keep talking about matches...
+            # already talked this phase;
+                # we talked about this just recently... i got nothing more.
+
             if count == 1:
-                #just talked or again -> will respond
-                if repeat_node_toggle: #exact same node is being used:
+                #remove
+                if repeat_node_toggle: #exact same node is being used, will respond:
                     _type = "again"
+                    #x again?
                     self.only_effects_and_says(self.get_dialogue_dic(_type, player_input=command), ui, command)
                     self.should_react = False
+                    return False
+                # remove to here
+                if self.topic_history[-1] == self.topic:
+                    _type = "just_talked"
+                    self.only_effects_and_says(self.get_dialogue_dic(_type, player_input=command), ui, command)
+                    self.should_react = False
+                    return False
+                _type = "already_talked"
+                self.only_effects_and_says(self.get_dialogue_dic(_type, player_input=command), ui, command)
+                self.should_react = False
                 return False
             if count >= 1:
+                #only just talked or already talked - but after they react. eg) he squints.. you wanna keep grilling me about x?
                 #just talked or already talked -> wont respond
                 _type = "just_talked" if self.topic_history[-1] == self.topic else "already_talked"
                 self.handle_dialogue_dic(self.get_dialogue_dic(type=_type, player_input=command), ui, command)
@@ -147,12 +176,13 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         default = "react"
 
         before_react_type = dialogue_dic.get("before_react_type", default)
-        after_react_type = dialogue_dic.get("after_react_type", None) #none will break if looking for keys
-        ent_logger.debug(f"{self.current_node}; {before_react_type} ; {after_react_type}")
+        #after_react_type = dialogue_dic.get("after_react_type", None) #none will break if looking for keys
+        #ent_logger.debug(f"{self.current_node}; {before_react_type} ; {after_react_type}")
 
         before_react_dic = self.get_dialogue_dic(before_react_type, command)
         #after_react_dic = self.get_dialogue_dic(after_react_type) #should be idle?
-        ent_logger.debug(f"{self.current_node}; {before_react_type} ; {after_react_type}\n{before_react_dic} ")
+        #ent_logger.debug(f"{self.current_node}; {before_react_type} ; {after_react_type}\n{before_react_dic} ")
+
         return before_react_dic #, after_react_dic #only print after if after react!
 
     def handle_says_logic(self, dialogue_dic, ui, command=None):

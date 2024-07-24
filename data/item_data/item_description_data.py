@@ -157,7 +157,7 @@ item_description_data = {
         },
         "gun": {
             "at_scene": {
-                "neutral": ["Bullet are embedded in her head, chest, and abdomen."],
+                "neutral": ["Bullets are embedded in her head, chest, and abdomen."],
             },
             "at_entity": {
                 "neutral": ["Each wound houses a straight path from her front to back."],
@@ -238,29 +238,34 @@ item_description_data = {
             "at_scene": {
                 "neutral": ["A heap of old cardboard and garbage makes the alley awkward to traverse."],
             },
+            "at_entity": {
+                "neutral": ["It's miscellaneous, abandoned items - scrap materials, boxes, clothes...\n"
+                            "There looks like a body shaped impression where someone has fallen..."],
+            },
         },
-        "rum": {
-            "approaching": {
+},
+"scent_01": {
+        "default": {
+            "at_scene": {
                 "neutral": ["You notice an alcoholic scent, out of place amongst the rubbish. Something was spilled."],
             },
+            "at_entity": {
+                "neutral": ["ERROR - why is it default?."],
+            },
+        },
+        "rum": {
             "at_entity": {
                 "neutral": ["The scent is somewhere between molasses and sugarcane - with a hint of nutmeg."],
             },
         },
         "whiskey": {
-            "approaching": {
-                "neutral": ["You notice an alcoholic scent, out of place amongst the rubbish. Something was spilled."],
-            },
             "at_entity": {
                 "neutral": ["The scent is somewhere between vanilla and caramel - with a hint of oak."],
             },
         },
         "gin": {
-            "approaching": {
-                "neutral": ["You notice an alcoholic scent, out of place amongst the rubbish. Something was spilled."],
-            },
             "at_entity": {
-                "neutral": ["The scent is a spiced, piney alcohol."],
+                "neutral": ["The scent is somewhere between pine and citrus - with floral undertones."],
             },
         },
 },
@@ -470,7 +475,7 @@ item_description_data = {
 "bar_cabinet_01": {
         "default": {
             "at_scene": {
-                "neutral": ["Where the counter meets the wall, theres a large cabinet."],
+                "neutral": ["Where the counter meets the wall, a wide shelf hangs above."],
             },
         },
 },
@@ -483,20 +488,20 @@ item_description_data = {
         }
 },
 
-"gambling_tables": {
+"backroom_table_01": {
         "default": {
             "at_scene": {
-                "neutral": ["Gambling tables take center stage."],
+                "neutral": ["Gambling tables take center stage.","The center of the room hosts the gambling tables."],
             },
             "at_entity": {
-                "neutral": ["The felt looks worn, but clean."],
+                "neutral": ["Old and worn felt cover the table."],
             },
         },
 },
 "backroom_counter_01": {
         "default": {
             "at_scene": {
-                "neutral": ["The side of the room houses a casual looking bar counter."],
+                "neutral": ["To the side, there's a casual looking bar counter."],
             },
             "approaching": {
             },
@@ -859,7 +864,7 @@ item_description_data = {
 "apple_01": {
         "default": {
             "at_scene": {
-                "default": {"neutral": ["DEFAULT WORKED FOR APPLLLEEE"],},
+                "default": {"neutral": ["Amongst various items, an apple stands out."],},
                 "kitchen_01": {
                     "neutral": ["An apple sits on the counter."],
                 },
@@ -982,7 +987,7 @@ item_description_data = {
         },
         "opened": {
             "at_entity": {
-                "neutral": ["The odor is a spicy, floral citrus. It reminds you of pine."],
+                "neutral": ["The odor is sharp, spicy, and floral. It reminds you of pine."],
             },
             "leaving": {
             },
@@ -1039,7 +1044,7 @@ item_description_data = {
             },
             "at_entity": {
                 "neutral": ["A cloy, caramel sweetness hits your nose.","It has a dark, sugary scent.",
-                            "The bottle is sticky, with a slight honey scent."],
+                            "The bottle is sticky, with a cloy, honey scent."],
             },
             "leaving": {
                 "neutral": ["You set the bottle back, it's fragrance lingering."],
@@ -1213,6 +1218,12 @@ item_description_data = {
             "at_scene": {
                     "neutral": ["A wine glass is here."],
             },
+            "at_entity": {
+                "stage_02": {
+                    "neutral": ["LIPSTICK AT THE BRIM."],
+                },
+                "neutral": ["It's filled with white wine."],
+            },
         },
         "white": {
 
@@ -1275,7 +1286,9 @@ item_description_data = {
 "cigs_01": {
         "default": {
             "at_scene": {
-                    "neutral": ["Perched around the ashtray are some cigarettes."],
+                "lounge_01": {
+                    "neutral": ["Peeking out the right pocket are some cigarettes."],},
+                "neutral": ["Perched around the ashtray are some cigarettes."]
             },
             "at_entity": {
                 "neutral": ["The body is made of thin paper surrounding tobacco, the base a white filter. It's a cigarette."],
@@ -1293,6 +1306,7 @@ item_description_data = {
 "cigs_02": {
         "default": {
             "at_scene": {
+                "leather_jacket_02": ["You find some cigarettes in the breast pocket."],
                     "neutral": ["Perched around the ashtray are some cigarettes."],
             },
             "at_entity": {
@@ -1301,6 +1315,7 @@ item_description_data = {
         },
         "pack": {
             "at_scene": {
+                "leather_jacket_02": ["You find some cigarettes in the breast pocket."],
                     "neutral": ["Closeby, there's a pack of cigarettes - it looks like a nice brand."],
             },
             "at_entity": {
@@ -1318,6 +1333,18 @@ item_description_data = {
             },
         },
     },
+
+"tobacco_01": {
+        "default": {
+            "at_scene": {
+                    "neutral": ["A pouch of tobacco is loosely closed by a sticker."],
+            },
+            "at_entity": {
+                "neutral": ["The pouch is vintage leather. Inside, thin, fresh strips of tobacco create a rich, sweet aroma."],
+            },
+        },
+    },
+
 "fibers_01": {
         "default": {
             "at_scene": {
@@ -1371,7 +1398,8 @@ item_description_data = {
 "earring_01": {
         "default": {
             "at_scene": {
-                    "neutral": ["Something catches the light on the ground - an ear ring. "],
+                "refrigeration_02": {"neutral": ["she has an ear ring. "]},
+                "default": {"neutral": ["Something catches the light on the ground - an ear ring. "]},
             },
             "at_entity": {
                 "neutral": ["It's a small, copper hoop with a tiny jewel."],
@@ -1489,13 +1517,16 @@ item_description_data = {
         "default": {
             "at_scene": {
                 "open": {"neutral": ["A corpse lays flat in the center of the room."],},
-                "closed": {"neutral": ["A white cloth covers a corpse.CONCAVE/CONVEX"],},
+                "closed": {"neutral": ["A white cloth forms subtle, alternating curves.",
+                                       "Concave and convex slopes trace a still form.",
+                                       "A white cloth covers her body.",
+                                       "The cloth drapes, its edges gently brushing the floor."],},
             },
             "approaching": {
                 "neutral": [""],
             },
             "at_entity": {
-                "neutral": ["Her corpse lays flat on the table."],
+                "neutral": [""],
             },
             "leaving": {
                 "neutral": [""],
@@ -1541,8 +1572,14 @@ item_description_data = {
 },
 
 
-
-
+"morgue_tools_01": {
+    "default": {
+        "at_scene": {"neutral": ["Various tools and equipment are in an open box against the wall."], },
+        "at_entity": {
+            "neutral": ["It's an assortment of scalpels, knives, bone saws, forceps, and shears..."],
+        },
+    },
+},
 
 
 

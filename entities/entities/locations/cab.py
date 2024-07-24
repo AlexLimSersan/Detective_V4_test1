@@ -20,6 +20,8 @@ class Cab(Location):
                 "reception": "reception_01",
                 "reception_01": "reception_01"
             }
+        self.last_major_loc = ["",""]
+
 
     def get_actions(self):
         return ["cabbie"]
@@ -51,9 +53,10 @@ class Cab(Location):
                     self.drive(result, ui)
                     return result
                 #regular processing:
-                if result != self.game_state.player.location_history[-2].id:
+                if result != self.last_major_loc[-1]:
                     self.drive(result, ui)
-                ent_logger.info(f"returning result = {result}")
+                ent_logger.warning(f"returning result = {result}")
+                self.last_major_loc.append(result)
                 return result
     def process_action(self, command_id, ui):
         action_dic = {

@@ -6,39 +6,43 @@ sus_description_data = {
             "at_scene": {
                 "bar_01": {
                     "neutral": ["Bertha wipes the counter, her movements rehearsed and efficient.",
-                                "Bertha adjusts her jacket, some drink stains caught on the denim.", "Bertha's cleaning glasses."],
+                                "Bertha leans across the counter, clearing it of old bottles.",
+                                "Bertha reaches for a glass, angling her grip as she pours some beer.",
+                                "Bertha slices lemons in a rhythmic, practiced fashion.",
+                                "Bertha rests her weight against the counter, crossing her arms in front of her."
+                                ],
                 },
                 "porch_01": {
-                    "neutral": ["Bertha exhales a puff of smoke, ashing her cigarette on the railing."],
+                    "neutral": ["Bertha exhales a puff of smoke, ashing her cigarette on the railing.", "Bertha places her elbows atop the handrail, a cigarette dangling between her lips.",
+                                "Bertha leans against the railing, putting her weight on her elbows.","Bertha adjusts her stance, leaning back against the rail, arms crossed.",
+                                "Bertha reaches into her pocket, pulling out a cigarette.","Bertha flicks her cigarette off the porch, faint embers sparking as they fall.",
+                                "The wind tosses Bertha's hair around, loose strands dancing in the breeze.", "A gust of wind blows, Bertha's jacket rippling with the wind."],
                 },
                 "bertha_office_01": {
                     "neutral": ["BerTHA IS IN THE OFFICE."],
                 },
             },
             "approaching": {
-                "neutral": ["She meets your eye as you approach her."],
-                "good": ["A soft smile spreads across her face when she sees you.]"],
-                "bad": ["She frowns as you get closer."]
+                "neutral": ["She meets your eye as you approach her.", "She glances your direction as you come closer.",
+                            "She gives a nod of acknowledgement as you come close.", "A soft smile spreads across her face when she sees you."],
+                "bad": ["She frowns as you get closer.","She rolls her eyes as you near.",
+                        "She slumps in place as you approach her.","She runs her hand through her hair, as if trying to muster energy."]
             },
             "at_entity": {
                 "neutral": ["She strikes a black matchbook, her face briefly lit as she pulls the flame through a cigarette.",
-                             "She shifts her stance, her sneakers scraping against the floor.","She tosses a lock of black hair out of her eyes."]
+                             "She shifts her stance, her sneakers scraping against the floor.","She tosses a lock of black hair out of her eyes.",
+                            "She stretches, her denim jacket rising just above her belt buckle.", "She wipes her hands on her pants, the leather creasing slightly.",
+                            "She rests a hand on her hip, gently adjusting the waistband of her leather pants.", "She scratches her shoulder, the collar of her denim jacket poking into her neck.",
+                            "She plays with her hair, black strands twirling around her finger.", "She tucks a loose strand of black hair behind her ear.",
+                            "She pulls her jacket tighter around her, the denim tugging at the shoulders."
+                            ]
             },
             "leaving": {
-                "neutral": ["You step away from Bertha."],
-                "good": ["Her gaze lingers a moment as your leave. "],
-                "bad": ["Bertha turns her back on you as you leave."]
+                "neutral": ["You step away from Bertha.","Her gaze lingers a moment as your leave. ","You turn your back on her, and leave.","She gives you a wave as you turn to leave."],
             },
             "times": {
-                "morning": ["Bertha yawns."],
-                "afternoon": ["Bertha wipes a mug."],
-                "evening": ["Bertha leans back, facing the window, her eyes distant."],
-                "night": ["Bertha wipes a rag across the counter, her movements efficient and rehearsed."]
             },
             "weather": {
-                "rain": ["Raindrops patter against the bar's window as Bertha serves a drink."],
-                "sunny": ["Sunlight streams in, highlighting Bertha's smile."],
-                "grey": ["The overcast sky outside mirrors Bertha's serious expression."]
             }
         }
     },
@@ -46,82 +50,61 @@ sus_description_data = {
         "default": {
             "at_scene": {
                 "backroom_01": {
-                    "neutral": ["Gibbs sits at the gambling table, his eyes focused on the cards."],
-                    "good": ["Gibbs grins broadly, clearly on a winning streak."],
-                    "bad": ["Gibbs scowls, his luck clearly not holding up."]
+                    "neutral": ["Gibbs is hunched over and focused, his eyes glued to his cards.",
+                                "Gibbs lets out a joyful scream, his arms start hauling chips towards him.",
+                                "Without warning, Gibbs yells as the dealer flips a card over. 'FUCK!'",
+                                "You hear Gibbs complaining to the dealer. 'What are the fucking odds of that?'",
+                                "Gibbs scowls, throwing his cards on the table.", "Gibbs slumps in his seat as the dealer drags more chips away from him.",
+                                "Gibbs reaches into his pocket, throwing money onto the table."
+                                ],
                 }
             },
             "approaching": {
-                "neutral": ["You see Gibbs at the gambling table."],
-                "good": ["Gibbs glances up and nods as you approach."],
-                "bad": ["Gibbs barely acknowledges you, his mood sour."]
+                "neutral": ["Gibbs barely acknowledges you, his mood sour.","He doesn't notice you until you are right next to him.",
+                            "His eyes are glued to the table, never wavering as you approach.", "He covers his face, peeking out onto the table in anticipation.",
+                            "Gibbs mutters incomprehensibly under his breath, not looking at you.", "He throws his cards on the table, frustrated."],
             },
             "at_entity": {
-                "neutral": ["You are standing next to Gibbs."],
-                "good": ["Gibbs greets you with a friendly smile."],
-                "bad": ["Gibbs mutters under his breath, not looking at you."]
+                "neutral": ["He picks up dice, his suit creasing as he shakes his hands dramatically.", "The dealer serves out new cards. Gibbs sits impatient, his shoes bouncing on the floor."
+                            "A bead of sweat trickles from his fedora down his face, before seeping into his necktie.", "The dealer lays a card down, and Gibbs cranes his neck to get a better view.",
+                            "He wipes his hands on his jeans, cleaning them before touching his cards.","He wipes his mouth on the cuffs of his suit with a fluid motion.",
+                            "He takes a swig from his flask, whiskey dribbling down his chin.", "He belches, a mix of mustard and whiskey briefly permeating the air.",
+                            "He readjusts his fedora, pulling it firmly onto his scalp.", "He puffs his cigarette, exhaling obnoxiously before resting it back on the table's ashtray.",
+                            "His shoe taps the floor as he thinks - then he throws his cards down, swearing under his breath.", "He reaches into his suit's breast pocket, pulling out a cigarette.",
+                            "With a tug, he readjusts his suit, the lapel flapping dramatically.",
+                            ],
             },
             "leaving": {
-                "neutral": ["You step away from Gibbs."],
-                "good": ["Gibbs waves you off with a smile."],
-                "bad": ["Gibbs ignores you as you leave."]
+                "neutral": ["You step away from Gibbs.","He ignores you as you leave.","He waves you off dismissively, focusing on the game.",
+                            "He barely acknowledges your departure."],
             },
             "times": {
-                "morning": ["Gibbs shuffles a deck of cards, preparing for the day."],
-                "afternoon": ["Gibbs deals a hand, his focus intense."],
-                "evening": ["Gibbs laughs and jokes with the other players, enjoying the game."],
-                "night": ["Gibbs counts his winnings, the room quieting down."]
             },
             "weather": {
-                "rain": ["Raindrops tap against the window as Gibbs deals a new hand."],
-                "sunny": ["Sunlight catches the cards in Gibbs' hand, casting a warm glow."],
-                "grey": ["The overcast sky outside matches Gibbs' concentrated expression."]
             }
         }
     },
 "mortician_01": {
         "default": {
             "at_scene": {
-                "bar_01": {
-                    "neutral": ["Bertha stands behind the bar, working.","Bertha is tending to customers.", "Bertha pours a drink", "Bertha is wiping down the table."],
-                    "bad": ["Bertha looks annoyed, her movements sharp and impatient."]
+                    "neutral": ["The mortician lays back in his chair, puffing a cigarette.","The mortician lazily sways in his chair, reading the news.",
+                                "The mortician, half asleep, reaches into his pocket to pull out another cigarette.", "The mortician stands, wincing as he grabs a cigarette from across the desk."
+                                "The mortician strikes a match, his face and palms briefly illuminated as he inhales.",
+                                "The mortician groans as he stretches across his desk, crushing a cigarette on the ashtray."],
                 },
-                "porch_01": {
-                    "neutral": ["Bertha is on the porch, smoking"],
-                    "good": ["bertha is on the porch ; smiles warmly as she tends to her patrons."],
-                    "bad": ["bertha is on the porch ; looks annoyed, her movements sharp and impatient."]
-                },
-                "bertha_office_01": {
-                    "neutral": ["Bertha stands behind the bar, her eyes watching the room intently."],
-                    "good": ["Bertha smiles warmly as she tends to her patrons."],
-                    "bad": ["Bertha looks annoyed, her movements sharp and impatient."]
-                },
-            },
             "approaching": {
-                "neutral": ["You see Bertha behind the bar."],
-                "good": ["Bertha's face lights up as you approach."],
-                "bad": ["Bertha frowns slightly as you get closer."]
+                "neutral": ["His head turns as you approach, his expression unchanging.","He swivels in his chair to face you.",
+                            "He adjusts his position, leaning to the other side of the chair."],
             },
             "at_entity": {
-                "neutral": ["You are standing next to Bertha."],
-                "good": ["Bertha greets you with a friendly nod."],
-                "bad": ["Bertha glares at you, clearly in a bad mood."]
+                "neutral": ["He stands, slowly paces around the room, his gait weak and uneven.","FRAILILILILIG"],
             },
             "leaving": {
-                "neutral": ["You step away from Bertha."],
-                "good": ["Bertha waves goodbye, a smile on her face."],
-                "bad": ["Bertha turns her back on you as you leave."]
+                "neutral": ["You step away from the mortician.",],
             },
             "times": {
-                "morning": ["Bertha cleans the bar, preparing for the day's patrons."],
-                "afternoon": ["Bertha serves drinks efficiently, chatting with the customers."],
-                "evening": ["Bertha handles the busy evening crowd with practiced ease."],
-                "night": ["Bertha counts the day's earnings, the bar quieting down."]
             },
             "weather": {
-                "rain": ["Raindrops patter against the bar's window as Bertha serves a drink."],
-                "sunny": ["Sunlight streams in, highlighting Bertha's smile."],
-                "grey": ["The overcast sky outside mirrors Bertha's serious expression."]
             }
         }
     },

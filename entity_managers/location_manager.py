@@ -68,8 +68,9 @@ class Location_Manager(Entity_Manager):
         for id in spawn_loc_ids: #IF OBJ.INDRAWER = TRUE, THEN ADD TO HIDDEN ENTITIES?
             loc_obj = self.get_entity(id) or self.game_state.item_manager.get_entity(id) #loc or item accept it
             if not loc_obj:
-                raise ValueError(f"incorrect initialization order for ent {mobile_entity.id}, loc id {spawn_loc_ids}\n id = {id}\nloc_obk = {loc_obj}")
+                raise ValueError(f"incorrect initialization for ent {mobile_entity.id}, loc id {spawn_loc_ids}\n id = {id}\nloc_obk = {loc_obj}")
             loc_obj.add_entity(mobile_entity)
+            mobile_entity.spawned = True
             ent_logger.info(f"spawning {mobile_entity.id} in {loc_obj.id}")
 
 

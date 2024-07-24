@@ -45,8 +45,9 @@ class Mobile_Entity(Entity):
         super().__init__(id, name, game_state, None, entity_state, is_outdoors)
         self.descriptions = Mobile_Descriptions(self.id, self.name, self.entity_state, self.game_state, descriptions, current_location, is_outdoors)
         self._current_location = current_location #reference to lcoation object
-        self.dialogue_id = dialogue_id or self.id
+        self.dialogue_id = dialogue_id or self.id #NVM USELESS!
         self.category = category #ACTUALLY NVM, THIS IS USELESS!
+        self.spawned = False #just for stat tracker?
 
     @property
     def current_location(self):

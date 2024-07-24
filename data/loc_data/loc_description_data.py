@@ -50,7 +50,7 @@ loc_description_data = {
             "bad": ['The cabbie smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror, you catch a glimpse of his tired eyes. "Where to?"' ,'The driver looks indifferent to your presence.']
         },
         "times": {
-            "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans back.", "He grips the steering wheel."],
+            "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans back, resting an arm on the door.", "He grips the steering wheel."],
                         "bad": ["He looks like he hasn't slept.", "His hands reach for another cigarette.", "He rubs his eyes, tired.", "He looks tired.",
                                 ]},
             "afternoon": {"neutral": ["He rubs his eyes.", "He stretches in his seat.", "He sinks into his seat.", "He shifts in his seat."],
@@ -185,7 +185,6 @@ loc_description_data = {
             "night": ["The steady hum of conversation drones on.","Chatter forms a low backdrop."]
         },
         "weather": {
-
         },
         "tags": ["indoors"],
         "connections": {
@@ -432,19 +431,22 @@ loc_description_data = {
 "backroom_01": {
     "default": {
         "approaching": {
-            "neutral": ["You walk through the door and enter the backroom."],
+            "neutral": ["You walk through the door."],
         },
         "at_entity": {
-            "neutral": ["You are at the backroom "],
+            "neutral": [],
         },
         "leaving": {
-            "neutral": ["You leave the way you came..."],
+            "neutral": [""],
         },
         "times": {
-            "morning": ["Only the most hardcore late night gamblers are still up.", "Most of the tables are empty.", "It's quiet, with the occasional groans from lost bets."],
-            "afternoon": ["Most of the tables are empty.", "The clinking of chips punctuates the silence.", "It's quiet, with the occasional groans from lost bets." ],
-            "evening": ["Cards ruffle and shuffle.", "A mix of chatter and laughter create a backdrop of the night."],
-            "night": ["It's a rambunctious kind of night.","Cards ruffle and shuffle.", "A mix of chatter and laughter create a backdrop of the night."]
+            "default": ["Most of the tables are empty.", "The clinking of chips punctuates the silence.",
+                        "It's quiet, with the occasional groans from lost bets.","Cards ruffle and shuffle.",
+                        "A mix of chatter and laughter form a quiet backdrop."],
+            "morning": ["Only the most hardcore late night gamblers are still up.", ],
+            "afternoon": [ ],
+            "evening": [],
+            "night": ["It's a quiet night."]
         },
         "weather": {
         },
@@ -505,7 +507,7 @@ loc_description_data = {
         "connections": {
             "backroom_01": {
                 "open": ["A backdoor leads out to the street."],
-                "closed": ["A backdoor leads out to the street."],
+                "closed": ["A backdoor is on the far wall."],
                 }
             }
         }
@@ -636,7 +638,7 @@ loc_description_data = {
 "alley_03_1": {
     "default": {
         "approaching": {
-            "neutral" :[]
+            "neutral" :["The alley continues, dark and narrow."]
         },
         "at_entity": {
             "neutral": [],
@@ -648,7 +650,7 @@ loc_description_data = {
         "tags": ["urban"],
         "connections": {
             "crime_scene_01": {
-                "neutral": ["The alley continues, dark and narrow."],
+                "neutral": [],
             },
             "alley_03": {
                 "neutral": [""],
@@ -795,7 +797,7 @@ loc_description_data = {
                 "neutral": ["Ahead, the alley branches.", "The alley branches."],
             },
             "alley_06": {
-                "neutral": ["The alley continues further."],
+                "neutral": ["The path turns back towards the entrance."],
             }
         }
     }
@@ -855,7 +857,7 @@ loc_description_data = {
 "fire_escape_02": { #ON LADDER #hair
     "default": {
         "approaching": {
-            "neutral": ["The ladder shakes as you climb", "The metal creaks."],
+            "neutral": ["The ladder shakes as you climb.", "The metal creaks."],
             "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
         },
         "at_entity": {
@@ -895,7 +897,7 @@ loc_description_data = {
 "fire_escape_03": { #ON LADDER #hair
     "default": {
         "approaching": {
-            "neutral": ["The ladder shakes as you climb", "The metal creaks."],
+            "neutral": ["The ladder shakes as you climb.", "The metal creaks."],
             "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
         },
         "at_entity": {
@@ -996,10 +998,12 @@ loc_description_data = {
             "neutral": [""],
         },
         "times": {
+            "default": ["","","",""],
             "evening": ["A lantern flickers ominously."],
             "night": ["A lantern flickers ominously."],
         },
         "weather": {
+            "default": ["","","",""],
             "sun": ["The sun brings out each peeling flake of paint.","The handle glints in the sun.", "Each curling flake of paint has a matching shadow."],
             "rain": ["It's coated slick from the rain.","Water beads down door, pooling at odd places.","Water drips from the handle at regular intervals."],
             "storm": ["Thunder rumbles in the distance.","A thunderclap echoes.","Lightning flashes.","Rain slams against the door.","The wind howls, rain slamming into the door.","The wind brings a shower of rain onto the door."],
