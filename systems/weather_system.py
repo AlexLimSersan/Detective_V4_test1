@@ -62,7 +62,7 @@ class Weather_System:
         if not description_tags:
             return []
 
-        if random.random() < 0.7: #30% chance for generic weather description
+        if random.random() > 0.5: #30% chance for generic weather description
             return []
 
         # Get current time of day and weather type
@@ -106,7 +106,7 @@ class Weather_System:
                 specific_descs.extend(description_dic)
         # Create a pool of descriptions by combining specific time of day and default descriptions
         combined_descs = specific_descs + default_descs
-        weights = [2.0] * len(specific_descs) + [1.0] * len(default_descs)  # Adjust weights as needed
+        weights = [3.0] * len(specific_descs) + [1.0] * len(default_descs)  # Adjust weights as needed
 
         # Return a random description from the combined pool using weights
         if combined_descs:

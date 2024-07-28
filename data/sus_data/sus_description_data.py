@@ -9,7 +9,7 @@ sus_description_data = {
                                 "Bertha leans across the counter, clearing it of old bottles.",
                                 "Bertha reaches for a glass, angling her grip as she pours some beer.",
                                 "Bertha slices lemons in a rhythmic, practiced fashion.",
-                                "Bertha rests her weight against the counter, crossing her arms in front of her."
+                                "Bertha rests against the wall, crossing her arms in front of her."
                                 ],
                 },
                 "porch_01": {
@@ -32,13 +32,19 @@ sus_description_data = {
                 "neutral": ["She strikes a black matchbook, her face briefly lit as she pulls the flame through a cigarette.",
                              "She shifts her stance, her sneakers scraping against the floor.","She tosses a lock of black hair out of her eyes.",
                             "She stretches, her denim jacket rising just above her belt buckle.", "She wipes her hands on her pants, the leather creasing slightly.",
-                            "She rests a hand on her hip, gently adjusting the waistband of her leather pants.", "She scratches her shoulder, the collar of her denim jacket poking into her neck.",
+                            "She rests a hand on her hip.","She shifts her weight to the other side.","She leans back, crossing her arms.",
+                            "Her shoulders rise and fall with each breath.",
+                            "She scratches her head, and leans to the left.","Her denim collar pokes her neck. She scratches it absent-mindedly.",
                             "She plays with her hair, black strands twirling around her finger.", "She tucks a loose strand of black hair behind her ear.",
-                            "She pulls her jacket tighter around her, the denim tugging at the shoulders."
+                            "She pulls her jacket around her, the denim tugging at the shoulders.", "She leans back, crossing her arms.",
+                            "She puts both hands in her pockets, and takes a deep breath.", "She rubs the back of her neck.", "She purses her lips.",
+
+
                             ]
             },
             "leaving": {
-                "neutral": ["You step away from Bertha.","Her gaze lingers a moment as your leave. ","You turn your back on her, and leave.","She gives you a wave as you turn to leave."],
+                "neutral": ["You step away from Bertha.","Her gaze lingers a moment as your leave. ",
+                            "You turn your back on her, and leave.","She gives you a wave as you turn to leave."],
             },
             "times": {
             },
@@ -52,8 +58,8 @@ sus_description_data = {
                 "backroom_01": {
                     "neutral": ["Gibbs is hunched over and focused, his eyes glued to his cards.",
                                 "Gibbs lets out a joyful scream, his arms start hauling chips towards him.",
-                                "Without warning, Gibbs yells as the dealer flips a card over. 'FUCK!'",
-                                "You hear Gibbs complaining to the dealer. 'What are the fucking odds of that?'",
+                                "Without warning, Gibbs yells as the dealer flips a card over. 'F*CK!'",
+                                "You hear Gibbs complaining to the dealer. 'What are the f*cking odds of that?'",
                                 "Gibbs scowls, throwing his cards on the table.", "Gibbs slumps in his seat as the dealer drags more chips away from him.",
                                 "Gibbs reaches into his pocket, throwing money onto the table."
                                 ],
@@ -65,13 +71,22 @@ sus_description_data = {
                             "Gibbs mutters incomprehensibly under his breath, not looking at you.", "He throws his cards on the table, frustrated."],
             },
             "at_entity": {
-                "neutral": ["He picks up dice, his suit creasing as he shakes his hands dramatically.", "The dealer serves out new cards. Gibbs sits impatient, his shoes bouncing on the floor."
+                "neutral": ["He picks up dice, his suit creasing as he shakes his hands dramatically.", "The dealer serves out new cards. Gibbs sits impatient, his shoes bouncing on the floor.",
                             "A bead of sweat trickles from his fedora down his face, before seeping into his necktie.", "The dealer lays a card down, and Gibbs cranes his neck to get a better view.",
                             "He wipes his hands on his jeans, cleaning them before touching his cards.","He wipes his mouth on the cuffs of his suit with a fluid motion.",
                             "He takes a swig from his flask, whiskey dribbling down his chin.", "He belches, a mix of mustard and whiskey briefly permeating the air.",
                             "He readjusts his fedora, pulling it firmly onto his scalp.", "He puffs his cigarette, exhaling obnoxiously before resting it back on the table's ashtray.",
                             "His shoe taps the floor as he thinks - then he throws his cards down, swearing under his breath.", "He reaches into his suit's breast pocket, pulling out a cigarette.",
                             "With a tug, he readjusts his suit, the lapel flapping dramatically.",
+                            #new routine loop
+                            "The dealer serves out new cards. Gibbs takes a peek at his hand, and gets visibly excited.",
+                            "He takes a look at the board before slumping in his chair, visibly sad.",
+                            "He pushes some chips out in front of him, holding his breath.",
+                            "The dealer turns another card over. Gibbs yells 'F*CK!' as chips are dragged away from him.",
+                            "Suddenly, Gibbs screams.\n'WHAT ARE THE F*CKING ODDS OF THAT?!?' - the dealer drags his chips away from him.",
+                            "The dealer turns over another card. \n'YEEEEESSSSS!!!!'\n Gibbs suddenly jumps in the air, squealing with glee as chips move towards him.",
+                            "He mutters under his breath as he throws cash on the table, reloading his stack.",
+                            "The dealer turns a card over, and Gibbs covers his face with his hands, sinking into his seat.",
                             ],
             },
             "leaving": {
@@ -87,17 +102,27 @@ sus_description_data = {
 "mortician_01": {
         "default": {
             "at_scene": {
-                    "neutral": ["The mortician lays back in his chair, puffing a cigarette.","The mortician lazily sways in his chair, reading the news.",
-                                "The mortician, half asleep, reaches into his pocket to pull out another cigarette.", "The mortician stands, wincing as he grabs a cigarette from across the desk."
+                    "neutral": ["The mortician lays back in his chair, puffing a cigarette.","The mortician lazily sways in his chair, enjoying a smoke.",
+                                "The mortician, half asleep, reaches into his pocket to pull out a matchbook.",
+                                "The mortician stands, wincing as he leans across the desk to grab a cigarette.",
                                 "The mortician strikes a match, his face and palms briefly illuminated as he inhales.",
-                                "The mortician groans as he stretches across his desk, crushing a cigarette on the ashtray."],
+                                "The mortician groans as he stretches across his desk, crushing his cigarette on an ashtray.",
+                                "The mortician flicks ashes off his cigarette. They drift onto the floor."],
                 },
             "approaching": {
                 "neutral": ["His head turns as you approach, his expression unchanging.","He swivels in his chair to face you.",
                             "He adjusts his position, leaning to the other side of the chair."],
             },
             "at_entity": {
-                "neutral": ["He stands, slowly paces around the room, his gait weak and uneven.","FRAILILILILIG"],
+                "neutral": ["He fiddles with the button of his suit jacket.","He coughs, politely covering his mouth with his elbow, before resuming his raspy breathing.",
+                            "You notice how gaunt and old his eyes are, despite his youthful black hair.",
+                            "He reaches across the desk for another cigarette, his movements slow and effortful.", "He looks around the office, his mind wandering.",
+                            "He smokes his cigarette between labored, shallow breaths.","He checks his tie, ensuring it aligns flat with his suit.", "He squints to get a better look at you.",
+                            "He checks his watch in an overt fashion, curious of the time.", "He sinks into his chair as he exhales smoke.",
+                            "His dress shoes tapping against the floor while he waits.",
+
+                            "He taps his watch, as if to check that it's still working.", "He adjusts the hem of his sleeve."
+                            ],
             },
             "leaving": {
                 "neutral": ["You step away from the mortician.",],

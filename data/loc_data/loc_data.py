@@ -375,8 +375,8 @@ loc_ent_data = { #HAVE TABLE IN PORCH FOR MATCHBOOK WEIRDNESS, ALSO, YOU SHOULD 
             "name": "front door",
             "connections": ["reception_02", "cab_01"],
 
-            "component_descriptions": {"default": {"opening": {"neutral": ["The hinges grate.", "The hinges groan in resistance.","The hinges grind as you pull"]},
-                                                   "closing": {"neutral": ["The hinges scrape", "The hinges whine as they move.", "The hinges grate as they budge. "]},
+            "component_descriptions": {"default": {"opening": {"neutral": ["The hinges grate.", "The hinges groan in resistance.","The hinges grind as you pull."]},
+                                                   "closing": {"neutral": ["The hinges scrape", "The hinges whine as they move.", "The hinges grate as they turn. "]},
                                                    "closed": {"neutral": []},
                                                    "open": {"neutral": []}
                                                    }},

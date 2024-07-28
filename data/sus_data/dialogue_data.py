@@ -1980,7 +1980,7 @@ sus_dialogue_data = {
                 },
                 "redirect_neutral": {
                     "says": ["He clears his throat.","'And now?..'","'Can we speed things along?'","'What next, Detective...'",
-                             "'Is there more?..'","'What else?..'"
+                             "'Is there more?..'","'What else?..'","He swivels in his chair.",
                              ],
                     "effects": {},
                     "options": "default_1"
@@ -1996,15 +1996,16 @@ sus_dialogue_data = {
                 #REACTIONS
                 "react_chat_neutral": {
                     "says": ["He looks at you, blankly.", "'Oh yes... {topic}...'", "'Hmmm, {topic}..'",
-                             "'Ah yes...'", "'{topic}?.. '", "'Yes, yes, {topic}...'",
-                             "His face never changes.", "He takes his time talking.", "His response is monotone and dry.",
+                             "'Ah yes...'", "'{topic}?.. '", "'Yes, yes, {topic}...'", "'Indeed - '",
+                             "His face never changes.", "He takes his time responding.", "'Well, '"
+                            "His voice is dry and raspy.","He speaks at a glacial pace.",
                              ],
                 },
                 "react_grill_neutral": {
                     "says": ['His eyes grow distant.', "'{topic}? Let me think...'", "'Indeed, yes, {topic}...'",
                              "'Hmm, let me think...'", "'{topic}? Hmm..'","'Just a moment, please...'\nA beat passes.",
-                             "A beat passes before he responds.", "He shrugs his shoulders.", "'Well, '",
-                             "He clears his throat before answering."],
+                             "A beat passes before he responds.", "He shrugs his shoulders.", "'Ah, well, '",
+                             "He clears his throat before answering.","His voice is coarse.","He speaks at a glacial pace."],
                     "effects": {"mood": -1},
                 },
                 #again = WILL TALK, already = WONT talk
@@ -2075,7 +2076,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "murder_matchbook_01_chat_neutral": {
-                    "says": ["'That's a start... '" ],
+                    "says": ["'A matchbook - that's a start...'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2100,7 +2101,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "tooth_01_grill_neutral": {
-                    "says": ["'I'd imagine the strike to the front of her face was responsible for dislodging that tooth...'" ],
+                    "says": ["'I'd imagine a strong strike to the jaw was responsible for dislodging that tooth...'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2110,17 +2111,19 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "bruising_01_grill_neutral": {
-                    "says": ["'I believe those were inflicted prior to her death - although I would need to collect more information...'" ],
+                    "says": ["'I believe those were inflicted prior to her death -"
+                             " quite some force was behind the blows...'" ],
                     "effects": {},
                     "options": None
                 },
                 "wounds_01_chat_neutral": {
-                    "says": ["'Quite gruesome... I haven't had a murder victim here in quite some time actually - it was refreshing to investigate...'" ],
+                    "says": ["'Quite gruesome... I haven't had a murder victim here in quite some time actually...'" ],
                     "effects": {},
                     "options": None
                 },
                 "wounds_01_grill_neutral": {
-                    "says": ["'I imagine that those were the cause of death... As I'm sure you could surmise...'" ],
+                    "says": ["'If my deductions are correct... The time of death would be roughly 2 or 3 am... \n"
+                             "Then she was brought here to the cooler around 6 am.'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2130,7 +2133,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "murder_knife_01_grill_neutral": {
-                    "says": ["'Unfortunately, I don't have more information to yield regarding the bloody knife...'" ],
+                    "says": ["'Unfortunately, I don't have more information to yield regarding the bloody knife. It's quite a common tool to own...'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2140,27 +2143,28 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "murder_gun_01_grill_neutral": {
-                    "says": ["'I think it was expected that bullet wounds would have corresponding evidence at the scene of the crime...'" ],
+                    "says": ["'If I recall... Bertha purchased a gun a few years ago...'" ],
                     "effects": {},
                     "options": None
                 },
                 "pipe_01_chat_neutral": {
-                    "says": ["'Down in the alley, you say?..\nHe forms a wrinkled smirk. 'Only thing I could use that for is a walking stick...' '" ],
+                    "says": ["'Down in the alley, you say?..\nHe forms a thin smirk. 'Only thing I could use that for is a walking stick...' '" ],
                     "effects": {},
                     "options": None
                 },
                 "pipe_01_grill_neutral": {
-                    "says": ["'Not much I could tell you about a metal pipe... Too weak to work with that stuff nowadays...'" ],
+                    "says": ["'Not much I could tell you about a metal pipe... Too weak to do construction nowadays...'" ],
                     "effects": {},
                     "options": None
                 },
                 "murder_pipe_01_chat_neutral": {
-                    "says": ["'Well, someone with a strong arm must have used that...'\nHe groans as he tests his shoulder.\n'Sometimes, I miss my youth...'" ],
+                    "says": ["'That matches the blunt trauma...'\nHe chuckles, his laugh coarse and dry.\n'Such a barbaric way to kill someone.'"],
                     "effects": {},
                     "options": None
                 },
                 "murder_pipe_01_grill_neutral": {
-                    "says": ["'That matches the blunt trauma...'\nHe chuckles, his laugh coarse and dry.\n'Such a barbaric way to kill someone.'" ],
+                    "says": [
+                             "'Well, someone with a strong arm must have used that...'\nHe groans as he tests his shoulder.\n'Sometimes, I miss my youth...'"],
                     "effects": {},
                     "options": None
                 },
@@ -2180,7 +2184,8 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "spilled_tobacc_01_grill_neutral": {
-                    "says": ["'Well, we know there were two people at the scene of the crime. Did it spill before or after the murder? Then, who might have carried such an item...'" ],
+                    "says": ["'Well, we know there were two people at the scene of the crime. "
+                             "Did it spill before or after the murder? Then, who might have carried such an item...'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2202,7 +2207,8 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "debbie_01_grill_neutral": {
-                    "says": ["'Take a look yourself, I have her ready in refrigeration, just down the hall...'" ],
+                    "says": ["'She arrived this morning, around 6 am... Time of death, like 2 or 3 am... "
+                             "I haven't altered the body at all, if you're wondering...'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2242,7 +2248,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "revolver_02_grill_neutral": {
-                    "says": ["'I tend to keep it on my person when I go out... A man my age needs something like that around here...'" ],
+                    "says": ["'I tend to keep it on my person when I go out... Much like the young ones at the pub here...'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2252,7 +2258,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "bullets_01_grill_neutral": {
-                    "says": ["'One is useless without the other... Were you looking for something specific?..'" ],
+                    "says": ["'I get them from Fisherman Phil... Were you looking for something specific?..'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2272,7 +2278,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "matches_01_grill_neutral": {
-                    "says": ["'Truthfully, I've never seen those before... I only use the brown ones...'" ],
+                    "says": ["'Truthfully, I've never seen those before... I only use the old brown ones...'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2282,7 +2288,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "matches_02_grill_neutral": {
-                    "says": ["'Those are the matches I use - just as many others use... They are quite common around here...'"],
+                    "says": ["'They are quite common around here, Bertha used to hand them out at the pub...'"],
                     "effects": {},
                     "options": None
                 },
@@ -2302,7 +2308,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "gin_01_grill_neutral": {
-                    "says": ["'Did you want some? I buy it from Fisherman Phil, like everyone else...'"],
+                    "says": ["'Did you want some? I used to enjoy a bottle at the pub, with Bertha...'"],
                     "effects": {},
                     "options": None
                 },
@@ -2322,7 +2328,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "rum_01_grill_neutral": {
-                    "says": ["'I'm sure its quite popular, but I don't care for it...'",],
+                    "says": ["'It's quite popular at the pub, but I don't care for it...'",],
                     "effects": {},
                     "options": None
                 },
@@ -2342,7 +2348,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "mustard_01_grill_neutral": {
-                    "says": ["'I'm afraid I have nothing useful to tell you about mustard... Is it relevant to your investigation?..'",],
+                    "says": ["'I'm afraid I have nothing useful to tell you about that... Is it relevant to your investigation?..'",],
                     "effects": {},
                     "options": None
                 },
@@ -2382,7 +2388,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "cardigan_scraps_01_grill_neutral": {
-                    "says": ["'It sounds like fine shreds of wool, no? They likely tore from Debbie's cardigan during a scramble...'",],
+                    "says": ["'It sounds like shreds of wool, no? They must have been forcefully torn from Debbie's cardigan, indicating a fight...'",],
                     "effects": {},
                     "options": None
                 },
@@ -2412,11 +2418,11 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "tobacco_01_grill_neutral": {
-                    "says": ["'Not sure how I can help your investigation on this topic - but I like smoking pipe using that.. If I recall, I actually introduced Bertha to it as well...'"],
+                    "says": ["'.. "
+                             "If I recall, I actually introduced Bertha to pipe tobacco as well...'"],
                     "effects": {},
                     "options": None
                 },
-
                 "fibers_01_chat_neutral": {
                     "says": ["'It isn't uncommon to find something under a victims nails, if not just regular dirt and debris...'", ],
                     "effects": {},
@@ -2473,13 +2479,15 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "workboots_01_chat_neutral": {
-                    "says": ["'Those next to the door are mine.. They are pretty useful to own...'", ],
+                    "says": ["'Those next to the door are mine.. They are pretty useful to own...'",
+                             "'While they don't really go with my suit, I find they are very practical - "
+                        "I wear them on my walks sometimes, if I don't feel like dirtying my dress shoes...'" ],
                     "effects": {},
                     "options": None
                 },
                 "workboots_01_grill_neutral": {
-                    "says": [
-                        "'While they don't really go with my suit, I find they are very practical - I wear them on my walks sometimes, if I don't feel like dirtying my dress shoes...'"],
+                    "says": ["'Unfortunately Detective, anyone with a real job will have a similar pair...'"
+                        ],
                     "effects": {},
                     "options": None
                 },
@@ -2518,7 +2526,6 @@ sus_dialogue_data = {
                     "effects": {},
                     "options": None
                 },
-
 
                 "grease_01_chat_neutral": {
                     "says": ["'I try not to have too much, but enjoy it on ocassion.'"],
@@ -2559,7 +2566,7 @@ sus_dialogue_data = {
                 "dialogue": { #will add all these nodes to dialogue if all conditions in murderer profile
                     "default": {
                         "bertha_01_chat_neutral": {
-                            "says": ["Haven't seen her in quite some time... I used to go to her pub, long ago."],
+                            "says": ["'Poor girl has fallen into the wrong crowd... Frightful, I must say...'"],
                             "effects": {},
                             "options": "default_1"
                         }

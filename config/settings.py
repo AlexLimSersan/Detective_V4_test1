@@ -23,7 +23,7 @@ NEUTRAL, BAD
 #GOING TO CHANGE: sun, rain, and storm. with a TRANSITION ANNOUNCEMENT...
 #like the clouds darken, etc. maybe 2 announcements if detectable before changing.
 #can have references to rain in the sun, but sparingly.
-ALL_WEATHERS = ["sun", "rain", "storm"]# "grey",
+ALL_WEATHERS = ["sun", "rain"]# "grey",
 GOOD_WEATHER = ["sun"]
 
 #SPAWN DATA DEFAULT VALUES

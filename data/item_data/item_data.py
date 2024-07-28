@@ -573,8 +573,8 @@ item_ent_data = {
                             "closing":[ "You throw the cloth over her.","It lowers as air escapes.",
                                         "You drape the cloth across her.","You cover her with the cloth."],
                             "closed": ["A white cloth forms subtle, alternating curves.",
-                                       "Concave and convex slopes trace a still form.",
-                                       "A white cloth covers her body.",
+                                       "A cloth traces a still form with concave and convex slopes.",
+                                       "A white cloth covers a body.",
                                        "The cloth drapes, its edges gently brushing the floor."],
                             "opened":[
                                 "Glassy, fixed eyes stare into the void.\n"

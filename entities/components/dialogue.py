@@ -217,7 +217,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         if "chat" in self.current_node:
             ...
         elif "grill" in self.current_node:
-            mood_tally += -1
+            ...
         if command:
             ent_logger.debug(f"command = {command}; possible reaction?!")
         #or could be in base interaction class?

@@ -12,7 +12,8 @@ loc_description_data = {
 "cab_01": {
     "default": {
         "driving_start": {
-            "neutral": [f'"You got it boss."', "The engine sputters, and the cab drives off.", "The cab drives..."]},
+            "neutral": [f'"You got it boss."', "The engine sputters, and the cab drives off.",
+                        "The cab jerks unevenly before driving off...", ]},
         "driving_during": {
             "porch_01": {
                 "neutral": ["You sit in the cab, watching the city pass by through the window."],
@@ -61,9 +62,7 @@ loc_description_data = {
                         "bad": ["The headlights flicker.", "He looks like he might fall asleep.", "His hands shakily reach for a cigarette.", "His eyes dart across the horizon.",]},
         },
         "weather": { #optionally keyed to time of day - should make sense from INSIDE CAB!
-            "storm":["The wind hammers the rain against the cab.", "Lightning arcs across the sky, followed by thunderous, roaring crack.", "The headlights cast the storm with a cone of light."],
-            "rain": ["Raindrops pelt the cab, streaking its windows.", "The rain makes a rhythmic drumming sound.", "The headlights cast a pyramid in the rain."],
-            "sun": ["The sun reflects off the hood, making you squint.", "The sunlight makes the hood shimmer."],
+
         },
         "tags": ["cab"],
         "connections": {#optional weather or time keys.
@@ -74,7 +73,7 @@ loc_description_data = {
                 "storm": ["You can see the cab through the downpour."],
             },
             "alley_01": ["You can see the cabbie waiting across the street."],
-            "alley_07": ["You can see the cabbie waiting across the street."],
+            "alley_07": ["You can see the cabbie if you close your eyes."],
             "backroom_door_02": ["You can walk to the cab from here..."]
             },
         "leaving": { #leaving from this loc TO player current loc, so key by current loc, then weather or time,,,
@@ -797,7 +796,7 @@ loc_description_data = {
                 "neutral": ["Ahead, the alley branches.", "The alley branches."],
             },
             "alley_06": {
-                "neutral": ["The path turns back towards the entrance."],
+                "neutral": ["The path turns back towards the way you came."],
             }
         }
     }
@@ -856,11 +855,12 @@ loc_description_data = {
 },
 "fire_escape_02": { #ON LADDER #hair
     "default": {
-        "approaching": {
+        "at_entity": {
+            "default": {
             "neutral": ["The ladder shakes as you climb.", "The metal creaks."],
             "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
-        },
-        "at_entity": {
+            },
+
             "sun": {
                 "night": ["The rungs feel cold under your hands."],
                 "neutral": ["The rungs feel hot under your hands.",],
@@ -897,10 +897,13 @@ loc_description_data = {
 "fire_escape_03": { #ON LADDER #hair
     "default": {
         "approaching": {
-            "neutral": ["The ladder shakes as you climb.", "The metal creaks."],
-            "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
         },
         "at_entity": {
+            "default": {
+            "neutral": ["The ladder shakes as you climb.", "The metal creaks."],
+            "bad": ["The rungs groan under your weight.", "It rattles as you climb."]
+            },
+
             "sun": {
                 "night": ["The rungs feel cold under your hands."],
                 "neutral": ["The rungs feel hot under your hands.",],
@@ -914,7 +917,6 @@ loc_description_data = {
                 "neutral": ["The rungs feel cold under your hands."],
                 "bad": ["Wet rust digs into your hands."]
                         ,},
-
 
         },
         "leaving": {
@@ -941,17 +943,18 @@ loc_description_data = {
             "neutral": ["The city stretches out before you.","Your gaze stretches out onto the city.", "You look down at the city."],
 
         },
-        {"bad": ["A lurch of vertigo hits you.", "It makes you slightly nauseous.", "You feel a pang of fear as you imagine falling."],
-            "good": ["The rooftop offers a stunning view.", "The view from here is breathtaking."],},
-        {"neutral": ["Multiple paths from here lead to different areas of the city... "]},
+        {"bad": ["A lurch of vertigo hits you.", "It makes you slightly nauseous.", "You feel a pang of fear as you imagine falling.",
+                 "Multiple paths from here lead to different areas of the city... "],
+            "good": ["The rooftop offers a stunning view.", "The view from here is breathtaking.",
+                     "Multiple paths from here lead to different areas of the city... "],},
+
         ],
         "leaving": {
             "neutral": ["You climb back down."],
         },
         "times": {},
         #GREAT PLACE FOR WEATHER!!!!
-        "weather": {"sun": ["The roof has special weather text"],
-                    "rain": ["The roof has special weather text"]
+        "weather": {
                     },
         "tags": ["urban"],
         "connections": {
@@ -977,7 +980,7 @@ loc_description_data = {
         "tags": ["urban"],
         "connections": {
             "alley_06": {
-                "neutral": ["The alley leads all the way to the residential area."],
+                "neutral": ["The backstreet leads all the way to the residential area."],
             }
         }
     }
@@ -989,7 +992,7 @@ loc_description_data = {
 "reception_01": { #door
     "default": {
         "approaching": {
-            "neutral": ["The old door is rusting at the hinges."]
+            "neutral": ["You approach the front door."]
         },
         "at_entity": {
             "neutral": [],
@@ -998,15 +1001,18 @@ loc_description_data = {
             "neutral": [""],
         },
         "times": {
-            "default": ["","","",""],
+            "default": ["","","","",""],
             "evening": ["A lantern flickers ominously."],
             "night": ["A lantern flickers ominously."],
         },
         "weather": {
-            "default": ["","","",""],
+            "default": ["The old door is rusting at the hinges.","","",""],
             "sun": ["The sun brings out each peeling flake of paint.","The handle glints in the sun.", "Each curling flake of paint has a matching shadow."],
-            "rain": ["It's coated slick from the rain.","Water beads down door, pooling at odd places.","Water drips from the handle at regular intervals."],
-            "storm": ["Thunder rumbles in the distance.","A thunderclap echoes.","Lightning flashes.","Rain slams against the door.","The wind howls, rain slamming into the door.","The wind brings a shower of rain onto the door."],
+            "rain": ["It's coated slick from the rain.","Water beads down door, pooling at odd places.","Water drips from the handle at irregular intervals.",
+                     "Thunder rumbles in the distance.", "A thunderclap echoes.", "Lightning flashes.",
+                     "Rain crashes around you. ", "The wind howls, slamming rain into the door.",
+                     "The wind brings a shower of rain onto the door."
+                     ],
 
         },
         "tags": [""],
@@ -1023,10 +1029,9 @@ loc_description_data = {
 "reception_02": {
             "default": {
                 "approaching": {
-                    "neutral": ["The air is cold here."],
+                    "neutral": ["Each step sends an echo across the room.","A steady, droning hum fills the room."],
                 },
                 "at_entity": {
-                    "neutral": ["Each step sends an echo across the room.","A steady, droning hum comes from the hall."],
                 },
                 "leaving": {
                     "neutral": [""],
@@ -1122,7 +1127,7 @@ loc_description_data = {
 "hallway_morgue_02": {
             "default": {
                 "approaching": {
-                    "neutral": ["Footsteps echo across the walls."]
+                    "neutral": ["Each footstep echoes across the walls."]
                 },
                 "at_entity": {
                     "neutral": [""],

@@ -85,35 +85,82 @@ item_description_data = {
         },
         "knife": {
             "at_scene": {
-                "neutral": ["Streaks of blood mar the wall.",
-                            "Blood patterns the walls in long, irregular arcs."],
+                "crime_scene_01": {
+                    "neutral": ["Streaks of blood mar the wall.",
+                                "Blood patterns the walls in long, irregular arcs."],
+                    },
+                "crime_scene_02": {
+                    "neutral": ["Long, tapering streaks of blood arc across the walls and floor.",
+                                "Thick, curved lines of blood scatter against the walls and floor. "],
+                },
             },
             "at_entity": {
-                "neutral": ["They form jagged rows, pooling in a puddle near your feat.",
-                            "They form a series of jagged sprays. Below, you see a puddle of crimson, its edges irregular and smeared."
-                            ],
+                "crime_scene_01": {
+                    "neutral": ["They form jagged rows, with large, disk-like dots beneath you.",
+                                "They form a series of jagged sprays. Below, you see red, circular drops."
+                                ],
+                },
+                "crime_scene_02": {
+                    "neutral": ["Blood pools where the floor and walls meet, the edges smudged and crooked.",
+                                "Below, you see a puddle of crimson, its edges irregular and smeared.",
+
+                                "Below, you see a darker pool of blood, presumably where the body was."],
+                }
+
             },
         },
         "gun": {
             "at_scene": {
-                "neutral": ["Blood covers the walls in a fine mist.", "Small drops of red are scattered across the alley in a fine mist."],
+                "crime_scene_01": {
+                    "neutral": ["Blood covers the walls in a fine mist.",
+                                "A thin spray of blood evenly coats the walls.",
+                                "Small drops of red are spattered across the alley in a fine mist."],
+                    },
+                "crime_scene_02": {
+                    "neutral": ["Diffuse specks of blood mar the walls..",
+                                "Flecks of blood surround you."],
+                    },
             },
             "at_entity": {
-                "neutral": ["At shoulder level, diffuse splotches of blood center around circles of tiny droplets.",
-
-                            "At the center, you see a darker pool of blood, presumably where the body was."
-                            ],
+                "crime_scene_01": {
+                    "neutral": ["Each drop is thin and small. The bricks are coated uniformly.",
+                                ],
+                    },
+                "crime_scene_02": {
+                    "neutral": ["Blood pools where the floor and walls meet, the edges smudged and crooked.",
+                                "Below, you see a puddle of crimson, its edges irregular and smeared.",
+                                "Below, you see a darker pool of blood, presumably where the body was."],
+                    },
             },
         },
         "blunt": {
             "at_scene": {
-                "neutral": ["Blood covers the alley, splattered around unevenly."],
-            },
+                "crime_scene_01": {
+                    "neutral": ["Blood covers the walls, splattered around unevenly.",
+                                "Irregular arcs of blood streak the brick walls. "],
+                    },
+                "crime_scene_02": {#
+                    "neutral": ["Long, tapering streaks of blood arc across the walls and floor.",
+                                "Thick, curved lines of blood scatter the walls and floor. "],
+                    },
+                },
             "at_entity": {
-                "neutral": ["Specks of blood cast thick, branching streaks across the walls."],
+                "crime_scene_01": {
+                    "neutral": [
+                        "Splotches of blood lie beneath thick, branching arcs.",
+                        "The blood is cast across the walls in jagged strokes.",
+                            ],
+                },
+                "crime_scene_02": {
+                    "neutral": ["Blood pools where the floor and walls meet, the edges smudged and crooked.",
+                                "Below, you see a puddle of crimson, its edges irregular and smeared.",
+
+                                "Below, you see a darker pool of blood, presumably where the body was."],
+                }
+            },
+
             },
         },
-},
 "tooth_01": {
         "default": {
             "at_scene": {
@@ -311,6 +358,9 @@ item_description_data = {
             "at_scene": {
                 "neutral": ["A piece of torn leather dangles, caught on a jagged metal rail."],
                 },
+            "at_entity":
+                {"neutral": ["The leather has small tears and creases running through it, it's edges look uneven and frayed."]},
+
         },
         "mustard": {
             "at_entity": [
@@ -346,6 +396,10 @@ item_description_data = {
             "at_scene": {
                 "neutral": ["A piece of torn denim dangles, caught on a jagged metal rail."],
                 },
+            "at_entity": {
+
+                    "neutral": ["Blue and white threads form a tattered scrap, it's threads unraveling at the seams."]
+}
         },
         "mustard": {
             "at_entity": [
@@ -385,6 +439,10 @@ item_description_data = {
         "default": {
             "at_scene": {
                 "neutral": ["A piece of torn fabric dangles, caught on a jagged metal rail."],
+                },
+            "at_entity":
+                {
+                "neutral": ["Finely weaved wool flutters in the wind - it looks like it's from formal wear."]
                 },
         },
         "mustard": {
@@ -1398,8 +1456,17 @@ item_description_data = {
 "earring_01": {
         "default": {
             "at_scene": {
-                "refrigeration_02": {"neutral": ["she has an ear ring. "]},
-                "default": {"neutral": ["Something catches the light on the ground - an ear ring. "]},
+                "refrigeration_02": {"neutral": ["Her ears are pierced with matching ear rings. "]},
+                "neutral": ["Something catches the light on the ground - an ear ring. "],
+            },
+            "at_entity": {
+                "neutral": ["It's a small, copper hoop with a tiny jewel."],
+            },
+        },
+        "single": {
+            "at_scene": {
+                "refrigeration_02": {"neutral": ["One earlobe is pierced with a hoop - the other torn, without one.. "]},
+                "neutral": ["Something catches the light on the ground - an ear ring. "],
             },
             "at_entity": {
                 "neutral": ["It's a small, copper hoop with a tiny jewel."],
@@ -1518,8 +1585,8 @@ item_description_data = {
             "at_scene": {
                 "open": {"neutral": ["A corpse lays flat in the center of the room."],},
                 "closed": {"neutral": ["A white cloth forms subtle, alternating curves.",
-                                       "Concave and convex slopes trace a still form.",
-                                       "A white cloth covers her body.",
+                                       "A cloth traces a still form with concave and convex slopes.",
+                                       "A white cloth covers a body.",
                                        "The cloth drapes, its edges gently brushing the floor."],},
             },
             "approaching": {
