@@ -127,12 +127,12 @@ weather_data = {
                         "Rain splashes against your face.", "Raindrops dribble against you.",
                         "The rain continues..",
                         "Muffled thunder rumbles in the distance.", "A thunderclap echoes.", "Lightning flashes.",
-                        "Puddles ripple in the rain."
+                        "Puddles ripple in the rain.",
                         
-                        "The morning is grey and dim.", "Clouds blanket the morning sun.", "The morning is cold and gloomy."
+                        "The morning is grey and dim.", "Clouds blanket the morning sun.", "The morning is cold and gloomy.",
 
                         "It's raining this morning.", "It's a wet morning.",
-                        "Lightning arcs across the sky, followed by thunderous, roaring crack."
+                        "Lightning arcs across the sky, followed by thunderous, roaring crack.",
 
 
 
@@ -152,7 +152,7 @@ weather_data = {
                         "Rain splashes against your face.", "Raindrops dribble against you.",
                         "The rain continues..",
                         "Muffled thunder rumbles in the distance.", "A thunderclap echoes.", "Lightning flashes.",
-                        "Puddles ripple in the rain."
+                        "Puddles ripple in the rain.",
                 
                         "The overhead sun is marked only by a slightly lighter patch.", "The afternoon sun is covered from the clouds.",
 
@@ -161,9 +161,9 @@ weather_data = {
                         "The rain continues heavily", "A thunderclap echoes.", "Lightning flashes.", "The storm rages on.",
                         "Puddles ripple in the rain.",
                         #from cab
-                        "Lightning arcs across the sky, followed by thunderous, roaring crack."
+                        "Lightning arcs across the sky, followed by thunderous, roaring crack.",
         
-                        "The rain continues..."
+                        "The rain continues...",
             ],
             "evening": [
                     "It's cold and gloomy.", "It's cold and wet.", "Your breath condenses as you exhale.",
@@ -178,7 +178,7 @@ weather_data = {
                     "Rain splashes against your face.", "Raindrops dribble against you.",
                     "The rain continues..",
                     "Muffled thunder rumbles in the distance.", "A thunderclap echoes.", "Lightning flashes.",
-                    "Puddles ripple in the rain."
+                    "Puddles ripple in the rain.",
                     
                     "The clouds mask the sunset...", "The sky darkens with the setting sun...",  # transition?
                     "A chill sets in...","The sun slowly inches under the horizon...","The sun hides itself..",
@@ -190,7 +190,7 @@ weather_data = {
                 "The rain continues heavily", "A thunderclap echoes.", "Lightning flashes.", "The storm rages on.",
                 "Puddles ripple in the rain.",
                 #from cab
-                "Lightning arcs across the sky, followed by thunderous, roaring crack."
+                "Lightning arcs across the sky, followed by thunderous, roaring crack.",
 
                 "The rain continues...", "Flashes of lightning illuminate the dark landscape.",
 
@@ -207,7 +207,7 @@ weather_data = {
                 "Rain splashes against your face.", "Raindrops dribble against you.",
                 "The rain continues..",
                 "Muffled thunder rumbles in the distance.", "A thunderclap echoes.", "Lightning flashes.",
-                "Puddles ripple in the rain."
+                "Puddles ripple in the rain.",
 
                 "The night is cold.", "It's chilly.", "It's dark without the moonlight.",
                 "The moon hides behind the clouds.", "The moon peeks through fleeting gaps in the clouds.",
@@ -217,13 +217,13 @@ weather_data = {
 #defaults that work with all times
                 "The rain drizzles around you.", "Rain drums on the rooftops", "Muffled thunder rumbles in the distance.",
                 "The rain continues heavily", "A thunderclap echoes.", "Lightning flashes.", "The storm rages on.",
-                "Puddles ripple in the rain."
+                "Puddles ripple in the rain.",
                 #from cab
-                "Lightning arcs across the sky, followed by thunderous, roaring crack."
+                "Lightning arcs across the sky, followed by thunderous, roaring crack.",
 
                 "A lightning strike casts brief, stark light.",
 
-                "The rain is relentless.", "You brace against the wind.", "Lightning cracks."
+                "The rain is relentless.", "You brace against the wind.", "Lightning cracks.",
 
                       ]
         },
@@ -263,12 +263,12 @@ weather_data = {
                         ],
             "afternoon": [
                     "Rain patters against the walls.",
-                "Water coats the buildings with a dull sheen.", "Water sheets off the bricks.",
+                "Water coats the buildings with a dull sheen.", "Water sheets off brick walls.",
                     "The concrete glistens in the rain.", "The raindrops fall around you.",
                 "The rain gathers, streaming towards a drain.",
 
                 "Rain hammers against the walls.",
-                "Water coats the buildings with a slick, dull sheen.", "Water crashes off the bricks.",
+                "Water coats the buildings with a slick, dull sheen.", "Water crashes off the brick walls.",
                 "The concrete shimmers in the rain.", "The wind roars, raindrops crash into you.",
                 "The rain gathers into a large stream, racing towards a drain.",
                           ],
@@ -298,19 +298,19 @@ weather_data = {
         },
         "indoors": {
             "morning": [
-                "A dull morning glow comes through the windows.",
+                #"A dull morning glow comes through the windows.",
                 "The wind howls from outside.",
                 "Raindrops race down the windowpanes.",
                 "The window rattles, the rain drums on.",
                 "Rain patters against the windows.",
-                "Soft, diffuse light comes through the blinds.",
+                #"Soft, diffuse light comes through the blinds.",
                 "Muffled thunder rumbles in the distance.",
                 "Rainfall fills the background ambiance.",
                 "The window panes shake with the wind.",
 
                 #storm
                 "The wind howls from outside.",
-                "Raindrops patter against the window panes.", "The rainfall is relentless, pouring atop the roof.",
+                "Raindrops patter against the window panes.", "Outside, the rainfall is relentless.",
                 "Muffled thunder rumbles in the distance.", "Rain streaks the windows.",
                 "Sheets of rain cascade down the windows",
                 "Raindrops drum against the windows, and race down the glass.",
@@ -318,12 +318,12 @@ weather_data = {
                 "Lightning flashes, briefly illuminating the room.", "The storm rages on.",
                         ],
             "afternoon": [
-                "A dull glow comes through the windows.",
+                #"A dull glow comes through the windows.",
                 "The wind howls from outside.",
                 "Raindrops race down the windowpanes.",
                 "The window rattles, the rain drums on.",
                 "Rain patters against the windows.",
-                "Soft, diffuse light comes through the blinds.",
+                #"Soft, diffuse light comes through the blinds.",
                 "Muffled thunder rumbles in the distance.",
                 "Rainfall fills the background ambiance.",
                 "The window panes shake with the wind.",
@@ -339,12 +339,12 @@ weather_data = {
 
             ],
             "evening": [
-                "A dull glow comes through the windows.",
+                #"A dull glow comes through the windows.",
                 "The wind howls from outside.",
                 "Raindrops race down the windowpanes.",
                 "The window rattles, the rain drums on.",
                 "Rain patters against the windows.",
-                "Soft, diffuse light comes through the blinds.",
+                #"Soft, diffuse light comes through the blinds.",
                 "Muffled thunder rumbles in the distance.",
                 "Rainfall fills the background ambiance.",
                 "The window panes shake with the wind.",
@@ -360,12 +360,12 @@ weather_data = {
 
             ],
             "night": [
-                "A dull glow comes through the windows.",
+               # "A dull glow comes through the windows.",
                 "The wind howls from outside.",
                 "Raindrops race down the windowpanes.",
                 "The window rattles, the rain drums on.",
                 "Rain patters against the windows.",
-                "Soft, diffuse light comes through the blinds.",
+               # "Soft, diffuse light comes through the blinds.",
                 "Muffled thunder rumbles in the distance.",
                 "Rainfall fills the background ambiance.",
                 "The window panes shake with the wind.",

@@ -29,7 +29,8 @@ sus_description_data = {
                         "She slumps in place as you approach her.","She runs her hand through her hair, as if trying to muster energy."]
             },
             "at_entity": {
-                "neutral": ["She strikes a black matchbook, her face briefly lit as she pulls the flame through a cigarette.",
+                "default": {
+                        "neutral": ["She strikes a black matchbook, her face briefly lit as she pulls the flame through a cigarette.",
                              "She shifts her stance, her sneakers scraping against the floor.","She tosses a lock of black hair out of her eyes.",
                             "She stretches, her denim jacket rising just above her belt buckle.", "She wipes her hands on her pants, the leather creasing slightly.",
                             "She rests a hand on her hip.","She shifts her weight to the other side.","She leans back, crossing her arms.",
@@ -38,9 +39,27 @@ sus_description_data = {
                             "She plays with her hair, black strands twirling around her finger.", "She tucks a loose strand of black hair behind her ear.",
                             "She pulls her jacket around her, the denim tugging at the shoulders.", "She leans back, crossing her arms.",
                             "She puts both hands in her pockets, and takes a deep breath.", "She rubs the back of her neck.", "She purses her lips.",
+                            ],
+                    },
+                "bar_01": {
+                    "neutral": ["She wipes the counter, each stroke methodical and practiced.",
+                                "She rests both palms against the counter, and leans forward.",
+                                "She grabs a few nearby empty bottles, disposing them.",
+                                "She pours a glass of rum for herself, and takes a small sip.",
+                                "She slices a lemon absentmindedly.",
+                                "She places a lemon in her drink, swirling the contents around.",
+                                ],
+                },
+                "porch_01": {
+                    "neutral": ["She exhales slowly, releasing a long puff of smoke.",
+                                "She leans back, her elbows against the handrail.",
+                                "The embers on her cigarette glow stronger as she inhales.",
+                                "Her cigarette dangles loosely between her lips.",
+                                "She ashes her cigarette on the railing, and flicks it away in one, smooth motion.",
+                                "She reaches into her jacket, pulling out a cigarette.","She flicks her cigarette. Ashes and faint embers fall slowly to the ground.",
+                                "Loose strands of her black hair dance with a breeze.","Her denim jacket flutters with a strong gust of wind."],
+                },
 
-
-                            ]
             },
             "leaving": {
                 "neutral": ["You step away from Bertha.","Her gaze lingers a moment as your leave. ",
@@ -85,7 +104,7 @@ sus_description_data = {
                             "The dealer turns another card over. Gibbs yells 'F*CK!' as chips are dragged away from him.",
                             "Suddenly, Gibbs screams.\n'WHAT ARE THE F*CKING ODDS OF THAT?!?' - the dealer drags his chips away from him.",
                             "The dealer turns over another card. \n'YEEEEESSSSS!!!!'\n Gibbs suddenly jumps in the air, squealing with glee as chips move towards him.",
-                            "He mutters under his breath as he throws cash on the table, reloading his stack.",
+                            "He mutters under his breath as he throws cash on the table, buying more chips.",
                             "The dealer turns a card over, and Gibbs covers his face with his hands, sinking into his seat.",
                             ],
             },
@@ -103,7 +122,7 @@ sus_description_data = {
         "default": {
             "at_scene": {
                     "neutral": ["The mortician lays back in his chair, puffing a cigarette.","The mortician lazily sways in his chair, enjoying a smoke.",
-                                "The mortician, half asleep, reaches into his pocket to pull out a matchbook.",
+                                "The mortician slumps back in his chair, half asleep.",
                                 "The mortician stands, wincing as he leans across the desk to grab a cigarette.",
                                 "The mortician strikes a match, his face and palms briefly illuminated as he inhales.",
                                 "The mortician groans as he stretches across his desk, crushing his cigarette on an ashtray.",
@@ -115,13 +134,16 @@ sus_description_data = {
             },
             "at_entity": {
                 "neutral": ["He fiddles with the button of his suit jacket.","He coughs, politely covering his mouth with his elbow, before resuming his raspy breathing.",
-                            "You notice how gaunt and old his eyes are, despite his youthful black hair.",
+                            "You notice how gaunt and old his eyes are, despite his youthful black hair.", "He shifts his weight to the otherside.",
                             "He reaches across the desk for another cigarette, his movements slow and effortful.", "He looks around the office, his mind wandering.",
                             "He smokes his cigarette between labored, shallow breaths.","He checks his tie, ensuring it aligns flat with his suit.", "He squints to get a better look at you.",
                             "He checks his watch in an overt fashion, curious of the time.", "He sinks into his chair as he exhales smoke.",
-                            "His dress shoes tapping against the floor while he waits.",
+                            "His dress shoes tap against the floor while he waits.",
 
-                            "He taps his watch, as if to check that it's still working.", "He adjusts the hem of his sleeve."
+                            "He taps his watch, as if to check that it's still working.", "He adjusts the hem of his sleeve.",
+                            "He places both elbows on the armrests.", "He sinks deeper into his chair, exhaling.",
+                            "He places a foot over his other leg, exposing the flat, narrow sole of his dress shoes.",
+
                             ],
             },
             "leaving": {

@@ -171,6 +171,8 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
     def get_idle_text(self):
         ent = self.game_state.suspect_manager.get_entity(self.id)
         desc = ent.descriptions.get_description("at_entity")
+        while isinstance(desc, list):
+            desc = random.choice(desc)
         return desc
     def get_reactions(self, dialogue_dic, ui, command=None):
         default = "react"

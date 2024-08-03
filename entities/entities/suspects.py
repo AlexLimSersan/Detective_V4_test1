@@ -50,6 +50,8 @@ class Murderer(Suspect):
         murderer_profile = {}
         for trait, options in profile.items():
             murderer_profile[trait] = random.choice(options)
+        if murderer_profile["weapon_type"] == "blunt":
+            murderer_profile["fight_type"] = "strong"
         ent_logger.info(f"MURDERER/randomized_profile() = {self.id}\n {murderer_profile}")
         return murderer_profile
 

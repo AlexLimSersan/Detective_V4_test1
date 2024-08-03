@@ -46,9 +46,10 @@ loc_description_data = {
             "bad": ["The cabbie glances your direction.", "The cab is surrounded by cigarettes", "The cab idles.."]
         },
         "at_entity": {#inside cab
-            "neutral": ['The driver adjusts his mirror. "Where to?"', "The cabbie glances your way as you climb in.", ],
+            "neutral": ["The driver adjusts his mirror. 'Where to?'", "The cabbie glances your way as you climb in.", ],
             "good": ["You are acknowledged with a friendly nod.", "The cabbie greets you over the engine purr."],
-            "bad": ['The cabbie smells faintly of stale smoke and sweat.', 'The driver adjusts his mirror, you catch a glimpse of his tired eyes. "Where to?"' ,'The driver looks indifferent to your presence.']
+            "bad": ['The cabbie smells faintly of stale smoke and sweat.', "The driver adjusts his mirror, and you catch a glimpse of his tired eyes. 'Where to?'" ,
+                    'The driver looks indifferent to your presence.']
         },
         "times": {
             "morning": {"neutral": ["He yawns.", "He stretches in his seat.", "He leans back, resting an arm on the door.", "He grips the steering wheel."],
@@ -69,8 +70,8 @@ loc_description_data = {
                 # always key weather, time. or just time. but never time, weather!!!
             "porch_01": { #seeing the cab from the porch
                 "sun": ["The cab is parked nearby."],
-                "rain": ["Through the rain, you can see the idling cab."],
-                "storm": ["You can see the cab through the downpour."],
+                "rain": ["Through the downpour, you can see the idling cab."],
+
             },
             "alley_01": ["You can see the cabbie waiting across the street."],
             "alley_07": ["You can see the cabbie if you close your eyes."],
@@ -78,7 +79,7 @@ loc_description_data = {
             },
         "leaving": { #leaving from this loc TO player current loc, so key by current loc, then weather or time,,,
             "neutral": ["You exit the cab, closing the door behind you.", "Your feet hit the ground, and you climb out the car.",
-                        "The pavement scrapes against your shoes.","You clamber out the cab.", "Your back aches."],
+                        "The pavement scrapes against your shoes.","You clamber out the cab.", "You open the door, and pull yourself out of the cab."],
         },
 
     },
@@ -430,7 +431,7 @@ loc_description_data = {
 "backroom_01": {
     "default": {
         "approaching": {
-            "neutral": ["You walk through the door."],
+            "neutral": ["You step in."],
         },
         "at_entity": {
             "neutral": [],
@@ -480,8 +481,6 @@ loc_description_data = {
                 "closed": ["An iron door faces you."],
             },
             "backroom_01": {
-                "open": ["YOU CAN SEE THE IRON DOOR FORM HERE?1"],
-                "closed": ["YOU CAN SEE THE IRON DOOR FORM HERE?1."],
                 }
             }
         }
@@ -568,9 +567,10 @@ loc_description_data = {
         "leaving": {
         },
         "times": {},
-        "weather": {"sun": ["You hear the sound of dripping water.", "The air is damp and musty."],
-                    "rain": ["Water trickles down an eavestrough.", "An eavestrough drains a thin stream of water.","A nearby gutter dribbles out the rain."],
-                    "storm": ["Water jets out an eavestrough.", "An eavestrough gushes water.","A nearby gutter lets our a heavy flow of rain."]
+        "weather": {"sun": ["You hear the sound of dripping water.", "The air is damp and musty.", "Water drips off an eavestrough at irregular intervals."],
+                    "rain": ["An eavestrough gushes water.","A nearby gutter lets our a steady flow of water.",
+                            "Water pours down an eavestrough.", "An eavestrough drains a stream of water."],
+
                     },
         "tags": ["urban"],
         "connections": {
@@ -605,7 +605,7 @@ loc_description_data = {
         "tags": ["urban"],
         "connections": {
             "alley_02": {
-                "neutral": ["An alcove branches off the main path.", "An alcove is beside you."],
+                "neutral": ["An alcove branches off the main path.", "Beside you, there's a shallow alcove."],
             }
         }
     }
@@ -698,7 +698,7 @@ loc_description_data = {
                 "neutral": [""],
             },
             "alley_04": {
-                "neutral": ["The alley narrows again ahead."],
+                "neutral": [""],
             }
         }
     }
@@ -724,7 +724,7 @@ loc_description_data = {
                 "neutral": ["The alley stretches on..."],
             },
             "dead_end_01": {
-                "neutral": ["The dead end connects to the alley."],
+                "neutral": [],
             },
             "alley_05": {
                 "neutral": ["The alley stretches on..."],
@@ -779,7 +779,7 @@ loc_description_data = {
 "alley_05": { #TURN AND FALL
     "default": {
         "approaching": {
-            "neutral": ["You follow the sharp turn. ", "The alley turns sharply.", "You follow the bend."],
+            "neutral": ["You follow the turn. ","You follow the bend."],
         },
 
         "at_entity": {
@@ -822,7 +822,7 @@ loc_description_data = {
             },
             "fire_escape_01": { #at base of ladde,r not actually on the laddeer...
                 "sun":{"neutral": ["The concrete scrapes against your shoes."],},
-                "rain":{"neutral": ["You stand in a puddle."],},
+                "rain":{"neutral": ["Water seeps into your shoes."],},
                 "storm":{"neutral": ["You stand in a puddle."],},
             }
         }
@@ -954,8 +954,6 @@ loc_description_data = {
         },
         "times": {},
         #GREAT PLACE FOR WEATHER!!!!
-        "weather": {
-                    },
         "tags": ["urban"],
         "connections": {
             "fire_escape_01": {
@@ -1137,7 +1135,7 @@ loc_description_data = {
                 },
                 "times": {},
                 "weather": {},
-                "tags": [""],
+                "tags": ["indoors"],
                 "connections": {
                     "refrigeration_01": {
                         "neutral": [""],

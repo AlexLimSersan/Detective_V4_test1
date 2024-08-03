@@ -420,7 +420,7 @@ item_ent_data = {
     },
     "spawn_data": {
         "locations": ["crime_scene_02"], #to allow #later + debbie to sort through!!
-        "frequency": 0.8,
+        "frequency": 1,
         "count": 1,
             }
         },
@@ -1014,7 +1014,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": [ "crime_scene_01", "crime_scene_02", "alley_04"],
+        "locations": [ "crime_scene_01", "crime_scene_02"],
         "conditions": {"traits": ["strong"]},
         "frequency": 0.8,
         "count": 1,
@@ -1081,7 +1081,7 @@ item_ent_data = {
         },
     },
     "spawn_data": {
-        "locations": ["crime_scene_01", "crime_scene_02", "alley_03_1", "alley_04","debbie_01"],
+        "locations": ["crime_scene_01", "crime_scene_02", "alley_03_1", "debbie_01"],
         "frequency": 1,
         "count": 0,#why have purse?
     }

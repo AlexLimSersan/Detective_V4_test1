@@ -74,7 +74,7 @@ item_description_data = {
             },
             "at_entity": {
                 "morgue_office_01": {"neutral": ["Scorch marks form a symmetric circle around a solid, silver filter."]},
-                "bertha_office_drawer_01": {"neutral": ["The paper is burned unevenly, down to the solid, white filter."],},
+                "bertha_office_01": {"neutral": ["The paper is burned unevenly, down to the solid, white filter."],},
                 "porch_01": ["The paper is burned unevenly, down to the solid, white filter."],
                 "bar_01": ["The paper is burned unevenly, down to the solid, white filter."],
             },
@@ -174,18 +174,18 @@ item_description_data = {
 "bruising_01": {
         "default": {
             "at_scene": {
-                "neutral": ["Abrasions run across the front of her forearms and knees."],
+                "neutral": ["Abrasions run across the front of her forearms and knees. LIVOR MORTIS?!?"],
             },
             "at_entity": {
-                "neutral": ["They look like minor scrapes and bruises."],
+                "neutral": ["They look like minor scrapes and bruises. SHOULD BE FROM GRAVITY 3HR/S"],
             },
         },
         "strong": {
             "at_scene": {
-                "neutral": ["Deep, purple bruising mark her ribs and limbs WHAT ABOUT HER CLOTHES?."],
+                "neutral": ["Mottled, purple bruising mark her ribs and limbs WHAT ABOUT HER CLOTHES?."],
             },
             "at_entity": {
-                "neutral": ["The force of the impacts were clearly great, her ribs broken, her forearm snapped in two. "
+                "neutral": ["The force of the impacts were clearly great. Alongside the bruising, her ribs are broken, and her forearm snapped in two. "
                             "FIST MARKS TO CONTRAST PIPE? also   boot prints?!!"],
             },
         },
@@ -199,7 +199,8 @@ item_description_data = {
                             "\nYou can see right to the bone on some of them."],
             },
             "at_entity": {
-                "neutral": ["Her right jugular has been cut, a three inch gap between the two edges. \n...\nIt looks lethal."],
+                "neutral": [
+                    "A deep cut, from the neck to the spine, separates her jugular by about 3 inches. \n...\nIt looks lethal."],
             },
         },
         "gun": {
@@ -207,7 +208,7 @@ item_description_data = {
                 "neutral": ["Bullets are embedded in her head, chest, and abdomen."],
             },
             "at_entity": {
-                "neutral": ["Each wound houses a straight path from her front to back."],
+                "neutral": ["Each wound forms a direct, straight line through her. "],
             },
         },
         "blunt": {
@@ -215,7 +216,7 @@ item_description_data = {
                 "neutral": ["Rows of indents form distinct, concave lines. The deepest runs from her ear, through her jaw, to her neck."],
             },
             "at_entity": {
-                "neutral": ["Mottled, purple bruises form alongside the crushed bones."],
+                "neutral": ["Her jaw, neck, head, and nose are broken... Along with multiple ribs and some limbs."],
             },
         },
 },
@@ -640,7 +641,7 @@ item_description_data = {
 },
 "bertha_office_drawer_01": { #actually desk lol
 "default": {
-        "approaching": ["Your footsteps echo.", "The room creaks as you walk."],
+        "approaching": ["You place your palms against the desk."],
         "at_scene": {
                 "bertha_office_01": {
                     "sun": {"neutral": ["The middle of the room hosts a large desk",
@@ -653,9 +654,9 @@ item_description_data = {
                 },
         },
         "at_entity": { #sturdy oak scratched
-            "neutral": ["Scratches run across the wood grains.", "The desk's surface is coarse and rough.",
-                        "It's quite a sturdy desk.", "You stand by the desk.",
-                        "The desk's surface is coarse oak."],
+            "neutral": ["Scratches run across the wood grains.", "The surface is coarse and rough.",
+                        "It's quite sturdy.",
+                        "The surface is coarse oak."],
              },
     },
 },
@@ -1139,12 +1140,6 @@ item_description_data = {
             }
         },
         "opened": {
-            "at_scene": {
-                "lounge_01": {
-                },
-                "porch_01": {
-                }
-            },
             "approaching": {
             },
             "at_entity": { #OAK, SPICED, VANILLA, SMOKED OAK #maybe gin is more contrasting?
@@ -1280,7 +1275,7 @@ item_description_data = {
                 "stage_02": {
                     "neutral": ["LIPSTICK AT THE BRIM."],
                 },
-                "neutral": ["It's filled with white wine."],
+                "neutral": ["It's empty.."],
             },
         },
         "white": {

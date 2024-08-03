@@ -46,7 +46,7 @@ sus_dialogue_data = {
                 #REACTIONS
                 "react_chat_neutral": {
                     "says": ["A beat passes before she responds.", "'Uhhhmm...'", "She shrugs.",
-                             "She exhales, pausing for a second.", "'Right,'", "'Well...'"
+                             "She exhales, pausing for a second.", "'Right,'", "'Well...'",
                              "'Oh, {topic}? I mean...", "'Oh, that?'", "'I mean...'", "She scratches her head.",
                              "'{topic}?.. '", "'{topic}, huh?'"
                              ],
@@ -194,7 +194,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "bruising_01_chat_neutral": {
-                    "says": ["'Well, I guess some bruises are not really unexpected...'","What'd they look like? Are they bad?"],
+                    "says": ["'Well, I guess some bruises are not really unexpected...'","'What'd they look like? Are they bad?'"],
                     "effects": {},
                     "options": None
                 },
@@ -234,12 +234,12 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "murder_pipe_01_chat_neutral": {
-                    "says": ["Must of been taken from the alley, there is all sorts of abandoned scrap there.."],
+                    "says": ["'Must of been taken from the alley, there is all sorts of abandoned scrap there..'"],
                     "effects": {},
                     "options": None
                 },
                 "murder_pipe_01_grill_neutral": {
-                    "says": ["'Must be someone strong to bludgeon someone to death - does that help?'"],
+                    "says": ["'Must be reasonably strong to bludgeon someone to death - does that help?'"],
                     "effects": {},
                     "options": None
                 },
@@ -424,18 +424,18 @@ sus_dialogue_data = {
                 },
 
                 "bertha_01_chat_neutral": {
-                    "says": ["Im the bartender, and owner here - work at the pub all day, everyday.", ],
+                    "says": ["'Im the bartender, and owner here - work at the pub all day, everyday.'", ],
                     "effects": {},
                     "options": None
                 },
                 "bertha_01_grill_neutral": {
-                    "says": ["I'm just a girl who works here, ok?", ],
+                    "says": ["'I'm just a girl who works here, ok?'", ],
                     "effects": {},
                     "options": None
                 },
                 "gibbs_01_chat_neutral": {
                     "says": ["'Guy is the worst gambler I've ever heard of... Actually, he was chatting up Debbie yesterday.'",
-                             "'He can be exceedingly annoying, not going to lie... I saw him yesterday, hanging around Debbie. He can be a creep.'"
+                             "'He can be exceedingly annoying, not going to lie... I saw him yesterday, hanging around Debbie. He can be a creep.'",
                              ],
                     "effects": {},
                     "options": None
@@ -1023,7 +1023,8 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "night of the murder_grill_neutral": {
-                    "says": ["'Look, I got nothing for you - it was like any other day!.'","'I was here at the bar all night, honestly! I didn't see much, I would tell you if I did...'"
+                    "says": ["'Look, I got nothing for you - it was like any other day!.'",
+                             "'I was here at the bar all night, honestly! I didn't see much, I would tell you if I did...'",
                              "'If I knew something, I'd tell you for sure.' She bites her lip."
                              ],
                     "effects": {},
@@ -1190,7 +1191,8 @@ sus_dialogue_data = {
         "non_topic": {
             "default": {
                 "greet_neutral": {
-                    "says": [ "'You gunna keep looking at me with that ugly mug?'\nHis lips pull into a thin smirk.",
+                    "says": [ "He glances your direction, briefly, but pretends not to see you until you are right up to him.\n"
+                              "'You gunna keep looking at me with that ugly mug?'\nHis lips pull into a thin smirk.",
                              "'Oh hey, guess who it is...'","'Speak of the devil - it's you.'","'Oh, look who the cat dragged in..'"],
                     "options":  "default_1"
                 },
@@ -1566,9 +1568,9 @@ sus_dialogue_data = {
                 },
                 "matches_02_grill_neutral": {
                     "says": [
-                        "'Those old things? They are a thing of the past, hence why I grabbed so many of those new ones.'"
-                        "'\nWithout warning, he conjures a black and brown matchbook in each hand, as if pulling it out of thin air."
-                        "\nHe gives you a knowing look.'"],
+                        "'They are a thing of the past, hence why I grabbed so many of those new ones.'"
+                        "\nWithout warning, he conjures a black and brown matchbook in each hand, as if pulling it out of thin air."
+                        "\nHe gives you a knowing look before making them vanish."],
                     "effects": {},
                     "options": None
                 },
@@ -1842,7 +1844,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "gibbs_01_grill_neutral": {
-                    "says": ["'He stares at you blankly.\n'Never heard of him.'", ],
+                    "says": ["He stares at you blankly.\n'Never heard of him.'", ],
                     "effects": {},
                     "options": None
                 },
@@ -1950,7 +1952,7 @@ sus_dialogue_data = {
                 "dialogue": { #will add all these nodes to dialogue if all conditions in murderer profile
                     "default": {
                         "kitchen_knife_01_chat_neutral": {
-                            "says": ["'You got me. I snuck into the kitchen, took one, and stabbed Debbie repeatedly! Case solved!!!'\nHe looks at you sarcastically." ],
+                            "says": ["'I snuck into the kitchen, took one, and stabbed Debbie repeatedly! Case solved!!!'\nHe looks at you sarcastically." ],
                             "effects": {},
                             "options": None
                         },
@@ -1997,7 +1999,7 @@ sus_dialogue_data = {
                 "react_chat_neutral": {
                     "says": ["He looks at you, blankly.", "'Oh yes... {topic}...'", "'Hmmm, {topic}..'",
                              "'Ah yes...'", "'{topic}?.. '", "'Yes, yes, {topic}...'", "'Indeed - '",
-                             "His face never changes.", "He takes his time responding.", "'Well, '"
+                             "His face never changes.", "He takes his time responding.", "'Well, '",
                             "His voice is dry and raspy.","He speaks at a glacial pace.",
                              ],
                 },
@@ -2059,19 +2061,20 @@ sus_dialogue_data = {
                 },
                 "unknown_grill_neutral": {
                     "says": ["'I really dont know what to say about {topic}...'","'Afraid I can't help you with that...'",
-                             "'I wish I could help you with {topic}, but I can't...'","Honestly, I don't know what to say...",
+                             "'I wish I could help you with {topic}, but I can't...'","'Honestly, I don't know what to say...'",
                              "'Is there anything specific you wanted to know? I'm sorry, I can't help you with that...'"
                              ],
                     "effects": {},
                     "options": None
                 },
                 "night of the murder_chat_neutral": {
-                    "says": ["'I'm always here in the office, working... Although I do enjoy my late night walks...'" ],
+                    "says": ["'It was a night like any other - I'm always here in the office, working... '" ],
                     "effects": {},
                     "options": None
                 },
                 "night of the murder_grill_neutral": {
-                    "says": ["'I keep to myself, and only leave this place on my late night walks... I don't have much else to tell you...'" ],
+                    "says": ["'It was honestly like any other night to me - "
+                             "I keep here late, then go on a walk... to stretch my legs. I'm a night owl I suppose.'" ],
                     "effects": {},
                     "options": None
                 },
@@ -2368,7 +2371,7 @@ sus_dialogue_data = {
                     "options": None
                 },
                 "lighter_01_grill_neutral": {
-                    "says": ["'I'm sure someone in town uses a lighter - but personally, I like matches...'",],
+                    "says": ["'They aren't common in town - everyone gets matches from the pub... Even me.'"],
                     "effects": {},
                     "options": None
                 },

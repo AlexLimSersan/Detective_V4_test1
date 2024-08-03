@@ -49,13 +49,14 @@ class Descriptions(ABC):
                 desc_logger.error(
                     f"base descriptions : \n type: {description_type}, descriptions not list: {descriptions}")
                 raise ValueError(f"descriptions not list")
-
-            description = random.choice(descriptions) #so would either get a random str descriptioin, or a random list of strs, each str in the list would have a pause time.
-            if isinstance(description,str):
-                description.format(current_phase=self.game_state.time_system.current_phase)
+            while isinstance(descriptions, list):
+                descriptions = random.choice(descriptions)
+            #description = random.choice(descriptions) #so would either get a random str descriptioin, or a random list of strs, each str in the list would have a pause time.
+            if isinstance(descriptions,str):
+                descriptions.format(current_phase=self.game_state.time_system.current_phase)
             #i think this was getting messed up in set scene
             #actually, if i do the scroll text as it prints, then wouldnt really need this?
-            return description
+            return descriptions
         #desc_logger.warning(f"Base desc/ No valid description found for type '{description_type}' in ranked keys")
 
     def handle_description_keying(self, description_type, descriptions_dic, optional_key = None):
