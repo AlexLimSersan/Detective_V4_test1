@@ -285,7 +285,7 @@ class Dialogue(Interaction): #will move this later, i think in entites/component
         for _type in type_by_preference: #start with the topic, for example "apple" or "greet"
             for choice in player_choices_by_preference: #then the current choice, like "chat" or "grill"
                 for key in mood_keys_by_preference: #then iterate moods.if none, next player choice if no mood found
-                    dialogue_keys_by_preference.append(f"{_type}_{f"{choice}_" if player_input else ""}{key}")
+                    dialogue_keys_by_preference.append(f"{_type}_{f"{player_input}_" if player_input else ""}{key}")
 
         ent_logger.debug(f"dialogue_keys_by_preference: {dialogue_keys_by_preference}")
         #GET THE DIALOGUE DIC ACCORDING TO IF THE PLAYER GAVE AN INPUT; THIS TRANSLATES TO TOPIC VS NON TOPIC DIALOGUE

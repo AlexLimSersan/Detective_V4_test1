@@ -99,6 +99,7 @@ class Suspect_Manager(Entity_Manager):
                     ent_logger.warning(
                         f"conditions failed")
             else:
+                #if not?!
                 ent_logger.warning(f"DIALOGUE UNCONDITIONAL 20%: {sus_id}\n{conditional_dialogues["dialogue"]} ")
                 self.merge_dialogue(merged_dialogue["topic"], conditional_dialogues["dialogue"])
                 self.game_state.stat_tracker.track_dialogue(sus_id=sus_id,condition = conditional_dialogues["conditions"],dialogue_dic=conditional_dialogues["dialogue"],track_type="20")

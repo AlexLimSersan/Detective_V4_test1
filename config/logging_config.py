@@ -22,6 +22,6 @@ def setup_logging(level=logging.DEBUG, logger_name='my_game'):
 
 #debug info warning error critical
 
-ent_logger = setup_logging(logging.WARNING, "ENTITIES")
-desc_logger = setup_logging(logging.WARNING, "DESCRIPTIONS")
-app_logger = setup_logging(logging.WARNING, "MAIN")
+ent_logger = setup_logging(logging.ERROR, "ENTITIES")
+desc_logger = setup_logging(logging.ERROR, "DESCRIPTIONS")
+app_logger = setup_logging(logging.ERROR, "MAIN")

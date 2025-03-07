@@ -52,6 +52,8 @@ class UI:
     def announce(self, verb, subject=None):
         #refactor - could be good for all commands that work, like "chatting... or grilling... or opening..."
         # then you could also get less reliant on "its open"
+        """
+
         if verb == "go":
             choices = ["Moving...", "Approaching...", "Walking to..."]
             new_verb = random.choice(choices)
@@ -62,6 +64,8 @@ class UI:
         else:
             print(f"Announcing: {verb}, {subject}")
         self.beat()
+        """
+
 
     def confirm(self, command_id=None, text = None):
         command_name = None

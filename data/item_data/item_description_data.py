@@ -1103,7 +1103,7 @@ item_description_data = {
             },
             "at_entity": {
                 "neutral": ["A cloy, caramel sweetness hits your nose.","It has a dark, sugary scent.",
-                            "The bottle is sticky, with a cloy, honey scent."],
+                            "The bottle is sticky, with a dark, caramel scent."],
             },
             "leaving": {
                 "neutral": ["You set the bottle back, it's fragrance lingering."],
@@ -1143,7 +1143,7 @@ item_description_data = {
             "approaching": {
             },
             "at_entity": { #OAK, SPICED, VANILLA, SMOKED OAK #maybe gin is more contrasting?
-                "neutral": ["It has a zesty, fruity scent.", "Notes of vanilla mix with a fresh, fruity scent."],
+                "neutral": [ "Notes of vanilla mix with a sweet, woody scent."],
             },
             "leaving": {
                 "neutral": ["You leave the bottle behind, it's aroma lingering."],
@@ -1258,7 +1258,7 @@ item_description_data = {
 "cardigan_scraps_01": { #can now maybe also be something else that is thin laced wool!@!@!@
         "default": {
             "at_scene": {
-                    "neutral": ["White fibers are strewn about."],
+                    "neutral": ["Some white fabric is in tatters close by."],
             },
             "at_entity": {
                 "neutral": ["They are from some laced, wool article - it look like they were forcefully torn off."],

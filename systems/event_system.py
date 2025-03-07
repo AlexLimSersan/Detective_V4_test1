@@ -11,7 +11,6 @@ class Event_System():
 
 
     def add_event(self): #things like bertha watching, can pass conditions, etc
-
         #morgue - please close the doors and cover debbie when ur done...
         #pub - leave darwwer open - have you through my stuf?!?!, also she can come in on you when shes there...
         #backroom - some gibbs minigame
